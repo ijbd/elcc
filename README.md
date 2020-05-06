@@ -12,25 +12,25 @@ Instructions:
 
 1. Download this repository via commmand line- 
 
-    'git clone https://github.com/ijbd/elcc.git'
+    `git clone https://github.com/ijbd/elcc.git`
 
 2. Go to bin-
 
-    'cd elcc/bin/'
+    `cd elcc/bin/`
 
 4. Change parameters in ijbd_elcc.sh
 
 3. Change permission for shell script
 
-    'chmod a+rx ijbd_elcc.sh'
+    `chmod a+rx ijbd_elcc.sh`
 
 5. Run in foreground
 
-    'bash ijbd_elcc.sh'
+    `bash ijbd_elcc.sh`
 
 6. Run in background 
 
-    'nohup bash ijbd_elcc.sh > filename.out &'
+    `nohup bash ijbd_elcc.sh > filename.out &`
     
 Citations:
 ==========
