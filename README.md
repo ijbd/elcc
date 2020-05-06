@@ -6,9 +6,9 @@ Isaac Bromley-Dulfano
 University of Michigan ASSET Lab
 
 Computational method for calculating effective load carrying capability (ELCC) of a solar or wind plant in the U.S. 
-=============
 
 Instructions:
+=============
 
 1. Download this repository via commmand line- 
 
