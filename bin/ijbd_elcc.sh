@@ -6,7 +6,7 @@
     ########## Generic ##########
 
     year=2018
-    num_iterations=5000
+    num_iterations=1000
 
     ######## Directories ########
 
