@@ -1,0 +1,38 @@
+Salt Lake 100 MW PV contributing to PACE System:
+
+2016:
+2020-05-04 20:41:10     Begin Main
+2020-05-04 20:41:10     Begin PowGen & Demand
+2020-05-04 20:41:11     Begin Fleet File Access
+2020-05-04 20:41:59     Begin Derating & VG Index Processing
+2020-05-04 20:41:59     Begin Removing Generators
+2020-05-04 20:43:01     Begin System Processing
+2020-05-04 20:43:35     Begin Target LOLP
+2020-05-04 20:43:46     Begin ELCC
+ELCC: 20.3125
+2020-05-04 20:44:52     Finished Main
+
+2017:
+2020-05-04 20:44:54     Begin Main
+2020-05-04 20:44:54     Begin PowGen & Demand
+2020-05-04 20:44:55     Begin Fleet File Access
+2020-05-04 20:45:44     Begin Derating & VG Index Processing
+2020-05-04 20:45:44     Begin Removing Generators
+2020-05-04 20:46:10     Begin System Processing
+2020-05-04 20:46:44     Begin Target LOLP
+2020-05-04 20:46:55     Begin ELCC
+ELCC: 19.53125
+2020-05-04 20:48:11     Finished Main
+
+2018:
+2020-05-04 20:48:13     Begin Main
+2020-05-04 20:48:13     Begin PowGen & Demand
+2020-05-04 20:48:14     Begin Fleet File Access
+2020-05-04 20:49:02     Begin Derating & VG Index Processing
+2020-05-04 20:49:02     Begin Removing Generators
+2020-05-04 20:50:09     Begin System Processing
+2020-05-04 20:50:43     Begin Target LOLP
+2020-05-04 20:50:54     Begin ELCC
+ELCC: 18.75
+2020-05-04 20:51:38     Finished Main
+ijbd_elcc.sh complete
