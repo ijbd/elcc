@@ -14,7 +14,7 @@ Instructions:
 
     `git clone https://github.com/ijbd/elcc.git`
 
-2. Go to bin-
+2. Go to bin
 
     `cd elcc/bin/`
 
