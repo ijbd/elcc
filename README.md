@@ -1,9 +1,7 @@
-ELCC
+ELCC Calculator
 ===============
 
-University of Michigan ASSET Lab
-
-Computational method for calculating effective load carrying capability (ELCC) of a solar or wind plant in the U.S. 
+Computational method for calculating effective load carrying capability (ELCC) of a solar or wind plant in the U.S. Developed by the University of Michigan Advancing Sustainable Systems through low-impact Energy Technologies (ASSET) Lab.
 
 Instructions:
 -------------
