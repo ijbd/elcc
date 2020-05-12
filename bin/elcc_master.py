@@ -1,5 +1,5 @@
 
-from ijbd_elcc import main
+from elcc import main
 
 # Parameters
 
