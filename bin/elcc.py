@@ -14,7 +14,7 @@ import matplotlib
 
 np.random.seed()
 
-
+#test commit for comment
 # Get all necessary information from powGen netCDF files, VRE capacity factos and lat/lons
 def get_powGen(solar_file_in, wind_file_in):
     solar = Dataset(solar_file_in)
