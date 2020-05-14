@@ -14,7 +14,6 @@ import matplotlib
 
 np.random.seed()
 
-#test commit for comment
 # Get all necessary information from powGen netCDF files, VRE capacity factos and lat/lons
 def get_powGen(solar_file_in, wind_file_in):
     solar = Dataset(solar_file_in)
@@ -342,20 +341,51 @@ def get_lole(system, solar_cf, wind_cf, hourlyLoad, solar_generator, wind_genera
 
     if np.isscalar(wind_generator):
         wind_generator = np.array([[0],[0],[0],[0]])
-
     riskByHour = np.array([])
+    print()
+    print(datetime.datetime.now())
     for hour in range(8760):
         hourlyRisk = hourly_risk(hour, system[hour], solar_cf, wind_cf, solar_generator, wind_generator, hourlyLoad[hour], num_iterations)
         lole += hourlyRisk
         riskByHour = np.append(riskByHour,hourlyRisk)
+    print("Normal hourly lole generation: " + str(lole))
+    print(datetime.datetime.now())
 
+    print("New updated lole generation: " + str(getLoleSimplified(system, solar_cf, wind_cf, hourlyLoad, num_iterations)))
+    print("Done with generation: " + str(datetime.datetime.now()))
+    print()
     return lole,riskByHour
 
+#only returns lole, does not deal with riskByHour
+def getLoleSimplified(system, solar_cf, wind_cf, hourlyLoad, numIterations, vgProfile = 0, vgIsWind = False):
+    return annualRisk(system, solar_cf, wind_cf, hourlyLoad, numIterations, vgProfile, vgIsWind)
+
+def annualRisk(system, solar_cf, wind_cf, hourlyLoad, numIterations, vgProfile, vgIsWind):
+    capacity = system
+    if(vgProfile and vgIsWind):
+        vgCapacity = getVariableGenerationEnergyProfile(wind_cf,vgProfile,numIterations)
+        return(np.sum((capacity+vgCapacity) < hourlyLoad) / float(numIterations))
+    elif(vgProfile):
+        vgCapacity = getVariableGenerationEnergyProfile(solar_cf,vgProfile,numIterations)
+        return(np.sum((capacity+vgCapacity) < hourlyLoad) / float(numIterations))
+    else:
+        return (np.sum(capacity < np.array([hourlyLoad,]*numIterations).T) / float(numIterations))
+            #run lole calculation with solar
+
+def getVariableGenerationEnergyProfile(vgCapacityFactor, vgProfile,numIterations):
+    lats = np.array(vgProfile[1],dtype=int)
+    lons = np.array(vgProfile[2],dtype=int)
+    variableGeneratorCap = vgProfile[0]*vgCapacityFactor[lats,lons]
+    variableGeneratorCap = np.array([variableGeneratorCap,]*numIterations)
+    variableGeneratorEfor = np.array([vgProfile[3],]*numIterations)
+    return np.sum(variableGeneratorCap * (variableGeneratorEfor < np.random.random_sample(variableGeneratorEfor.shape)),axis=1)
+    
 def hourly_risk(hour, system, solar_cf, wind_cf, solar_generator, wind_generator, peak_load, num_iterations):
 
     #contribution from system
     capacity = system #1d array (length = # iterations), where every entry = total system capacity
 
+    
 #TO DO: REDUNDANT W/ ABOVE CODE, REPLACE W/ NEW FUNCTION
     #contribution from solar_generator
     lats = np.array(solar_generator[1],dtype=int)
@@ -384,7 +414,7 @@ def hourly_risk(hour, system, solar_cf, wind_cf, solar_generator, wind_generator
 def get_elcc(system, solar_cf, wind_cf, solar_generator, wind_generator, hourlyLoad, 
             num_iterations, target_lole,tgtAnnualLOLH):
     
-    print('gettging ELCC!')
+    print('getting ELCC!')
     # Use binary search to find elcc of generator(s)
     additional_load =  (np.sum(solar_generator[0]) + np.sum(wind_generator[0])) / 2.0 #MW
     additional_max = np.sum(solar_generator[0]) + np.sum(wind_generator[0])
@@ -415,11 +445,11 @@ def get_elcc(system, solar_cf, wind_cf, solar_generator, wind_generator, hourlyL
         
         binary_trial += 1
 
-    print(lole)
-    print([(i//(30*24))+1 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([(i-7)%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in hourlyRisk if i>0])
+    #print(lole)
+    #print([(i//(30*24))+1 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
+    #print([(i-7)%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
+    #print([i for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
+    #print([i for i in hourlyRisk if i>0])
 
     # Error Handling
     if binary_trial == 20:
