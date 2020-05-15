@@ -3,100 +3,90 @@ from elcc import main
 
 # Parameters
 
+simulation = dict()
+files = dict()
+system = dict()
+generator = dict()
+
 ########## Generic ##########
 
-year=2018
-num_iterations=1000
-tgtAnnualLOLH = 2.4
+simulation["year"] = 2018
+simulation["iterations"] = 1000
+simulation["rm generators iterations"] = 100 # number of iterations used for removing generators
+simulation["target lolh"] = 2.4 # hours per year
+simulation["shift load"] = 0 # +/- hours
+simulation["debug"] = False # print all information flagged for debug
 
-######## Directories ########
+######## files ########
 
-demand_file="../demand/PACE.csv"
-eia_folder="../eia8602018/"
-solar_file="../wecc_powGen/2018_solar_ac_generation.nc"
-wind_file="../wecc_powGen/2018_wind_ac_generation.nc"
+files["demand file"] = "../demand/PACE.csv"
+files["eia folder"] = "../eia8602018/"
+files["solar cf file"] = "../wecc_powGen/2018_solar_ac_generation.nc"
+files["wind cf file"] = "../wecc_powGen/2018_wind_ac_generation.nc"
 
 ########## System ###########
 
-# system_setting="system-0-saved.npy" #none, save (save processed system), or filename (of saved processed system)
-system_setting="none"
-
-balancing_authority="0" #otherwise set 0  or PACE
-#or
-nerc_region="WECC" # DO NOT identify both a balancing authority and a nerc region
-
-conventional_efor=.07
-vg_efor=1 #set to 1 to remove all W&S generators from current fleet
-derate_conventional="True"
-oldest_year_manual=1950 #set to 0 if not known, used for removing generators
+system["setting"] = "none" # none, save, or load
+system["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
+system["conventional efor"] = .07
+system["RE efor"] = 1.0 #set to 1 to remove all W&S generators from current fleet
+system["derate conventional"] = True #decrease conventional generators' capacity by 5%
+system["oldest year"] = 1950 #remove conventional generators older than this year
 
 ######## Generator ##########
 
-generator_type="solar" #solar or wind
-generator_capacity=100 #MW
-generator_latitude=41
-generator_longitude=-112
-generator_efor=0.0 #0.05 originally
+generator["type"] = "solar" #solar or wind 
+generator["nameplate"] = 100 #MW
+generator["lat"] = 41
+generator["lon"] = -112
+generator["efor"] = 0 #0.05 originally
 
-for test in [.5,20]:
-    print('target lolh:',test)
-    main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        test)    
-aa
+
+for i in range(3):
+    main(simulation,files,system,generator)
+
+
 for dShift in [-1,0,1]:
     print('**************************SHIFT HOURS:',dShift)
-    main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        tgtAnnualLOLH,dShift)
 
-aa
+    test_simulation = dict(simulation)
+    test_simulation["shift load"] = dShift
 
-for i in range(4):
-    main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        tgtAnnualLOLH)
-
-print('2017')
-for i in range(4):
-    main(2017,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        tgtAnnualLOLH)
-
-# balancing_authority="0" #otherwise set 0   
-# #or
-# nerc_region="WECC" # DO NOT identify both a balancing authority and a nerc region
-# main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-#         system_setting,balancing_authority,nerc_region,conventional_efor,
-#         vg_efor,derate_conventional,oldest_year_manual,generator_type,
-#         generator_capacity,generator_latitude,generator_longitude,generator_efor,
-#         tgtAnnualLOLH,dShift)    
+    main(test_simulation,files,system,generator)  
 
 
-for generator_efor in [0.0,.05,.1]:
+for generator_efor in [0.0,.25,.5]:
     print('****************************GENERATOR EFOR:',generator_efor)
-    main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        tgtAnnualLOLH)
 
-generator_efor = 0.05
+    test_generator = dict(generator)
+    test_generator["efor"] = generator_efor
+
+    main(simulation,files,system,test_generator)
+
+
 for conventional_efor in [.025,.075,.125]:
     print('***********************CONVENTIONAL EFOR:',conventional_efor)
-    main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-        system_setting,balancing_authority,nerc_region,conventional_efor,
-        vg_efor,derate_conventional,oldest_year_manual,generator_type,
-        generator_capacity,generator_latitude,generator_longitude,generator_efor,
-        tgtAnnualLOLH)
+    
+    test_system = dict(system)
+    test_system["conventional efor"] = conventional_efor
+
+    main(simulation,files,test_system,test_generator)
+
+for tgtLolh in [2.4,20]:
+    print('************************TARGET LOLH:',tgtLolh)
+
+    test_simulation = dict(simulation) #deep copy
+    test_simulation["target lolh"] = tgtLolh
+
+    main(test_simulation,files,system,generator)    
+
+for i in range(4):
+    print('******************************YEAR:,',2017)
+    
+    test_simulation = dict(simulation)
+    test_simulation["year"] = 2017
+
+    main(test_simulation,files,system,generator)
 
 
 
