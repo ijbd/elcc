@@ -11,9 +11,9 @@ generator = dict()
 ########## Generic ##########
 
 simulation["year"] = 2018
-simulation["iterations"] = 1000
-simulation["rm generators iterations"] = 100 # number of iterations used for removing generators
-simulation["target lolh"] = 2.4 # hours per year
+simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
+simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
+simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
 simulation["debug"] = True # print all information flagged for debug
 
@@ -42,10 +42,14 @@ generator["lon"] = -112
 generator["efor"] = 0 #0.05 originally
 
 
-for i in range(1):
-    main(simulation,files,system,generator)
+# Run a single calculation with parameters above
+main(simulation,files,system,generator)
 
-aa 
+
+######## TESTING #########
+
+for i in range(3):
+    main(simulation,files,system,generator)
 
 for dShift in [-1,0,1]:
     print('**************************SHIFT HOURS:',dShift)
@@ -55,7 +59,6 @@ for dShift in [-1,0,1]:
 
     main(test_simulation,files,system,generator)  
 
-
 for generator_efor in [0.0,.25,.5]:
     print('****************************GENERATOR EFOR:',generator_efor)
 
@@ -63,7 +66,6 @@ for generator_efor in [0.0,.25,.5]:
     test_generator["efor"] = generator_efor
 
     main(simulation,files,system,test_generator)
-
 
 for conventional_efor in [.025,.075,.125]:
     print('***********************CONVENTIONAL EFOR:',conventional_efor)
@@ -88,6 +90,3 @@ for i in range(4):
     test_simulation["year"] = 2017
 
     main(test_simulation,files,system,generator)
-
-
-

@@ -9,7 +9,17 @@ Instructions:
 1. Download this repository via commmand line- 
 
     `git clone https://github.com/ijbd/elcc.git`
-    
+
+2. Change parameters in bin/elcc_master.py
+
+3. Run simulation in foreground from command-line
+
+    `python elcc_master.py`
+
+4. Run simulation in background from command-line
+
+    `nohup python -u elcc_master.py > output_filename.out &'
+
 Citations:
 ----------
 

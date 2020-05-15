@@ -558,6 +558,7 @@ def main(simulation,files,system,generator):
     # filename contains simulation parameters
     if system["setting"] == "save":
         save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system)
+        save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
         
 
     # format RE generator and get hourly capacity matrix
@@ -579,7 +580,7 @@ def main(simulation,files,system,generator):
     ########## TESTING ##########
     np.savetxt('demand.csv',hourly_load,delimiter=',')
     np.savetxt('hourlyRisk.csv',hourlyRisk,delimiter=',')
-    save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
+    
 
     print('{:%Y-%m-%d %H:%M:%S}\tFinished Main'.format(datetime.datetime.now()))
     return elcc,hourlyRisk
