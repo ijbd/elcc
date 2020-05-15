@@ -10,29 +10,32 @@ import pandas as pd
 from netCDF4 import Dataset
 from numpy import random
 import matplotlib
-# import matplotlib.pyplot as plt
 
 np.random.seed()
 
+# Get all necessary information from powGen netCDF files: RE capacity factos and corresponding lat/lons
+#           Capacity factors in matrix of shape(lats, lon, 8760 hrs) 
+def get_powGen(solar_cf_file, wind_cf_file):
+    solarPowGen = Dataset(solar_cf_file)
+    windPowGen = Dataset(wind_cf_file) #assume solar and wind cover same geographic region
 
-# Get all necessary information from powGen netCDF files, VRE capacity factos and lat/lons
-def get_powGen(solar_file_in, wind_file_in):
-    solar = Dataset(solar_file_in)
-    wind = Dataset(wind_file_in) #assume solar and wind cover same geographic region
+    powGen_lats = np.array(solarPowGen.variables['lat'][:])
+    powGen_lons = np.array(solarPowGen.variables['lon'][:])
 
-    powGen_lats = np.array(solar.variables['lat'][:])
-    powGen_lons = np.array(solar.variables['lon'][:])
-    solar_cf = np.array(solar.variables['ac'][:])
-    wind_cf = np.array(wind.variables['ac'][:])
+    cf = dict()
+    cf["solar"] = np.array(solarPowGen.variables['ac'][:]) 
+    cf["wind"] = np.array(windPowGen.variables['ac'][:])
 
-    solar.close()
-    wind.close()
+    solarPowGen.close()
+    windPowGen.close()
 
     # Error Handling
-    if solar_cf.shape != (powGen_lats.size, powGen_lons.size, 8760):
-        print("powGen Error. Expected array of shape",powGen_lats.size,powGen_lons.size,8760,"Found:",solar_cf.shape)
-        return -1
-    return powGen_lats, powGen_lons, solar_cf, wind_cf
+    if cf["solar"].shape != (powGen_lats.size, powGen_lons.size, 8760):
+        error_message = 'Expected capacity factor array of shape ('+str(powGen_lats.size)+','+str(powGen_lons.size)+'8760). Found array of shape '+str(cf["solar"].shape)
+        raise RuntimeError(error_message)
+
+    return powGen_lats, powGen_lons, cf
+
 
 # Get hourly load vector
 def get_demand_data(demand_file_in, year_in, hrsShift=0):
@@ -58,450 +61,509 @@ def get_demand_data(demand_file_in, year_in, hrsShift=0):
 
     # Error Handling
     if(hourly_load.size != 8760):
-        print("Demand Error. Expected array of size 8760. Found:",hourly_load.size)
-        return -1
+        error_message = 'Expected hourly load array of size 8760. Found array of size '+str(hourly_load.size)
+        raise RuntimeError(error_message)
 
     return hourly_load
 
 
-# Accesses generator capacity and expected forced outage rate.
-#
-#   fleet = [[Capacity(MW)],[YEAR ENTERED OPERATION]]
-#
-def get_conventional_fleet(eia_folder, balancing_authority, nerc_region, year_in):
+# Get conventional generators in fleet
+def get_conventional_fleet(eia_folder, region, year_in, derate_conventional, conventional_efor):
     
-    #sort by balancing authority
+    # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Balancing Authority Code"])
-    if str(nerc_region) != "0":
-        desired_codes = plants["Plant Code"][plants["NERC Region"] == nerc_region]
-    elif str(balancing_authority) != "0":
-        desired_codes = plants["Plant Code"][plants["Balancing Authority Code"] == balancing_authority].values
-    else:
-        print("Fleet Error.")
-        return 1
+    all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y2018.xlsx",skiprows=1,\
+                                usecols=["Plant Code","Technology","Nameplate Capacity (MW)","Status","Operating Year"])
 
-    generators = pd.read_excel(eia_folder+"3_1_Generator_Y2018.xlsx",skiprows=1,\
-                                usecols=["Plant Code","Technology","Nameplate Capacity (MW)","Status","Operating Year"],\
-                                index_col="Plant Code")
+    # Sort by NERC Region and Balancing Authority to filter correct plant codes
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
     
-    fleet_generators = generators[generators.index.isin(desired_codes)]
-    fleet_generators = fleet_generators[fleet_generators["Status"] == "OP"]
-    fleet_generators = fleet_generators[fleet_generators["Technology"]!="Solar Photovoltaic"]
-    fleet_generators = fleet_generators[fleet_generators["Technology"]!="Onshore Wind Turbine"]
-    fleet_generators = fleet_generators[fleet_generators["Technology"]!="Offshore Wind Turbine"]
-    fleet_generators.loc[fleet_generators["Technology"]=="Conventional Hydroelectric","Operating Year"]= 2030 #bad fix, but prevents program from removing hydro to meet reliability.
+    desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
-    fleet_capacity = np.array(fleet_generators["Nameplate Capacity (MW)"].values)
-    fleet_year = np.array(fleet_generators["Operating Year"].values)
-    conventional_system = np.array([fleet_capacity, fleet_year])
-    return conventional_system
+    # Error Handling
+    if desired_plant_codes.size == 0:
+        error_message = "Invalid region/balancing authority: " + region
+        raise RuntimeError(error_message)
+
+    # Get operating generators
+    active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes)) & (all_conventional_generators["Status"] == "OP")]
+
+    # Remove renewable generators
+    renewable_technologies = np.array(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"])
+    active_generators = active_generators[~(active_generators["Technology"].isin(renewable_technologies))] # tilde -> is NOT in
+
+    # Convert Dataframe to Dictionary of numpy arrays
+    conventional_generators = dict()
+    conventional_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
+    conventional_generators["year"] = active_generators["Operating Year"].values
+    conventional_generators["type"] = active_generators["Technology"].values
+    conventional_generators["efor"] = np.ones(conventional_generators["nameplate"].size) * conventional_efor
+
+    # Derate (optional)
+    if derate_conventional:
+        conventional_generators["nameplate"] *= .95
+
+    # Error Handling
+    if conventional_generators["nameplate"].size == 0:
+        error_message = "No existing conventional found."
+        raise RuntimeError(error_message)
+
+    return conventional_generators
 
 
-# Reduce generator capacity by 5%
-def derate(derate_conventional, conventional_system):
-    if derate_conventional == True:
-        conventional_system[0] *= .95
-    return conventional_system
+# Implementation of get_solar_and_wind_fleet
+def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, RE_efor):
+   
+    # Get operating generators
+    active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes)) & (RE_generators["Status"] == "OP")]
+    
+    # Get coordinates
+    latitudes = plants["Latitude"][active_generators["Plant Code"]].values
+    longitudes = plants["Longitude"][active_generators["Plant Code"]].values
+
+    # Convert Dataframe to Dictionary of numpy arrays
+    RE_generators = dict()
+    RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
+    RE_generators["lat"] = latitudes
+    RE_generators["lon"] = longitudes
+    RE_generators["efor"] = np.ones(RE_generators["nameplate"].size) * RE_efor 
+
+    # Error Handling
+    if RE_generators["nameplate"].size == 0:
+        error_message = "No existing renewables found."
+        raise RuntimeWarning(error_message)
+
+    return RE_generators
 
 
-# Get solar and wind plants already in fleet
-#
-#   vg = [[Nameplate Capacity (MW)],[Latitude],[Longitude]]
-#
-def get_vg_system(eia_folder, balancing_authority, nerc_region, year_in):
-    solar_nameplate_capacity = np.array([],dtype=float)
-    solar_lat = np.array([],dtype=float)
-    solar_lon = np.array([],dtype=float)
-    wind_nameplate_capacity = np.array([],dtype=float)
-    wind_lat = np.array([],dtype=float)
-    wind_lon = np.array([],dtype=float)
+# Get solar and wind generators in fleet
+def get_solar_and_wind_fleet(eia_folder, region, year_in, RE_efor):
 
-    #sort by balancing authority
-    plant_codes = np.array(pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",header=1,usecols=[2]).values)
-    plant_balancing_authorities = np.array(pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",header=1,usecols=[12],dtype=str).values)
-    plant_nerc_region = np.array(pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",header=1,usecols=[11],dtype=str).values)
-    lats = np.array(pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",header=1,usecols=[9]).values)
-    lons = np.array(pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",header=1,usecols=[10]).values)
-    desired_plant_codes = np.array([])
-    desired_lats = np.array([])
-    desired_lons = np.array([])
+    # Open files
+    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude","Longitude","Balancing Authority Code"])
+    all_solar_generators = pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",skiprows=1,\
+                                usecols=["Plant Code","Nameplate Capacity (MW)","Status"])
+    all_wind_generators = pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",skiprows=1,\
+                                usecols=["Plant Code","Nameplate Capacity (MW)","Status"])
 
-    if str(balancing_authority) != "0":
-        for plant in range(plant_balancing_authorities.size):
-            if (str(plant_balancing_authorities[plant,0])).find(balancing_authority) != -1:
-                desired_plant_codes = np.append(desired_plant_codes, plant_codes[plant])
-                desired_lats = np.append(desired_lats, lats[plant])
-                desired_lons = np.append(desired_lons, lons[plant])
+     # Sort by NERC Region and Balancing Authority to filter correct plant codes
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
+    
+    desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
-    if str(nerc_region) != "0":
-        for plant in range(plant_balancing_authorities.size):
-            if (str(plant_nerc_region[plant,0])).find(nerc_region) != -1:
-                desired_plant_codes = np.append(desired_plant_codes, plant_codes[plant])
-                desired_lats = np.append(desired_lats, lats[plant])
-                desired_lons = np.append(desired_lons, lons[plant])
+    # Repeat process for solar and wind
+    plants.set_index("Plant Code",inplace=True)
+    solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,RE_efor)
+    wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,RE_efor)
 
-    #find solar plants
-    solar_plant_codes = np.array(pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",header=1,usecols=[2]).values)
-    solar_capacities = np.array(pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",header=1,usecols=[12]).values)
-    solar_status = np.array(pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",header=1,usecols=[7]).values)
-    for generator in range(solar_plant_codes.size):
-        for code in range(desired_plant_codes.size):
-            if desired_plant_codes[code] == solar_plant_codes[generator]:
-                if (str(solar_status[generator])).find("OP") != -1:
-                    solar_nameplate_capacity = np.append(solar_nameplate_capacity, solar_capacities[generator])
-                    solar_lat = np.append(solar_lat, desired_lats[code])
-                    solar_lon = np.append(solar_lon, desired_lons[code])
+    return solar_generators, wind_generators
 
-    #find windplants
-    wind_plant_codes = np.array(pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",header=1,usecols=[2]).values)
-    wind_capacities = np.array(pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",header=1,usecols=[12]).values)
-    wind_status = np.array(pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",header=1,usecols=[7]).values)
-    for generator in range(wind_plant_codes.size):
-        for code in range(desired_plant_codes.size):
-            if desired_plant_codes[code] == wind_plant_codes[generator]:
-                if (str(wind_status[generator])).find("OP") != -1:
-                    wind_nameplate_capacity = np.append(wind_nameplate_capacity, wind_capacities[generator])
-                    wind_lat = np.append(wind_lat, desired_lats[code])
-                    wind_lon = np.append(wind_lon, desired_lons[code])
-    #print("Found "+ str(solar_nameplate_capacity.size + wind_nameplate_capacity.size) +" vg plants")
 
-    solar_system = np.array([solar_nameplate_capacity[:], solar_lat[:], solar_lon[:]])
-    wind_system  = np.array([wind_nameplate_capacity[:], wind_lat[:], wind_lon[:]])
-
-    return solar_system, wind_system
+# Find index of nearest coordinate. Implementation of get_RE_index
+def find_nearest_impl(actual_coordinates, discrete_coordinates):
+    indices = []
+    for coord in actual_coordinates:
+        indices.append((np.abs(coord-discrete_coordinates)).argmin())
+    return np.array(indices)
 
 
 # Convert the latitude and longitude of the vg into indices for capacity factor matrix
-def process_vg(vg, powGen_lats, powGen_lons):
-    lats = vg[1,:]
-    lons = vg[2,:]
-    max_lat = powGen_lats.size - 1
-    max_lon = powGen_lons.size - 1
-
-    #TO DO: SPLIT INTO SUBFUNCTION SO DON'T REPEAT CODE
-    for i in range(lats.size):
-        lat = 0
-        if type(lats[i]) is str: lats[i] = 0
-        while lats[i] > powGen_lats[lat] and lat < max_lat: 
-            lat += 1
-        vg[1,i] = lat
-
-    for i in range(lons.size):
-        lon = 0
-        if type(lons[i]) is str:
-            lons[i] = 0
-        while lons[i] > powGen_lons[lon] and lon < max_lon:
-            lon += 1
-        vg[2,i] = lon
-    return vg
-
-
-# Find hourly contribution from system for a desired number of iterations
 #
-#       system = matrix( hours x iterations )
-#
-def process_system(conventional_system, solar, wind, solar_cf, wind_cf, num_iterations, conventional_efor, vg_efor):
+# More detail: The simulated capacity factor maps are of limited resolution. This function
+#               identifies the nearest simulated location for renewable energy generators
+#               and replaces those generators' latitudes and longitudes with indices for 
+#               for the nearest simulated location in the capacity factor maps
+def get_cf_index(RE_generators, powGen_lats, powGen_lons):
+    RE_generators["lat idx"] = find_nearest_impl(RE_generators["lat"], powGen_lats).astype(int)
+    RE_generators["lon idx"] = find_nearest_impl(RE_generators["lon"], powGen_lons).astype(int)
+    return RE_generators
 
-    system = np.zeros((8760,num_iterations))
 
-    #conventional contribution
-    max_length = 1 #set to 1 for larger systems like wecc, otherwise memory error
-    blocks = int(num_iterations/max_length)
-    remainder = int(num_iterations)%max_length
-    #TO DO: THIS CALCULATION AND SOLAR/WIND OUTAGE SAMPLING CALCULATION IN NEXT FOR LOOP
-    #ARE VERY SIMILAR. CREATE FUNCTION THAT DOES BOTH
-    for i in range(blocks):
-        conventional = np.array([[conventional_system[0],]*max_length,]*8760)
-        conventional = np.sum(conventional * (np.random.random_sample(conventional.shape) > conventional_efor), axis = 2)
-        system[:,i*max_length:(i+1)*max_length] = conventional
-    if remainder != 0:
-        conventional = np.array([[conventional_system[0],]*(remainder),]*8760)
-        conventional = np.sum(conventional * (np.random.random_sample(conventional.shape) > conventional_efor), axis = 2)
-        system[:,(blocks*max_length):] = conventional
+# Find expected hourly capacity for RE generators before sampling outages. Of shape (8760 hrs, num generators)
+# Implementation of get_hourly_capacity
+def get_hourly_RE_impl(RE_generators, cf):
+    RE_nameplate = RE_generators["nameplate"]
+    hrs = np.array([np.arange(8760),]*RE_nameplate.size).T
+    RE_capacity = np.multiply(RE_nameplate, cf[RE_generators["lat idx"], RE_generators["lon idx"], hrs])
+    return RE_capacity
 
-    del(conventional)
-    del(conventional_efor)
+
+# Get hourly capacity matrix for a generator by sampling outage rates over all hours/iterations. Of shape (8760 hrs, num iterations)
+# Implementation of get_hourly_capacity
+def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
+
+    hourly_capacity = np.zeros((8760,num_iterations))
+
+    # otherwise sample outages and add generator contribution
+    max_iterations = 2000 // generators["nameplate"].size # the largest # of iterations to compute at one time (solve memory issues)
+    if max_iterations == 0: 
+        max_iterations = 1 
+
+    for i in range(num_iterations // max_iterations):
+        for_matrix = np.random.random_sample((max_iterations,8760,generators["nameplate"].size))>generators["efor"] # shape(its,hours,generators)
+        capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T # shape(its,hours).T -> shape(hours,its)
+        hourly_capacity[:,i*max_iterations:(i+1)*max_iterations] = capacity 
+
+    if num_iterations % max_iterations != 0:
+        remaining_iterations = num_iterations % max_iterations
+        for_matrix = np.random.random_sample((remaining_iterations,8760,generators["nameplate"].size))>generators["efor"]
+        capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T
+        hourly_capacity[:,-remaining_iterations:] = capacity
+    return hourly_capacity
+
+
+# Get the hourly capacity matrix for a set of generators for a desired number of iterations
+def get_hourly_capacity(num_iterations, generators, cf=None):
+
+    # check for conventional
+    if cf is None:
+        pre_outage_capacity = np.array([generators["nameplate"],]*8760) # shape(8760 hrs, num generators)
     
-    #TO DO: ARRAY CALCULATION
-    for hour in range(8760):
-        capacity = np.zeros(num_iterations)
+    # otherwise, renewable source:
+    else:
+        pre_outage_capacity = get_hourly_RE_impl(generators,cf)
 
-        #contribution from solar
-        lats = np.array(solar[1],dtype=int)
-        lons = np.array(solar[2],dtype=int)
+    # sample outages
+    hourly_capacity = sample_outages_impl(num_iterations, pre_outage_capacity, generators)
 
-        solar_cap = solar[0]*solar_cf[lats,lons,hour]
-        solar_cap = np.array([solar_cap,]*num_iterations)
+    return hourly_capacity
 
-        capacity = np.sum(solar_cap * (vg_efor < np.random.random_sample(solar_cap.shape)),axis=1)
-        del(solar_cap)
 
-        #contribution from wind
-        lats = np.array(wind[1],dtype=int)
-        lons = np.array(wind[2],dtype=int)
-        wind_cap = wind[0]*wind_cf[lats,lons,hour]
-        wind_cap = np.array([wind_cap,]*num_iterations,dtype=float)
-        capacity += np.sum(wind_cap * (vg_efor < np.random.random_sample(wind_cap.shape)),axis=1)
-        del(wind_cap)
-        system[hour] += capacity
-    return system
+# Get the hourly capacity matrix for the whole fleet (conventional, solar, and wind)
+def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_generators, wind_generators, cf):
 
-#TO DO:USE THIS IN PRIOR FUNCTION
-#Outputs hourly generation by wind or solar
-#Returns: 2d array (rows = hours, columns = generators)
-def getREHourlyGen(generators,cfs):
-    lats,lons = np.array(generators[1],dtype=int),np.array(generators[2],dtype=int)
-    return (cfs[lats,lons].T)*generators[0]
+    hourly_fleet_capacity = np.zeros((8760,num_iterations))
+
+    # conventional, solar, and wind
+    hourly_fleet_capacity += get_hourly_capacity(num_iterations,conventional_generators)
+    hourly_fleet_capacity += get_hourly_capacity(num_iterations,solar_generators,cf["solar"])
+    hourly_fleet_capacity += get_hourly_capacity(num_iterations,wind_generators,cf["wind"])
+   
+    return hourly_fleet_capacity
+
+
+# Calculate number of expected hours in which load does not meet demand using monte carlo method
+def get_lolh(num_iterations, hourly_capacity, hourly_load):
+
+    # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
+    lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
+    hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
+    lolh = np.sum(lol_matrix) / float(num_iterations)
+    return lolh, hourly_risk
+
 
 # Remove the oldest generators from the conventional system
-# add an optional oldest year to start at, otherwise set to some low value (e.g. -1)
-def remove_oldest(conventional_system, optional_oldest_operating_year):
-    oldest_operating_year = np.amin(conventional_system[1,:])
-    if optional_oldest_operating_year > oldest_operating_year:
-        oldest_operating_year = optional_oldest_operating_year
-    erase = np.array([], dtype=int)
-    for generator in range(conventional_system[1,:].size):
-        if conventional_system[1,generator] <= oldest_operating_year:
-            erase = np.append(erase,generator)
-    capacity_removed = np.sum(conventional_system[0,erase])
-    conventional_system = np.delete(conventional_system,erase,1)
-    return conventional_system, oldest_operating_year, capacity_removed
+# Implementation of remove_generators
+def remove_oldest_impl(generators, manual_oldest_year=0):
+
+    # ignore hydroelectric plants
+    not_hydro = generators["type"] != "Conventional Hydroelectric"
+
+    # find oldest plant
+    oldest_year = np.amin(generators["year"][not_hydro]) 
+
+    # check for manual removal
+    if manual_oldest_year > oldest_year:
+        oldest_year = manual_oldest_year
+
+    # erase all generators older than that year
+    erase = np.logical_and(generators["year"] <= oldest_year, not_hydro)
+    capacity_removed = np.sum(generators["nameplate"][erase])
+
+    generators["nameplate"] = generators["nameplate"][np.logical_not(erase)]
+    generators["year"] = generators["year"][np.logical_not(erase)]
+    generators["type"] = generators["type"][np.logical_not(erase)]
+    generators["efor"] = generators["efor"][np.logical_not(erase)]
+
+    return generators, oldest_year, capacity_removed
 
 
 # Remove generators to meet reliability requirement (LOLH of 2.4 by default)
-def remove_generators(conventional_system, oldest_year_manual, solar_system, wind_system, solar_cf, wind_cf,\
-                hourlyLoad,num_iterations, conventional_efor, vg_efor,tgtAnnualLOLH):
+def remove_generators(num_iterations, conventional_generators, solar_generators, wind_generators, cf,
+                        hourly_load, oldest_year_manual, target_lolh):
 
-    #TO DO: IMPROVE ITERATION TRACKING
-    iters = 10
-
-    # Remove capacity until reliability drops beyond target LOLH/year (2.4 by default)
-    target_lole = 0
+    # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
+    lolh = 0
+    low_iterations = 10
     total_capacity_removed = 0
-
-    #TO DO: REPLACE 0, 0, 1 ETC. IN GET_LOLE CALLS
-    while conventional_system.size > 1 and target_lole <= tgtAnnualLOLH:
-        conventional_system, min_operating_year, capacity_removed = remove_oldest(conventional_system, oldest_year_manual)
-        system = process_system(conventional_system, solar_system, wind_system, solar_cf, wind_cf, iters,
-                                    conventional_efor, vg_efor)
-        target_lole,hourlyRisk = get_lole(system, solar_cf, wind_cf, hourlyLoad, 0, 0, iters) #001 = NO WIND, NO SOLAR, 1 ITER
+    
+    while conventional_generators["nameplate"].size > 1 and lolh <= target_lolh*1.1:
+        conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators, oldest_year_manual)
+        hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,wind_generators,cf)
+        lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
         total_capacity_removed = total_capacity_removed + capacity_removed
 
-    # Use binary search to add supplemental capacity until target reliability is reached
-    supplement_capacity = capacity_removed / 2.0
-    supplement_max = capacity_removed
-    supplement_min = 0.0
-    conventional_system[0,0] += supplement_capacity
-    system = process_system(conventional_system, solar_system, wind_system, solar_cf, 
-                            wind_cf, iters, conventional_efor, vg_efor)
-    target_lole,hourlyRisk = get_lole(system, solar_cf, wind_cf, hourlyLoad, 0, 0, iters)
+    # find reliability of higher iteration simulation
+    hourly_fleet_capacity = get_hourly_fleet_capacity(num_iterations,conventional_generators,solar_generators,wind_generators,cf)
+    lolh, hourly_risk = get_lolh(num_iterations,hourly_fleet_capacity,hourly_load) 
 
+    # create a supplemental unit to match target reliability level
+    supplement_generator = dict()
+
+    supplement_capacity = total_capacity_removed / 2.0
+    supplement_generator["nameplate"] = np.array([supplement_capacity])
+    supplement_generator["efor"] = np.array([.07]) #reasonable efor for conventional generator
+
+    # get hourly capacity of supplemental generator and add to fleet capacity
+    hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generator)
+    hourly_total_capacity = np.add(hourly_fleet_capacity, hourly_supplement_capacity)
+
+    # adjust supplement capacity using binary search until reliability is met
+    supplement_capacity_max = total_capacity_removed
+    supplement_capacity_min = 0.0
     binary_trial = 0
-    while binary_trial < 20 and abs(target_lole - tgtAnnualLOLH) > .1:
-        if target_lole > tgtAnnualLOLH:
-            conventional_system[0,0] -= supplement_capacity #remove supplement and adjust
 
-            supplement_min = supplement_capacity
-            supplement_capacity += (supplement_max - supplement_capacity) / 2
-            conventional_system[0,0] += supplement_capacity
-        elif target_lole < tgtAnnualLOLH:
-            conventional_system[0,0] -= supplement_capacity
+    lolh, hourly_risk = get_lolh(num_iterations,hourly_total_capacity,hourly_load)
 
-            supplement_max = supplement_capacity
-            supplement_capacity -= (supplement_capacity - supplement_min) / 2
-            conventional_system[0,0] += supplement_capacity
-        system = process_system(conventional_system, solar_system, wind_system, 
-                                solar_cf, wind_cf, iters, conventional_efor, vg_efor)
-        target_lole,hourlyRisk = get_lole(system, solar_cf, wind_cf, hourlyLoad, 0, 0, iters)
+    while binary_trial < 20 and abs(lolh-target_lolh) > (10 / num_iterations):
+        
+        # under reliable, add supplement capacity
+        if lolh > target_lolh: 
+            supplement_capacity_min = supplement_capacity
+            supplement_capacity += (supplement_capacity_max - supplement_capacity) / 2.0
+        
+        # over reliable, remove supplement capacity
+        else: 
+            supplement_capacity_max = supplement_capacity
+            supplement_capacity -= (supplement_capacity - supplement_capacity_min) / 2.0
+
+        # adjust supplement capacity and 
+        supplement_generator["nameplate"] = np.array([supplement_capacity])
+        hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generator)
+        hourly_total_capacity = hourly_fleet_capacity + hourly_supplement_capacity
+
+        # find new lolh
+        lolh, hourly_risk = get_lolh(num_iterations,hourly_total_capacity,hourly_load)
         binary_trial += 1
 
-    #FOR TESTING PURPOSES
-    target_lole,hourlyRisk = get_lole(system, solar_cf, wind_cf, hourlyLoad, 0, 0, iters)
-    print(target_lole)
-    print([i//(30*24) for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([(i-7)%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in hourlyRisk if i>0])
+    # add supplemental generator to fleet
+    conventional_generators["nameplate"] = np.append(conventional_generators["nameplate"], supplement_generator["nameplate"])
+    conventional_generators["efor"] = np.append(conventional_generators["efor"], supplement_generator["efor"])
+    conventional_generators["year"] = np.append(conventional_generators["year"], 9999) 
+    conventional_generators["type"] = np.append(conventional_generators["type"], "supplemental")
+
+    ############### TESTING ###################
+    if DEBUG:
+        print(lolh)
+        print([i//(30*24) for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([(i-7)%24 for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([i for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([i for i in hourly_risk if i>0])
 
     total_capacity_removed = total_capacity_removed - supplement_capacity
-    print("Oldest operating year:",min_operating_year)
-    print("Number of active generators:",conventional_system[0].size)
+
+    print("Oldest operating year:",oldest_year)
+    print("Number of active generators:",conventional_generators["nameplate"].size)
     print("Capacity removed:",total_capacity_removed)
-    print("Conventional fleet capacity:",np.sum(conventional_system[0]))
-    print("LOLE achieved:",target_lole)
+    print("Conventional fleet capacity:",np.sum(conventional_generators["nameplate"]))
+    print("lolh achieved:",lolh)
 
-    return conventional_system
+    return conventional_generators
 
 
-#find number of expected hours in which load does not meet demand using monte carlo method
-def get_lole(system, solar_cf, wind_cf, hourlyLoad, solar_generator, wind_generator, num_iterations):
-    lole = 0.0
-
-    if np.isscalar(solar_generator):
-        solar_generator = np.array([[0],[0],[0],[0]])
-
-    if np.isscalar(wind_generator):
-        wind_generator = np.array([[0],[0],[0],[0]])
-
-    riskByHour = np.array([])
-    for hour in range(8760):
-        hourlyRisk = hourly_risk(hour, system[hour], solar_cf, wind_cf, solar_generator, wind_generator, hourlyLoad[hour], num_iterations)
-        lole += hourlyRisk
-        riskByHour = np.append(riskByHour,hourlyRisk)
-
-    return lole,riskByHour
-
-def hourly_risk(hour, system, solar_cf, wind_cf, solar_generator, wind_generator, peak_load, num_iterations):
-
-    #contribution from system
-    capacity = system #1d array (length = # iterations), where every entry = total system capacity
-
-#TO DO: REDUNDANT W/ ABOVE CODE, REPLACE W/ NEW FUNCTION
-    #contribution from solar_generator
-    lats = np.array(solar_generator[1],dtype=int)
-    lons = np.array(solar_generator[2],dtype=int)
-    solar_generator_cap = solar_generator[0]*solar_cf[lats,lons,hour]
-    solar_generator_cap = np.array([solar_generator_cap,]*num_iterations)
-    solar_generator_efor = np.array([solar_generator[3],]*num_iterations)
-
-    capacity = capacity + np.sum(solar_generator_cap * (solar_generator_efor < np.random.random_sample(solar_generator_efor.shape)),axis=1)
-
-    #contribution from wind_generator
-    lats = np.array(wind_generator[1],dtype=int)
-    lons = np.array(wind_generator[2],dtype=int)
-    wind_generator_cap = wind_generator[0]*wind_cf[lats,lons,hour]
-    wind_generator_cap = np.array([wind_generator_cap,]*num_iterations)
-    wind_generator_efor = np.array([wind_generator[3],]*num_iterations)
-
-    capacity = capacity + np.sum(wind_generator_cap * (wind_generator_efor < np.random.random_sample(wind_generator_efor.shape)),axis=1)
-
-    hourly_risk = np.sum(capacity < peak_load) / float(num_iterations)
-
-    return hourly_risk
+# move generator parameters into dictionary of numpy arrays (for function compatibility)
+def get_RE_generator(generator):
+    RE_generator = dict()
+    RE_generator["nameplate"] = np.array([generator["nameplate"]])
+    RE_generator["lat"] = np.array([generator["lat"]])
+    RE_generator["lon"] = np.array([generator["lon"]])
+    RE_generator["efor"] = np.array([generator["efor"]])
+    return RE_generator
 
 
 # use binary search to find elcc by adjusting additional load
-def get_elcc(system, solar_cf, wind_cf, solar_generator, wind_generator, hourlyLoad, 
-            num_iterations, target_lole,tgtAnnualLOLH):
+def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity, hourly_load, RE_generator_nameplate):
     
-    print('gettging ELCC!')
-    # Use binary search to find elcc of generator(s)
-    additional_load =  (np.sum(solar_generator[0]) + np.sum(wind_generator[0])) / 2.0 #MW
-    additional_max = np.sum(solar_generator[0]) + np.sum(wind_generator[0])
-    additional_min = 0.0
+    print('getting ELCC!')
 
-    lole,hourlyRisk = get_lole(system,solar_cf,wind_cf,hourlyLoad+additional_load,solar_generator,wind_generator,num_iterations)
+    # find original reliability
+    target_lolh, hourly_risk = get_lolh(num_iterations, hourly_fleet_capacity, hourly_load)
 
-    hrsWithRisk = [i//(30*24) for i in range(len(hourlyRisk)) if hourlyRisk[i]>0]
-    # print(lole)
-    # print(hrsWithRisk)
-    # print([i%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    # print([i for i in hourlyRisk if i>0])
+    print("Target lolh:", target_lolh)
+
+    # combine contribution from fleet and RE generator
+    hourly_total_capacity = np.add(hourly_fleet_capacity, hourly_RE_generator_capacity)
+
+    # use binary search to find amount of load needed to match base reliability
+    additional_load_max = RE_generator_nameplate
+    additional_load_min = 0
+    additional_load = RE_generator_nameplate / 2.0
+
+    lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load + additional_load)
     
     binary_trial = 0
-    while binary_trial < 20 and abs(target_lole - lole) > tgtAnnualLOLH/num_iterations: #.0024 res for 1000 its/.0005 res for 5000 its
-        if lole < target_lole:
-            additional_min = additional_load
-            additional_load = additional_load + (additional_max - additional_load) / 2
-        if lole > target_lole:
-            additional_max = additional_load
-            additional_load = additional_load - (additional_load - additional_min) / 2
-        lole,hourlyRisk = get_lole(system,solar_cf,wind_cf,hourlyLoad+additional_load,solar_generator,wind_generator,num_iterations)
+    while binary_trial < 20 and abs(lolh - target_lolh) > (10/num_iterations):
         
-        # print(lole)
-        # print(hrsWithRisk)
-        # print([i%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-        # print([i for i in hourlyRisk if i>0])
+        #under reliable, remove load
+        if lolh > target_lolh: 
+            additional_load_max = additional_load
+            additional_load -= (additional_load - additional_load_min) / 2.0
         
+        # over reliable, add load
+        else: 
+            additional_load_min = additional_load
+            additional_load += (additional_load_max - additional_load) / 2.0
+        
+        lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load + additional_load)
+    
+        # print additional debugging information
+        if DEBUG:
+            print(lolh)
+            print([i%24 for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+            print([i for i in hourly_risk if i>0])
+
         binary_trial += 1
 
-    print(lole)
-    print([(i//(30*24))+1 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([(i-7)%24 for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in range(len(hourlyRisk)) if hourlyRisk[i]>0])
-    print([i for i in hourlyRisk if i>0])
+    if DEBUG == True:
+        print(lolh)
+        print([(i//(30*24))+1 for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([(i-7)%24 for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([i for i in range(len(hourly_risk)) if hourly_risk[i]>0])
+        print([i for i in hourly_risk if i>0])
 
     # Error Handling
     if binary_trial == 20:
-        print("Threshold not met in 20 binary trials. LOLE:",lole)
+        error_message = "Threshold not met in 20 binary trials. lolh: "+str(lolh)
+        raise RuntimeWarning(error_message)
 
     elcc = additional_load
-    return elcc,hourlyRisk
+    return elcc, hourly_risk
 
 
-def main(year,num_iterations,demand_file,eia_folder,solar_file,wind_file,
-    system_setting,balancing_authority,nerc_region,conventional_efor,
-    vg_efor,derate_conventional,oldest_year_manual,generator_type,
-    generator_capacity,generator_latitude,generator_longitude,generator_efor,
-    tgtAnnualLOLH,hrsShift=0):
+################ SAVE/LOAD ######################
+
+
+# save hourly fleet capacity to csv
+def save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system,generator):
+    
+    # pseudo-unique filename 
+    hourly_capacity_filename = str(simulation["year"])+'_'+str(simulation["iterations"])+'_'+str(system["region"])+\
+                    '_'+str(generator["nameplate"])+'_'+generator["type"]+'_'+str(generator["lat"])+'_'+str(generator["lon"])+'.csv'
+
+    # convert to dataframe
+    hourly_capacity_df = pd.DataFrame(data=hourly_fleet_capacity,
+                            index=np.arange(8760),
+                            columns=np.arange(simulation["iterations"]))
+
+    # save to csv
+    hourly_capacity_df.to_csv(hourly_capacity_filename)
+
+    return
+
+
+# load hourly fleet capacity
+def load_hourly_fleet_capacity(simulation,system,generator):
+    
+    # pseudo-unique filename to find h.f.c of previous simulation with similar parameters
+    hourly_capacity_filename = str(simulation["year"])+'_'+str(simulation["iterations"])+'_'+str(system["region"])+\
+                        '_'+str(generator["nameplate"])+'_'+generator["type"]+'_'+str(generator["lat"])+'_'+str(generator["lon"])+'.csv'
+    
+    if path.exists(hourly_capacity_filename):
+        hourly_fleet_capacity =pd.read_csv(hourly_capacity_filename,index_col=0).values
+    else:
+        error_message = "No saved system found."
+        raise RuntimeError(error_message)
+
+    return hourly_fleet_capacity
+
+
+# save generators to csv
+def save_active_generators(conventional, solar, wind):
+    
+    #conventional
+    conventional_generator_array = np.array([conventional["nameplate"]/.95,conventional["year"],conventional["type"],conventional["efor"]])
+    conventional_generator_df = pd.DataFrame(data=conventional_generator_array.T,
+                                index=np.arange(conventional["nameplate"].size),
+                                columns=["nameplate", "year", "type", "efor"])
+    conventional_generator_df.to_csv("active_conventional.csv")
+
+    #solar
+    solar_generator_array = np.array([solar["nameplate"],solar["lat"],solar["lon"],solar["efor"]])
+
+    solar_generator_df = pd.DataFrame(data=solar_generator_array.T,
+                                index=np.arange(solar["nameplate"].size),
+                                columns=["nameplate", "lat", "lon", "efor"])
+    solar_generator_df.to_csv("active_solar.csv")
+
+    #wind
+    wind_generator_array = np.array([wind["nameplate"],wind["lat"],wind["lon"],wind["efor"]])
+
+    wind_generator_df = pd.DataFrame(data=wind_generator_array.T,
+                                index=np.arange(wind["nameplate"].size),
+                                columns=["nameplate", "lat", "lon", "efor"])
+    wind_generator_df.to_csv("active_wind.csv")
+    return
+
+
+##################### MAIN ##########################
+
+def main(simulation,files,system,generator):
+
+    global DEBUG 
+    DEBUG = simulation["debug"]
     
     print('{:%Y-%m-%d %H:%M:%S}\tBegin Main'.format(datetime.datetime.now()))
 
     # get file data
-
-    powGen_lats, powGen_lons, solar_cf, wind_cf = get_powGen(solar_file, wind_file)
-    hourlyLoad = get_demand_data(demand_file, year,hrsShift) 
-    np.savetxt('demand.csv',hourlyLoad,delimiter=',')
+    powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
+    hourly_load = get_demand_data(files["demand file"],simulation["year"],simulation["shift load"]) 
     
-    # get system depending on input (option to load preprocessed saved system)
     
-    if system_setting == "none" or system_setting == "save":
-        #print('{:%Y-%m-%d %H:%M:%S}\tBegin Fleet File Access'.format(datetime.datetime.now()))
-        #Get conventional system, array w/ 2 rows: capacity, year online
-        conventional_system = get_conventional_fleet(eia_folder, balancing_authority, nerc_region, year)
+    # Load saved system
+    if system["setting"] == "load":
+        hourly_fleet_capacity = load_hourly_fleet_capacity(simulation,system,generator)
 
-        #Get VG system, array w/ 3 rows: capac, lat, long
-        solar_system, wind_system = get_vg_system(eia_folder, balancing_authority, nerc_region, year)
-
-        # process conventional and vre (derate and correct coordinates for array indexing)
-        #print('{:%Y-%m-%d %H:%M:%S}\tBegin Derating & VG Index Processing'.format(datetime.datetime.now()))
-        conventional_system = derate(derate_conventional, conventional_system)
-        solar_system = process_vg(solar_system, powGen_lats, powGen_lons) #cap, # row idx, # col idx
-        wind_system = process_vg(wind_system, powGen_lats, powGen_lons)
-        
-        # remove generators to find a target reliability level (2.4 loss of load hours per year)
-        conventional_system = remove_generators(conventional_system,oldest_year_manual,
-            solar_system,wind_system,solar_cf,wind_cf,hourlyLoad,100,conventional_efor,
-            vg_efor,tgtAnnualLOLH)
-
-
-        system = process_system(conventional_system,solar_system,wind_system,solar_cf,wind_cf,num_iterations,conventional_efor, vg_efor)
-        # option to save system for detailed analysis or future simulations
-        #TO DO: CREATE DESCRIPTIVE FILENAME AND MASTER CSV
-        #This system is an array of sampled total capacity (hours x iterations)
-        if system_setting == "save":
-            i = 0
-            while path.exists('system-'+str(i)+'-saved'):
-                i+=1
-            system_filename='system-'+str(i)+'-saved'
-            np.save(system_filename,system)
+    # get fleet depending on input (option to load preprocessed saved fleet)
     else:
-        system_filename = system_setting
-        system = np.load(system_filename)
+        #Get conventional system (nameplate capacity, year, technology, and efor)
+        fleet_conventional_generators = get_conventional_fleet(files["eia folder"],system["region"],simulation["year"],
+                                                                system["derate conventional"],system["conventional efor"])
+        
+        #Get RE system (nameplate capacity, latitude, longitude, and efor)
+        fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],system["region"],
+                                                                                simulation["year"], system["RE efor"])
 
-    # process generators to be added
+        # add lat/lon indices for cf matrix
+        get_cf_index(fleet_solar_generators, powGen_lats, powGen_lons)
+        get_cf_index(fleet_wind_generators, powGen_lats, powGen_lons)
 
-    solar_generator=np.array([[0],[0],[0],[0]])
-    wind_generator=np.array([[0],[0],[0],[0]])
-    if generator_type == "solar":
-        solar_generator = np.array([[generator_capacity],[generator_latitude],[generator_longitude],[generator_efor]])
-        solar_generator = process_vg(solar_generator, powGen_lats, powGen_lons)
-    if generator_type == "wind":
-        wind_generator = np.array([[generator_capacity],[generator_latitude],[generator_longitude],[generator_efor]])
-        wind_generator = process_vg(wind_generator, powGen_lats, powGen_lons)
+        # remove generators to find a target reliability level (2.4 loss of load hours per year)
+        fleet_conventional_generators = remove_generators(simulation["rm generators iterations"],fleet_conventional_generators,
+                                                            fleet_solar_generators,fleet_wind_generators,cf,hourly_load,system["oldest year"],
+                                                            simulation["target lolh"])
 
-    np.savetxt('solarGen.csv',getREHourlyGen(solar_generator,solar_cf),delimiter=',')
-    np.savetxt('windGen.csv',getREHourlyGen(wind_generator,wind_cf),delimiter=',')
+        # find hourly capacity
+        hourly_fleet_capacity = get_hourly_fleet_capacity(simulation["iterations"],fleet_conventional_generators,
+                                                            fleet_solar_generators,fleet_wind_generators,cf)
+
+    # option to save system for detailed analysis or future simulations
+    # filename contains simulation parameters
+    if system["setting"] == "save":
+        save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system,generator)
+        
+
+    # format RE generator and get hourly capacity matrix
+    RE_generator = get_RE_generator(generator)
+
+    # get cf index
+    get_cf_index(RE_generator,powGen_lats,powGen_lons)
+
+    # get hourly capacity matrix
+    hourly_RE_generator_capacity = get_hourly_capacity(simulation["iterations"],RE_generator,cf[generator["type"]])
     
-    #complete elcc calculation
+    # calculate elcc
+    elcc, hourlyRisk = get_elcc(simulation["iterations"],hourly_fleet_capacity,hourly_RE_generator_capacity,
+                                    hourly_load, generator["nameplate"])
 
-    target_lole,hourlyRisk = get_lole(system,solar_cf,wind_cf,hourlyLoad,0,0,num_iterations)
-    print("Target LOLE:", target_lole)
+    print("******!!!!!!!!!!!!***********ELCC:", int(elcc/generator["nameplate"]*100))
     
-    elcc,hourlyRisk = get_elcc(system,solar_cf,wind_cf,solar_generator,wind_generator,hourlyLoad,
-                num_iterations,target_lole,tgtAnnualLOLH)
-    print("******!!!!!!!!!!!!***********ELCC:", int(elcc/generator_capacity*100))
+
+    ########## TESTING ##########
+    np.savetxt('demand.csv',hourly_load,delimiter=',')
     np.savetxt('hourlyRisk.csv',hourlyRisk,delimiter=',')
+    save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
 
     print('{:%Y-%m-%d %H:%M:%S}\tFinished Main'.format(datetime.datetime.now()))
     return elcc,hourlyRisk
