@@ -108,6 +108,9 @@ def get_conventional_fleet(eia_folder, region, year_in, derate_conventional, con
     if conventional_generators["nameplate"].size == 0:
         error_message = "No existing conventional found."
         raise RuntimeError(error_message)
+    
+    if DEBUG:
+        print("found",conventional_generators["nameplate"].size,"conventional generators")
 
     return conventional_generators
 
@@ -138,7 +141,7 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, RE_efor):
 
 
 # Get solar and wind generators in fleet
-def get_solar_and_wind_fleet(eia_folder, region, year_in, RE_efor):
+def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude","Longitude","Balancing Authority Code"])
@@ -157,6 +160,9 @@ def get_solar_and_wind_fleet(eia_folder, region, year_in, RE_efor):
     plants.set_index("Plant Code",inplace=True)
     solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,RE_efor)
     wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,RE_efor)
+
+    if DEBUG:
+        print("found",solar_generators["nameplate"].size+wind_generators["nameplate"].size,"renewable generators")
 
     return solar_generators, wind_generators
 
@@ -185,7 +191,7 @@ def get_cf_index(RE_generators, powGen_lats, powGen_lons):
 # Implementation of get_hourly_capacity
 def get_hourly_RE_impl(RE_generators, cf):
     RE_nameplate = RE_generators["nameplate"]
-    hrs = np.array([np.arange(8760),]*RE_nameplate.size).T
+    hrs = np.array([np.arange(8760),]*RE_nameplate.size).T # shape(8760 hrs, num generators)
     RE_capacity = np.multiply(RE_nameplate, cf[RE_generators["lat idx"], RE_generators["lon idx"], hrs])
     return RE_capacity
 
@@ -294,6 +300,9 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
         hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,wind_generators,cf)
         lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
         total_capacity_removed = total_capacity_removed + capacity_removed
+
+        if DEBUG:
+            print(oldest_year,lolh,capacity_removed)
 
     # find reliability of higher iteration simulation
     hourly_fleet_capacity = get_hourly_fleet_capacity(num_iterations,conventional_generators,solar_generators,wind_generators,cf)
@@ -436,11 +445,12 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity
 
 
 # save hourly fleet capacity to csv
-def save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system,generator):
+def save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system):
     
     # pseudo-unique filename 
-    hourly_capacity_filename = str(simulation["year"])+'_'+str(simulation["iterations"])+'_'+str(system["region"])+\
-                    '_'+str(generator["nameplate"])+'_'+generator["type"]+'_'+str(generator["lat"])+'_'+str(generator["lon"])+'.csv'
+    hourly_capacity_filename = str(simulation["year"])+'_'+str(system["region"])+'_'+str(simulation["iterations"])+\
+                                str(simulation["target lolh"])+'_'+str(simulation["shift load"])+'_'+\
+                                str(system["conventional efor"])+'_'+str(system["RE efor"])+'.csv'
 
     # convert to dataframe
     hourly_capacity_df = pd.DataFrame(data=hourly_fleet_capacity,
@@ -454,12 +464,13 @@ def save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system,generator
 
 
 # load hourly fleet capacity
-def load_hourly_fleet_capacity(simulation,system,generator):
+def load_hourly_fleet_capacity(simulation,system):
     
     # pseudo-unique filename to find h.f.c of previous simulation with similar parameters
-    hourly_capacity_filename = str(simulation["year"])+'_'+str(simulation["iterations"])+'_'+str(system["region"])+\
-                        '_'+str(generator["nameplate"])+'_'+generator["type"]+'_'+str(generator["lat"])+'_'+str(generator["lon"])+'.csv'
-    
+    hourly_capacity_filename = str(simulation["year"])+'_'+str(system["region"])+'_'+str(simulation["iterations"])+\
+                                str(simulation["target lolh"])+'_'+str(simulation["shift load"])+'_'+\
+                                str(system["conventional efor"])+'_'+str(system["RE efor"])+'.csv'
+
     if path.exists(hourly_capacity_filename):
         hourly_fleet_capacity =pd.read_csv(hourly_capacity_filename,index_col=0).values
     else:
@@ -503,8 +514,13 @@ def main(simulation,files,system,generator):
 
     global DEBUG 
     DEBUG = simulation["debug"]
+
+    if DEBUG:
+        print("Region:",system["region"])
+        print("Demand File:",files["demand file"])
     
     print('{:%Y-%m-%d %H:%M:%S}\tBegin Main'.format(datetime.datetime.now()))
+    
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
@@ -513,7 +529,7 @@ def main(simulation,files,system,generator):
     
     # Load saved system
     if system["setting"] == "load":
-        hourly_fleet_capacity = load_hourly_fleet_capacity(simulation,system,generator)
+        hourly_fleet_capacity = load_hourly_fleet_capacity(simulation,system)
 
     # get fleet depending on input (option to load preprocessed saved fleet)
     else:
@@ -541,7 +557,7 @@ def main(simulation,files,system,generator):
     # option to save system for detailed analysis or future simulations
     # filename contains simulation parameters
     if system["setting"] == "save":
-        save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system,generator)
+        save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system)
         
 
     # format RE generator and get hourly capacity matrix
