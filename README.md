@@ -18,7 +18,7 @@ Instructions:
 
 4. Run simulation in background from command-line
 
-    `nohup python -u elcc_master.py > output_filename.out &'
+    `nohup python -u elcc_master.py > output_filename.out &`
 
 Citations:
 ----------
