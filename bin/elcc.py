@@ -38,18 +38,18 @@ def get_powGen(solar_cf_file, wind_cf_file):
 
 
 # Get hourly load vector
-def get_demand_data(demand_file_in, year_in, hrsShift=0):
+def get_demand_data(demand_file_in, year, hrsShift=0):
     demand_data = pd.read_csv(demand_file_in,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
 
     # Remove Leap Days
     leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
     demand_data.drop(leap_days, inplace=True) 
         # two date_time formats from eia cleaned data
-    leap_days=demand_data.index[demand_data.index.str.find(str(year_in)+"0229",0,10) != -1]
+    leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
     demand_data.drop(leap_days, inplace=True)
 
     # Find Given Year
-    hourly_load = np.array(demand_data["cleaned demand (MW)"][demand_data.index.str.find(str(year_in),0,10) != -1].values)
+    hourly_load = np.array(demand_data["cleaned demand (MW)"][demand_data.index.str.find(str(year),0,10) != -1].values)
 
     # Shift load
     if hrsShift!=0:
@@ -68,7 +68,7 @@ def get_demand_data(demand_file_in, year_in, hrsShift=0):
 
 
 # Get conventional generators in fleet
-def get_conventional_fleet(eia_folder, region, year_in, derate_conventional, conventional_efor):
+def get_conventional_fleet(eia_folder, region, year, derate_conventional, conventional_efor):
     
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Balancing Authority Code"])
@@ -88,6 +88,9 @@ def get_conventional_fleet(eia_folder, region, year_in, derate_conventional, con
 
     # Get operating generators
     active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes)) & (all_conventional_generators["Status"] == "OP")]
+
+    # Remove generators added after simulation year
+    active_generators = active_generators[active_generators["Operating Year"] <= year]
 
     # Remove renewable generators
     renewable_technologies = np.array(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"])
@@ -116,11 +119,14 @@ def get_conventional_fleet(eia_folder, region, year_in, derate_conventional, con
 
 
 # Implementation of get_solar_and_wind_fleet
-def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, RE_efor):
+def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor):
    
     # Get operating generators
     active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes)) & (RE_generators["Status"] == "OP")]
     
+    # Remove generators added after simulation year
+    acitve_generators = active_generators[active_generators["Operating Year"] <= year]
+
     # Get coordinates
     latitudes = plants["Latitude"][active_generators["Plant Code"]].values
     longitudes = plants["Longitude"][active_generators["Plant Code"]].values
@@ -144,11 +150,12 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, RE_efor):
 def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
     # Open files
-    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude","Longitude","Balancing Authority Code"])
+    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
+                                                                                "Longitude","Balancing Authority Code"])
     all_solar_generators = pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",skiprows=1,\
-                                usecols=["Plant Code","Nameplate Capacity (MW)","Status"])
+                                usecols=["Plant Code","Nameplate Capacity (MW)","Status","Operating Year"])
     all_wind_generators = pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",skiprows=1,\
-                                usecols=["Plant Code","Nameplate Capacity (MW)","Status"])
+                                usecols=["Plant Code","Nameplate Capacity (MW)","Status","Operating Year"])
 
      # Sort by NERC Region and Balancing Authority to filter correct plant codes
     nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
@@ -158,8 +165,8 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
     # Repeat process for solar and wind
     plants.set_index("Plant Code",inplace=True)
-    solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,RE_efor)
-    wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,RE_efor)
+    solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,year,RE_efor)
+    wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,year,RE_efor)
 
     if DEBUG:
         print("found",solar_generators["nameplate"].size+wind_generators["nameplate"].size,"renewable generators")
