@@ -1,0 +1,3080 @@
+,Nameplate Capacity (MW),Summer Capacity (MW),Winter Capacity (MW),Year,Type,EFOR
+0,86.9,64,64,1980.0,Natural Gas Fired Combustion Turbine,0.05
+1,12.1,12.1,12.1,1980.0,Conventional Hydroelectric,0.05
+2,257.0,253,253,1984.0,Conventional Steam Coal,0.05
+3,88.9,67,81.1,1981.0,Natural Gas Fired Combustion Turbine,0.05
+4,88.9,67,81.1,1981.0,Natural Gas Fired Combustion Turbine,0.05
+5,1.4,1.4,1.4,1981.0,Conventional Hydroelectric,0.05
+6,199.8,199.8,199.8,1987.0,Hydroelectric Pumped Storage,0.05
+7,312.3,271,271,1980.0,Conventional Steam Coal,0.05
+8,414.0,380,380,1981.0,Conventional Steam Coal,0.05
+9,91.0,68,80,2001.0,Natural Gas Fired Combined Cycle,0.05
+10,44.6,39,40,2001.0,Natural Gas Fired Combined Cycle,0.05
+11,184.5,155,160,2003.0,Natural Gas Fired Combined Cycle,0.05
+12,184.5,153,160,2003.0,Natural Gas Fired Combined Cycle,0.05
+13,200.6,150,166,2003.0,Natural Gas Fired Combined Cycle,0.05
+14,78.3,76,79,2002.0,Natural Gas Fired Combustion Turbine,0.05
+15,25.3,20,22,1978.0,Petroleum Liquids,0.05
+16,60.5,47,49,2008.0,Natural Gas Fired Combustion Turbine,0.05
+17,60.5,47,49,2008.0,Natural Gas Fired Combustion Turbine,0.05
+18,85.0,75,77.4,2001.0,Natural Gas Fired Combustion Turbine,0.05
+19,9.9,10,10,1927.0,Conventional Hydroelectric,0.05
+20,9.9,10,10,1927.0,Conventional Hydroelectric,0.05
+21,9.9,10,10,1927.0,Conventional Hydroelectric,0.05
+22,170.0,148,167,2002.0,Natural Gas Fired Combined Cycle,0.05
+23,122.0,106,110,2002.0,Natural Gas Fired Combined Cycle,0.05
+24,9.2,11.5,11.5,1926.0,Conventional Hydroelectric,0.05
+25,36.0,36,36,1973.0,Conventional Hydroelectric,0.05
+26,13.0,13,13,1930.0,Conventional Hydroelectric,0.05
+27,71.2,53.5,53.5,1980.0,Petroleum Liquids,0.05
+28,71.2,53.5,53.5,1981.0,Natural Gas Fired Combustion Turbine,0.05
+29,51.7,51.7,51.7,1951.0,Conventional Hydroelectric,0.05
+30,51.7,51.7,51.7,1951.0,Conventional Hydroelectric,0.05
+31,48.0,48,48,1951.0,Conventional Hydroelectric,0.05
+32,51.7,51.7,51.7,1951.0,Conventional Hydroelectric,0.05
+33,51.7,51.7,51.7,1951.0,Conventional Hydroelectric,0.05
+34,165.0,165,165,1964.0,Conventional Hydroelectric,0.05
+35,165.0,165,165,1964.0,Conventional Hydroelectric,0.05
+36,165.0,165,165,1964.0,Conventional Hydroelectric,0.05
+37,165.0,165,165,1965.0,Conventional Hydroelectric,0.05
+38,165.0,165,165,1965.0,Conventional Hydroelectric,0.05
+39,165.0,165,165,1965.0,Conventional Hydroelectric,0.05
+40,157.0,157,157,1966.0,Conventional Hydroelectric,0.05
+41,165.0,165,165,1966.0,Conventional Hydroelectric,0.05
+42,2.4,2.4,2.4,1936.0,Conventional Hydroelectric,0.05
+43,130.0,130,130,1936.0,Conventional Hydroelectric,0.05
+44,130.0,130,130,1936.0,Conventional Hydroelectric,0.05
+45,130.0,130,130,1937.0,Conventional Hydroelectric,0.05
+46,130.0,130,130,1936.0,Conventional Hydroelectric,0.05
+47,130.0,130,130,1938.0,Conventional Hydroelectric,0.05
+48,130.0,130,130,1938.0,Conventional Hydroelectric,0.05
+49,127.0,127,127,1944.0,Conventional Hydroelectric,0.05
+50,130.0,130,130,1961.0,Conventional Hydroelectric,0.05
+51,1.5,1,1,1981.0,Conventional Hydroelectric,0.05
+52,204.0,175,175,1979.0,Natural Gas Steam Turbine,0.05
+53,204.0,175,175,1979.0,Conventional Steam Coal,0.05
+54,1.1,1.1,1.1,1980.0,Conventional Hydroelectric,0.05
+55,1.1,1.1,1.1,1980.0,Conventional Hydroelectric,0.05
+56,1.1,1.1,1.1,1980.0,Conventional Hydroelectric,0.05
+57,0.5,0.5,0.5,1979.0,Conventional Hydroelectric,0.05
+58,0.5,0.5,0.5,1979.0,Conventional Hydroelectric,0.05
+59,1.0,0.9,0.9,1981.0,Conventional Hydroelectric,0.05
+60,1.0,1,1,1902.0,Conventional Hydroelectric,0.05
+61,1.4,0.7,1,1940.0,Conventional Hydroelectric,0.05
+62,31.0,34,34,1927.0,Conventional Hydroelectric,0.05
+63,48.6,52.5,52.5,1958.0,Conventional Hydroelectric,0.05
+64,48.6,52.5,52.5,1958.0,Conventional Hydroelectric,0.05
+65,117.9,125,125,1969.0,Conventional Hydroelectric,0.05
+66,33.0,32.5,32.5,1928.0,Conventional Hydroelectric,0.05
+67,33.0,32.5,32.5,1928.0,Conventional Hydroelectric,0.05
+68,40.0,41,41,1958.0,Conventional Hydroelectric,0.05
+69,23.8,25,25,1921.0,Conventional Hydroelectric,0.05
+70,25.0,25,25,1921.0,Conventional Hydroelectric,0.05
+71,25.0,25,25,1924.0,Conventional Hydroelectric,0.05
+72,60.3,60,60,1958.0,Conventional Hydroelectric,0.05
+73,57.6,60,60,1958.0,Conventional Hydroelectric,0.05
+74,7.0,7,7,1965.0,Conventional Hydroelectric,0.05
+75,12.1,13,13,1979.0,Conventional Hydroelectric,0.05
+76,0.7,0.9,0.9,1907.0,Conventional Hydroelectric,0.05
+77,0.7,0.9,0.9,1907.0,Conventional Hydroelectric,0.05
+78,36.9,35,35,1949.0,Conventional Hydroelectric,0.05
+79,36.9,35,35,1950.0,Conventional Hydroelectric,0.05
+80,18.4,18.5,18.5,1963.0,Conventional Hydroelectric,0.05
+81,5.5,5.7,5.7,1908.0,Conventional Hydroelectric,0.05
+82,12.0,13.2,13.2,1913.0,Conventional Hydroelectric,0.05
+83,12.0,13.2,13.2,1913.0,Conventional Hydroelectric,0.05
+84,12.0,13.2,13.2,1922.0,Conventional Hydroelectric,0.05
+85,13.2,14.4,14.4,1928.0,Conventional Hydroelectric,0.05
+86,53.1,49.5,49.5,1965.0,Conventional Hydroelectric,0.05
+87,22.0,22,22,1943.0,Conventional Hydroelectric,0.05
+88,10.0,10.4,10.6,1924.0,Conventional Hydroelectric,0.05
+89,10.0,10.4,10.5,1924.0,Conventional Hydroelectric,0.05
+90,32.3,30.7,30.7,1948.0,Conventional Hydroelectric,0.05
+91,35.1,30.7,30.7,1948.0,Conventional Hydroelectric,0.05
+92,35.1,36.6,36.6,1948.0,Conventional Hydroelectric,0.05
+93,67.5,72,72,1958.0,Conventional Hydroelectric,0.05
+94,67.5,72,72,1958.0,Conventional Hydroelectric,0.05
+95,13.6,11,11,1916.0,Conventional Hydroelectric,0.05
+96,10.0,8.5,8.5,1921.0,Conventional Hydroelectric,0.05
+97,10.0,8.5,8.5,1921.0,Conventional Hydroelectric,0.05
+98,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+99,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+100,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+101,16.7,16.3,16.3,2011.0,Natural Gas Internal Combustion Engine,0.05
+102,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+103,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+104,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+105,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+106,16.7,16.3,16.3,2010.0,Natural Gas Internal Combustion Engine,0.05
+107,16.7,16.7,16.7,2010.0,Natural Gas Internal Combustion Engine,0.05
+108,85.1,86,86,1966.0,Conventional Hydroelectric,0.05
+109,83.5,86,86,1965.0,Conventional Hydroelectric,0.05
+110,1.5,1.6,1.6,1904.0,Conventional Hydroelectric,0.05
+111,48.6,52,52,1962.0,Conventional Hydroelectric,0.05
+112,3.4,3.5,3.5,1930.0,Conventional Hydroelectric,0.05
+113,233.0,165,165,2002.0,Natural Gas Fired Combined Cycle,0.05
+114,233.0,165,165,2002.0,Natural Gas Fired Combined Cycle,0.05
+115,233.0,165,165,2002.0,Natural Gas Fired Combined Cycle,0.05
+116,233.0,165,165,2002.0,Natural Gas Fired Combined Cycle,0.05
+117,233.0,180,180,2002.0,Natural Gas Fired Combined Cycle,0.05
+118,233.0,180,180,2002.0,Natural Gas Fired Combined Cycle,0.05
+119,3.6,1.7,2,1954.0,Conventional Hydroelectric,0.05
+120,10.2,12,12,1942.0,Conventional Hydroelectric,0.05
+121,1.6,2,2,1940.0,Conventional Hydroelectric,0.05
+122,34.6,30.5,30.5,1922.0,Conventional Hydroelectric,0.05
+123,34.6,30.5,30.5,1922.0,Conventional Hydroelectric,0.05
+124,26.7,23.3,23.3,1925.0,Conventional Hydroelectric,0.05
+125,26.7,23.3,23.3,1925.0,Conventional Hydroelectric,0.05
+126,26.7,23.3,23.3,1925.0,Conventional Hydroelectric,0.05
+127,51.7,47.5,47.5,1955.0,Conventional Hydroelectric,0.05
+128,51.7,47.5,47.5,1955.0,Conventional Hydroelectric,0.05
+129,38.2,40,40,1944.0,Conventional Hydroelectric,0.05
+130,38.2,40,40,1944.0,Conventional Hydroelectric,0.05
+131,33.2,40,40,1944.0,Conventional Hydroelectric,0.05
+132,32.0,40,40,1944.0,Conventional Hydroelectric,0.05
+133,39.6,40,40,1965.0,Conventional Hydroelectric,0.05
+134,39.6,40,40,1965.0,Conventional Hydroelectric,0.05
+135,57.6,56,56,1965.0,Conventional Hydroelectric,0.05
+136,52.2,57,57,1965.0,Conventional Hydroelectric,0.05
+137,71.4,60,60,1958.0,Conventional Hydroelectric,0.05
+138,71.4,60,60,1958.0,Conventional Hydroelectric,0.05
+139,4.4,4.5,4.5,1939.0,Conventional Hydroelectric,0.05
+140,2.0,2,2,1910.0,Conventional Hydroelectric,0.05
+141,3.0,2.7,2.7,1917.0,Conventional Hydroelectric,0.05
+142,63.0,63,63,1950.0,Conventional Hydroelectric,0.05
+143,63.0,63,63,1950.0,Conventional Hydroelectric,0.05
+144,2.8,3.2,3.2,1917.0,Conventional Hydroelectric,0.05
+145,12.3,11,11,1931.0,Conventional Hydroelectric,0.05
+146,29.7,33,33,1953.0,Conventional Hydroelectric,0.05
+147,6.7,7,7,1979.0,Conventional Hydroelectric,0.05
+148,7.0,7,7,1928.0,Conventional Hydroelectric,0.05
+149,3.7,4.4,4.4,1928.0,Conventional Hydroelectric,0.05
+150,6.6,5.8,5.8,1929.0,Conventional Hydroelectric,0.05
+151,6.0,7,7,1921.0,Conventional Hydroelectric,0.05
+152,81.9,91,91,1963.0,Conventional Hydroelectric,0.05
+153,110.0,50,50,1979.0,Geothermal,0.05
+154,138.0,56,56,1980.0,Geothermal,0.05
+155,113.0,50,50,1980.0,Geothermal,0.05
+156,118.0,49,49,1985.0,Geothermal,0.05
+157,118.0,56,56,1982.0,Geothermal,0.05
+158,118.0,45,45,1983.0,Geothermal,0.05
+159,118.0,40,40,1985.0,Geothermal,0.05
+160,25.5,29,29,1931.0,Conventional Hydroelectric,0.05
+161,26.7,29,29,1931.0,Conventional Hydroelectric,0.05
+162,8.5,9,9,1980.0,Conventional Hydroelectric,0.05
+163,13.6,14.5,14.5,1948.0,Conventional Hydroelectric,0.05
+164,13.6,14,14,1917.0,Conventional Hydroelectric,0.05
+165,2.8,3.2,3.2,1986.0,Conventional Hydroelectric,0.05
+166,3.2,5,5,1910.0,Conventional Hydroelectric,0.05
+167,3.2,5,5,1910.0,Conventional Hydroelectric,0.05
+168,3.2,5,5,1910.0,Conventional Hydroelectric,0.05
+169,3.2,5,5,1910.0,Conventional Hydroelectric,0.05
+170,10.0,14,14,1918.0,Conventional Hydroelectric,0.05
+171,10.0,14,14,1918.0,Conventional Hydroelectric,0.05
+172,13.5,17,17,1925.0,Conventional Hydroelectric,0.05
+173,13.5,17,17,1925.0,Conventional Hydroelectric,0.05
+174,0.5,0.4,0.4,1903.0,Conventional Hydroelectric,0.05
+175,0.4,0.4,0.4,1907.0,Conventional Hydroelectric,0.05
+176,1.2,1.1,1.1,1910.0,Conventional Hydroelectric,0.05
+177,18.0,18.8,18.8,1962.0,Conventional Hydroelectric,0.05
+178,30.7,23,23,1984.0,Geothermal,0.05
+179,14.1,11,9,2007.0,Geothermal,0.05
+180,2.0,1.9,0.9,1982.0,Conventional Hydroelectric,0.05
+181,19.8,19.8,19.8,1913.0,Conventional Hydroelectric,0.05
+182,15.8,15.8,15.8,1913.0,Conventional Hydroelectric,0.05
+183,21.6,21.6,21.6,1923.0,Conventional Hydroelectric,0.05
+184,31.2,31.2,31.2,1925.0,Conventional Hydroelectric,0.05
+185,15.8,15.8,15.8,1913.0,Conventional Hydroelectric,0.05
+186,15.8,15.8,15.8,1914.0,Conventional Hydroelectric,0.05
+187,17.5,17.5,17.5,1921.0,Conventional Hydroelectric,0.05
+188,17.5,17.5,17.5,1925.0,Conventional Hydroelectric,0.05
+189,34.0,34,34,1923.0,Conventional Hydroelectric,0.05
+190,34.0,34,34,1923.0,Conventional Hydroelectric,0.05
+191,34.0,33,33,1923.0,Conventional Hydroelectric,0.05
+192,36.0,36,36,1948.0,Conventional Hydroelectric,0.05
+193,36.5,36.5,36.5,1980.0,Conventional Hydroelectric,0.05
+194,50.0,50,50,1951.0,Conventional Hydroelectric,0.05
+195,50.0,50,50,1951.0,Conventional Hydroelectric,0.05
+196,30.0,25.8,25.8,1921.0,Conventional Hydroelectric,0.05
+197,45.0,45,45,1929.0,Conventional Hydroelectric,0.05
+198,55.0,50,50,1928.0,Conventional Hydroelectric,0.05
+199,55.0,50,50,1928.0,Conventional Hydroelectric,0.05
+200,2.5,2.5,2.5,1908.0,Conventional Hydroelectric,0.05
+201,2.5,2.5,2.5,1908.0,Conventional Hydroelectric,0.05
+202,2.3,2.3,2.3,1911.0,Conventional Hydroelectric,0.05
+203,2.8,2.8,2.8,1913.0,Conventional Hydroelectric,0.05
+204,2.8,2.8,2.8,1913.0,Conventional Hydroelectric,0.05
+205,2.8,2.8,2.8,1913.0,Conventional Hydroelectric,0.05
+206,1.0,1,1,1905.0,Conventional Hydroelectric,0.05
+207,1.0,1,1,1905.0,Conventional Hydroelectric,0.05
+208,2.0,2,2,1906.0,Conventional Hydroelectric,0.05
+209,2.2,2.2,2.2,1907.0,Conventional Hydroelectric,0.05
+210,2.0,2,2,1909.0,Conventional Hydroelectric,0.05
+211,2.0,2,2,1943.0,Conventional Hydroelectric,0.05
+212,2.5,1.8,1.8,1919.0,Conventional Hydroelectric,0.05
+213,1.6,1.6,1.6,1913.0,Conventional Hydroelectric,0.05
+214,3.0,2.1,2.1,1904.0,Conventional Hydroelectric,0.05
+215,3.0,2.5,2.5,1904.0,Conventional Hydroelectric,0.05
+216,6.0,6,6,1932.0,Conventional Hydroelectric,0.05
+217,1.5,1.5,1.5,1917.0,Conventional Hydroelectric,0.05
+218,1.5,1.5,1.5,1917.0,Conventional Hydroelectric,0.05
+219,1.8,1.8,1.8,1929.0,Conventional Hydroelectric,0.05
+220,2.3,2.3,2.3,1929.0,Conventional Hydroelectric,0.05
+221,2.4,2.4,2.4,1913.0,Conventional Hydroelectric,0.05
+222,2.4,2.1,2.1,1913.0,Conventional Hydroelectric,0.05
+223,20.5,20.5,20.5,1921.0,Conventional Hydroelectric,0.05
+224,19.8,19.7,19.7,1921.0,Conventional Hydroelectric,0.05
+225,6.6,6.6,6.6,1907.0,Conventional Hydroelectric,0.05
+226,6.6,6.6,6.6,1907.0,Conventional Hydroelectric,0.05
+227,6.6,6.6,6.6,1907.0,Conventional Hydroelectric,0.05
+228,6.6,6.6,6.6,1907.0,Conventional Hydroelectric,0.05
+229,1.5,1.5,1.5,1911.0,Conventional Hydroelectric,0.05
+230,1.5,1.5,1.5,1912.0,Conventional Hydroelectric,0.05
+231,95.0,80,80,1960.0,Conventional Hydroelectric,0.05
+232,95.0,80,80,1960.0,Conventional Hydroelectric,0.05
+233,11.3,11.3,11.3,1924.0,Conventional Hydroelectric,0.05
+234,10.8,10.8,10.8,1956.0,Conventional Hydroelectric,0.05
+235,5.9,5.9,5.9,1916.0,Conventional Hydroelectric,0.05
+236,7.2,5.5,5.5,1917.0,Conventional Hydroelectric,0.05
+237,164.6,149,156,2005.0,Natural Gas Fired Combined Cycle,0.05
+238,164.6,149,156,2005.0,Natural Gas Fired Combined Cycle,0.05
+239,189.2,188,197,2005.0,Natural Gas Fired Combined Cycle,0.05
+240,164.6,149,156,2006.0,Natural Gas Fired Combined Cycle,0.05
+241,164.6,149,156,2006.0,Natural Gas Fired Combined Cycle,0.05
+242,189.2,188,197,2006.0,Natural Gas Fired Combined Cycle,0.05
+243,0.8,0.8,0.8,1899.0,Conventional Hydroelectric,0.05
+244,0.8,0.8,0.8,1899.0,Conventional Hydroelectric,0.05
+245,0.8,0.8,0.8,1899.0,Conventional Hydroelectric,0.05
+246,0.8,0.8,0.8,1899.0,Conventional Hydroelectric,0.05
+247,3.1,3.1,3.1,1999.0,Conventional Hydroelectric,0.05
+248,1.3,1.3,1.3,1909.0,Conventional Hydroelectric,0.05
+249,1.3,1.3,1.3,1909.0,Conventional Hydroelectric,0.05
+250,1200.0,1163,1163,1984.0,Nuclear,0.05
+251,7.5,8.9,8.9,1930.0,Conventional Hydroelectric,0.05
+252,7.5,8.9,8.9,1930.0,Conventional Hydroelectric,0.05
+253,8.6,9.9,9.9,1983.0,Conventional Hydroelectric,0.05
+254,57.4,48,48,2004.0,Natural Gas Fired Combustion Turbine,0.05
+255,78.4,78.4,78.4,1960.0,Conventional Hydroelectric,0.05
+256,78.4,78.4,78.4,1960.0,Conventional Hydroelectric,0.05
+257,50.0,50,50,1969.0,Conventional Hydroelectric,0.05
+258,50.0,50,50,1969.0,Conventional Hydroelectric,0.05
+259,39.5,39.5,39.5,1967.0,Conventional Hydroelectric,0.05
+260,39.5,39.5,39.5,1967.0,Conventional Hydroelectric,0.05
+261,36.5,36.5,36.5,1987.0,Conventional Hydroelectric,0.05
+262,5.0,4.9,2.5,1953.0,Conventional Hydroelectric,0.05
+263,5.0,4.9,2.5,1953.0,Conventional Hydroelectric,0.05
+264,4.8,2.7,2.7,1941.0,Conventional Hydroelectric,0.05
+265,4.4,4.6,4.6,1966.0,Conventional Hydroelectric,0.05
+266,10.0,8.1,10.8,1950.0,Conventional Hydroelectric,0.05
+267,9.6,11,10,1941.0,Conventional Hydroelectric,0.05
+268,16.5,16.5,10.4,1957.0,Conventional Hydroelectric,0.05
+269,16.5,16.5,7.7,1957.0,Conventional Hydroelectric,0.05
+270,89.9,71,73,1993.0,Natural Gas Fired Combined Cycle,0.05
+271,65.9,52,53,2012.0,Natural Gas Fired Combined Cycle,0.05
+272,43.2,45,46,2012.0,Natural Gas Fired Combined Cycle,0.05
+273,43.2,45,46,2012.0,Natural Gas Fired Combined Cycle,0.05
+274,3.2,3,3,1925.0,Conventional Hydroelectric,0.05
+275,271.0,270.5,270.5,1978.0,Hydroelectric Pumped Storage,0.05
+276,56.0,51.5,51.5,1972.0,Conventional Hydroelectric,0.05
+277,37.5,37.5,37.5,1952.0,Conventional Hydroelectric,0.05
+278,0.8,1.2,1.2,1908.0,Conventional Hydroelectric,0.05
+279,0.8,1.2,1.2,1909.0,Conventional Hydroelectric,0.05
+280,10.1,8.6,8.6,1971.0,Conventional Hydroelectric,0.05
+281,2.0,2,2,1921.0,Conventional Hydroelectric,0.05
+282,2.8,2.5,2.5,1927.0,Conventional Hydroelectric,0.05
+283,2.8,2.5,2.5,1927.0,Conventional Hydroelectric,0.05
+284,85.3,73,73,1995.0,Natural Gas Fired Combined Cycle,0.05
+285,85.3,73,73,1995.0,Natural Gas Fired Combined Cycle,0.05
+286,75.0,56,60,1995.0,Natural Gas Fired Combined Cycle,0.05
+287,60.5,47.4,47.4,2002.0,Natural Gas Fired Combustion Turbine,0.05
+288,60.5,47.4,47.4,2002.0,Natural Gas Fired Combustion Turbine,0.05
+289,60.5,47.4,47.4,2002.0,Natural Gas Fired Combustion Turbine,0.05
+290,60.5,47.4,47.4,2002.0,Natural Gas Fired Combustion Turbine,0.05
+291,60.5,47.4,47.4,2002.0,Natural Gas Fired Combustion Turbine,0.05
+292,182.8,157.5,162.5,2005.0,Natural Gas Fired Combined Cycle,0.05
+293,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+294,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+295,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+296,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+297,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+298,108.2,99.4,99.4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+299,264.3,235,250,2005.0,Natural Gas Fired Combined Cycle,0.05
+300,182.8,162.5,162.5,2005.0,Natural Gas Fired Combined Cycle,0.05
+301,37.5,37.5,37.5,1952.0,Conventional Hydroelectric,0.05
+302,3.2,2.7,2.7,1958.0,Conventional Hydroelectric,0.05
+303,2.8,3.2,3.2,1922.0,Conventional Hydroelectric,0.05
+304,2.8,2.9,2.9,1922.0,Conventional Hydroelectric,0.05
+305,216.9,204,204,2015.0,Natural Gas Fired Combined Cycle,0.05
+306,118.9,107,107,2015.0,Natural Gas Fired Combined Cycle,0.05
+307,106.9,102,102,2015.0,Natural Gas Fired Combustion Turbine,0.05
+308,106.9,102,102,2015.0,Natural Gas Fired Combustion Turbine,0.05
+309,37.5,36.5,36.5,1953.0,Conventional Hydroelectric,0.05
+310,60.5,43,43,2001.0,Natural Gas Fired Combustion Turbine,0.05
+311,182.8,162,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+312,182.8,162,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+313,264.4,209,209,2003.0,Natural Gas Fired Combined Cycle,0.05
+314,94.5,94.5,94.5,1967.0,Conventional Hydroelectric,0.05
+315,9.0,9,9,1967.0,Conventional Hydroelectric,0.05
+316,44.0,44,44,1965.0,Conventional Hydroelectric,0.05
+317,27.3,27.3,27.3,1965.0,Conventional Hydroelectric,0.05
+318,10.0,11,8.5,1957.0,Conventional Hydroelectric,0.05
+319,72.0,72,61.2,1957.0,Conventional Hydroelectric,0.05
+320,8.5,9,8,1958.0,Conventional Hydroelectric,0.05
+321,8.5,10,8.5,1958.0,Conventional Hydroelectric,0.05
+322,7.2,6.8,6,2012.0,Conventional Hydroelectric,0.05
+323,41.9,37.5,37.5,1963.0,Conventional Hydroelectric,0.05
+324,10.0,11,11,1963.0,Conventional Hydroelectric,0.05
+325,67.2,60,60,1963.0,Conventional Hydroelectric,0.05
+326,60.5,47.2,47.2,2004.0,Natural Gas Fired Combustion Turbine,0.05
+327,60.5,47.2,47.2,2004.0,Natural Gas Fired Combustion Turbine,0.05
+328,71.0,68,68,2016.0,Natural Gas Fired Combined Cycle,0.05
+329,16.0,16,16,2016.0,Natural Gas Fired Combined Cycle,0.05
+330,15.3,16,16,1966.0,Conventional Hydroelectric,0.05
+331,61.2,66,66,1966.0,Conventional Hydroelectric,0.05
+332,61.2,66,66,1966.0,Conventional Hydroelectric,0.05
+333,6.1,6,6,1966.0,Conventional Hydroelectric,0.05
+334,79.2,86,86,1966.0,Conventional Hydroelectric,0.05
+335,2.7,2.7,2.7,1982.0,Conventional Hydroelectric,0.05
+336,78.9,78.9,78.9,1963.0,Conventional Hydroelectric,0.05
+337,78.9,77,77,1968.0,Conventional Hydroelectric,0.05
+338,80.8,78.1,78.1,1961.0,Conventional Hydroelectric,0.05
+339,80.8,78.1,78.1,1962.0,Conventional Hydroelectric,0.05
+340,74.1,74.1,74.1,1971.0,Conventional Hydroelectric,0.05
+341,25.5,25.5,25.5,1965.0,Conventional Hydroelectric,0.05
+342,133.0,108,108,1968.0,Conventional Hydroelectric,0.05
+343,133.0,133,133,1968.0,Conventional Hydroelectric,0.05
+344,0.5,0.5,0.5,1983.0,Conventional Hydroelectric,0.05
+345,59.8,57,57,1972.0,Conventional Hydroelectric,0.05
+346,59.8,57,57,1976.0,Conventional Hydroelectric,0.05
+347,78.3,74,74,1994.0,Conventional Hydroelectric,0.05
+348,78.3,74,74,1992.0,Conventional Hydroelectric,0.05
+349,117.0,135.3,131.3,1968.0,Conventional Hydroelectric,0.05
+350,117.0,135.3,131.3,1968.0,Conventional Hydroelectric,0.05
+351,117.0,135.3,131.3,1968.0,Conventional Hydroelectric,0.05
+352,45.5,55,55,1971.0,Conventional Hydroelectric,0.05
+353,45.5,55,55,1971.0,Conventional Hydroelectric,0.05
+354,45.5,55,55,1971.0,Conventional Hydroelectric,0.05
+355,34.3,38.2,38.2,1989.0,Conventional Hydroelectric,0.05
+356,1.2,1,1,1924.0,Conventional Hydroelectric,0.05
+357,3.3,3.3,3.3,1924.0,Conventional Hydroelectric,0.05
+358,66.2,71.7,71.7,1955.0,Conventional Hydroelectric,0.05
+359,66.2,71.7,71.7,1955.0,Conventional Hydroelectric,0.05
+360,66.2,71.7,71.7,1955.0,Conventional Hydroelectric,0.05
+361,77.2,88.7,88.7,1963.0,Conventional Hydroelectric,0.05
+362,77.2,88.7,88.7,1963.0,Conventional Hydroelectric,0.05
+363,39.0,39,39,1950.0,Conventional Hydroelectric,0.05
+364,39.0,39,39,1949.0,Conventional Hydroelectric,0.05
+365,39.0,39,39,1949.0,Conventional Hydroelectric,0.05
+366,6.7,8.3,8.3,1955.0,Conventional Hydroelectric,0.05
+367,6.7,8.3,8.3,1955.0,Conventional Hydroelectric,0.05
+368,142.0,142,142,1949.0,Conventional Hydroelectric,0.05
+369,142.0,142,142,1948.0,Conventional Hydroelectric,0.05
+370,142.0,142,142,1944.0,Conventional Hydroelectric,0.05
+371,142.0,142,142,1944.0,Conventional Hydroelectric,0.05
+372,142.0,142,142,1948.0,Conventional Hydroelectric,0.05
+373,2.0,2,2,1944.0,Conventional Hydroelectric,0.05
+374,2.0,2,2,1944.0,Conventional Hydroelectric,0.05
+375,30.0,30,30,1942.0,Conventional Hydroelectric,0.05
+376,30.0,30,30,1943.0,Conventional Hydroelectric,0.05
+377,30.0,30,30,1942.0,Conventional Hydroelectric,0.05
+378,30.0,30,30,1943.0,Conventional Hydroelectric,0.05
+379,90.0,90,90,1964.0,Conventional Hydroelectric,0.05
+380,90.0,90,90,1964.0,Conventional Hydroelectric,0.05
+381,70.0,70,70,1964.0,Conventional Hydroelectric,0.05
+382,70.0,70,70,1964.0,Conventional Hydroelectric,0.05
+383,157.5,157.5,157.5,1969.0,Conventional Hydroelectric,0.05
+384,157.5,157.5,157.5,1969.0,Conventional Hydroelectric,0.05
+385,46.7,46.7,46.7,1969.0,Conventional Hydroelectric,0.05
+386,0.7,0.7,0.7,1986.0,Conventional Hydroelectric,0.05
+387,0.7,0.7,0.7,1986.0,Conventional Hydroelectric,0.05
+388,5.0,5,5,2013.0,Conventional Hydroelectric,0.05
+389,185.3,168,176,2015.0,Natural Gas Fired Combined Cycle,0.05
+390,185.3,168,176,2015.0,Natural Gas Fired Combined Cycle,0.05
+391,255.0,240,248,2015.0,Natural Gas Fired Combined Cycle,0.05
+392,856.8,750,766,2010.0,Conventional Steam Coal,0.05
+393,0.6,0.8,0.6,1906.0,Conventional Hydroelectric,0.05
+394,0.6,0.8,0.6,1908.0,Conventional Hydroelectric,0.05
+395,1.5,1.5,3,1932.0,Conventional Hydroelectric,0.05
+396,0.6,0.6,0.6,1908.0,Conventional Hydroelectric,0.05
+397,7.2,7.5,4,1909.0,Conventional Hydroelectric,0.05
+398,7.2,7.5,4,1909.0,Conventional Hydroelectric,0.05
+399,2.9,2.8,2.8,1983.0,Conventional Hydroelectric,0.05
+400,2.9,2.8,2.8,1983.0,Conventional Hydroelectric,0.05
+401,7.9,7.9,7.9,1983.0,Conventional Hydroelectric,0.05
+402,1.9,1.9,1.9,1984.0,Conventional Hydroelectric,0.05
+403,3.1,3.1,3.1,1984.0,Conventional Hydroelectric,0.05
+404,5.9,5.9,5.9,1985.0,Conventional Hydroelectric,0.05
+405,4.1,4.1,4.1,1985.0,Conventional Hydroelectric,0.05
+406,4.4,5.5,5.5,1983.0,Conventional Hydroelectric,0.05
+407,2.5,2.5,2.5,1939.0,Conventional Hydroelectric,0.05
+408,2.5,2.6,2.6,1927.0,Conventional Hydroelectric,0.05
+409,0.6,0.5,0.5,2006.0,Conventional Hydroelectric,0.05
+410,1.0,1,1,1925.0,Conventional Hydroelectric,0.05
+411,7.5,8.6,8.6,1952.0,Conventional Hydroelectric,0.05
+412,7.5,8.6,8.6,1952.0,Conventional Hydroelectric,0.05
+413,78.0,50,55,1983.0,Geothermal,0.05
+414,1.8,1.8,1.8,1999.0,Petroleum Liquids,0.05
+415,1.8,1.8,1.8,1999.0,Petroleum Liquids,0.05
+416,1.8,1.8,1.8,1999.0,Petroleum Liquids,0.05
+417,43.2,43.2,43.2,1967.0,Conventional Hydroelectric,0.05
+418,43.2,43.2,43.2,1967.0,Conventional Hydroelectric,0.05
+419,15.0,17.2,17.2,1950.0,Conventional Hydroelectric,0.05
+420,15.0,17.2,17.2,1950.0,Conventional Hydroelectric,0.05
+421,15.0,17.2,17.2,1950.0,Conventional Hydroelectric,0.05
+422,86.6,86.6,86.6,1970.0,Conventional Hydroelectric,0.05
+423,86.6,86.6,86.6,1971.0,Conventional Hydroelectric,0.05
+424,4.5,5.2,4.1,1959.0,Conventional Hydroelectric,0.05
+425,13.0,13,13,1943.0,Conventional Hydroelectric,0.05
+426,13.0,13,13,1943.0,Conventional Hydroelectric,0.05
+427,8.1,9.3,9.3,1951.0,Conventional Hydroelectric,0.05
+428,43.0,43,43,1954.0,Conventional Hydroelectric,0.05
+429,43.0,43,43,1954.0,Conventional Hydroelectric,0.05
+430,38.2,38.2,38.2,1954.0,Conventional Hydroelectric,0.05
+431,5.6,5.6,5.6,1962.0,Conventional Hydroelectric,0.05
+432,9.9,9.9,9.9,1962.0,Conventional Hydroelectric,0.05
+433,79.3,64,64,1991.0,Conventional Steam Coal,0.05
+434,7.2,7.2,7.2,1985.0,Conventional Hydroelectric,0.05
+435,10.0,10,10,1985.0,Conventional Hydroelectric,0.05
+436,77.0,77,77,1986.0,Natural Gas Fired Combustion Turbine,0.05
+437,3.6,3.5,3.5,1983.0,Conventional Hydroelectric,0.05
+438,3.6,3.5,3.5,1983.0,Conventional Hydroelectric,0.05
+439,3.6,3.5,3.5,1983.0,Conventional Hydroelectric,0.05
+440,50.7,50,50.7,1983.0,Wood/Wood Waste Biomass,0.05
+441,7.2,6.2,8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+442,15.0,15,15,1989.0,Conventional Hydroelectric,0.05
+443,15.0,15,15,1989.0,Conventional Hydroelectric,0.05
+444,1.9,1.3,1.5,1984.0,Conventional Hydroelectric,0.05
+445,1.9,1.2,1.1,1984.0,Conventional Hydroelectric,0.05
+446,1.9,1.3,1.1,1984.0,Conventional Hydroelectric,0.05
+447,2.4,1,0.8,1984.0,Conventional Hydroelectric,0.05
+448,16.8,16.8,16.8,1995.0,Conventional Hydroelectric,0.05
+449,1.4,1.3,1.3,1985.0,Conventional Hydroelectric,0.05
+450,12.7,11.5,11.5,1986.0,Conventional Hydroelectric,0.05
+451,139.5,155,155,1983.0,Conventional Hydroelectric,0.05
+452,1.8,1.5,1.5,1986.0,Conventional Hydroelectric,0.05
+453,23.9,23.9,23.9,1994.0,Conventional Hydroelectric,0.05
+454,2.9,2.9,2.9,1987.0,Conventional Hydroelectric,0.05
+455,12.1,13,13,1983.0,Conventional Hydroelectric,0.05
+456,23.4,23.4,23.4,1988.0,Conventional Hydroelectric,0.05
+457,30.8,36.8,20.3,1978.0,Conventional Hydroelectric,0.05
+458,30.8,36.8,20.3,1978.0,Conventional Hydroelectric,0.05
+459,30.8,36.8,20.3,1978.0,Conventional Hydroelectric,0.05
+460,25.0,26.9,26.5,1949.0,Conventional Hydroelectric,0.05
+461,25.0,25.7,24.8,1950.0,Conventional Hydroelectric,0.05
+462,25.0,28.8,26.6,1950.0,Conventional Hydroelectric,0.05
+463,112.5,123.3,120.1,1959.0,Conventional Hydroelectric,0.05
+464,112.5,131.2,123,1958.0,Conventional Hydroelectric,0.05
+465,112.5,120.2,118.4,1958.0,Conventional Hydroelectric,0.05
+466,112.5,123.1,123.7,1958.0,Conventional Hydroelectric,0.05
+467,225.0,246.2,241.7,1980.0,Conventional Hydroelectric,0.05
+468,27.6,32.3,32.3,1952.0,Conventional Hydroelectric,0.05
+469,27.6,31.2,29.6,1952.0,Conventional Hydroelectric,0.05
+470,27.6,30.7,30.1,1952.0,Conventional Hydroelectric,0.05
+471,6.2,7.2,4.6,1984.0,Conventional Hydroelectric,0.05
+472,6.2,7.2,4.6,1983.0,Conventional Hydroelectric,0.05
+473,2.5,2.1,2.2,1937.0,Conventional Hydroelectric,0.05
+474,13.5,15.3,14.3,1948.0,Conventional Hydroelectric,0.05
+475,15.0,18.1,17.9,1949.0,Conventional Hydroelectric,0.05
+476,15.0,18,16.5,1949.0,Conventional Hydroelectric,0.05
+477,15.0,17.7,17.7,1949.0,Conventional Hydroelectric,0.05
+478,15.0,18.1,18.5,1949.0,Conventional Hydroelectric,0.05
+479,11.5,12.8,12.4,1921.0,Conventional Hydroelectric,0.05
+480,12.5,14.9,12.4,1994.0,Conventional Hydroelectric,0.05
+481,12.5,14.5,12.4,1994.0,Conventional Hydroelectric,0.05
+482,8.4,10.1,10.1,1935.0,Conventional Hydroelectric,0.05
+483,44.3,43.1,34.5,1995.0,Conventional Hydroelectric,0.05
+484,9.0,9.5,9.6,1937.0,Conventional Hydroelectric,0.05
+485,9.0,8.7,9.4,1937.0,Conventional Hydroelectric,0.05
+486,8.3,8.1,8.1,1948.0,Conventional Hydroelectric,0.05
+487,2.7,2.7,2.7,1917.0,Conventional Hydroelectric,0.05
+488,2.0,2.2,2.2,1925.0,Conventional Hydroelectric,0.05
+489,2.0,2.2,2.2,1925.0,Conventional Hydroelectric,0.05
+490,11.0,11,11,1923.0,Conventional Hydroelectric,0.05
+491,11.0,11,11,1923.0,Conventional Hydroelectric,0.05
+492,11.0,11,11,1923.0,Conventional Hydroelectric,0.05
+493,10.0,9.3,9.3,1915.0,Conventional Hydroelectric,0.05
+494,10.0,9.3,9.3,1916.0,Conventional Hydroelectric,0.05
+495,10.0,9.3,9.3,1920.0,Conventional Hydroelectric,0.05
+496,7.5,7.6,7.6,1924.0,Conventional Hydroelectric,0.05
+497,7.0,7.6,7.6,1924.0,Conventional Hydroelectric,0.05
+498,59.4,44.3,66.5,1953.0,Conventional Hydroelectric,0.05
+499,73.2,73.9,79.8,1953.0,Conventional Hydroelectric,0.05
+500,73.2,73.4,80.2,1952.0,Conventional Hydroelectric,0.05
+501,59.4,63,68.3,1952.0,Conventional Hydroelectric,0.05
+502,2.2,2.8,2.9,1907.0,Conventional Hydroelectric,0.05
+503,2.2,2.8,2.9,1906.0,Conventional Hydroelectric,0.05
+504,2.2,2.8,2.9,1906.0,Conventional Hydroelectric,0.05
+505,2.2,2.8,2.9,1906.0,Conventional Hydroelectric,0.05
+506,2.2,2.8,2.9,1908.0,Conventional Hydroelectric,0.05
+507,1.0,0.9,0.9,1985.0,Conventional Hydroelectric,0.05
+508,103.0,103,90,1975.0,Conventional Hydroelectric,0.05
+509,103.0,103,90,1975.0,Conventional Hydroelectric,0.05
+510,259.0,259,220,1974.0,Conventional Hydroelectric,0.05
+511,8.0,8,8,1982.0,Conventional Hydroelectric,0.05
+512,3.0,3,3,1940.0,Conventional Hydroelectric,0.05
+513,8.0,8,8,1982.0,Conventional Hydroelectric,0.05
+514,0.5,0.5,0.5,1984.0,Conventional Hydroelectric,0.05
+515,0.5,0.5,0.5,1984.0,Conventional Hydroelectric,0.05
+516,0.5,0.5,0.5,1984.0,Conventional Hydroelectric,0.05
+517,44.1,44.1,44.1,1957.0,Conventional Hydroelectric,0.05
+518,44.1,44.1,44.1,1957.0,Conventional Hydroelectric,0.05
+519,44.1,44.1,44.1,1957.0,Conventional Hydroelectric,0.05
+520,44.1,44.1,44.1,1958.0,Conventional Hydroelectric,0.05
+521,14.0,14,14,1955.0,Conventional Hydroelectric,0.05
+522,14.0,14,14,1955.0,Conventional Hydroelectric,0.05
+523,14.0,14,14,1955.0,Conventional Hydroelectric,0.05
+524,19.6,17,17,1986.0,Conventional Hydroelectric,0.05
+525,9.4,9.4,9.4,1985.0,Conventional Hydroelectric,0.05
+526,0.7,0.6,0.2,1984.0,Conventional Hydroelectric,0.05
+527,2.1,2,1.9,1984.0,Conventional Hydroelectric,0.05
+528,0.2,0.2,0.2,1984.0,Conventional Hydroelectric,0.05
+529,0.5,0.4,0.4,1984.0,Conventional Hydroelectric,0.05
+530,1.0,0.8,0.8,1984.0,Conventional Hydroelectric,0.05
+531,0.6,0.5,0.1,1989.0,Conventional Hydroelectric,0.05
+532,0.6,0.5,0.1,1989.0,Conventional Hydroelectric,0.05
+533,7.8,7,7,1927.0,Conventional Hydroelectric,0.05
+534,7.8,7,7,1927.0,Conventional Hydroelectric,0.05
+535,8.4,7,7,1927.0,Conventional Hydroelectric,0.05
+536,28.4,31,31,1958.0,Conventional Hydroelectric,0.05
+537,32.0,31,31,1958.0,Conventional Hydroelectric,0.05
+538,2.8,2.8,2.8,1911.0,Conventional Hydroelectric,0.05
+539,2.8,2.6,2.6,1911.0,Conventional Hydroelectric,0.05
+540,2.8,2.8,2.8,1911.0,Conventional Hydroelectric,0.05
+541,2.8,2.8,2.8,1911.0,Conventional Hydroelectric,0.05
+542,3.0,3.8,3.8,1915.0,Conventional Hydroelectric,0.05
+543,9.6,13.3,13.3,1918.0,Conventional Hydroelectric,0.05
+544,9.6,13.3,13.3,1918.0,Conventional Hydroelectric,0.05
+545,9.6,13.3,13.3,1918.0,Conventional Hydroelectric,0.05
+546,9.6,13.3,13.3,1918.0,Conventional Hydroelectric,0.05
+547,70.6,62,62,1938.0,Conventional Hydroelectric,0.05
+548,50.4,62,62,1949.0,Conventional Hydroelectric,0.05
+549,86.6,82,82,1954.0,Conventional Hydroelectric,0.05
+550,31.5,24.5,24.5,1930.0,Conventional Hydroelectric,0.05
+551,31.5,24.5,24.5,1930.0,Conventional Hydroelectric,0.05
+552,6.0,6,6,1925.0,Conventional Hydroelectric,0.05
+553,6.0,6,6,1925.0,Conventional Hydroelectric,0.05
+554,59.0,64,64,2013.0,Conventional Hydroelectric,0.05
+555,8.0,10,10,1915.0,Conventional Hydroelectric,0.05
+556,9.2,12,12,1915.0,Conventional Hydroelectric,0.05
+557,9.2,12,12,1915.0,Conventional Hydroelectric,0.05
+558,9.2,12,12,1915.0,Conventional Hydroelectric,0.05
+559,9.2,11.5,11.5,1916.0,Conventional Hydroelectric,0.05
+560,7.0,7.5,7.5,1917.0,Conventional Hydroelectric,0.05
+561,7.0,6.5,6.5,1917.0,Conventional Hydroelectric,0.05
+562,7.0,7.5,7.5,1916.0,Conventional Hydroelectric,0.05
+563,6.0,6.5,6.5,1916.0,Conventional Hydroelectric,0.05
+564,7.0,6,6.5,1915.0,Conventional Hydroelectric,0.05
+565,7.0,6.5,6.5,1915.0,Conventional Hydroelectric,0.05
+566,57.1,53,53,1915.0,Conventional Hydroelectric,0.05
+567,113.9,113.9,120.3,1959.0,Conventional Hydroelectric,0.05
+568,113.9,113,120,1959.0,Conventional Hydroelectric,0.05
+569,113.9,113,120,1959.0,Conventional Hydroelectric,0.05
+570,113.8,113,120,1960.0,Conventional Hydroelectric,0.05
+571,114.0,127.6,142.2,1977.0,Conventional Hydroelectric,0.05
+572,107.0,107,107,1952.0,Conventional Hydroelectric,0.05
+573,107.0,107,107,1952.0,Conventional Hydroelectric,0.05
+574,107.0,107,107,1953.0,Conventional Hydroelectric,0.05
+575,107.0,107,107,1953.0,Conventional Hydroelectric,0.05
+576,71.9,71.9,71.9,1966.0,Conventional Hydroelectric,0.05
+577,62.5,62.5,62.5,1966.0,Conventional Hydroelectric,0.05
+578,71.9,71.9,71.9,1966.0,Conventional Hydroelectric,0.05
+579,62.5,62.5,62.5,1966.0,Conventional Hydroelectric,0.05
+580,104.4,85,88,1994.0,Natural Gas Fired Combined Cycle,0.05
+581,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+582,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+583,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+584,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+585,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+586,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+587,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+588,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+589,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+590,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+591,58.9,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+592,60.5,52,57,2008.0,Natural Gas Fired Combustion Turbine,0.05
+593,104.4,85,88,1993.0,Natural Gas Fired Combined Cycle,0.05
+594,92.5,73,81,1979.0,Natural Gas Fired Combined Cycle,0.05
+595,92.5,73,81,1979.0,Natural Gas Fired Combined Cycle,0.05
+596,92.5,73,81,1980.0,Natural Gas Fired Combined Cycle,0.05
+597,92.5,73,81,1982.0,Natural Gas Fired Combined Cycle,0.05
+598,312.0,263,286,2008.0,Natural Gas Fired Combined Cycle,0.05
+599,69.7,64,68,1994.0,Natural Gas Fired Combined Cycle,0.05
+600,50.2,40,40,1996.0,Natural Gas Fired Combined Cycle,0.05
+601,155.6,145,146,2008.0,Natural Gas Fired Combined Cycle,0.05
+602,155.6,145,146,2008.0,Natural Gas Fired Combined Cycle,0.05
+603,85.0,66.3,72,1994.0,Natural Gas Fired Combustion Turbine,0.05
+604,85.0,66.3,72,1994.0,Natural Gas Fired Combustion Turbine,0.05
+605,131.8,87.9,92.9,2013.0,Natural Gas Fired Combustion Turbine,0.05
+606,555.0,507,507,1982.0,Conventional Steam Coal,0.05
+607,18.6,17,19,1994.0,Natural Gas Fired Combustion Turbine,0.05
+608,130.5,145.8,147.8,1967.0,Conventional Hydroelectric,0.05
+609,130.5,150,150,1967.0,Conventional Hydroelectric,0.05
+610,130.5,149.2,146.9,1967.0,Conventional Hydroelectric,0.05
+611,47.5,55.3,55.7,1961.0,Conventional Hydroelectric,0.05
+612,47.5,54.8,53.2,1961.0,Conventional Hydroelectric,0.05
+613,47.5,54.9,55.9,1961.0,Conventional Hydroelectric,0.05
+614,47.5,54.8,55.1,1961.0,Conventional Hydroelectric,0.05
+615,15.0,17.9,17.9,1953.0,Conventional Hydroelectric,0.05
+616,26.0,31,31,1953.0,Conventional Hydroelectric,0.05
+617,2.8,2.8,2.8,1957.0,Conventional Hydroelectric,0.05
+618,3.2,3,3,1924.0,Conventional Hydroelectric,0.05
+619,11.0,10.4,10.4,1952.0,Conventional Hydroelectric,0.05
+620,50.3,50.4,50.4,1958.0,Conventional Hydroelectric,0.05
+621,48.4,47.6,47.6,1958.0,Conventional Hydroelectric,0.05
+622,32.0,32,32,1955.0,Conventional Hydroelectric,0.05
+623,3.8,4.6,4.6,1912.0,Conventional Hydroelectric,0.05
+624,16.0,18,18,1928.0,Conventional Hydroelectric,0.05
+625,16.0,18,18,1928.0,Conventional Hydroelectric,0.05
+626,7.2,7.7,7.7,1932.0,Conventional Hydroelectric,0.05
+627,1.0,0.9,0.9,1944.0,Conventional Hydroelectric,0.05
+628,18.0,18,18,1951.0,Conventional Hydroelectric,0.05
+629,11.0,11.6,11.6,1952.0,Conventional Hydroelectric,0.05
+630,14.2,15,15,1950.0,Conventional Hydroelectric,0.05
+631,14.2,15,15,1949.0,Conventional Hydroelectric,0.05
+632,14.2,15,15,1950.0,Conventional Hydroelectric,0.05
+633,1.1,1.1,1.1,1921.0,Conventional Hydroelectric,0.05
+634,3.1,3.9,3.9,1907.0,Conventional Hydroelectric,0.05
+635,3.1,3.9,3.9,1907.0,Conventional Hydroelectric,0.05
+636,2.7,3.4,3.4,1908.0,Conventional Hydroelectric,0.05
+637,4.5,5.6,5.6,1909.0,Conventional Hydroelectric,0.05
+638,4.0,5.1,5.1,1910.0,Conventional Hydroelectric,0.05
+639,19.2,23.9,23.9,1958.0,Conventional Hydroelectric,0.05
+640,19.2,27,27,1958.0,Conventional Hydroelectric,0.05
+641,21.6,31,31,1958.0,Conventional Hydroelectric,0.05
+642,45.0,38,38,1957.0,Conventional Hydroelectric,0.05
+643,32.4,36,36,1958.0,Conventional Hydroelectric,0.05
+644,32.4,36,36,1958.0,Conventional Hydroelectric,0.05
+645,3.3,4.3,4.3,1911.0,Conventional Hydroelectric,0.05
+646,3.3,4.3,4.3,1911.0,Conventional Hydroelectric,0.05
+647,3.3,4.3,4.3,1912.0,Conventional Hydroelectric,0.05
+648,3.9,5.2,5.2,1927.0,Conventional Hydroelectric,0.05
+649,5.0,6.6,6.6,1952.0,Conventional Hydroelectric,0.05
+650,112.5,110,110,1964.0,Conventional Hydroelectric,0.05
+651,130.0,121.5,121.5,1964.0,Conventional Hydroelectric,0.05
+652,130.0,121.5,121.5,1964.0,Conventional Hydroelectric,0.05
+653,1.2,1.4,1.4,1952.0,Conventional Hydroelectric,0.05
+654,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+655,1.2,1.4,1.4,1952.0,Conventional Hydroelectric,0.05
+656,1.2,1.4,1.4,1952.0,Conventional Hydroelectric,0.05
+657,1.2,1.2,1.2,1952.0,Conventional Hydroelectric,0.05
+658,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+659,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+660,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+661,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+662,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+663,1.2,1.5,1.5,1952.0,Conventional Hydroelectric,0.05
+664,1.2,1.4,1.4,1952.0,Conventional Hydroelectric,0.05
+665,1.0,1,1,1924.0,Conventional Hydroelectric,0.05
+666,52.2,50,50,1963.0,Conventional Hydroelectric,0.05
+667,52.2,50,50,1963.0,Conventional Hydroelectric,0.05
+668,9.9,3.8,6.5,1963.0,Conventional Hydroelectric,0.05
+669,8.4,4,8,1930.0,Conventional Hydroelectric,0.05
+670,7.5,4,7.5,1950.0,Conventional Hydroelectric,0.05
+671,8.0,7.5,7.5,1949.0,Conventional Hydroelectric,0.05
+672,18.0,21,21,1954.0,Conventional Hydroelectric,0.05
+673,62.1,54,54,1944.0,Conventional Hydroelectric,0.05
+674,66.5,66.5,66.5,1982.0,Conventional Hydroelectric,0.05
+675,66.5,66.5,66.5,1982.0,Conventional Hydroelectric,0.05
+676,66.5,66.5,66.5,1982.0,Conventional Hydroelectric,0.05
+677,66.5,66.5,66.5,1982.0,Conventional Hydroelectric,0.05
+678,66.5,66.5,66.5,1982.0,Conventional Hydroelectric,0.05
+679,66.5,66.5,66.5,1981.0,Conventional Hydroelectric,0.05
+680,66.5,66.5,66.5,1981.0,Conventional Hydroelectric,0.05
+681,66.5,66.5,66.5,1981.0,Conventional Hydroelectric,0.05
+682,53.5,53.5,53.5,1938.0,Conventional Hydroelectric,0.05
+683,62.1,62.1,62.1,1941.0,Conventional Hydroelectric,0.05
+684,62.1,62.1,62.1,1941.0,Conventional Hydroelectric,0.05
+685,62.1,62.1,62.1,1941.0,Conventional Hydroelectric,0.05
+686,62.1,62.1,62.1,1942.0,Conventional Hydroelectric,0.05
+687,62.1,62.1,62.1,1943.0,Conventional Hydroelectric,0.05
+688,62.1,62.1,62.1,1943.0,Conventional Hydroelectric,0.05
+689,62.1,62.1,62.1,1943.0,Conventional Hydroelectric,0.05
+690,13.1,13.1,13.1,1982.0,Conventional Hydroelectric,0.05
+691,13.1,13.1,13.1,1981.0,Conventional Hydroelectric,0.05
+692,13.0,13,13,1964.0,Conventional Hydroelectric,0.05
+693,13.0,13,13,1964.0,Conventional Hydroelectric,0.05
+694,50.0,50,50,1953.0,Conventional Hydroelectric,0.05
+695,50.0,50,50,1953.0,Conventional Hydroelectric,0.05
+696,15.0,17,17,1955.0,Conventional Hydroelectric,0.05
+697,40.0,40,40,1967.0,Conventional Hydroelectric,0.05
+698,40.0,40,40,1967.0,Conventional Hydroelectric,0.05
+699,15.0,15,15,1962.0,Conventional Hydroelectric,0.05
+700,15.0,15,15,1962.0,Conventional Hydroelectric,0.05
+701,135.0,135,135,1969.0,Conventional Hydroelectric,0.05
+702,135.0,118,118,1970.0,Conventional Hydroelectric,0.05
+703,135.0,118,118,1970.0,Conventional Hydroelectric,0.05
+704,135.0,135,135,1970.0,Conventional Hydroelectric,0.05
+705,135.0,135,135,1971.0,Conventional Hydroelectric,0.05
+706,135.0,135,135,1971.0,Conventional Hydroelectric,0.05
+707,135.0,118,118,1969.0,Conventional Hydroelectric,0.05
+708,135.0,118,118,1969.0,Conventional Hydroelectric,0.05
+709,40.0,40,40,1955.0,Conventional Hydroelectric,0.05
+710,40.0,40,40,1955.0,Conventional Hydroelectric,0.05
+711,40.0,40,40,1955.0,Conventional Hydroelectric,0.05
+712,70.0,70,70,1953.0,Conventional Hydroelectric,0.05
+713,70.0,70,70,1955.0,Conventional Hydroelectric,0.05
+714,70.0,70,70,1956.0,Conventional Hydroelectric,0.05
+715,70.0,70,70,1956.0,Conventional Hydroelectric,0.05
+716,70.0,70,70,1957.0,Conventional Hydroelectric,0.05
+717,80.5,80.5,80.5,1957.0,Conventional Hydroelectric,0.05
+718,70.0,70,70,1954.0,Conventional Hydroelectric,0.05
+719,70.0,70,70,1954.0,Conventional Hydroelectric,0.05
+720,70.0,70,70,1954.0,Conventional Hydroelectric,0.05
+721,70.0,70,70,1954.0,Conventional Hydroelectric,0.05
+722,70.0,48,48,1955.0,Conventional Hydroelectric,0.05
+723,70.0,70,70,1955.0,Conventional Hydroelectric,0.05
+724,70.0,70,70,1955.0,Conventional Hydroelectric,0.05
+725,70.0,70,70,1956.0,Conventional Hydroelectric,0.05
+726,25.0,17,25,1978.0,Natural Gas Fired Combustion Turbine,0.05
+727,25.0,17,25,1979.0,Natural Gas Fired Combustion Turbine,0.05
+728,134.0,138,138,2011.0,Natural Gas Fired Combined Cycle,0.05
+729,86.5,70,72,2009.0,Natural Gas Fired Combined Cycle,0.05
+730,86.5,70,72,2009.0,Natural Gas Fired Combined Cycle,0.05
+731,1.3,1.3,1.3,1907.0,Conventional Hydroelectric,0.05
+732,1.2,1.2,1.2,1907.0,Conventional Hydroelectric,0.05
+733,15.0,15,15,1927.0,Conventional Hydroelectric,0.05
+734,15.0,15,15,1927.0,Conventional Hydroelectric,0.05
+735,71.0,39,40,2002.0,Natural Gas Fired Combustion Turbine,0.05
+736,71.0,39,40,2002.0,Natural Gas Fired Combustion Turbine,0.05
+737,71.0,39,40,2002.0,Natural Gas Fired Combustion Turbine,0.05
+738,2.0,1.2,1.2,1896.0,Conventional Hydroelectric,0.05
+739,2.5,2,2,1910.0,Conventional Hydroelectric,0.05
+740,2.5,2,2,1910.0,Conventional Hydroelectric,0.05
+741,0.6,0.5,0.5,1910.0,Conventional Hydroelectric,0.05
+742,0.6,0.5,0.5,1910.0,Conventional Hydroelectric,0.05
+743,1.0,1.2,1.2,1912.0,Conventional Hydroelectric,0.05
+744,3.8,2,2,1911.0,Conventional Hydroelectric,0.05
+745,5.2,4.2,5.1,2001.0,Natural Gas Fired Combustion Turbine,0.05
+746,12.6,11.5,13.5,2012.0,Natural Gas Fired Combustion Turbine,0.05
+747,12.6,11.5,13.5,2012.0,Natural Gas Fired Combustion Turbine,0.05
+748,0.6,0.5,0.5,1921.0,Conventional Hydroelectric,0.05
+749,0.6,0.5,0.5,1921.0,Conventional Hydroelectric,0.05
+750,0.6,0.5,0.5,1964.0,Conventional Hydroelectric,0.05
+751,0.7,0.7,0.2,1925.0,Conventional Hydroelectric,0.05
+752,0.7,0.7,0.2,1925.0,Conventional Hydroelectric,0.05
+753,0.6,0.4,0.1,1939.0,Conventional Hydroelectric,0.05
+754,1.0,0.8,0.1,1988.0,Conventional Hydroelectric,0.05
+755,1.0,1,1,1988.0,Conventional Hydroelectric,0.05
+756,1.7,1.7,1.7,1983.0,Conventional Hydroelectric,0.05
+757,1.7,1.7,1.7,1983.0,Conventional Hydroelectric,0.05
+758,0.2,0.2,0.2,1937.0,Conventional Hydroelectric,0.05
+759,2.0,2,2,1958.0,Conventional Hydroelectric,0.05
+760,2.0,2,2,1958.0,Conventional Hydroelectric,0.05
+761,1.9,1.9,1.9,1958.0,Conventional Hydroelectric,0.05
+762,1.4,1.4,1.4,1958.0,Conventional Hydroelectric,0.05
+763,1.4,1.4,1.4,1958.0,Conventional Hydroelectric,0.05
+764,1.4,1.4,1.4,1961.0,Conventional Hydroelectric,0.05
+765,0.6,0.6,0.6,1920.0,Conventional Hydroelectric,0.05
+766,0.6,0.6,0.6,1940.0,Conventional Hydroelectric,0.05
+767,45.0,50,50,1932.0,Conventional Hydroelectric,0.05
+768,45.0,50,50,1949.0,Conventional Hydroelectric,0.05
+769,45.0,50,50,1958.0,Conventional Hydroelectric,0.05
+770,1.0,1,1,1931.0,Conventional Hydroelectric,0.05
+771,80.0,87.9,87.9,1958.0,Conventional Hydroelectric,0.05
+772,80.0,87.9,87.9,1958.0,Conventional Hydroelectric,0.05
+773,80.0,87.9,87.9,1958.0,Conventional Hydroelectric,0.05
+774,67.0,81.8,81.8,1953.0,Conventional Hydroelectric,0.05
+775,67.0,81.8,81.8,1953.0,Conventional Hydroelectric,0.05
+776,5.1,5.7,5.7,1904.0,Conventional Hydroelectric,0.05
+777,5.1,5.9,5.9,1904.0,Conventional Hydroelectric,0.05
+778,5.1,6.3,6.3,1904.0,Conventional Hydroelectric,0.05
+779,7.5,7.9,7.9,1929.0,Conventional Hydroelectric,0.05
+780,80.8,74.8,74.8,1960.0,Conventional Hydroelectric,0.05
+781,30.4,30.4,30.4,2013.0,Conventional Hydroelectric,0.05
+782,1.5,1.5,1.5,1898.0,Conventional Hydroelectric,0.05
+783,1.5,1.5,1.5,1898.0,Conventional Hydroelectric,0.05
+784,1.5,1.5,1.5,1898.0,Conventional Hydroelectric,0.05
+785,1.5,1.5,1.5,1898.0,Conventional Hydroelectric,0.05
+786,6.8,6.1,6.1,2013.0,Conventional Hydroelectric,0.05
+787,52.4,52.5,52.5,1959.0,Conventional Hydroelectric,0.05
+788,52.4,52.5,52.5,1959.0,Conventional Hydroelectric,0.05
+789,8.0,9.5,9.5,1910.0,Conventional Hydroelectric,0.05
+790,8.0,9.5,9.5,1910.0,Conventional Hydroelectric,0.05
+791,10.8,9.5,9.5,1910.0,Conventional Hydroelectric,0.05
+792,17.5,22.4,22.4,1915.0,Conventional Hydroelectric,0.05
+793,17.5,22.5,22.5,1915.0,Conventional Hydroelectric,0.05
+794,17.5,22.5,22.5,1919.0,Conventional Hydroelectric,0.05
+795,17.5,22.1,22.1,1924.0,Conventional Hydroelectric,0.05
+796,0.9,0.9,0.9,1915.0,Conventional Hydroelectric,0.05
+797,0.3,0.3,0.3,1915.0,Conventional Hydroelectric,0.05
+798,0.2,0.2,0.2,2006.0,Conventional Hydroelectric,0.05
+799,0.2,0.2,0.2,2006.0,Conventional Hydroelectric,0.05
+800,8.8,8.8,8.8,1910.0,Conventional Hydroelectric,0.05
+801,8.8,8.8,8.8,1908.0,Conventional Hydroelectric,0.05
+802,10.0,8,8,1994.0,Conventional Hydroelectric,0.05
+803,10.0,8,8,1994.0,Conventional Hydroelectric,0.05
+804,3.0,2.7,2.7,1930.0,Conventional Hydroelectric,0.05
+805,3.0,2.7,2.7,1930.0,Conventional Hydroelectric,0.05
+806,6.0,6,6,1955.0,Conventional Hydroelectric,0.05
+807,125.4,129.9,129.9,1974.0,Conventional Hydroelectric,0.05
+808,125.4,129.9,129.9,1974.0,Conventional Hydroelectric,0.05
+809,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+810,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+811,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+812,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+813,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+814,114.0,104.9,104.9,1961.0,Conventional Hydroelectric,0.05
+815,125.4,129.9,129.9,1973.0,Conventional Hydroelectric,0.05
+816,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+817,77.4,84,84,1969.0,Conventional Hydroelectric,0.05
+818,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+819,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+820,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+821,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+822,77.4,84,84,1967.0,Conventional Hydroelectric,0.05
+823,77.4,84,84,1968.0,Conventional Hydroelectric,0.05
+824,77.4,84,84,1969.0,Conventional Hydroelectric,0.05
+825,95.0,95,95,1961.0,Conventional Hydroelectric,0.05
+826,95.0,95,95,1959.0,Conventional Hydroelectric,0.05
+827,97.8,97.8,97.8,1961.0,Conventional Hydroelectric,0.05
+828,95.0,95,95,1960.0,Conventional Hydroelectric,0.05
+829,95.0,95,95,1960.0,Conventional Hydroelectric,0.05
+830,95.0,95,95,1960.0,Conventional Hydroelectric,0.05
+831,95.0,95,95,1960.0,Conventional Hydroelectric,0.05
+832,95.0,95,95,1960.0,Conventional Hydroelectric,0.05
+833,95.0,95,95,1959.0,Conventional Hydroelectric,0.05
+834,97.8,95,95,1959.0,Conventional Hydroelectric,0.05
+835,122.0,122,122,2014.0,Conventional Hydroelectric,0.05
+836,122.0,122,122,2013.0,Conventional Hydroelectric,0.05
+837,122.0,122,122,2012.0,Conventional Hydroelectric,0.05
+838,122.0,122,122,2017.0,Conventional Hydroelectric,0.05
+839,103.8,103.8,103.8,1963.0,Conventional Hydroelectric,0.05
+840,122.0,122,122,2012.0,Conventional Hydroelectric,0.05
+841,122.0,122,122,2016.0,Conventional Hydroelectric,0.05
+842,122.0,122,122,2011.0,Conventional Hydroelectric,0.05
+843,122.0,122,122,2018.0,Conventional Hydroelectric,0.05
+844,122.0,122,122,2015.0,Conventional Hydroelectric,0.05
+845,22.5,22.5,22.5,1955.0,Conventional Hydroelectric,0.05
+846,22.5,22.5,22.5,1955.0,Conventional Hydroelectric,0.05
+847,22.5,22.5,22.5,1955.0,Conventional Hydroelectric,0.05
+848,22.5,22.5,22.5,1955.0,Conventional Hydroelectric,0.05
+849,78.0,78,78,1957.0,Conventional Hydroelectric,0.05
+850,78.0,78,78,1959.0,Conventional Hydroelectric,0.05
+851,78.0,78,78,1960.0,Conventional Hydroelectric,0.05
+852,78.0,78,78,1960.0,Conventional Hydroelectric,0.05
+853,78.0,78,78,1960.0,Conventional Hydroelectric,0.05
+854,86.0,86,86,1973.0,Conventional Hydroelectric,0.05
+855,86.0,86,86,1973.0,Conventional Hydroelectric,0.05
+856,86.0,86,86,1973.0,Conventional Hydroelectric,0.05
+857,78.0,78,78,1957.0,Conventional Hydroelectric,0.05
+858,86.0,86,86,1973.0,Conventional Hydroelectric,0.05
+859,86.0,86,86,1973.0,Conventional Hydroelectric,0.05
+860,78.0,78,78,1958.0,Conventional Hydroelectric,0.05
+861,78.0,78,78,1958.0,Conventional Hydroelectric,0.05
+862,89.7,92.7,92,1958.0,Conventional Hydroelectric,0.05
+863,78.0,78,78,1958.0,Conventional Hydroelectric,0.05
+864,78.0,78,78,1959.0,Conventional Hydroelectric,0.05
+865,78.0,78,78,1959.0,Conventional Hydroelectric,0.05
+866,78.0,78,78,1959.0,Conventional Hydroelectric,0.05
+867,14.0,14,14,1957.0,Conventional Hydroelectric,0.05
+868,14.0,14,14,1957.0,Conventional Hydroelectric,0.05
+869,25.0,25.2,21,1947.0,Conventional Hydroelectric,0.05
+870,25.0,25.2,21,1945.0,Conventional Hydroelectric,0.05
+871,21.6,26.7,19,1926.0,Conventional Hydroelectric,0.05
+872,21.6,26.7,19,1926.0,Conventional Hydroelectric,0.05
+873,27.0,30,30,1930.0,Conventional Hydroelectric,0.05
+874,27.0,30,30,1931.0,Conventional Hydroelectric,0.05
+875,27.0,30,30,1952.0,Conventional Hydroelectric,0.05
+876,1.8,1.8,1.8,2013.0,Conventional Hydroelectric,0.05
+877,1.8,1.8,1.8,2013.0,Conventional Hydroelectric,0.05
+878,6.0,6,6,1912.0,Conventional Hydroelectric,0.05
+879,6.0,6,6,1912.0,Conventional Hydroelectric,0.05
+880,6.0,6,6,1912.0,Conventional Hydroelectric,0.05
+881,6.0,6,6,1912.0,Conventional Hydroelectric,0.05
+882,40.0,40,40,1945.0,Conventional Hydroelectric,0.05
+883,40.5,41,41,1983.0,Conventional Hydroelectric,0.05
+884,40.5,41,41,1963.0,Conventional Hydroelectric,0.05
+885,40.5,41,41,1963.0,Conventional Hydroelectric,0.05
+886,40.5,41,41,1963.0,Conventional Hydroelectric,0.05
+887,150.0,186,175.3,1968.0,Conventional Hydroelectric,0.05
+888,150.0,157,147,1968.0,Conventional Hydroelectric,0.05
+889,88.2,88.2,88.2,1958.0,Conventional Hydroelectric,0.05
+890,88.2,88.2,88.2,1955.0,Conventional Hydroelectric,0.05
+891,88.2,65,65,1955.0,Conventional Hydroelectric,0.05
+892,88.2,88.2,88.2,1955.0,Conventional Hydroelectric,0.05
+893,88.2,65,65,1957.0,Conventional Hydroelectric,0.05
+894,88.2,88.2,88.2,1957.0,Conventional Hydroelectric,0.05
+895,88.2,65,65,1957.0,Conventional Hydroelectric,0.05
+896,95.0,95,95,1977.0,Conventional Hydroelectric,0.05
+897,95.0,95,95,1977.0,Conventional Hydroelectric,0.05
+898,95.0,95,95,1977.0,Conventional Hydroelectric,0.05
+899,88.2,88.2,88.2,1958.0,Conventional Hydroelectric,0.05
+900,95.0,95,95,1978.0,Conventional Hydroelectric,0.05
+901,95.0,95,95,1978.0,Conventional Hydroelectric,0.05
+902,95.0,95,95,1978.0,Conventional Hydroelectric,0.05
+903,95.0,95,95,1978.0,Conventional Hydroelectric,0.05
+904,95.0,95,95,1979.0,Conventional Hydroelectric,0.05
+905,95.0,95,95,1979.0,Conventional Hydroelectric,0.05
+906,95.0,95,95,1979.0,Conventional Hydroelectric,0.05
+907,88.2,88.2,88.2,1958.0,Conventional Hydroelectric,0.05
+908,88.2,88.2,88.2,1958.0,Conventional Hydroelectric,0.05
+909,88.2,88.2,88.2,1957.0,Conventional Hydroelectric,0.05
+910,88.2,88.2,88.2,1956.0,Conventional Hydroelectric,0.05
+911,88.2,88.2,88.2,1956.0,Conventional Hydroelectric,0.05
+912,88.2,88.2,88.2,1956.0,Conventional Hydroelectric,0.05
+913,88.2,88.2,88.2,1955.0,Conventional Hydroelectric,0.05
+914,90.0,72,72,1962.0,Conventional Hydroelectric,0.05
+915,90.0,76,76,1962.0,Conventional Hydroelectric,0.05
+916,111.0,87,87,1975.0,Conventional Hydroelectric,0.05
+917,111.0,111,111,1976.0,Conventional Hydroelectric,0.05
+918,135.0,135,135,1971.0,Conventional Hydroelectric,0.05
+919,135.0,135,135,1978.0,Conventional Hydroelectric,0.05
+920,135.0,135,135,1978.0,Conventional Hydroelectric,0.05
+921,135.0,95,95,1969.0,Conventional Hydroelectric,0.05
+922,135.0,117,117,1970.0,Conventional Hydroelectric,0.05
+923,135.0,135,135,1979.0,Conventional Hydroelectric,0.05
+924,135.0,135,135,1979.0,Conventional Hydroelectric,0.05
+925,27.5,26,26,1964.0,Conventional Hydroelectric,0.05
+926,33.4,33.4,33.4,1961.0,Conventional Hydroelectric,0.05
+927,33.4,33.4,33.4,1960.0,Conventional Hydroelectric,0.05
+928,19.0,19,17.5,1958.0,Conventional Hydroelectric,0.05
+929,19.0,19,19,1959.0,Conventional Hydroelectric,0.05
+930,3.2,3.2,2.9,1927.0,Conventional Hydroelectric,0.05
+931,3.2,3.2,3.2,1928.0,Conventional Hydroelectric,0.05
+932,12.0,12.2,12.2,1951.0,Conventional Hydroelectric,0.05
+933,12.0,12.2,12.2,1950.0,Conventional Hydroelectric,0.05
+934,12.0,12.2,12.2,1950.0,Conventional Hydroelectric,0.05
+935,17.2,17.2,17.2,1939.0,Conventional Hydroelectric,0.05
+936,17.2,17.2,17.2,1939.0,Conventional Hydroelectric,0.05
+937,17.2,17.2,17.2,1939.0,Conventional Hydroelectric,0.05
+938,3.0,3,3,1922.0,Conventional Hydroelectric,0.05
+939,10.0,11.2,11.2,1968.0,Conventional Hydroelectric,0.05
+940,2.4,2.4,2.4,1994.0,Conventional Hydroelectric,0.05
+941,2.4,2.4,2.4,1994.0,Conventional Hydroelectric,0.05
+942,23.7,24,24,1982.0,Conventional Hydroelectric,0.05
+943,11.8,13.5,13.5,1982.0,Conventional Hydroelectric,0.05
+944,5.3,4.5,5.2,2002.0,Natural Gas Fired Combustion Turbine,0.05
+945,5.3,4.5,5.2,2002.0,Natural Gas Fired Combustion Turbine,0.05
+946,5.3,4.5,5.2,2002.0,Natural Gas Fired Combustion Turbine,0.05
+947,24.9,23.5,24.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+948,24.9,23.5,24.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+949,1.0,1,0.9,1987.0,Conventional Hydroelectric,0.05
+950,1.7,1.7,1.7,1987.0,Conventional Hydroelectric,0.05
+951,1.7,1.7,1.7,1987.0,Conventional Hydroelectric,0.05
+952,1403.2,1311,1333,1986.0,Nuclear,0.05
+953,1403.2,1314,1336,1986.0,Nuclear,0.05
+954,1403.2,1312,1334,1988.0,Nuclear,0.05
+955,446.4,427,427,1980.0,Conventional Steam Coal,0.05
+956,446.4,410,410,1979.0,Conventional Steam Coal,0.05
+957,534.8,448,448,1984.0,Conventional Steam Coal,0.05
+958,823.7,740,740,1984.0,Conventional Steam Coal,0.05
+959,823.7,740,740,1986.0,Conventional Steam Coal,0.05
+960,26.8,20,21.4,2001.0,Natural Gas Fired Combustion Turbine,0.05
+961,1159.0,1122,1122,1985.0,Nuclear,0.05
+962,1164.0,1118,1118,1986.0,Nuclear,0.05
+963,351.0,404,404,1984.0,Hydroelectric Pumped Storage,0.05
+964,351.0,404,404,1984.0,Hydroelectric Pumped Storage,0.05
+965,402.3,332,340,1978.0,Conventional Steam Coal,0.05
+966,642.2,585,585,1980.0,Conventional Steam Coal,0.05
+967,342.6,301,304,1998.0,Natural Gas Fired Combined Cycle,0.05
+968,175.1,123,134,1996.0,Natural Gas Fired Combined Cycle,0.05
+969,175.1,128,139,1999.0,Natural Gas Fired Combined Cycle,0.05
+970,175.1,128,139,2001.0,Natural Gas Fired Combined Cycle,0.05
+971,140.3,144,159,2009.0,Natural Gas Fired Combustion Turbine,0.05
+972,140.3,144,159,2009.0,Natural Gas Fired Combustion Turbine,0.05
+973,84.6,67,81.1,1981.0,Natural Gas Fired Combustion Turbine,0.05
+974,84.6,67,81.1,1981.0,Natural Gas Fired Combustion Turbine,0.05
+975,150.0,191,191,1979.0,Conventional Hydroelectric,0.05
+976,150.0,191,191,1979.0,Conventional Hydroelectric,0.05
+977,28.0,35,35,1978.0,Conventional Hydroelectric,0.05
+978,125.0,125,125,1942.0,Conventional Hydroelectric,0.05
+979,125.0,125,125,1951.0,Conventional Hydroelectric,0.05
+980,125.0,125,125,1951.0,Conventional Hydroelectric,0.05
+981,125.0,125,125,1951.0,Conventional Hydroelectric,0.05
+982,125.0,125,125,1950.0,Conventional Hydroelectric,0.05
+983,125.0,125,125,1950.0,Conventional Hydroelectric,0.05
+984,125.0,125,125,1950.0,Conventional Hydroelectric,0.05
+985,125.0,125,125,1949.0,Conventional Hydroelectric,0.05
+986,125.0,125,125,1949.0,Conventional Hydroelectric,0.05
+987,125.0,125,125,1949.0,Conventional Hydroelectric,0.05
+988,600.0,690,690,1975.0,Conventional Hydroelectric,0.05
+989,125.0,125,125,1942.0,Conventional Hydroelectric,0.05
+990,600.0,690,690,1976.0,Conventional Hydroelectric,0.05
+991,600.0,690,690,1976.0,Conventional Hydroelectric,0.05
+992,805.0,805,805,1978.0,Conventional Hydroelectric,0.05
+993,805.0,805,805,1979.0,Conventional Hydroelectric,0.05
+994,805.0,805,805,1980.0,Conventional Hydroelectric,0.05
+995,125.0,125,125,1941.0,Conventional Hydroelectric,0.05
+996,125.0,125,125,1944.0,Conventional Hydroelectric,0.05
+997,125.0,125,125,1943.0,Conventional Hydroelectric,0.05
+998,125.0,125,125,1943.0,Conventional Hydroelectric,0.05
+999,125.0,125,125,1947.0,Conventional Hydroelectric,0.05
+1000,125.0,125,125,1943.0,Conventional Hydroelectric,0.05
+1001,125.0,125,125,1948.0,Conventional Hydroelectric,0.05
+1002,10.0,10,10,1941.0,Conventional Hydroelectric,0.05
+1003,10.0,10,10,1941.0,Conventional Hydroelectric,0.05
+1004,10.0,10,10,1951.0,Conventional Hydroelectric,0.05
+1005,53.5,53.5,53.5,1983.0,Hydroelectric Pumped Storage,0.05
+1006,53.5,53.5,53.5,1983.0,Hydroelectric Pumped Storage,0.05
+1007,53.5,53.5,53.5,1984.0,Hydroelectric Pumped Storage,0.05
+1008,53.5,53.5,53.5,1983.0,Hydroelectric Pumped Storage,0.05
+1009,525.0,471,471,1978.0,Conventional Steam Coal,0.05
+1010,525.0,430,430,1980.0,Conventional Steam Coal,0.05
+1011,527.2,460,460,1983.0,Conventional Steam Coal,0.05
+1012,105.0,105,105,1975.0,Conventional Hydroelectric,0.05
+1013,105.0,105,105,1975.0,Conventional Hydroelectric,0.05
+1014,105.0,105,105,1976.0,Conventional Hydroelectric,0.05
+1015,105.0,105,105,1976.0,Conventional Hydroelectric,0.05
+1016,105.0,105,105,1984.0,Conventional Hydroelectric,0.05
+1017,24.5,24.5,24.5,1977.0,Conventional Hydroelectric,0.05
+1018,24.5,24.5,24.5,1977.0,Conventional Hydroelectric,0.05
+1019,135.0,127,127,1975.0,Conventional Hydroelectric,0.05
+1020,135.0,135,135,1975.0,Conventional Hydroelectric,0.05
+1021,135.0,135,135,1978.0,Conventional Hydroelectric,0.05
+1022,135.0,135,135,1978.0,Conventional Hydroelectric,0.05
+1023,135.0,135,135,1978.0,Conventional Hydroelectric,0.05
+1024,410.9,380,380,1979.0,Conventional Steam Coal,0.05
+1025,410.9,382,382,1980.0,Conventional Steam Coal,0.05
+1026,37.1,38,38,1982.0,Conventional Hydroelectric,0.05
+1027,37.1,38,38,1983.0,Conventional Hydroelectric,0.05
+1028,1.2,1.2,1.2,1931.0,Conventional Hydroelectric,0.05
+1029,22.5,19,19,1953.0,Conventional Hydroelectric,0.05
+1030,22.5,17,17,1952.0,Conventional Hydroelectric,0.05
+1031,22.5,17,17,1952.0,Conventional Hydroelectric,0.05
+1032,22.5,17,17,1953.0,Conventional Hydroelectric,0.05
+1033,22.5,19,19,1953.0,Conventional Hydroelectric,0.05
+1034,51.3,42,42,1979.0,Conventional Hydroelectric,0.05
+1035,51.3,42,42,1979.0,Conventional Hydroelectric,0.05
+1036,51.3,42,42,1979.0,Conventional Hydroelectric,0.05
+1037,51.3,42,42,1979.0,Conventional Hydroelectric,0.05
+1038,51.3,42,42,1978.0,Conventional Hydroelectric,0.05
+1039,51.3,42,42,1978.0,Conventional Hydroelectric,0.05
+1040,51.3,42,42,1978.0,Conventional Hydroelectric,0.05
+1041,51.3,42,42,1978.0,Conventional Hydroelectric,0.05
+1042,112.5,112.5,112.5,1956.0,Conventional Hydroelectric,0.05
+1043,112.5,112.5,112.5,1954.0,Conventional Hydroelectric,0.05
+1044,112.5,112.5,112.5,1953.0,Conventional Hydroelectric,0.05
+1045,112.5,112.5,112.5,1952.0,Conventional Hydroelectric,0.05
+1046,570.0,570,570,1981.0,Conventional Steam Coal,0.05
+1047,570.0,570,570,1981.0,Conventional Steam Coal,0.05
+1048,570.0,570,570,1982.0,Conventional Steam Coal,0.05
+1049,2.3,2.3,2.3,1906.0,Conventional Hydroelectric,0.05
+1050,2.3,2.3,2.3,1905.0,Conventional Hydroelectric,0.05
+1051,3.6,3.6,3.6,1906.0,Conventional Hydroelectric,0.05
+1052,100.0,115,115,1981.0,Hydroelectric Pumped Storage,0.05
+1053,100.0,115,115,1984.0,Hydroelectric Pumped Storage,0.05
+1054,61.8,45,66,1978.0,Natural Gas Fired Combustion Turbine,0.05
+1055,74.5,55,55,1978.0,Petroleum Liquids,0.05
+1056,74.5,55,55,1978.0,Petroleum Liquids,0.05
+1057,74.5,55,55,1978.0,Petroleum Liquids,0.05
+1058,552.3,505,505,1981.0,Conventional Steam Coal,0.05
+1059,2.7,2.3,2.3,1986.0,Conventional Hydroelectric,0.05
+1060,2.7,2.3,2.3,1986.0,Conventional Hydroelectric,0.05
+1061,0.9,0.5,0.5,1946.0,Conventional Hydroelectric,0.05
+1062,1.1,0.8,0.8,1947.0,Conventional Hydroelectric,0.05
+1063,0.5,0.5,0.5,1940.0,Conventional Hydroelectric,0.05
+1064,0.5,0.5,0.5,1940.0,Conventional Hydroelectric,0.05
+1065,0.5,0.5,0.5,1951.0,Conventional Hydroelectric,0.05
+1066,0.8,0.8,0.8,2009.0,Conventional Hydroelectric,0.05
+1067,0.6,0.6,0.6,2010.0,Conventional Hydroelectric,0.05
+1068,0.3,0.3,0.3,2010.0,Conventional Hydroelectric,0.05
+1069,20.0,20,20,1950.0,Conventional Hydroelectric,0.05
+1070,20.0,20,20,1951.0,Conventional Hydroelectric,0.05
+1071,5.1,5.1,5.1,1925.0,Conventional Hydroelectric,0.05
+1072,5.1,5.1,5.1,1925.0,Conventional Hydroelectric,0.05
+1073,1.1,1.1,1.1,2004.0,Conventional Hydroelectric,0.05
+1074,1.1,1.1,1.1,2004.0,Conventional Hydroelectric,0.05
+1075,1.1,1.1,1.1,2004.0,Conventional Hydroelectric,0.05
+1076,2.7,2.7,2.7,1927.0,Conventional Hydroelectric,0.05
+1077,5.0,5,5,1942.0,Conventional Hydroelectric,0.05
+1078,10.0,10,10,1997.0,Conventional Hydroelectric,0.05
+1079,10.0,10,10,1997.0,Conventional Hydroelectric,0.05
+1080,16.6,19.2,19.2,1953.0,Conventional Hydroelectric,0.05
+1081,16.6,19.2,19.2,1954.0,Conventional Hydroelectric,0.05
+1082,16.6,19.2,19.2,1954.0,Conventional Hydroelectric,0.05
+1083,9.3,9.3,9.3,1940.0,Conventional Hydroelectric,0.05
+1084,9.3,9.3,9.3,1940.0,Conventional Hydroelectric,0.05
+1085,9.3,9.3,9.3,1940.0,Conventional Hydroelectric,0.05
+1086,17.2,17.2,17.2,1960.0,Conventional Hydroelectric,0.05
+1087,2.4,2.7,2.7,1958.0,Conventional Hydroelectric,0.05
+1088,2.4,2.7,2.7,1958.0,Conventional Hydroelectric,0.05
+1089,50.6,50.6,50.6,1963.0,Conventional Hydroelectric,0.05
+1090,50.6,50.6,50.6,1963.0,Conventional Hydroelectric,0.05
+1091,50.6,50.6,50.6,1964.0,Conventional Hydroelectric,0.05
+1092,6.0,6,6,1956.0,Conventional Hydroelectric,0.05
+1093,6.0,6,6,1956.0,Conventional Hydroelectric,0.05
+1094,12.9,12.9,12.9,1958.0,Conventional Hydroelectric,0.05
+1095,5.0,5,4.6,1948.0,Conventional Hydroelectric,0.05
+1096,20.7,20.7,20.7,1955.0,Conventional Hydroelectric,0.05
+1097,20.7,20.7,20.7,1955.0,Conventional Hydroelectric,0.05
+1098,38.5,38.5,38.5,1956.0,Conventional Hydroelectric,0.05
+1099,2.2,2,2,1906.0,Conventional Hydroelectric,0.05
+1100,2.2,2,2,1906.0,Conventional Hydroelectric,0.05
+1101,2.2,2,2,1906.0,Conventional Hydroelectric,0.05
+1102,2.2,2,2,1908.0,Conventional Hydroelectric,0.05
+1103,29.6,31.4,31.4,1927.0,Conventional Hydroelectric,0.05
+1104,29.6,30.7,30.7,1928.0,Conventional Hydroelectric,0.05
+1105,15.0,15,15,1921.0,Conventional Hydroelectric,0.05
+1106,15.0,15,15,1929.0,Conventional Hydroelectric,0.05
+1107,36.8,32,32,1924.0,Conventional Hydroelectric,0.05
+1108,36.8,32,32,1924.0,Conventional Hydroelectric,0.05
+1109,36.8,32,32,1929.0,Conventional Hydroelectric,0.05
+1110,96.9,97,97,1951.0,Conventional Hydroelectric,0.05
+1111,90.0,90,90,1937.0,Conventional Hydroelectric,0.05
+1112,90.0,90,90,1936.0,Conventional Hydroelectric,0.05
+1113,1.2,1.2,1.2,1936.0,Conventional Hydroelectric,0.05
+1114,1.2,1.2,1.2,1936.0,Conventional Hydroelectric,0.05
+1115,158.4,158.4,158.4,1967.0,Conventional Hydroelectric,0.05
+1116,161.5,161.5,161.5,1967.0,Conventional Hydroelectric,0.05
+1117,158.4,158.4,158.4,1967.0,Conventional Hydroelectric,0.05
+1118,161.5,161.5,161.5,1967.0,Conventional Hydroelectric,0.05
+1119,239.4,232,232,1985.0,Conventional Hydroelectric,0.05
+1120,239.4,232,232,1986.0,Conventional Hydroelectric,0.05
+1121,3.0,2,2,1949.0,Conventional Hydroelectric,0.05
+1122,1.7,1.9,1.9,1927.0,Conventional Hydroelectric,0.05
+1123,1.7,1.9,1.9,1928.0,Conventional Hydroelectric,0.05
+1124,0.7,0.8,0.8,1910.0,Conventional Hydroelectric,0.05
+1125,22.5,21.2,21.2,1983.0,Conventional Hydroelectric,0.05
+1126,9.9,9.8,9.8,1917.0,Conventional Hydroelectric,0.05
+1127,10.6,11.4,11.4,1923.0,Conventional Hydroelectric,0.05
+1128,22.5,20.9,20.9,1987.0,Conventional Hydroelectric,0.05
+1129,14.0,10.4,10.4,1920.0,Conventional Hydroelectric,0.05
+1130,18.0,14.4,14.4,1932.0,Conventional Hydroelectric,0.05
+1131,820.0,900,900,1986.0,Conventional Steam Coal,0.05
+1132,820.0,900,900,1987.0,Conventional Steam Coal,0.05
+1133,0.2,0.2,0.2,1913.0,Conventional Hydroelectric,0.05
+1134,0.3,0.3,0.3,1916.0,Conventional Hydroelectric,0.05
+1135,0.6,0.5,0.5,1917.0,Conventional Hydroelectric,0.05
+1136,25.5,22,22,1924.0,Conventional Hydroelectric,0.05
+1137,25.5,22,22,1931.0,Conventional Hydroelectric,0.05
+1138,1.0,1.1,1.1,1941.0,Conventional Hydroelectric,0.05
+1139,0.4,0.4,0.4,1921.0,Conventional Hydroelectric,0.05
+1140,1.0,1.1,1.1,1950.0,Conventional Hydroelectric,0.05
+1141,1.5,1.7,1.7,1982.0,Conventional Hydroelectric,0.05
+1142,2.0,2.5,2.2,1914.0,Conventional Hydroelectric,0.05
+1143,54.0,19.8,21.2,2006.0,Natural Gas Fired Combustion Turbine,0.05
+1144,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1145,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1146,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1147,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1148,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1149,2.5,2,2,2008.0,Petroleum Liquids,0.05
+1150,0.6,0.6,0.6,1911.0,Conventional Hydroelectric,0.05
+1151,0.6,0.6,0.6,1911.0,Conventional Hydroelectric,0.05
+1152,0.6,0.6,0.6,1911.0,Conventional Hydroelectric,0.05
+1153,2.4,2.1,2.1,1911.0,Conventional Hydroelectric,0.05
+1154,1.3,0.9,0.7,1904.0,Conventional Hydroelectric,0.05
+1155,1.3,0.9,0.7,1904.0,Conventional Hydroelectric,0.05
+1156,2.4,2.4,2.4,1983.0,Conventional Hydroelectric,0.05
+1157,2.4,2.4,2.4,1983.0,Conventional Hydroelectric,0.05
+1158,10.0,10,10,1968.0,Conventional Hydroelectric,0.05
+1159,10.0,10,10,1968.0,Conventional Hydroelectric,0.05
+1160,38.6,38.6,38.6,1963.0,Conventional Hydroelectric,0.05
+1161,43.5,50,50,1943.0,Conventional Hydroelectric,0.05
+1162,43.5,50,50,1951.0,Conventional Hydroelectric,0.05
+1163,40.0,49,49,1961.0,Conventional Hydroelectric,0.05
+1164,40.0,49,49,1961.0,Conventional Hydroelectric,0.05
+1165,4.9,4.9,4.9,1980.0,Conventional Hydroelectric,0.05
+1166,4.5,7.1,6.7,1981.0,Conventional Hydroelectric,0.05
+1167,4.5,4.5,4.5,1981.0,Conventional Hydroelectric,0.05
+1168,9.9,9.9,9.9,1981.0,Conventional Hydroelectric,0.05
+1169,5.1,5.1,5.1,1981.0,Conventional Hydroelectric,0.05
+1170,1.4,1.4,1.4,1986.0,Petroleum Liquids,0.05
+1171,2.8,2.8,2.8,1995.0,Petroleum Liquids,0.05
+1172,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1173,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1174,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1175,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1176,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1177,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1178,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1179,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1180,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1181,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1182,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1183,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1184,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1185,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1186,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1187,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1188,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1189,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1190,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1191,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1192,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1193,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1194,0.1,0.1,0.1,2011.0,Petroleum Liquids,0.05
+1195,293.6,280,280,1984.0,Conventional Steam Coal,0.05
+1196,89.3,65,65,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1197,89.3,65,65,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1198,89.3,65,65,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1199,89.3,65,65,2004.0,Natural Gas Fired Combustion Turbine,0.05
+1200,149.6,128,128,2008.0,Natural Gas Fired Combustion Turbine,0.05
+1201,8.0,8,8,1982.0,Conventional Hydroelectric,0.05
+1202,1.5,1.1,0.5,1993.0,Conventional Hydroelectric,0.05
+1203,7.0,5.9,6.3,1986.0,Natural Gas Internal Combustion Engine,0.05
+1204,7.0,6,6.2,1986.0,Natural Gas Internal Combustion Engine,0.05
+1205,7.0,5.9,6,2000.0,Natural Gas Internal Combustion Engine,0.05
+1206,5.0,4,4.3,2002.0,Natural Gas Internal Combustion Engine,0.05
+1207,2.5,2.5,2.5,2016.0,Natural Gas Internal Combustion Engine,0.05
+1208,2.5,2.5,2.5,2016.0,Natural Gas Internal Combustion Engine,0.05
+1209,3.3,3.1,1.5,1986.0,Conventional Hydroelectric,0.05
+1210,3.3,3.1,1.5,1986.0,Conventional Hydroelectric,0.05
+1211,3.0,3,3,1988.0,Conventional Hydroelectric,0.05
+1212,0.6,0.6,0.6,1988.0,Conventional Hydroelectric,0.05
+1213,10.9,10.8,10.8,1996.0,Conventional Hydroelectric,0.05
+1214,10.9,10.8,10.8,1996.0,Conventional Hydroelectric,0.05
+1215,10.9,10.8,10.8,1996.0,Conventional Hydroelectric,0.05
+1216,8.2,8.8,9.4,1947.0,Conventional Hydroelectric,0.05
+1217,8.3,8.4,9.2,1947.0,Conventional Hydroelectric,0.05
+1218,167.5,151.6,164,2011.0,Natural Gas Fired Combined Cycle,0.05
+1219,167.5,151.6,164,2011.0,Natural Gas Fired Combined Cycle,0.05
+1220,223.5,206.8,196,2011.0,Natural Gas Fired Combined Cycle,0.05
+1221,101.5,72,76,1995.0,Natural Gas Fired Combustion Turbine,0.05
+1222,85.0,72,76,2006.0,Natural Gas Fired Combustion Turbine,0.05
+1223,1.4,1.4,1.4,2004.0,Natural Gas Internal Combustion Engine,0.05
+1224,1.9,1.9,1.9,2015.0,Natural Gas Internal Combustion Engine,0.05
+1225,2.3,2.3,2.3,2015.0,Natural Gas Internal Combustion Engine,0.05
+1226,1.4,1.4,1.4,2004.0,Natural Gas Internal Combustion Engine,0.05
+1227,1.9,1.9,1.9,2003.0,Natural Gas Internal Combustion Engine,0.05
+1228,1.9,1.9,1.9,2002.0,Natural Gas Internal Combustion Engine,0.05
+1229,0.7,0.7,0.7,1990.0,Natural Gas Internal Combustion Engine,0.05
+1230,0.7,0.7,0.7,2001.0,Natural Gas Internal Combustion Engine,0.05
+1231,1.9,1.9,1.9,2003.0,Natural Gas Internal Combustion Engine,0.05
+1232,6.6,6.6,6.6,1990.0,Conventional Hydroelectric,0.05
+1233,12.8,15.5,12.8,1994.0,Conventional Hydroelectric,0.05
+1234,3.4,3,3,1987.0,Conventional Hydroelectric,0.05
+1235,1.8,1.8,1.8,1991.0,Conventional Hydroelectric,0.05
+1236,1.0,1,1,1903.0,Conventional Hydroelectric,0.05
+1237,1.0,1,1,1904.0,Conventional Hydroelectric,0.05
+1238,1.0,1,1,1904.0,Conventional Hydroelectric,0.05
+1239,2.5,2.5,2.5,1986.0,Conventional Hydroelectric,0.05
+1240,2.5,2.5,2.5,1986.0,Conventional Hydroelectric,0.05
+1241,10.0,10,10,1993.0,Hydroelectric Pumped Storage,0.05
+1242,10.0,10,10,1993.0,Hydroelectric Pumped Storage,0.05
+1243,10.0,10,10,1993.0,Hydroelectric Pumped Storage,0.05
+1244,10.0,10,10,1993.0,Hydroelectric Pumped Storage,0.05
+1245,6.5,6.5,6.5,1993.0,Conventional Hydroelectric,0.05
+1246,6.5,6.5,6.5,1993.0,Conventional Hydroelectric,0.05
+1247,6.5,6.5,6.5,1993.0,Conventional Hydroelectric,0.05
+1248,3.5,3.5,3.5,1986.0,Conventional Hydroelectric,0.05
+1249,46.6,47.8,23.6,1992.0,Conventional Hydroelectric,0.05
+1250,12.1,12.5,12.5,1992.0,Conventional Hydroelectric,0.05
+1251,0.8,0.8,0.8,1992.0,Conventional Hydroelectric,0.05
+1252,6.1,6.1,6.1,1988.0,Conventional Hydroelectric,0.05
+1253,32.3,24.8,24.8,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1254,32.3,24.8,24.8,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1255,3.9,3.5,3.5,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1256,3.9,3.5,3.5,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1257,26.6,28,28,1997.0,Conventional Hydroelectric,0.05
+1258,1.0,1,1,1990.0,Conventional Hydroelectric,0.05
+1259,37.7,33,33,2003.0,Natural Gas Fired Combined Cycle,0.05
+1260,60.5,50,50,2003.0,Natural Gas Fired Combined Cycle,0.05
+1261,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1262,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1263,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1264,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1265,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1266,8.4,8.2,8.2,2011.0,Natural Gas Internal Combustion Engine,0.05
+1267,50.4,45,45,1993.0,Natural Gas Fired Combustion Turbine,0.05
+1268,18.0,16,17,1996.0,Natural Gas Fired Combustion Turbine,0.05
+1269,27.9,23,25,1996.0,Natural Gas Fired Combustion Turbine,0.05
+1270,27.9,23,25,1996.0,Natural Gas Fired Combustion Turbine,0.05
+1271,26.8,27,28,1989.0,Natural Gas Fired Combined Cycle,0.05
+1272,40.0,41,45,2002.0,Natural Gas Fired Combined Cycle,0.05
+1273,42.5,41,46,2011.0,Natural Gas Fired Combined Cycle,0.05
+1274,49.5,49.5,49.5,1996.0,Natural Gas Fired Combustion Turbine,0.05
+1275,58.0,50,58,2012.0,Natural Gas Fired Combustion Turbine,0.05
+1276,58.0,50,58,2012.0,Natural Gas Fired Combustion Turbine,0.05
+1277,58.0,50,58,2012.0,Natural Gas Fired Combustion Turbine,0.05
+1278,6.0,6,6,1992.0,Conventional Hydroelectric,0.05
+1279,6.0,6,6,1992.0,Conventional Hydroelectric,0.05
+1280,6.0,6,6,1992.0,Conventional Hydroelectric,0.05
+1281,22.0,17.7,17.7,1993.0,Conventional Hydroelectric,0.05
+1282,185.7,171,189,1995.0,Natural Gas Fired Combined Cycle,0.05
+1283,80.6,72,78,1995.0,Natural Gas Fired Combined Cycle,0.05
+1284,55.0,25,26,1983.0,Geothermal,0.05
+1285,55.0,22,23,1983.0,Geothermal,0.05
+1286,55.0,41,42,1986.0,Geothermal,0.05
+1287,1.2,1.2,1.2,1992.0,Conventional Hydroelectric,0.05
+1288,11.4,11.4,10.5,1993.0,Conventional Hydroelectric,0.05
+1289,2.6,2.6,2.6,1988.0,Natural Gas Internal Combustion Engine,0.05
+1290,2.6,2.6,2.6,1988.0,Natural Gas Internal Combustion Engine,0.05
+1291,2.5,2,2,1995.0,Natural Gas Internal Combustion Engine,0.05
+1292,2.0,2,2,1995.0,Natural Gas Internal Combustion Engine,0.05
+1293,0.8,0.8,0.8,1992.0,Landfill Gas,0.05
+1294,0.8,0.8,0.8,1992.0,Landfill Gas,0.05
+1295,0.8,0.8,0.8,1993.0,Landfill Gas,0.05
+1296,0.8,0.8,0.8,1993.0,Landfill Gas,0.05
+1297,35.0,35,35,1994.0,Conventional Hydroelectric,0.05
+1298,35.0,35,35,1994.0,Conventional Hydroelectric,0.05
+1299,6.5,5,5,1991.0,Conventional Hydroelectric,0.05
+1300,50.0,49.3,49.9,1996.0,Natural Gas Fired Combustion Turbine,0.05
+1301,27.4,21.8,24,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1302,27.4,21.8,24,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1303,83.2,66,87.5,1994.0,Natural Gas Fired Combustion Turbine,0.05
+1304,83.2,66,87.5,1994.0,Natural Gas Fired Combustion Turbine,0.05
+1305,5.0,4.5,4.5,1985.0,Conventional Hydroelectric,0.05
+1306,1.0,1,1,1987.0,Conventional Hydroelectric,0.05
+1307,2.5,2.5,2.5,1987.0,Conventional Hydroelectric,0.05
+1308,90.0,80,80,1995.0,Conventional Steam Coal,0.05
+1309,40.0,34,37,2000.0,Natural Gas Fired Combustion Turbine,0.05
+1310,2.0,1.9,2,1993.0,Conventional Hydroelectric,0.05
+1311,12.0,7,10.7,1994.0,Conventional Hydroelectric,0.05
+1312,10.0,9,9,1997.0,Conventional Hydroelectric,0.05
+1313,54.0,41.2,41.2,1995.0,Natural Gas Fired Combustion Turbine,0.05
+1314,17.5,16.6,16.6,1995.0,Natural Gas Fired Combined Cycle,0.05
+1315,54.0,51.2,51.2,1995.0,Natural Gas Fired Combined Cycle,0.05
+1316,4.5,4.5,4.5,1994.0,Conventional Hydroelectric,0.05
+1317,1.5,1.5,1.5,1998.0,Conventional Hydroelectric,0.05
+1318,0.6,0.6,0.6,1998.0,Conventional Hydroelectric,0.05
+1319,49.8,37.6,37.6,1997.0,Natural Gas Fired Combined Cycle,0.05
+1320,49.8,47.6,47.6,1997.0,Natural Gas Fired Combined Cycle,0.05
+1321,49.8,47.6,47.6,1997.0,Natural Gas Fired Combined Cycle,0.05
+1322,44.0,43.8,47.3,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1323,118.7,111,111,1997.0,Natural Gas Fired Combined Cycle,0.05
+1324,55.2,53,53,1997.0,Natural Gas Fired Combined Cycle,0.05
+1325,47.5,41,44,1984.0,Conventional Hydroelectric,0.05
+1326,47.5,41,44,1984.0,Conventional Hydroelectric,0.05
+1327,8.4,7,8,1984.0,Conventional Hydroelectric,0.05
+1328,8.4,7,8,1984.0,Conventional Hydroelectric,0.05
+1329,8.0,8,8,1988.0,Conventional Hydroelectric,0.05
+1330,248.0,220,248,1997.0,Natural Gas Fired Combined Cycle,0.05
+1331,5.0,5,5,1983.0,Conventional Hydroelectric,0.05
+1332,5.0,5,5,1983.0,Conventional Hydroelectric,0.05
+1333,1.5,1.5,1.5,1983.0,Conventional Hydroelectric,0.05
+1334,49.2,44.5,46.5,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1335,0.8,0.8,0.8,1995.0,Landfill Gas,0.05
+1336,0.8,0.8,0.8,1995.0,Landfill Gas,0.05
+1337,0.8,0.8,0.8,1995.0,Landfill Gas,0.05
+1338,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+1339,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+1340,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1341,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1342,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1343,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1344,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1345,1.7,1.5,1.5,1999.0,Petroleum Liquids,0.05
+1346,6.3,6.9,6.9,1989.0,Conventional Hydroelectric,0.05
+1347,6.3,6.9,6.9,1989.0,Conventional Hydroelectric,0.05
+1348,3.0,3,3,2011.0,Conventional Hydroelectric,0.05
+1349,499.5,458,458,1986.0,Conventional Steam Coal,0.05
+1350,24.9,24.1,24.1,1979.0,Natural Gas Fired Combustion Turbine,0.05
+1351,24.9,23,23,1980.0,Petroleum Liquids,0.05
+1352,2.1,2.1,2.1,1999.0,Landfill Gas,0.05
+1353,2.1,2.1,2.1,1999.0,Landfill Gas,0.05
+1354,2.1,2.1,2.1,1999.0,Landfill Gas,0.05
+1355,2.1,2.1,2.1,1999.0,Landfill Gas,0.05
+1356,2.1,2.1,2.1,2000.0,Landfill Gas,0.05
+1357,10.0,10,10,2011.0,Landfill Gas,0.05
+1358,10.0,10,10,2011.0,Landfill Gas,0.05
+1359,6.0,6,6,2011.0,Landfill Gas,0.05
+1360,14.4,12.6,12.6,2013.0,Conventional Hydroelectric,0.05
+1361,24.3,21,21,1957.0,Conventional Hydroelectric,0.05
+1362,39.4,34.5,42.2,1993.0,Natural Gas Fired Combined Cycle,0.05
+1363,39.4,34.5,42.2,1993.0,Natural Gas Fired Combined Cycle,0.05
+1364,39.4,34.5,42.2,1993.0,Natural Gas Fired Combined Cycle,0.05
+1365,58.2,55.9,55.9,1993.0,Natural Gas Fired Combined Cycle,0.05
+1366,55.0,55,55,1984.0,Conventional Hydroelectric,0.05
+1367,55.0,55,55,1984.0,Conventional Hydroelectric,0.05
+1368,55.0,55,55,1984.0,Conventional Hydroelectric,0.05
+1369,170.0,173,207,2003.0,Natural Gas Fired Combined Cycle,0.05
+1370,117.0,117,117,2003.0,Natural Gas Fired Combined Cycle,0.05
+1371,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1372,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1373,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1374,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1375,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1376,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1377,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1378,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1379,3.3,3.3,3.3,2001.0,Conventional Hydroelectric,0.05
+1380,179.1,171,205,2008.0,Natural Gas Fired Combustion Turbine,0.05
+1381,45.9,41.4,47.6,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1382,45.9,39,46.4,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1383,44.0,37,43,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1384,44.0,37,43,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1385,46.5,39.5,45.6,2003.0,Natural Gas Fired Combustion Turbine,0.05
+1386,46.5,39.5,45.6,2003.0,Natural Gas Fired Combustion Turbine,0.05
+1387,46.5,39.5,45.6,2003.0,Natural Gas Fired Combustion Turbine,0.05
+1388,46.5,39.5,45.6,2003.0,Natural Gas Fired Combustion Turbine,0.05
+1389,60.5,48,48,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1390,2.5,2.5,2.5,2002.0,Petroleum Liquids,0.05
+1391,2.5,2.5,2.5,2002.0,Petroleum Liquids,0.05
+1392,2.5,2.5,2.5,2002.0,Petroleum Liquids,0.05
+1393,2.5,2.5,2.5,2002.0,Petroleum Liquids,0.05
+1394,198.9,151,188,2008.0,Natural Gas Fired Combined Cycle,0.05
+1395,198.9,153,190,2008.0,Natural Gas Fired Combined Cycle,0.05
+1396,300.0,300,314,2008.0,Natural Gas Fired Combined Cycle,0.05
+1397,14.0,12,13,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1398,14.0,12,13,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1399,14.0,12,13,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1400,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1401,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1402,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1403,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1404,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1405,4.1,4.1,4.1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1406,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1407,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1408,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1409,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1410,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1411,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1412,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1413,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1414,7.5,5,6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+1415,608.3,530,530,1979.0,Conventional Steam Coal,0.05
+1416,153.8,151,170,2005.0,Natural Gas Fired Combined Cycle,0.05
+1417,153.8,151,170,2005.0,Natural Gas Fired Combined Cycle,0.05
+1418,314.5,280,286,2005.0,Natural Gas Fired Combined Cycle,0.05
+1419,153.8,151,166,2006.0,Natural Gas Fired Combined Cycle,0.05
+1420,136.1,126,135,2006.0,Natural Gas Fired Combined Cycle,0.05
+1421,24.5,24,24,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1422,207.0,208,208,1980.0,Conventional Steam Coal,0.05
+1423,37.8,30,32,1999.0,Natural Gas Fired Combustion Turbine,0.05
+1424,37.8,30,32,1999.0,Natural Gas Fired Combustion Turbine,0.05
+1425,424.8,387,387,1985.0,Conventional Steam Coal,0.05
+1426,424.8,406,406,1990.0,Conventional Steam Coal,0.05
+1427,458.1,417,417,2006.0,Conventional Steam Coal,0.05
+1428,458.1,415,415,2009.0,Conventional Steam Coal,0.05
+1429,277.2,254,254,1981.0,Conventional Steam Coal,0.05
+1430,289.8,268,268,1985.0,Conventional Steam Coal,0.05
+1431,2.4,2.7,2.7,1936.0,Conventional Hydroelectric,0.05
+1432,130.0,130,130,1941.0,Conventional Hydroelectric,0.05
+1433,130.0,130,130,1942.0,Conventional Hydroelectric,0.05
+1434,130.0,130,130,1952.0,Conventional Hydroelectric,0.05
+1435,130.0,130,130,1952.0,Conventional Hydroelectric,0.05
+1436,127.0,127,127,1943.0,Conventional Hydroelectric,0.05
+1437,130.0,130,130,1939.0,Conventional Hydroelectric,0.05
+1438,130.0,130,130,1939.0,Conventional Hydroelectric,0.05
+1439,61.5,61.5,61.5,1937.0,Conventional Hydroelectric,0.05
+1440,68.5,68.5,68.5,1952.0,Conventional Hydroelectric,0.05
+1441,14.8,15,15,1992.0,Conventional Hydroelectric,0.05
+1442,10.0,10.2,10.2,1922.0,Conventional Hydroelectric,0.05
+1443,2.3,2.3,2.3,1970.0,Conventional Hydroelectric,0.05
+1444,20.0,20,20,1983.0,Natural Gas Steam Turbine,0.05
+1445,45.0,36.2,19.2,1988.0,Conventional Hydroelectric,0.05
+1446,45.0,36.2,19.2,1988.0,Conventional Hydroelectric,0.05
+1447,11.2,10.6,10.3,1988.0,Conventional Hydroelectric,0.05
+1448,15.0,10,15,2006.0,Geothermal,0.05
+1449,11.0,7.3,11,2006.0,Geothermal,0.05
+1450,0.8,0.8,0.8,2008.0,Other Waste Biomass,0.05
+1451,0.8,0.8,0.8,2008.0,Other Waste Biomass,0.05
+1452,0.8,0.8,0.8,2009.0,Other Waste Biomass,0.05
+1453,0.8,0.8,0.8,2009.0,Other Waste Biomass,0.05
+1454,90.0,85,85,1987.0,Natural Gas Fired Combined Cycle,0.05
+1455,40.0,30,35,1987.0,Natural Gas Fired Combined Cycle,0.05
+1456,3.5,3.5,3.5,2008.0,Natural Gas Fired Combustion Turbine,0.05
+1457,0.3,0.3,0.3,1984.0,Conventional Hydroelectric,0.05
+1458,0.4,0.4,0.4,1984.0,Conventional Hydroelectric,0.05
+1459,0.4,0.4,0.4,1984.0,Conventional Hydroelectric,0.05
+1460,0.4,0.4,0.4,1984.0,Conventional Hydroelectric,0.05
+1461,18.8,16,16,1986.0,Wood/Wood Waste Biomass,0.05
+1462,3.1,3.1,3.1,1985.0,Conventional Hydroelectric,0.05
+1463,1.0,1,1,1986.0,Conventional Hydroelectric,0.05
+1464,9.9,8,9,2003.0,Other Waste Biomass,0.05
+1465,9.9,8,9,2001.0,Other Waste Biomass,0.05
+1466,9.9,8,9,1986.0,Other Waste Biomass,0.05
+1467,8.7,7.4,8.2,1986.0,Other Waste Biomass,0.05
+1468,6.0,5.5,5.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1469,4.5,4.2,4.4,2016.0,Natural Gas Fired Combustion Turbine,0.05
+1470,1.0,0.1,0.4,1983.0,Conventional Hydroelectric,0.05
+1471,1.0,0.1,0.4,1983.0,Conventional Hydroelectric,0.05
+1472,2.0,2,2.0,1985.0,Conventional Hydroelectric,0.05
+1473,5.9,5.9,5.9,1990.0,Conventional Hydroelectric,0.05
+1474,5.9,5.9,5.9,1990.0,Conventional Hydroelectric,0.05
+1475,2.6,2.6,2.6,1986.0,Conventional Hydroelectric,0.05
+1476,19.2,17.5,16.9,2004.0,Wood/Wood Waste Biomass,0.05
+1477,10.0,6,6.5,1990.0,Natural Gas Fired Combined Cycle,0.05
+1478,22.3,21.9,22.3,2001.0,Natural Gas Fired Combustion Turbine,0.05
+1479,50.3,45,50.3,2004.0,Natural Gas Fired Combined Cycle,0.05
+1480,4.8,4.8,4.8,2004.0,Natural Gas Fired Combustion Turbine,0.05
+1481,1.5,1.5,1.5,2010.0,Petroleum Liquids,0.05
+1482,1.5,1.5,1.5,2010.0,Petroleum Liquids,0.05
+1483,1.5,1.5,1.5,2010.0,Petroleum Liquids,0.05
+1484,3.5,2.5,3.1,2000.0,Other Waste Biomass,0.05
+1485,3.5,2.5,3.1,2000.0,Other Waste Biomass,0.05
+1486,5.2,4.8,4.8,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1487,5.2,4.8,4.8,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1488,42.4,38.7,38.7,1987.0,Natural Gas Fired Combined Cycle,0.05
+1489,42.4,38.7,38.7,1987.0,Natural Gas Fired Combined Cycle,0.05
+1490,40.3,39.2,39.2,1996.0,Natural Gas Fired Combined Cycle,0.05
+1491,9.1,9.1,9.1,1996.0,Natural Gas Fired Combined Cycle,0.05
+1492,40.7,40.7,40.7,2013.0,Natural Gas Fired Combined Cycle,0.05
+1493,5.2,5.2,5.2,2013.0,Natural Gas Fired Combined Cycle,0.05
+1494,0.6,0.6,0.6,1986.0,Natural Gas Internal Combustion Engine,0.05
+1495,0.6,0.6,0.6,1986.0,Natural Gas Internal Combustion Engine,0.05
+1496,0.6,0.6,0.6,1986.0,Natural Gas Internal Combustion Engine,0.05
+1497,5.0,5,5,1989.0,Conventional Hydroelectric,0.05
+1498,5.0,5,5,1988.0,Conventional Hydroelectric,0.05
+1499,10.5,9,9.9,2003.0,Natural Gas Fired Combined Cycle,0.05
+1500,2.5,2.1,2.1,2003.0,Natural Gas Fired Combined Cycle,0.05
+1501,5.0,4.8,4.6,1987.0,Conventional Hydroelectric,0.05
+1502,17.0,12.8,13.1,1985.0,Geothermal,0.05
+1503,3.6,1.3,2,2011.0,Geothermal,0.05
+1504,90.8,73,83.5,1989.0,Natural Gas Fired Combined Cycle,0.05
+1505,42.4,38,39,1989.0,Natural Gas Fired Combined Cycle,0.05
+1506,4.0,4,4,1984.0,Conventional Hydroelectric,0.05
+1507,4.0,4,4,1984.0,Conventional Hydroelectric,0.05
+1508,55.5,47,47,1991.0,Wood/Wood Waste Biomass,0.05
+1509,2.6,1,2.6,2015.0,Conventional Hydroelectric,0.05
+1510,1.8,0.3,1.2,1987.0,Conventional Hydroelectric,0.05
+1511,3.1,2,0.6,1986.0,Conventional Hydroelectric,0.05
+1512,2.2,2.1,2.2,2002.0,Natural Gas Internal Combustion Engine,0.05
+1513,2.2,2.1,2.2,2002.0,Natural Gas Internal Combustion Engine,0.05
+1514,1.1,1.1,1.1,1987.0,Other Waste Biomass,0.05
+1515,1.1,1.1,1.1,1987.0,Other Waste Biomass,0.05
+1516,40.0,35,37,1987.0,Natural Gas Fired Combined Cycle,0.05
+1517,40.0,35,37,1987.0,Natural Gas Fired Combined Cycle,0.05
+1518,33.5,33.5,33.5,1987.0,Natural Gas Fired Combined Cycle,0.05
+1519,49.5,49.5,49.5,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1520,46.0,42,44,1989.0,Natural Gas Fired Combined Cycle,0.05
+1521,20.0,8,6,1989.0,Natural Gas Fired Combined Cycle,0.05
+1522,1.2,1.2,1.2,2011.0,Landfill Gas,0.05
+1523,1.2,1.2,1.2,2011.0,Landfill Gas,0.05
+1524,3.0,2.8,3,2004.0,Landfill Gas,0.05
+1525,23.1,22,23,1990.0,Natural Gas Fired Combined Cycle,0.05
+1526,13.1,11.8,11.8,1990.0,Natural Gas Fired Combined Cycle,0.05
+1527,1.8,1.8,1.8,1987.0,Conventional Hydroelectric,0.05
+1528,3.0,3,3,1959.0,Conventional Hydroelectric,0.05
+1529,0.5,0.5,0.5,2012.0,Conventional Hydroelectric,0.05
+1530,5.5,5.5,5.5,1988.0,Conventional Hydroelectric,0.05
+1531,7.8,7.8,7.8,2007.0,Conventional Hydroelectric,0.05
+1532,34.0,34,34,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1533,34.2,36,34,1986.0,Solar Thermal without Energy Storage,0.05
+1534,34.2,36,34,1986.0,Solar Thermal without Energy Storage,0.05
+1535,34.2,36,34,1987.0,Solar Thermal without Energy Storage,0.05
+1536,35.0,36,35,1988.0,Solar Thermal without Energy Storage,0.05
+1537,35.0,36,35,1988.0,Solar Thermal without Energy Storage,0.05
+1538,92.0,88,64,1989.0,Solar Thermal without Energy Storage,0.05
+1539,92.0,88,64,1990.0,Solar Thermal without Energy Storage,0.05
+1540,29.9,29.9,29.9,1988.0,Conventional Hydroelectric,0.05
+1541,50.0,45,45,1986.0,Landfill Gas,0.05
+1542,5.0,3.3,5,1990.0,Geothermal,0.05
+1543,5.0,3.3,5,1990.0,Geothermal,0.05
+1544,5.0,3.3,5,1990.0,Geothermal,0.05
+1545,5.0,3.3,5,1984.0,Geothermal,0.05
+1546,5.0,3.3,5,1984.0,Geothermal,0.05
+1547,5.0,3.3,5,1990.0,Geothermal,0.05
+1548,5.0,3.3,5,1990.0,Geothermal,0.05
+1549,5.0,3.3,5,1990.0,Geothermal,0.05
+1550,75.0,72,77,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1551,75.0,72,77,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1552,75.0,72,77,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1553,75.0,72,77,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1554,6.2,5,5,1994.0,Conventional Steam Coal,0.05
+1555,6.0,5.6,5.6,1984.0,Natural Gas Fired Combustion Turbine,0.05
+1556,34.0,30.7,30.7,1982.0,All Other,0.05
+1557,22.1,22.1,22.1,1989.0,Natural Gas Fired Combined Cycle,0.05
+1558,12.4,1.5,0.5,1989.0,Natural Gas Fired Combined Cycle,0.05
+1559,45.5,43.2,43.2,1989.0,Geothermal,0.05
+1560,45.5,43.2,43.2,1988.0,Geothermal,0.05
+1561,45.5,43.2,43.2,1988.0,Geothermal,0.05
+1562,46.0,46,48,1995.0,Natural Gas Fired Combustion Turbine,0.05
+1563,46.0,46,48,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1564,31.0,31,31,1989.0,Wood/Wood Waste Biomass,0.05
+1565,12.0,12,12,1985.0,Wood/Wood Waste Biomass,0.05
+1566,23.8,25,30,1990.0,Natural Gas Fired Combined Cycle,0.05
+1567,23.8,25,30,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1568,37.0,32,38,1994.0,Natural Gas Fired Combined Cycle,0.05
+1569,23.8,25,30,1999.0,Natural Gas Fired Combined Cycle,0.05
+1570,23.8,25,30,1999.0,Natural Gas Fired Combined Cycle,0.05
+1571,38.0,30,30,1990.0,Natural Gas Fired Combined Cycle,0.05
+1572,37.0,40,40,1994.0,Natural Gas Fired Combined Cycle,0.05
+1573,90.0,90,90,2002.0,Natural Gas Fired Combined Cycle,0.05
+1574,27.5,25,25,1978.0,Conventional Steam Coal,0.05
+1575,27.5,25,25,1978.0,Conventional Steam Coal,0.05
+1576,3.0,3,3,1990.0,Conventional Hydroelectric,0.05
+1577,5.0,5,5,1990.0,Conventional Hydroelectric,0.05
+1578,1.1,1.1,1.1,1989.0,Conventional Hydroelectric,0.05
+1579,1.1,1.1,1.1,1990.0,Conventional Hydroelectric,0.05
+1580,1.7,1.7,1.7,2012.0,Natural Gas Internal Combustion Engine,0.05
+1581,2.1,2.1,2.1,2012.0,Natural Gas Internal Combustion Engine,0.05
+1582,4.1,4,4,1990.0,Conventional Hydroelectric,0.05
+1583,1.2,1,1,1989.0,Conventional Hydroelectric,0.05
+1584,3.0,2.9,2.8,1989.0,Conventional Hydroelectric,0.05
+1585,3.0,2.9,2.8,1989.0,Conventional Hydroelectric,0.05
+1586,3.0,2.9,2.8,1989.0,Conventional Hydroelectric,0.05
+1587,1.6,1.6,1.6,2006.0,Landfill Gas,0.05
+1588,1.0,1,1,2002.0,Landfill Gas,0.05
+1589,0.9,0.9,0.8,2017.0,Landfill Gas,0.05
+1590,1.4,1.2,1.2,2016.0,Landfill Gas,0.05
+1591,15.0,13,15,1987.0,Natural Gas Fired Combined Cycle,0.05
+1592,15.0,13,15,1987.0,Natural Gas Fired Combined Cycle,0.05
+1593,15.0,13,15,1987.0,Natural Gas Fired Combined Cycle,0.05
+1594,39.0,34,34.8,1987.0,Natural Gas Fired Combined Cycle,0.05
+1595,53.9,47.5,47.5,1989.0,Geothermal,0.05
+1596,49.8,41,43,1994.0,Natural Gas Fired Combined Cycle,0.05
+1597,11.5,9,10,1994.0,Natural Gas Fired Combined Cycle,0.05
+1598,60.5,45,47,2003.0,Natural Gas Fired Combined Cycle,0.05
+1599,60.5,45,47,2003.0,Natural Gas Fired Combined Cycle,0.05
+1600,60.5,45,47,2003.0,Natural Gas Fired Combined Cycle,0.05
+1601,60.5,45,47,2003.0,Natural Gas Fired Combined Cycle,0.05
+1602,27.8,26,26,2003.0,Natural Gas Fired Combined Cycle,0.05
+1603,27.8,26,26,2003.0,Natural Gas Fired Combined Cycle,0.05
+1604,8.0,5.3,8,2007.0,Geothermal,0.05
+1605,21.6,14.4,21.6,1989.0,Geothermal,0.05
+1606,28.0,24.3,24.3,1988.0,Wood/Wood Waste Biomass,0.05
+1607,27.9,24.4,24.4,1989.0,Wood/Wood Waste Biomass,0.05
+1608,48.5,48.5,48.5,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1609,36.2,30,30,1989.0,Wood/Wood Waste Biomass,0.05
+1610,0.2,0.2,0.2,1983.0,Conventional Hydroelectric,0.05
+1611,0.3,0.3,0.3,1983.0,Conventional Hydroelectric,0.05
+1612,0.8,0.8,0.7,1983.0,Conventional Hydroelectric,0.05
+1613,46.1,38,40.5,1990.0,Conventional Steam Coal,0.05
+1614,2.3,2,2,1988.0,Conventional Hydroelectric,0.05
+1615,4.8,4.8,4.8,1990.0,Conventional Hydroelectric,0.05
+1616,2.8,2.7,2.6,1990.0,Conventional Hydroelectric,0.05
+1617,1.9,1.8,1.8,1990.0,Conventional Hydroelectric,0.05
+1618,28.0,25,25,1989.0,Wood/Wood Waste Biomass,0.05
+1619,15.0,14,14,1985.0,Wood/Wood Waste Biomass,0.05
+1620,15.0,14,14,2009.0,Wood/Wood Waste Biomass,0.05
+1621,32.2,27.5,27.5,1987.0,Geothermal,0.05
+1622,30.0,27,27,1988.0,Geothermal,0.05
+1623,30.0,26.7,27.2,1988.0,Geothermal,0.05
+1624,30.0,30,30,1989.0,Geothermal,0.05
+1625,30.0,23.4,27,1989.0,Geothermal,0.05
+1626,30.0,26.9,29,1989.0,Geothermal,0.05
+1627,30.0,21.8,26.1,1988.0,Geothermal,0.05
+1628,30.0,22.5,28.5,1988.0,Geothermal,0.05
+1629,30.0,23.5,28.7,1989.0,Geothermal,0.05
+1630,10.0,10,10,1982.0,Geothermal,0.05
+1631,11.5,10,10,1990.0,Geothermal,0.05
+1632,5.0,4,4,1990.0,Geothermal,0.05
+1633,3.5,2.1,2.1,1990.0,Geothermal,0.05
+1634,1.8,1.8,1.8,1987.0,Conventional Hydroelectric,0.05
+1635,2.0,2,2,1986.0,Conventional Hydroelectric,0.05
+1636,6.8,6.8,6.8,1986.0,Conventional Hydroelectric,0.05
+1637,2.8,2.7,2.7,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1638,2.8,2.7,2.7,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1639,46.0,46,48,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1640,12.5,13,13,1988.0,Wood/Wood Waste Biomass,0.05
+1641,12.5,13,13,1988.0,Wood/Wood Waste Biomass,0.05
+1642,5.1,4.6,4.8,2002.0,Natural Gas Fired Combined Cycle,0.05
+1643,5.1,4.6,4.8,2002.0,Natural Gas Fired Combined Cycle,0.05
+1644,4.1,4.1,4.1,2002.0,Natural Gas Fired Combined Cycle,0.05
+1645,4.4,4.4,4.4,2015.0,Natural Gas Fired Combustion Turbine,0.05
+1646,88.2,50,55,1984.0,Geothermal,0.05
+1647,88.2,50,55,1984.0,Geothermal,0.05
+1648,0.2,0.2,0.2,1987.0,Conventional Hydroelectric,0.05
+1649,1.1,1.1,1,1987.0,Conventional Hydroelectric,0.05
+1650,1.5,1.4,1.4,1987.0,Natural Gas Internal Combustion Engine,0.05
+1651,1.3,1.3,0.8,1986.0,Conventional Hydroelectric,0.05
+1652,6.2,5.8,6.2,1983.0,Wood/Wood Waste Biomass,0.05
+1653,20.0,18.9,17.9,1986.0,Wood/Wood Waste Biomass,0.05
+1654,20.0,11.8,16.5,1989.0,Wood/Wood Waste Biomass,0.05
+1655,35.2,24,24,2018.0,Wood/Wood Waste Biomass,0.05
+1656,48.2,39,42,1984.0,Natural Gas Fired Combustion Turbine,0.05
+1657,18.3,15.3,15.5,1987.0,Other Gases,0.05
+1658,18.3,15.4,16.6,1987.0,Other Gases,0.05
+1659,18.3,14.9,16.4,1987.0,Other Gases,0.05
+1660,75.0,75,78,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1661,75.0,75,78,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1662,75.0,75,78,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1663,75.0,75,78,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1664,1.4,1,0.5,1987.0,Conventional Hydroelectric,0.05
+1665,3.2,3,2.9,1990.0,Conventional Hydroelectric,0.05
+1666,38.7,35,37,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1667,2.5,2.5,2.5,1986.0,Conventional Hydroelectric,0.05
+1668,2.5,2.5,2.5,1986.0,Conventional Hydroelectric,0.05
+1669,5.0,4.8,4.6,1990.0,Conventional Hydroelectric,0.05
+1670,2.8,2.7,2.6,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1671,3.3,3,2.9,1995.0,Natural Gas Fired Combustion Turbine,0.05
+1672,6.1,6.1,6.1,1984.0,All Other,0.05
+1673,0.8,0.8,0.8,1989.0,Conventional Hydroelectric,0.05
+1674,2.5,2.5,2.5,1989.0,Conventional Hydroelectric,0.05
+1675,2.5,2.5,2.5,1989.0,Conventional Hydroelectric,0.05
+1676,30.1,23.5,23.5,1985.0,Geothermal,0.05
+1677,9.5,6,6,1985.0,Geothermal,0.05
+1678,82.0,82,82,1988.0,Natural Gas Fired Combined Cycle,0.05
+1679,82.0,82,82,1988.0,Natural Gas Fired Combined Cycle,0.05
+1680,82.0,82,82,1988.0,Natural Gas Fired Combined Cycle,0.05
+1681,82.0,82,82,1987.0,Natural Gas Fired Combined Cycle,0.05
+1682,38.5,35,35,1988.0,Natural Gas Fired Combined Cycle,0.05
+1683,38.5,35,35,1987.0,Natural Gas Fired Combined Cycle,0.05
+1684,2.8,2.7,2.6,1982.0,Conventional Hydroelectric,0.05
+1685,5.3,4,4.3,1983.0,Conventional Hydroelectric,0.05
+1686,1.2,0.5,0.9,1989.0,Conventional Hydroelectric,0.05
+1687,0.5,0.4,0.4,1981.0,Other Waste Biomass,0.05
+1688,0.5,0.4,0.4,1981.0,Other Waste Biomass,0.05
+1689,0.5,0.4,0.4,1981.0,Other Waste Biomass,0.05
+1690,5.0,4.7,4.7,2002.0,Wood/Wood Waste Biomass,0.05
+1691,0.9,0.9,0.8,1985.0,Natural Gas Internal Combustion Engine,0.05
+1692,0.9,0.9,0.8,1985.0,Natural Gas Internal Combustion Engine,0.05
+1693,0.9,0.9,0.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+1694,4.0,3.8,3.7,1989.0,Conventional Hydroelectric,0.05
+1695,1.4,1.4,1.4,1931.0,Conventional Hydroelectric,0.05
+1696,15.9,14.8,15,1986.0,All Other,0.05
+1697,29.1,26.5,26.5,1989.0,Other Waste Biomass,0.05
+1698,49.5,46.1,46.1,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1699,46.0,40,42,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1700,2.1,2.1,2.1,1985.0,Conventional Hydroelectric,0.05
+1701,0.3,0.3,0.3,1985.0,Conventional Hydroelectric,0.05
+1702,0.3,0.3,0.3,1985.0,Conventional Hydroelectric,0.05
+1703,0.3,0.3,0.3,1985.0,Conventional Hydroelectric,0.05
+1704,0.3,0.3,0.3,1985.0,Conventional Hydroelectric,0.05
+1705,2.3,2.3,2.3,2012.0,Other Waste Biomass,0.05
+1706,2.3,2.3,2.3,2012.0,Other Waste Biomass,0.05
+1707,14.5,14.5,14.5,1992.0,Conventional Hydroelectric,0.05
+1708,4.0,3.7,3.6,1987.0,Conventional Hydroelectric,0.05
+1709,0.4,0.3,0.3,1987.0,Conventional Hydroelectric,0.05
+1710,1.8,1.8,1.8,1989.0,Conventional Hydroelectric,0.05
+1711,4.3,2.9,2.9,1985.0,Conventional Hydroelectric,0.05
+1712,1.2,1.2,1.2,1987.0,Conventional Hydroelectric,0.05
+1713,2.0,0.5,1.5,1936.0,Conventional Hydroelectric,0.05
+1714,2.0,0.5,1.5,1936.0,Conventional Hydroelectric,0.05
+1715,2.0,0.5,1.5,1936.0,Conventional Hydroelectric,0.05
+1716,5.8,1.5,5,1984.0,Conventional Hydroelectric,0.05
+1717,5.8,1.5,5,1984.0,Conventional Hydroelectric,0.05
+1718,2.2,1.8,1.5,1988.0,Conventional Hydroelectric,0.05
+1719,27.3,17,17,1983.0,Petroleum Coke,0.05
+1720,18.4,20,18.4,1986.0,Conventional Hydroelectric,0.05
+1721,9.8,9.8,9.8,1985.0,Conventional Hydroelectric,0.05
+1722,2.4,2.3,2.3,1985.0,Conventional Hydroelectric,0.05
+1723,6.9,7.3,7.3,2017.0,Conventional Hydroelectric,0.05
+1724,16.2,15.6,14,1986.0,Conventional Hydroelectric,0.05
+1725,0.8,0.8,0.7,1987.0,Conventional Hydroelectric,0.05
+1726,0.8,0.8,0.7,1987.0,Conventional Hydroelectric,0.05
+1727,1.7,1.6,1.6,1987.0,Conventional Hydroelectric,0.05
+1728,2.5,2.5,2.5,1985.0,Conventional Hydroelectric,0.05
+1729,19.2,22.4,22.4,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1730,49.5,48.5,48.5,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1731,2.3,2.3,2.3,1985.0,Other Waste Biomass,0.05
+1732,2.3,2.3,2.3,1985.0,Other Waste Biomass,0.05
+1733,1.5,1,1.5,2002.0,Conventional Hydroelectric,0.05
+1734,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1735,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1736,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1737,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1738,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1739,24.9,23,24,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1740,30.0,25,25,1982.0,Other Gases,0.05
+1741,30.0,25,25,1982.0,Other Gases,0.05
+1742,6.0,5.6,5.6,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1743,7.5,7.5,7.5,1986.0,Wood/Wood Waste Biomass,0.05
+1744,3.6,3.6,3.6,1986.0,Conventional Hydroelectric,0.05
+1745,25.0,18,18,1986.0,Wood/Wood Waste Biomass,0.05
+1746,3.0,2.9,3.3,1989.0,Landfill Gas,0.05
+1747,1.3,1.3,1.3,2002.0,Landfill Gas,0.05
+1748,1.3,1.3,1.3,2002.0,Landfill Gas,0.05
+1749,1.2,1,1.1,1992.0,Natural Gas Fired Combustion Turbine,0.05
+1750,46.0,46,48,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1751,8.8,7,7.5,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1752,8.8,7,7.5,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1753,7.5,7.5,7.5,1983.0,All Other,0.05
+1754,22.5,22.5,22.5,1988.0,Other Gases,0.05
+1755,19.3,19.3,19.3,1988.0,All Other,0.05
+1756,13.1,11.5,11.5,1986.0,Municipal Solid Waste,0.05
+1757,24.0,19.9,19.9,1988.0,Municipal Solid Waste,0.05
+1758,28.8,25.2,25.3,1981.0,Wood/Wood Waste Biomass,0.05
+1759,65.0,24,24,1991.0,Wood/Wood Waste Biomass,0.05
+1760,16.3,10.9,16.3,1988.0,Geothermal,0.05
+1761,5.5,3.7,5.5,2007.0,Geothermal,0.05
+1762,1.2,1.2,1.2,2015.0,Natural Gas Internal Combustion Engine,0.05
+1763,2.5,2.4,2.4,1993.0,Other Waste Biomass,0.05
+1764,2.5,2.4,2.4,1993.0,Other Waste Biomass,0.05
+1765,2.5,2.4,2.4,1993.0,Other Waste Biomass,0.05
+1766,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1767,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1768,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1769,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1770,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1771,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1772,0.2,0.2,0.2,1986.0,Conventional Hydroelectric,0.05
+1773,58.5,272,272,1994.0,Natural Gas Fired Combined Cycle,0.05
+1774,58.5,58.5,58.5,1994.0,Natural Gas Fired Combined Cycle,0.05
+1775,58.5,58.5,58.5,1994.0,Natural Gas Fired Combined Cycle,0.05
+1776,58.5,58.5,58.5,1994.0,Natural Gas Fired Combined Cycle,0.05
+1777,58.5,58.5,58.5,1994.0,Natural Gas Fired Combined Cycle,0.05
+1778,52.2,52.2,52.2,1994.0,Natural Gas Fired Combined Cycle,0.05
+1779,52.2,52.2,52.2,1994.0,Natural Gas Fired Combined Cycle,0.05
+1780,1.0,1,0.9,1986.0,Conventional Hydroelectric,0.05
+1781,24.4,24.4,24.4,1990.0,Natural Gas Fired Combined Cycle,0.05
+1782,7.6,7.3,7.4,1990.0,Natural Gas Fired Combined Cycle,0.05
+1783,3.4,3.2,3.3,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1784,3.4,3.2,3.3,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1785,24.0,20.8,21.7,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1786,31.4,19,21,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1787,31.4,19,21,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1788,31.4,19,21,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1789,2.0,1.9,1.9,1989.0,Conventional Hydroelectric,0.05
+1790,1.0,0.9,0.9,1989.0,Conventional Hydroelectric,0.05
+1791,11.8,10.1,14.3,2009.0,Geothermal,0.05
+1792,11.8,10.1,14.3,2009.0,Geothermal,0.05
+1793,11.8,10.1,14.3,2009.0,Geothermal,0.05
+1794,11.8,10.1,14.3,2009.0,Geothermal,0.05
+1795,12.0,8,12,2003.0,Geothermal,0.05
+1796,12.0,8,12,2003.0,Geothermal,0.05
+1797,1.2,0.8,1.2,1986.0,Geothermal,0.05
+1798,1.2,0.8,1.2,1986.0,Geothermal,0.05
+1799,12.0,11.4,11,1989.0,Conventional Hydroelectric,0.05
+1800,12.0,11.4,11,1989.0,Conventional Hydroelectric,0.05
+1801,1.0,1,1,1985.0,Landfill Gas,0.05
+1802,1.0,1,1,1987.0,Landfill Gas,0.05
+1803,1.0,1,1,1985.0,Landfill Gas,0.05
+1804,35.6,28,26,1988.0,Municipal Solid Waste,0.05
+1805,23.0,21,23,1987.0,Natural Gas Fired Combined Cycle,0.05
+1806,5.5,2,4,1987.0,Natural Gas Fired Combined Cycle,0.05
+1807,23.5,22.5,22.5,1987.0,Natural Gas Fired Combined Cycle,0.05
+1808,7.3,6.5,6,1987.0,Natural Gas Fired Combined Cycle,0.05
+1809,23.5,21.5,22.1,1988.0,Natural Gas Fired Combined Cycle,0.05
+1810,7.6,6.8,6.9,1988.0,Natural Gas Fired Combined Cycle,0.05
+1811,38.9,33,35,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1812,23.0,23.6,23.6,1988.0,Natural Gas Fired Combined Cycle,0.05
+1813,7.7,3.7,3.7,1988.0,Natural Gas Fired Combined Cycle,0.05
+1814,18.3,18.8,18.8,1987.0,Wood/Wood Waste Biomass,0.05
+1815,18.3,18.8,18.8,1987.0,Wood/Wood Waste Biomass,0.05
+1816,18.3,18.8,18.8,1987.0,Wood/Wood Waste Biomass,0.05
+1817,26.0,22.7,22.7,1991.0,Municipal Solid Waste,0.05
+1818,2.6,2.3,2.3,1986.0,Conventional Hydroelectric,0.05
+1819,1.5,1.5,1.5,1986.0,Conventional Hydroelectric,0.05
+1820,1.5,1.5,1.5,1986.0,Conventional Hydroelectric,0.05
+1821,7.0,6,6.3,2005.0,Natural Gas Fired Combustion Turbine,0.05
+1822,1.1,0.7,0.7,2011.0,Natural Gas Steam Turbine,0.05
+1823,6.7,6.2,7,2014.0,Natural Gas Fired Combustion Turbine,0.05
+1824,2.0,2,2,1986.0,Conventional Hydroelectric,0.05
+1825,0.5,0.5,0.5,1986.0,Conventional Hydroelectric,0.05
+1826,0.8,0.8,0.8,1986.0,Conventional Hydroelectric,0.05
+1827,68.0,52,55,1995.0,Petroleum Coke,0.05
+1828,0.8,0.8,1,1987.0,Conventional Hydroelectric,0.05
+1829,0.8,0.8,1,1987.0,Conventional Hydroelectric,0.05
+1830,58.1,51,51,1993.0,Conventional Steam Coal,0.05
+1831,4.2,4,3.9,1990.0,Conventional Hydroelectric,0.05
+1832,5.3,4.4,4.4,2003.0,Natural Gas Fired Combustion Turbine,0.05
+1833,1.5,1.1,0.7,1988.0,Geothermal,0.05
+1834,1.5,1.1,0.7,1988.0,Geothermal,0.05
+1835,1.6,1.5,1.5,1993.0,Conventional Hydroelectric,0.05
+1836,2.7,2.7,2.7,1989.0,Conventional Hydroelectric,0.05
+1837,2.7,2.7,2.7,1989.0,Conventional Hydroelectric,0.05
+1838,1.0,1,1,1989.0,Natural Gas Internal Combustion Engine,0.05
+1839,0.4,0.4,0.4,1989.0,Natural Gas Internal Combustion Engine,0.05
+1840,1.4,1.4,1,2004.0,Natural Gas Internal Combustion Engine,0.05
+1841,2.1,2,1,1983.0,Conventional Hydroelectric,0.05
+1842,64.7,56,57,1998.0,Geothermal,0.05
+1843,6.2,2.5,5.1,2012.0,Geothermal,0.05
+1844,2.3,2.3,2.3,1985.0,Conventional Hydroelectric,0.05
+1845,4.0,4,4,1978.0,All Other,0.05
+1846,14.5,12.5,13.5,1993.0,Natural Gas Fired Combined Cycle,0.05
+1847,14.5,12.5,13.5,1993.0,Natural Gas Fired Combined Cycle,0.05
+1848,14.0,11,12,1993.0,Natural Gas Fired Combined Cycle,0.05
+1849,6.0,4.8,5.5,2012.0,Natural Gas Fired Combustion Turbine,0.05
+1850,6.0,4.8,5.5,2012.0,Natural Gas Fired Combustion Turbine,0.05
+1851,3.5,2.7,3,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1852,3.5,2.7,3,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1853,3.5,2.7,3,1985.0,Natural Gas Fired Combustion Turbine,0.05
+1854,3.4,2.7,2.9,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1855,3.4,2.7,2.9,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1856,3.4,2.7,2.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1857,3.4,2.7,2.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1858,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1859,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1860,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1861,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1862,3.4,2.7,2.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1863,3.4,2.7,2.9,1986.0,Natural Gas Fired Combustion Turbine,0.05
+1864,3.4,2.7,2.9,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1865,3.4,2.7,2.9,1987.0,Natural Gas Fired Combustion Turbine,0.05
+1866,21.4,19.6,19.6,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1867,21.4,19.6,19.6,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1868,3.0,2.7,2.7,1993.0,Other Waste Biomass,0.05
+1869,3.0,2.7,2.7,1993.0,Other Waste Biomass,0.05
+1870,3.0,2.7,2.7,1993.0,Other Waste Biomass,0.05
+1871,3.0,2.7,2.7,1993.0,Other Waste Biomass,0.05
+1872,3.0,2.7,2.7,1993.0,Other Waste Biomass,0.05
+1873,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1874,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1875,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1876,3.1,2.7,2.9,1982.0,Natural Gas Fired Combustion Turbine,0.05
+1877,24.4,20.8,21.7,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1878,24.4,20.8,21.7,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1879,62.6,50,52,1992.0,Natural Gas Fired Combined Cycle,0.05
+1880,62.6,50,52,1992.0,Natural Gas Fired Combined Cycle,0.05
+1881,30.4,30.4,30.4,2006.0,Natural Gas Fired Combined Cycle,0.05
+1882,8.0,8,8,1983.0,Natural Gas Fired Combustion Turbine,0.05
+1883,10.0,9.3,9.3,1983.0,Natural Gas Fired Combustion Turbine,0.05
+1884,1.0,1,1,1986.0,Conventional Hydroelectric,0.05
+1885,12.5,9,10,1989.0,Geothermal,0.05
+1886,12.5,9,10,1989.0,Geothermal,0.05
+1887,78.0,73,83,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1888,78.0,73,83,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1889,78.0,73,83,1989.0,Natural Gas Fired Combustion Turbine,0.05
+1890,1.2,0.8,0.8,1987.0,Geothermal,0.05
+1891,1.2,0.9,0.8,1987.0,Geothermal,0.05
+1892,1.2,0.9,0.9,1987.0,Geothermal,0.05
+1893,1.5,1.1,1,1990.0,Geothermal,0.05
+1894,3.5,1.2,1.6,1990.0,Geothermal,0.05
+1895,3.5,1.2,1.7,1990.0,Geothermal,0.05
+1896,3.5,1.3,1.7,1990.0,Geothermal,0.05
+1897,3.5,1.3,1.8,1990.0,Geothermal,0.05
+1898,3.5,1.3,1.7,1990.0,Geothermal,0.05
+1899,3.5,1.3,1.7,1990.0,Geothermal,0.05
+1900,49.0,48.7,46.5,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1901,4.1,3.9,4.8,1984.0,Conventional Hydroelectric,0.05
+1902,1.8,1.5,1.5,1986.0,Landfill Gas,0.05
+1903,1.8,1.5,1.5,1991.0,Landfill Gas,0.05
+1904,3.7,3.2,3.2,2007.0,Landfill Gas,0.05
+1905,1.6,1.5,1.5,2013.0,Landfill Gas,0.05
+1906,1.6,1.5,1.5,2013.0,Landfill Gas,0.05
+1907,9.7,9.7,9.7,1989.0,Conventional Hydroelectric,0.05
+1908,6.8,5.4,5.4,1993.0,Landfill Gas,0.05
+1909,3.9,3.7,3.6,1987.0,Conventional Hydroelectric,0.05
+1910,1.1,1.1,1,1987.0,Conventional Hydroelectric,0.05
+1911,4.5,3.8,4,1993.0,Geothermal,0.05
+1912,4.5,3.8,4,1993.0,Geothermal,0.05
+1913,4.5,3.8,4,1993.0,Geothermal,0.05
+1914,16.0,2,2,2006.0,Geothermal,0.05
+1915,3.5,3,3.5,1993.0,Geothermal,0.05
+1916,16.0,12,16,2008.0,Geothermal,0.05
+1917,3.5,3,3.5,1993.0,Geothermal,0.05
+1918,3.5,3,3.5,1993.0,Geothermal,0.05
+1919,3.5,3,3.5,1993.0,Geothermal,0.05
+1920,3.5,3,3.5,1993.0,Geothermal,0.05
+1921,3.5,3,3.5,1993.0,Geothermal,0.05
+1922,4.5,3.8,4,1993.0,Geothermal,0.05
+1923,4.5,3.8,4,1993.0,Geothermal,0.05
+1924,4.5,3.8,4,1993.0,Geothermal,0.05
+1925,2.0,2,2,1993.0,Conventional Hydroelectric,0.05
+1926,54.0,45,45,1987.0,Wood/Wood Waste Biomass,0.05
+1927,18.0,9,18,1990.0,Conventional Hydroelectric,0.05
+1928,18.0,9,18,1990.0,Conventional Hydroelectric,0.05
+1929,2.1,2.1,2.1,1989.0,Conventional Hydroelectric,0.05
+1930,4.3,3.3,5,1985.0,Conventional Hydroelectric,0.05
+1931,2.7,1.2,1.2,1988.0,Conventional Hydroelectric,0.05
+1932,12.0,12.4,12.4,1990.0,Conventional Hydroelectric,0.05
+1933,46.6,39.6,42.1,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1934,46.6,40,42.7,1991.0,Natural Gas Fired Combustion Turbine,0.05
+1935,46.6,40.6,43.4,1993.0,Natural Gas Fired Combustion Turbine,0.05
+1936,45.1,36,38,1991.0,Natural Gas Fired Combined Cycle,0.05
+1937,45.1,36,38,1991.0,Natural Gas Fired Combined Cycle,0.05
+1938,37.0,29,29,1991.0,Natural Gas Fired Combined Cycle,0.05
+1939,0.6,0.6,0.6,1990.0,Natural Gas Internal Combustion Engine,0.05
+1940,0.6,0.6,0.6,1990.0,Natural Gas Internal Combustion Engine,0.05
+1941,1.0,1,1,2002.0,Natural Gas Internal Combustion Engine,0.05
+1942,4.2,4.2,4.2,1993.0,Conventional Hydroelectric,0.05
+1943,4.2,4.2,4.2,1993.0,Conventional Hydroelectric,0.05
+1944,1.3,1.2,1.2,1984.0,Conventional Hydroelectric,0.05
+1945,0.8,0.8,0.8,1986.0,Natural Gas Internal Combustion Engine,0.05
+1946,0.8,0.8,0.8,1986.0,Natural Gas Internal Combustion Engine,0.05
+1947,20.1,20,20,1990.0,Conventional Hydroelectric,0.05
+1948,22.2,21.7,21.7,1992.0,Natural Gas Fired Combined Cycle,0.05
+1949,22.2,21.7,21.7,1992.0,Natural Gas Fired Combined Cycle,0.05
+1950,22.2,21.7,21.7,1992.0,Natural Gas Fired Combined Cycle,0.05
+1951,29.7,28,28,1992.0,Natural Gas Fired Combined Cycle,0.05
+1952,21.7,20.5,22,1992.0,Natural Gas Fired Combined Cycle,0.05
+1953,21.7,20.5,22,1992.0,Natural Gas Fired Combined Cycle,0.05
+1954,21.7,20.5,22,1992.0,Natural Gas Fired Combined Cycle,0.05
+1955,29.7,24,19,1992.0,Natural Gas Fired Combined Cycle,0.05
+1956,16.0,15,16,1992.0,Natural Gas Fired Combined Cycle,0.05
+1957,16.0,15,16,1992.0,Natural Gas Fired Combined Cycle,0.05
+1958,1.0,1,1,1992.0,Natural Gas Fired Combined Cycle,0.05
+1959,1.3,1.3,1.3,2012.0,Natural Gas Internal Combustion Engine,0.05
+1960,1.3,1.3,1.3,2012.0,Natural Gas Internal Combustion Engine,0.05
+1961,1.3,1.3,1.3,2012.0,Natural Gas Internal Combustion Engine,0.05
+1962,4.3,4.2,4.2,1990.0,Conventional Hydroelectric,0.05
+1963,3.6,2.2,1.5,1987.0,Conventional Hydroelectric,0.05
+1964,27.7,19.6,19.5,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1965,5.0,4,4.7,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1966,3.0,2.5,2.7,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1967,3.0,2.5,2.7,1988.0,Natural Gas Fired Combustion Turbine,0.05
+1968,58.5,45,48,1988.0,Other Gases,0.05
+1969,11.5,11.5,11.5,1986.0,All Other,0.05
+1970,87.8,84.7,96.5,1993.0,Natural Gas Fired Combined Cycle,0.05
+1971,37.7,40.8,40.8,1993.0,Natural Gas Fired Combined Cycle,0.05
+1972,1.3,1.3,1.3,1992.0,Conventional Hydroelectric,0.05
+1973,7.5,6,6.4,2018.0,Wood/Wood Waste Biomass,0.05
+1974,4.7,4.7,4.7,1995.0,Conventional Hydroelectric,0.05
+1975,4.7,4.7,4.7,1995.0,Conventional Hydroelectric,0.05
+1976,95.9,86,94,1994.0,Natural Gas Fired Combined Cycle,0.05
+1977,95.9,86,94,1994.0,Natural Gas Fired Combined Cycle,0.05
+1978,93.7,98,98,1994.0,Natural Gas Fired Combined Cycle,0.05
+1979,2.7,2.5,2.5,1989.0,Conventional Hydroelectric,0.05
+1980,2.7,2.5,2.5,1989.0,Conventional Hydroelectric,0.05
+1981,0.5,0.5,0.5,1989.0,Conventional Hydroelectric,0.05
+1982,126.5,126.5,126.5,1989.0,Conventional Hydroelectric,0.05
+1983,126.5,126.5,126.5,1989.0,Conventional Hydroelectric,0.05
+1984,3.8,3.8,3.8,1993.0,Conventional Hydroelectric,0.05
+1985,3.8,3.8,3.8,1993.0,Conventional Hydroelectric,0.05
+1986,0.6,0.5,0.5,1990.0,Landfill Gas,0.05
+1987,0.6,0.5,0.5,1990.0,Landfill Gas,0.05
+1988,0.6,0.6,0.6,1993.0,Landfill Gas,0.05
+1989,0.4,0.4,0.4,1998.0,Landfill Gas,0.05
+1990,62.0,42.4,42.4,1989.0,Wood/Wood Waste Biomass,0.05
+1991,4.2,3.2,3.8,1992.0,Natural Gas Fired Combustion Turbine,0.05
+1992,4.2,3.2,3.8,1992.0,Natural Gas Fired Combustion Turbine,0.05
+1993,4.2,3.2,3.8,1992.0,Natural Gas Fired Combustion Turbine,0.05
+1994,2.8,2.6,2.8,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1995,3.6,2.6,2.8,1990.0,Natural Gas Fired Combustion Turbine,0.05
+1996,4.9,4.9,4.9,1989.0,Conventional Hydroelectric,0.05
+1997,9.1,5.4,8.1,1992.0,Geothermal,0.05
+1998,9.1,5.4,8.1,1992.0,Geothermal,0.05
+1999,9.1,5.4,8.1,1992.0,Geothermal,0.05
+2000,9.1,5.4,8.1,1992.0,Geothermal,0.05
+2001,4.5,4.5,4.5,1993.0,Conventional Hydroelectric,0.05
+2002,4.5,4.5,4.5,1993.0,Conventional Hydroelectric,0.05
+2003,0.4,0.2,0.5,1988.0,Conventional Hydroelectric,0.05
+2004,0.4,0.2,0.5,1988.0,Conventional Hydroelectric,0.05
+2005,0.4,0.2,0.5,1988.0,Conventional Hydroelectric,0.05
+2006,3.5,3.5,3.5,2004.0,Conventional Hydroelectric,0.05
+2007,3.0,3,3,1987.0,Conventional Hydroelectric,0.05
+2008,52.0,38,42,1985.0,Geothermal,0.05
+2009,7.0,5,5.5,2006.0,Geothermal,0.05
+2010,3.5,2.5,3,2006.0,Geothermal,0.05
+2011,19.0,16,17.5,2018.0,Geothermal,0.05
+2012,44.1,35.1,37.4,1994.0,Natural Gas Fired Combined Cycle,0.05
+2013,18.5,17.1,16.5,1994.0,Natural Gas Fired Combined Cycle,0.05
+2014,19.6,18.5,18.5,1982.0,Conventional Hydroelectric,0.05
+2015,12.0,8,12,1989.0,Geothermal,0.05
+2016,12.0,8,12,2007.0,Geothermal,0.05
+2017,2.3,2,2,1993.0,Conventional Hydroelectric,0.05
+2018,41.2,40,40,1994.0,Natural Gas Fired Combined Cycle,0.05
+2019,10.2,9.4,9.4,1994.0,Natural Gas Fired Combined Cycle,0.05
+2020,2.4,2.3,2.2,1984.0,Conventional Hydroelectric,0.05
+2021,106.1,80,83,1996.0,Natural Gas Fired Combined Cycle,0.05
+2022,204.5,152,160,1996.0,Natural Gas Fired Combined Cycle,0.05
+2023,106.1,80,83,1996.0,Natural Gas Fired Combined Cycle,0.05
+2024,204.5,152,160,1996.0,Natural Gas Fired Combined Cycle,0.05
+2025,46.0,46,48,1992.0,Natural Gas Fired Combustion Turbine,0.05
+2026,3.5,2.7,2.2,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2027,3.5,2.7,2.2,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2028,0.7,0.7,0.6,1994.0,Conventional Hydroelectric,0.05
+2029,0.7,0.7,0.6,1994.0,Conventional Hydroelectric,0.05
+2030,3.7,3.7,3.7,1994.0,Conventional Hydroelectric,0.05
+2031,40.0,40,42,1995.0,Natural Gas Fired Combined Cycle,0.05
+2032,40.0,40,42,1996.0,Natural Gas Fired Combined Cycle,0.05
+2033,20.0,20,20,1995.0,Other Gases,0.05
+2034,7.5,7.5,7.5,2012.0,Natural Gas Fired Combined Cycle,0.05
+2035,3.5,1.5,3,2012.0,Natural Gas Fired Combined Cycle,0.05
+2036,0.6,0.6,0.6,1988.0,Other Waste Biomass,0.05
+2037,0.6,0.6,0.6,1988.0,Other Waste Biomass,0.05
+2038,0.6,0.6,0.6,1988.0,Other Waste Biomass,0.05
+2039,4.7,4.5,4.5,1996.0,Natural Gas Fired Combustion Turbine,0.05
+2040,47.5,44,44,1996.0,Geothermal,0.05
+2041,2.6,2.6,2.6,1987.0,Conventional Hydroelectric,0.05
+2042,150.0,138,148,2000.0,Natural Gas Fired Combustion Turbine,0.05
+2043,170.0,150,160,2000.0,Natural Gas Fired Combined Cycle,0.05
+2044,170.0,150,160,2000.0,Natural Gas Fired Combined Cycle,0.05
+2045,196.0,150,170,2000.0,Natural Gas Fired Combined Cycle,0.05
+2046,247.4,247.4,247.4,1995.0,Natural Gas Fired Combined Cycle,0.05
+2047,6.2,5.8,5.8,1982.0,Wood/Wood Waste Biomass,0.05
+2048,1.6,1.6,1.6,1997.0,Landfill Gas,0.05
+2049,1.6,1.6,1.6,1997.0,Landfill Gas,0.05
+2050,1.6,1.6,1.6,1997.0,Landfill Gas,0.05
+2051,1.6,1.6,1.6,1997.0,Landfill Gas,0.05
+2052,161.5,155,184,2001.0,Natural Gas Fired Combined Cycle,0.05
+2053,161.5,155,184,2001.0,Natural Gas Fired Combined Cycle,0.05
+2054,178.5,180,190,2001.0,Natural Gas Fired Combined Cycle,0.05
+2055,212.0,175,185,2001.0,Natural Gas Fired Combined Cycle,0.05
+2056,212.0,175,185,2001.0,Natural Gas Fired Combined Cycle,0.05
+2057,212.0,180,185,2001.0,Natural Gas Fired Combined Cycle,0.05
+2058,176.6,147,147,2002.0,Natural Gas Fired Combined Cycle,0.05
+2059,176.6,147,147,2002.0,Natural Gas Fired Combined Cycle,0.05
+2060,301.8,276,276,2002.0,Natural Gas Fired Combined Cycle,0.05
+2061,150.0,132,160,2000.0,Natural Gas Fired Combustion Turbine,0.05
+2062,150.0,132,160,2000.0,Natural Gas Fired Combustion Turbine,0.05
+2063,187.0,162,178,2001.0,Natural Gas Fired Combined Cycle,0.05
+2064,187.0,162,178,2001.0,Natural Gas Fired Combined Cycle,0.05
+2065,272.1,253,269,2001.0,Natural Gas Fired Combined Cycle,0.05
+2066,300.0,243.7,258.6,2003.0,Natural Gas Fired Combined Cycle,0.05
+2067,300.0,241.6,259.7,2003.0,Natural Gas Fired Combined Cycle,0.05
+2068,3.0,2.7,2.7,1998.0,Landfill Gas,0.05
+2069,236.0,180,193,2001.0,Natural Gas Fired Combined Cycle,0.05
+2070,236.0,190,200,2001.0,Natural Gas Fired Combined Cycle,0.05
+2071,179.4,150,172,2001.0,Natural Gas Fired Combined Cycle,0.05
+2072,122.1,98,110,2001.0,Natural Gas Fired Combined Cycle,0.05
+2073,270.0,245,270,2003.0,Natural Gas Fired Combined Cycle,0.05
+2074,167.7,150,160,2001.0,Natural Gas Fired Combined Cycle,0.05
+2075,167.7,150,160,2001.0,Natural Gas Fired Combined Cycle,0.05
+2076,3.0,2.8,3,1989.0,Natural Gas Fired Combustion Turbine,0.05
+2077,3.2,2.8,3,1989.0,Natural Gas Fired Combustion Turbine,0.05
+2078,71.1,39,39,2000.0,Natural Gas Fired Combined Cycle,0.05
+2079,71.1,39,39,2000.0,Natural Gas Fired Combined Cycle,0.05
+2080,51.8,44.5,48.6,2002.0,Natural Gas Fired Combined Cycle,0.05
+2081,71.1,39.9,39.9,2000.0,Natural Gas Fired Combustion Turbine,0.05
+2082,71.1,39.9,39.9,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2083,177.0,141,149,2002.0,Natural Gas Fired Combined Cycle,0.05
+2084,110.0,94.6,103.4,2007.0,Natural Gas Fired Combined Cycle,0.05
+2085,198.9,165,177,2001.0,Natural Gas Fired Combined Cycle,0.05
+2086,198.9,165,177,2001.0,Natural Gas Fired Combined Cycle,0.05
+2087,280.5,237,244,2001.0,Natural Gas Fired Combined Cycle,0.05
+2088,2.5,1.8,2.5,1983.0,Natural Gas Fired Combustion Turbine,0.05
+2089,2.5,1.8,2.5,1992.0,Natural Gas Fired Combustion Turbine,0.05
+2090,0.9,0.9,0.9,2018.0,All Other,0.05
+2091,198.0,162,162,2002.0,Natural Gas Fired Combined Cycle,0.05
+2092,198.0,163,163,2002.0,Natural Gas Fired Combined Cycle,0.05
+2093,317.0,255,255,2002.0,Natural Gas Fired Combined Cycle,0.05
+2094,153.9,135,140,2003.0,Natural Gas Fired Combined Cycle,0.05
+2095,153.9,135,140,2003.0,Natural Gas Fired Combined Cycle,0.05
+2096,246.5,190,200,2003.0,Natural Gas Fired Combined Cycle,0.05
+2097,182.0,156.5,160.5,2003.0,Natural Gas Fired Combined Cycle,0.05
+2098,182.0,156.5,160.5,2003.0,Natural Gas Fired Combined Cycle,0.05
+2099,227.0,201,204,2003.0,Natural Gas Fired Combined Cycle,0.05
+2100,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2101,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2102,271.0,223,227,2003.0,Natural Gas Fired Combined Cycle,0.05
+2103,201.5,165,168,2006.0,Natural Gas Fired Combined Cycle,0.05
+2104,201.5,165,168,2006.0,Natural Gas Fired Combined Cycle,0.05
+2105,201.5,165,168,2006.0,Natural Gas Fired Combined Cycle,0.05
+2106,201.5,165,168,2006.0,Natural Gas Fired Combined Cycle,0.05
+2107,329.8,255,265,2006.0,Natural Gas Fired Combined Cycle,0.05
+2108,329.8,255,265,2006.0,Natural Gas Fired Combined Cycle,0.05
+2109,212.5,184,195,2002.0,Natural Gas Fired Combined Cycle,0.05
+2110,212.5,184,195,2002.0,Natural Gas Fired Combined Cycle,0.05
+2111,264.4,247,258,2002.0,Natural Gas Fired Combined Cycle,0.05
+2112,212.0,176,191,2002.0,Natural Gas Fired Combined Cycle,0.05
+2113,212.0,165,180,2002.0,Natural Gas Fired Combined Cycle,0.05
+2114,213.5,165,180,2002.0,Natural Gas Fired Combined Cycle,0.05
+2115,306.0,263.1,287.6,2002.0,Natural Gas Fired Combined Cycle,0.05
+2116,175.0,150.5,164.5,2006.0,Natural Gas Fired Combined Cycle,0.05
+2117,175.0,150.5,164.5,2006.0,Natural Gas Fired Combined Cycle,0.05
+2118,300.0,258,282,2006.0,Natural Gas Fired Combined Cycle,0.05
+2119,198.9,152.8,165.9,2009.0,Natural Gas Fired Combined Cycle,0.05
+2120,198.9,152.8,165.9,2009.0,Natural Gas Fired Combined Cycle,0.05
+2121,290.7,265.4,275.3,2009.0,Natural Gas Fired Combined Cycle,0.05
+2122,281.7,239.9,244,2004.0,Natural Gas Fired Combined Cycle,0.05
+2123,281.7,226.6,247.8,2004.0,Natural Gas Fired Combined Cycle,0.05
+2124,281.7,226.2,245.2,2004.0,Natural Gas Fired Combined Cycle,0.05
+2125,160.0,119.8,121.8,2004.0,Natural Gas Fired Combined Cycle,0.05
+2126,160.0,114.9,121.1,2004.0,Natural Gas Fired Combined Cycle,0.05
+2127,160.0,115.5,120.4,2004.0,Natural Gas Fired Combined Cycle,0.05
+2128,200.0,172,188,2005.0,Natural Gas Fired Combined Cycle,0.05
+2129,200.0,172,188,2005.0,Natural Gas Fired Combined Cycle,0.05
+2130,235.0,202.1,220.9,2005.0,Natural Gas Fired Combined Cycle,0.05
+2131,199.0,156,165,2003.0,Natural Gas Fired Combined Cycle,0.05
+2132,199.0,156,165,2003.0,Natural Gas Fired Combined Cycle,0.05
+2133,225.0,213,219,2003.0,Natural Gas Fired Combined Cycle,0.05
+2134,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2135,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2136,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2137,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2138,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2139,38.0,39,42,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2140,187.5,148,166,2002.0,Natural Gas Fired Combined Cycle,0.05
+2141,181.6,148,166,2002.0,Natural Gas Fired Combined Cycle,0.05
+2142,181.6,148,166,2002.0,Natural Gas Fired Combined Cycle,0.05
+2143,181.6,148,161,2002.0,Natural Gas Fired Combined Cycle,0.05
+2144,204.0,171,174,2002.0,Natural Gas Fired Combined Cycle,0.05
+2145,204.0,171,174,2002.0,Natural Gas Fired Combined Cycle,0.05
+2146,40.0,34,38,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2147,40.0,34,38,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2148,90.0,85,86,2003.0,Conventional Steam Coal,0.05
+2149,185.3,153,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+2150,185.3,153,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+2151,321.0,289,300,2003.0,Natural Gas Fired Combined Cycle,0.05
+2152,170.0,153.1,194,2004.0,Natural Gas Fired Combined Cycle,0.05
+2153,114.3,110.6,110.6,2004.0,Natural Gas Fired Combined Cycle,0.05
+2154,60.5,48,50.6,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2155,77.1,67,75,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2156,77.1,67,75,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2157,77.1,67,75,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2158,77.1,67,75,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2159,60.5,48,52,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2160,60.5,48,51.3,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2161,48.7,48.7,48.7,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2162,58.9,48,48.1,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2163,174.0,164.6,181.6,2003.0,Natural Gas Fired Combined Cycle,0.05
+2164,174.0,164.6,181.6,2003.0,Natural Gas Fired Combined Cycle,0.05
+2165,252.6,195.2,213.4,2003.0,Natural Gas Fired Combined Cycle,0.05
+2166,173.0,157.6,175.8,2003.0,Natural Gas Fired Combined Cycle,0.05
+2167,173.0,157.6,175.8,2003.0,Natural Gas Fired Combined Cycle,0.05
+2168,173.0,156.5,175.8,2003.0,Natural Gas Fired Combined Cycle,0.05
+2169,333.0,304.8,310.6,2003.0,Natural Gas Fired Combined Cycle,0.05
+2170,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2171,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2172,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2173,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2174,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2175,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2176,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2177,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2178,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2179,60.5,41,44,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2180,49.9,45,49.9,2014.0,Natural Gas Fired Combustion Turbine,0.05
+2181,44.0,33.6,34.6,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2182,49.9,46.7,46.7,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2183,49.9,47.6,47.6,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2184,49.9,48.2,48.2,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2185,49.9,45.6,45.6,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2186,49.9,46,46,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2187,29.4,25,28.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2188,29.4,25,28.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2189,29.4,25,28.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2190,29.4,25,28.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2191,31.9,28.1,27.7,1996.0,All Other,0.05
+2192,3.0,2.7,2.7,1999.0,Landfill Gas,0.05
+2193,3.0,2.7,2.7,1999.0,Landfill Gas,0.05
+2194,0.9,0.9,0.9,1999.0,Landfill Gas,0.05
+2195,0.9,0.9,0.9,1999.0,Landfill Gas,0.05
+2196,0.9,0.9,0.9,1999.0,Landfill Gas,0.05
+2197,0.9,0.9,0.9,1999.0,Landfill Gas,0.05
+2198,3.0,2.7,2.7,2000.0,Landfill Gas,0.05
+2199,43.4,37,41,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2200,43.4,37,41,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2201,43.4,37,41,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2202,43.4,37,41,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2203,43.4,37,41,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2204,47.0,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2205,47.0,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2206,47.0,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2207,198.9,130,144,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2208,198.9,134,148,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2209,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2210,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2211,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2212,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2213,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2214,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2215,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2216,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2217,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2218,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2219,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2220,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2221,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2222,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2223,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2224,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2225,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2226,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2227,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2228,5.7,5.7,5.7,2002.0,Natural Gas Internal Combustion Engine,0.05
+2229,168.0,175,185,2005.0,Natural Gas Fired Combined Cycle,0.05
+2230,168.0,173,183,2005.0,Natural Gas Fired Combined Cycle,0.05
+2231,168.0,156,161,2005.0,Natural Gas Fired Combined Cycle,0.05
+2232,185.0,174,184,2005.0,Natural Gas Fired Combined Cycle,0.05
+2233,90.0,87,89,2005.0,Natural Gas Fired Combined Cycle,0.05
+2234,230.0,157,167,2003.0,Natural Gas Fired Combined Cycle,0.05
+2235,234.0,160,170,2003.0,Natural Gas Fired Combined Cycle,0.05
+2236,234.0,160,170,2003.0,Natural Gas Fired Combined Cycle,0.05
+2237,178.0,157,170,2004.0,Natural Gas Fired Combined Cycle,0.05
+2238,178.0,157,170,2004.0,Natural Gas Fired Combined Cycle,0.05
+2239,332.4,236,260,2004.0,Natural Gas Fired Combined Cycle,0.05
+2240,46.1,45.9,48.7,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2241,46.1,45.9,48.7,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2242,133.0,120,129,2008.0,Natural Gas Fired Combined Cycle,0.05
+2243,186.0,150,207,2008.0,Natural Gas Fired Combined Cycle,0.05
+2244,172.8,164,196.9,2005.0,Natural Gas Fired Combustion Turbine,0.05
+2245,126.1,126.1,126.1,2013.0,Natural Gas Fired Combined Cycle,0.05
+2246,45.0,45,45,2003.0,Natural Gas Fired Combined Cycle,0.05
+2247,45.0,45,45,2003.0,Natural Gas Fired Combined Cycle,0.05
+2248,45.0,45,45,2003.0,Natural Gas Fired Combined Cycle,0.05
+2249,45.0,45,45,2003.0,Natural Gas Fired Combined Cycle,0.05
+2250,115.7,107,107,2006.0,Conventional Steam Coal,0.05
+2251,0.8,0.7,0.7,1993.0,Landfill Gas,0.05
+2252,0.8,0.7,0.7,1993.0,Landfill Gas,0.05
+2253,0.8,0.7,0.7,1993.0,Landfill Gas,0.05
+2254,0.8,0.7,0.7,1993.0,Landfill Gas,0.05
+2255,0.8,0.7,0.7,1996.0,Landfill Gas,0.05
+2256,0.8,0.7,0.7,1996.0,Landfill Gas,0.05
+2257,0.8,0.7,0.7,1996.0,Landfill Gas,0.05
+2258,0.8,0.7,0.7,1996.0,Landfill Gas,0.05
+2259,3.0,2.8,2.8,1999.0,Landfill Gas,0.05
+2260,3.0,2.8,2.8,1999.0,Landfill Gas,0.05
+2261,3.0,2.8,2.8,1999.0,Landfill Gas,0.05
+2262,159.5,144.3,150.2,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2263,49.0,46.3,48.3,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2264,49.0,46.1,47.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2265,45.0,45,45,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2266,45.0,45,45,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2267,45.0,45,45,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2268,47.3,44,44.5,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2269,47.3,45,45,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2270,192.0,164,180,2002.0,Natural Gas Fired Combined Cycle,0.05
+2271,126.3,82,85,2002.0,Natural Gas Fired Combined Cycle,0.05
+2272,175.1,145,157,2004.0,Natural Gas Fired Combined Cycle,0.05
+2273,175.1,145,157,2004.0,Natural Gas Fired Combined Cycle,0.05
+2274,334.9,290,301,2004.0,Natural Gas Fired Combined Cycle,0.05
+2275,197.2,157,170,2004.0,Natural Gas Fired Combined Cycle,0.05
+2276,197.2,157,170,2004.0,Natural Gas Fired Combined Cycle,0.05
+2277,270.3,246,260,2004.0,Natural Gas Fired Combined Cycle,0.05
+2278,47.0,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2279,51.0,45.4,46.8,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2280,409.5,345,376,2009.0,Natural Gas Fired Combined Cycle,0.05
+2281,47.0,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2282,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2283,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2284,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2285,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2286,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2287,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2288,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2289,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2290,6.1,6,6,2006.0,Natural Gas Internal Combustion Engine,0.05
+2291,0.8,0.7,0.7,2004.0,Landfill Gas,0.05
+2292,0.8,0.7,0.7,2004.0,Landfill Gas,0.05
+2293,18.0,17.4,18,2003.0,Wood/Wood Waste Biomass,0.05
+2294,3.3,3.3,3.3,2000.0,Conventional Hydroelectric,0.05
+2295,167.3,156.2,167.3,2012.0,Natural Gas Fired Combined Cycle,0.05
+2296,84.4,82.1,87.5,2003.0,Natural Gas Fired Combined Cycle,0.05
+2297,84.4,81.8,87.4,2003.0,Natural Gas Fired Combined Cycle,0.05
+2298,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2299,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2300,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2301,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2302,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2303,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2304,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2305,11.2,9.5,11,2001.0,Natural Gas Fired Combustion Turbine,0.05
+2306,60.5,40,43,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2307,47.0,46.1,46.1,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2308,190.0,171,178.6,2006.0,Natural Gas Fired Combined Cycle,0.05
+2309,170.0,166,178,2006.0,Natural Gas Fired Combined Cycle,0.05
+2310,170.0,189,201,2006.0,Natural Gas Fired Combined Cycle,0.05
+2311,40.0,31,40,2005.0,Natural Gas Fired Combined Cycle,0.05
+2312,27.0,27,27,2005.0,Natural Gas Fired Combined Cycle,0.05
+2313,58.3,46,46,2000.0,Geothermal,0.05
+2314,11.5,10.9,10.9,2000.0,Geothermal,0.05
+2315,165.0,170,170.5,2005.0,Natural Gas Fired Combined Cycle,0.05
+2316,165.0,170,170.5,2005.0,Natural Gas Fired Combined Cycle,0.05
+2317,229.0,222,229,2006.0,Natural Gas Fired Combined Cycle,0.05
+2318,6.5,4.3,6.5,2002.0,Geothermal,0.05
+2319,15.0,10,15,2018.0,Geothermal,0.05
+2320,50.0,50,50,2005.0,Natural Gas Fired Combined Cycle,0.05
+2321,50.0,50,50,2005.0,Natural Gas Fired Combined Cycle,0.05
+2322,54.0,47.8,47.8,2005.0,Natural Gas Fired Combined Cycle,0.05
+2323,2.2,2,2,1985.0,Other Waste Biomass,0.05
+2324,2.2,2,2,1985.0,Other Waste Biomass,0.05
+2325,2.2,2,2,1985.0,Other Waste Biomass,0.05
+2326,5.9,5.4,5.9,1987.0,Natural Gas Fired Combustion Turbine,0.05
+2327,5.9,5.4,5.9,1987.0,Natural Gas Fired Combustion Turbine,0.05
+2328,40.0,42,42,2005.0,Natural Gas Fired Combined Cycle,0.05
+2329,40.0,42,42,2005.0,Natural Gas Fired Combined Cycle,0.05
+2330,50.0,50,50,2005.0,Natural Gas Fired Combined Cycle,0.05
+2331,198.9,161,165,2005.0,Natural Gas Fired Combined Cycle,0.05
+2332,188.7,140,140,2005.0,Natural Gas Fired Combined Cycle,0.05
+2333,57.4,45,45,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2334,94.9,84,84,2006.0,Natural Gas Fired Combined Cycle,0.05
+2335,94.9,84,84,2006.0,Natural Gas Fired Combined Cycle,0.05
+2336,110.8,101,101,2006.0,Natural Gas Fired Combined Cycle,0.05
+2337,2.8,2.8,2.8,1995.0,Natural Gas Internal Combustion Engine,0.05
+2338,2.8,2.8,2.8,1985.0,Natural Gas Internal Combustion Engine,0.05
+2339,2.8,2.8,2.8,1985.0,Natural Gas Internal Combustion Engine,0.05
+2340,4.0,2.5,2.5,2000.0,Other Gases,0.05
+2341,3.7,3,3,2000.0,Other Gases,0.05
+2342,0.3,0.3,0.3,2012.0,Other Gases,0.05
+2343,172.0,135,143,2005.0,Natural Gas Fired Combined Cycle,0.05
+2344,172.0,135,143,2005.0,Natural Gas Fired Combined Cycle,0.05
+2345,305.0,254,269,2006.0,Natural Gas Fired Combined Cycle,0.05
+2346,1.0,1,1,1994.0,Conventional Hydroelectric,0.05
+2347,1.0,1,1,2000.0,Other Waste Biomass,0.05
+2348,1.0,1,1,2000.0,Other Waste Biomass,0.05
+2349,1.0,1,1,2000.0,Other Waste Biomass,0.05
+2350,60.5,50,50,2006.0,Natural Gas Fired Combustion Turbine,0.05
+2351,60.5,50,50,2006.0,Natural Gas Fired Combustion Turbine,0.05
+2352,50.0,50,50,2006.0,Natural Gas Fired Combustion Turbine,0.05
+2353,50.0,50,50,2006.0,Natural Gas Fired Combustion Turbine,0.05
+2354,48.0,48,48,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2355,48.0,48,48,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2356,10.0,10,10,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2357,10.0,10,10,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2358,10.0,10,10,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2359,10.0,10,10,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2360,6.4,5.9,6.4,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2361,31.8,31.8,31.8,1995.0,All Other,0.05
+2362,65.0,65,65,2004.0,Natural Gas Fired Combined Cycle,0.05
+2363,75.0,65,75,2004.0,Natural Gas Fired Combined Cycle,0.05
+2364,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2365,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2366,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2367,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2368,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2369,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2370,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2371,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2372,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2373,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2374,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2375,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2376,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2377,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2378,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2379,2.9,2.8,2.8,2001.0,Natural Gas Internal Combustion Engine,0.05
+2380,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2381,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2382,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2383,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2384,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2385,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2386,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2387,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2388,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2389,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2390,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2391,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2392,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2393,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2394,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2395,3.1,3.1,3.1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2396,36.0,22,24,1996.0,Wood/Wood Waste Biomass,0.05
+2397,242.0,218.4,219.2,2008.0,Conventional Steam Coal,0.05
+2398,312.0,256.2,267.9,2007.0,Natural Gas Fired Combined Cycle,0.05
+2399,171.0,136,138.5,2007.0,Natural Gas Fired Combined Cycle,0.05
+2400,9.0,8.3,6.6,2002.0,Natural Gas Fired Combined Cycle,0.05
+2401,53.0,47,47,2005.0,Natural Gas Fired Combustion Turbine,0.05
+2402,53.0,47,47,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2403,203.0,169,174,2007.0,Natural Gas Fired Combined Cycle,0.05
+2404,203.0,169,174,2007.0,Natural Gas Fired Combined Cycle,0.05
+2405,206.0,178,183.2,2014.0,Natural Gas Fired Combined Cycle,0.05
+2406,206.0,178,183.2,2014.0,Natural Gas Fired Combined Cycle,0.05
+2407,251.0,209,215,2007.0,Natural Gas Fired Combined Cycle,0.05
+2408,316.0,273,281,2014.0,Natural Gas Fired Combined Cycle,0.05
+2409,60.5,48,48,2005.0,Natural Gas Fired Combustion Turbine,0.05
+2410,60.5,48,48,2005.0,Natural Gas Fired Combustion Turbine,0.05
+2411,40.0,36.8,39,2006.0,Natural Gas Fired Combustion Turbine,0.05
+2412,40.0,36.8,39,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2413,5.5,5.3,5.3,1995.0,Other Gases,0.05
+2414,42.0,38,42,2007.0,Natural Gas Fired Combined Cycle,0.05
+2415,42.0,38,42,2007.0,Natural Gas Fired Combined Cycle,0.05
+2416,80.0,75,78,2007.0,Natural Gas Fired Combined Cycle,0.05
+2417,48.0,32.9,37,2005.0,Other Gases,0.05
+2418,48.0,32.9,37,2005.0,Other Gases,0.05
+2419,48.0,32.9,36.6,2005.0,Other Gases,0.05
+2420,18.0,10,12.2,2008.0,Geothermal,0.05
+2421,95.0,90,91,2008.0,Conventional Steam Coal,0.05
+2422,15.0,10,15,2005.0,Geothermal,0.05
+2423,15.0,10,15,2005.0,Geothermal,0.05
+2424,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2425,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2426,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2427,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2428,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2429,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2430,1.2,1.2,1.2,2005.0,Natural Gas Internal Combustion Engine,0.05
+2431,41.0,21,21,2005.0,Natural Gas Fired Combined Cycle,0.05
+2432,8.0,7,7,2005.0,Natural Gas Fired Combined Cycle,0.05
+2433,75.7,68.5,40,2007.0,Solar Thermal without Energy Storage,0.05
+2434,28.0,24.6,24.7,2007.0,Wood/Wood Waste Biomass,0.05
+2435,1.0,1,1,2006.0,Landfill Gas,0.05
+2436,1.0,1,1,2006.0,Landfill Gas,0.05
+2437,1.0,1,1,2006.0,Landfill Gas,0.05
+2438,210.0,135,155,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2439,210.0,135,155,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2440,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+2441,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+2442,200.0,185,200,2013.0,Natural Gas Fired Combined Cycle,0.05
+2443,200.0,185,200,2013.0,Natural Gas Fired Combined Cycle,0.05
+2444,255.0,245,248,2013.0,Natural Gas Fired Combined Cycle,0.05
+2445,13.4,9,9,2010.0,Wood/Wood Waste Biomass,0.05
+2446,49.8,49,49,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2447,49.8,46,46,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2448,49.8,49,49,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2449,49.8,49,49,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2450,49.8,47,47,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2451,203.2,177,181.4,2009.0,Natural Gas Fired Combined Cycle,0.05
+2452,203.2,177,181.4,2009.0,Natural Gas Fired Combined Cycle,0.05
+2453,213.3,209.4,223,2009.0,Natural Gas Fired Combined Cycle,0.05
+2454,60.5,45,45,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2455,60.5,45,45,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2456,1.7,0.8,0.8,2006.0,Conventional Hydroelectric,0.05
+2457,7.5,7.5,7.5,2004.0,Conventional Hydroelectric,0.05
+2458,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2459,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2460,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2461,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2462,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2463,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2464,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2465,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2466,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2467,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2468,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2469,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2470,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2471,8.4,7.9,8.4,2005.0,Natural Gas Internal Combustion Engine,0.05
+2472,15.2,11,12.5,2004.0,Natural Gas Fired Combustion Turbine,0.05
+2473,15.2,11,12.5,2004.0,Natural Gas Fired Combustion Turbine,0.05
+2474,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2475,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2476,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2477,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2478,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2479,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2480,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2481,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2482,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2483,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2484,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2485,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2486,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2487,8.4,8.3,8.3,2008.0,Natural Gas Internal Combustion Engine,0.05
+2488,0.8,0.8,0.8,2008.0,Landfill Gas,0.05
+2489,0.8,0.8,0.8,2008.0,Landfill Gas,0.05
+2490,0.8,0.8,0.8,2008.0,Landfill Gas,0.05
+2491,0.8,0.8,0.8,2008.0,Landfill Gas,0.05
+2492,181.5,167,181,2010.0,Natural Gas Fired Combined Cycle,0.05
+2493,181.5,167,181,2010.0,Natural Gas Fired Combined Cycle,0.05
+2494,349.4,306,306,2010.0,Natural Gas Fired Combined Cycle,0.05
+2495,13.5,9,13.5,2007.0,Geothermal,0.05
+2496,15.0,10,15,2008.0,Geothermal,0.05
+2497,15.0,10,15,2008.0,Geothermal,0.05
+2498,0.8,0.8,0.8,2006.0,Landfill Gas,0.05
+2499,0.8,0.8,0.8,2006.0,Landfill Gas,0.05
+2500,1.6,1.5,1.5,2006.0,Landfill Gas,0.05
+2501,60.5,47.5,48.5,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2502,60.5,47.5,48.5,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2503,116.0,100,103,2010.0,Conventional Steam Coal,0.05
+2504,483.7,380,405,2011.0,Conventional Steam Coal,0.05
+2505,4.6,4.4,4.2,2007.0,Conventional Hydroelectric,0.05
+2506,27.2,22.2,22.2,2008.0,Wood/Wood Waste Biomass,0.05
+2507,69.9,55.6,60,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2508,69.9,55.6,60,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2509,6.1,6.1,6.1,1982.0,Conventional Hydroelectric,0.05
+2510,46.0,46,46.0,1985.0,Conventional Hydroelectric,0.05
+2511,46.0,46,46.0,1985.0,Conventional Hydroelectric,0.05
+2512,2.2,2.2,2.2,1983.0,Conventional Hydroelectric,0.05
+2513,2.3,2.3,2.3,1985.0,Conventional Hydroelectric,0.05
+2514,26.8,26.8,26.8,1987.0,Conventional Hydroelectric,0.05
+2515,12.5,10.5,10.5,2008.0,Wood/Wood Waste Biomass,0.05
+2516,12.5,10.5,10.5,2008.0,Wood/Wood Waste Biomass,0.05
+2517,21.0,10,10,2007.0,Wood/Wood Waste Biomass,0.05
+2518,108.0,97,103,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2519,108.0,97,103,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2520,108.0,97,103,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2521,108.0,97,103,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2522,140.0,147.7,140,2013.0,Solar Thermal with Energy Storage,0.05
+2523,140.0,147.7,140,2013.0,Solar Thermal with Energy Storage,0.05
+2524,16.0,10.7,16,2009.0,Geothermal,0.05
+2525,16.0,10.7,16,2009.0,Geothermal,0.05
+2526,16.0,10.7,16,2009.0,Geothermal,0.05
+2527,16.0,10.7,16,2009.0,Geothermal,0.05
+2528,1.6,1.5,1.5,2009.0,Landfill Gas,0.05
+2529,1.6,1.5,1.5,2009.0,Landfill Gas,0.05
+2530,1.6,1.5,1.5,2009.0,Landfill Gas,0.05
+2531,1.2,1.2,1.2,2014.0,Conventional Hydroelectric,0.05
+2532,1.2,1.2,1.2,2014.0,Conventional Hydroelectric,0.05
+2533,1.2,1.2,1.2,2014.0,Conventional Hydroelectric,0.05
+2534,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2535,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2536,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2537,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2538,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2539,1.9,1.8,1.8,2008.0,Landfill Gas,0.05
+2540,1.9,1.8,1.8,2009.0,Landfill Gas,0.05
+2541,1.9,1.8,1.8,2009.0,Landfill Gas,0.05
+2542,4.6,4,4,2010.0,Landfill Gas,0.05
+2543,4.6,4,4,2010.0,Landfill Gas,0.05
+2544,67.7,44.1,48.1,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2545,67.7,44.1,48.1,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2546,67.7,44.1,48.1,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2547,59.0,49.1,49.1,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2548,59.0,49.1,49.1,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2549,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2550,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2551,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2552,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2553,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2554,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2555,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2556,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2557,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2558,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2559,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2560,60.5,43.4,47.7,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2561,21.3,13,14.3,2009.0,Geothermal,0.05
+2562,21.3,13,14.3,2009.0,Geothermal,0.05
+2563,21.3,13,14.3,2009.0,Geothermal,0.05
+2564,7.5,8,8,2010.0,Conventional Hydroelectric,0.05
+2565,7.5,8,8,2010.0,Conventional Hydroelectric,0.05
+2566,40.0,37,37,2012.0,Natural Gas Fired Combined Cycle,0.05
+2567,20.0,20,20,2012.0,Natural Gas Fired Combined Cycle,0.05
+2568,40.0,37,37,2012.0,Natural Gas Fired Combined Cycle,0.05
+2569,20.0,20,20,2012.0,Natural Gas Fired Combined Cycle,0.05
+2570,40.0,37,37,2012.0,Natural Gas Fired Combined Cycle,0.05
+2571,40.0,37,37,2012.0,Natural Gas Fired Combined Cycle,0.05
+2572,40.0,40,40,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2573,100.0,90,90,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2574,100.0,90,90,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2575,49.9,43.5,48.9,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2576,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2577,1.6,1.6,1.6,2014.0,Landfill Gas,0.05
+2578,1.6,1.6,1.6,2014.0,Landfill Gas,0.05
+2579,1.6,1.6,1.6,2014.0,Landfill Gas,0.05
+2580,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2581,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2582,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2583,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2584,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2585,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2586,0.8,0.8,0.8,2009.0,Landfill Gas,0.05
+2587,1.6,1.6,1.6,2014.0,Landfill Gas,0.05
+2588,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2589,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2590,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2591,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2592,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2593,0.8,0.8,0.8,2010.0,Landfill Gas,0.05
+2594,50.0,49.4,49.4,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2595,50.0,48,48,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2596,50.0,48,48,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2597,50.0,49.4,49.4,2011.0,Natural Gas Fired Combustion Turbine,0.05
+2598,187.0,176.9,197.1,2012.0,Natural Gas Fired Combined Cycle,0.05
+2599,131.5,122.8,122.8,2012.0,Natural Gas Fired Combined Cycle,0.05
+2600,1.4,1.4,1.4,2011.0,Other Natural Gas,0.05
+2601,0.2,0.2,0.2,2011.0,Other Natural Gas,0.05
+2602,1.4,1.4,1.4,2011.0,Other Natural Gas,0.05
+2603,133.4,133.4,133.4,2013.0,Solar Thermal without Energy Storage,0.05
+2604,133.0,133,133,2013.0,Solar Thermal without Energy Storage,0.05
+2605,133.4,133.4,133.4,2013.0,Solar Thermal without Energy Storage,0.05
+2606,64.0,55,55,2009.0,Wood/Wood Waste Biomass,0.05
+2607,1.1,1,1,2008.0,Landfill Gas,0.05
+2608,1.4,1.4,1.4,2010.0,Landfill Gas,0.05
+2609,1.1,1,1,2006.0,Landfill Gas,0.05
+2610,1.1,1,1,2010.0,Landfill Gas,0.05
+2611,13.5,13.5,13.5,2007.0,Natural Gas Fired Combined Cycle,0.05
+2612,5.5,5.5,5.5,2007.0,Natural Gas Fired Combined Cycle,0.05
+2613,1.9,1.8,1.8,2009.0,Landfill Gas,0.05
+2614,1.6,1.5,1.5,2013.0,Landfill Gas,0.05
+2615,4.5,3,4.5,2009.0,All Other,0.05
+2616,4.6,3.3,3.6,2010.0,Landfill Gas,0.05
+2617,4.6,3.3,3.6,2010.0,Landfill Gas,0.05
+2618,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2619,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2620,11.8,10.1,14.3,2009.0,Geothermal,0.05
+2621,11.8,10.1,14.3,2009.0,Geothermal,0.05
+2622,207.0,191.9,201.6,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2623,207.0,191.1,200.7,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2624,207.0,190.4,200.3,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2625,207.0,191.8,202.2,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2626,125.0,110,110,2015.0,Solar Thermal with Energy Storage,0.05
+2627,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2628,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2629,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2630,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2631,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2632,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2633,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2634,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2635,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2636,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2637,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2638,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2639,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2640,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2641,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2642,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2643,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2644,0.3,0.3,0.3,2009.0,Landfill Gas,0.05
+2645,140.0,137.5,100,2014.0,Solar Thermal without Energy Storage,0.05
+2646,140.0,137.5,100,2014.0,Solar Thermal without Energy Storage,0.05
+2647,1.1,1.1,1.1,2009.0,Other Waste Biomass,0.05
+2648,1.1,1.1,1.1,2009.0,Other Waste Biomass,0.05
+2649,0.8,0.8,0.8,2008.0,Other Waste Biomass,0.05
+2650,0.8,0.8,0.8,2008.0,Other Waste Biomass,0.05
+2651,0.8,0.8,0.8,2008.0,Other Waste Biomass,0.05
+2652,0.9,0.9,0.9,2011.0,Other Waste Biomass,0.05
+2653,0.9,0.9,0.9,2011.0,Other Waste Biomass,0.05
+2654,4.3,4,4,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2655,4.3,4,4,2009.0,Natural Gas Fired Combustion Turbine,0.05
+2656,14.0,14,14,2013.0,Geothermal,0.05
+2657,2.2,2.2,2.2,1987.0,Conventional Hydroelectric,0.05
+2658,2.2,2.2,2.2,1987.0,Conventional Hydroelectric,0.05
+2659,16.0,10.6,16,2010.0,Geothermal,0.05
+2660,7.5,5,7.5,2010.0,Geothermal,0.05
+2661,0.8,0.7,0.7,2009.0,Other Waste Biomass,0.05
+2662,0.8,0.7,0.7,2009.0,Other Waste Biomass,0.05
+2663,125.0,125,125,2014.0,Solar Thermal without Energy Storage,0.05
+2664,125.0,125,125,2013.0,Solar Thermal without Energy Storage,0.05
+2665,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2666,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2667,1.5,1.5,1.5,2011.0,Other Waste Biomass,0.05
+2668,1.5,1.5,1.5,2012.0,Other Waste Biomass,0.05
+2669,1.5,1.5,1.5,2012.0,Other Waste Biomass,0.05
+2670,5.0,3.3,1.1,2010.0,Conventional Hydroelectric,0.05
+2671,20.0,13.3,20,2012.0,Geothermal,0.05
+2672,20.0,13.3,20,2012.0,Geothermal,0.05
+2673,12.0,8,12,2012.0,Geothermal,0.05
+2674,18.0,12,18,2015.0,Geothermal,0.05
+2675,18.0,12,18,2015.0,Geothermal,0.05
+2676,12.0,8,12,2015.0,Geothermal,0.05
+2677,16.0,10.7,16,2012.0,Geothermal,0.05
+2678,16.0,10.7,16,2012.0,Geothermal,0.05
+2679,11.8,6,9,2012.0,Geothermal,0.05
+2680,19.8,19.8,19.8,2011.0,Wood/Wood Waste Biomass,0.05
+2681,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2682,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2683,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2684,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2685,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2686,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2687,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2688,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2689,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2690,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2691,0.1,0.1,0.1,2010.0,Other Waste Biomass,0.05
+2692,55.0,49.9,49.9,2012.0,Geothermal,0.05
+2693,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2694,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2695,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2696,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2697,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2698,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2699,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2700,100.0,100,100,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2701,49.9,49.9,49.9,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2702,49.9,49.9,49.9,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2703,49.9,49.9,49.9,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2704,49.9,49.9,49.9,2012.0,Natural Gas Fired Combustion Turbine,0.05
+2705,6.9,6.9,6.9,2006.0,Conventional Hydroelectric,0.05
+2706,6.9,6.9,6.9,2006.0,Conventional Hydroelectric,0.05
+2707,100.0,97,97,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2708,100.0,97,97,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2709,100.0,97,97,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2710,100.0,97,97,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2711,100.0,97,97,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2712,1.4,1.4,1.4,2013.0,Other Natural Gas,0.05
+2713,2.9,2.6,2,1983.0,Conventional Hydroelectric,0.05
+2714,131.8,106,111.3,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2715,131.8,106,112.7,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2716,131.8,106,112,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2717,0.8,0.8,0.8,1997.0,Landfill Gas,0.05
+2718,0.8,0.8,0.8,1997.0,Landfill Gas,0.05
+2719,49.0,49,49,2007.0,Natural Gas Fired Combined Cycle,0.05
+2720,12.5,12.5,12.5,2012.0,Natural Gas Fired Combined Cycle,0.05
+2721,3.5,3,3.5,1995.0,Natural Gas Fired Combustion Turbine,0.05
+2722,2.1,2.1,2.1,2008.0,Natural Gas Internal Combustion Engine,0.05
+2723,2.1,2.1,2.1,2008.0,Natural Gas Internal Combustion Engine,0.05
+2724,15.0,13.5,13.5,2001.0,Natural Gas Fired Combined Cycle,0.05
+2725,15.0,13.5,13.5,2001.0,Natural Gas Fired Combined Cycle,0.05
+2726,3.0,3,3,2001.0,Natural Gas Fired Combined Cycle,0.05
+2727,29.0,29,29,1986.0,Natural Gas Fired Combustion Turbine,0.05
+2728,5.5,5.2,5.5,2010.0,Natural Gas Fired Combined Cycle,0.05
+2729,1.0,0.5,1,2010.0,Natural Gas Fired Combined Cycle,0.05
+2730,7.5,6.5,6.5,2010.0,All Other,0.05
+2731,5.3,5.3,5.3,2011.0,Conventional Hydroelectric,0.05
+2732,7.7,7.7,7.7,2011.0,Conventional Hydroelectric,0.05
+2733,4.6,3.8,3.8,2011.0,Other Waste Biomass,0.05
+2734,5.7,5.7,5.7,2004.0,Other Gases,0.05
+2735,40.0,37,37,2014.0,Natural Gas Fired Combined Cycle,0.05
+2736,40.0,37,37,2014.0,Natural Gas Fired Combined Cycle,0.05
+2737,20.0,20,20,2014.0,Natural Gas Fired Combined Cycle,0.05
+2738,40.0,37,37,2014.0,Natural Gas Fired Combustion Turbine,0.05
+2739,1.0,1,1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2740,1.0,1,1,2001.0,Natural Gas Internal Combustion Engine,0.05
+2741,21.0,21,21,2012.0,Hydroelectric Pumped Storage,0.05
+2742,21.0,21,21,2012.0,Hydroelectric Pumped Storage,0.05
+2743,3.0,2.8,2.8,2011.0,Other Natural Gas,0.05
+2744,7.5,7.9,7.9,2011.0,Conventional Hydroelectric,0.05
+2745,1.5,1.4,1.4,2012.0,Other Waste Biomass,0.05
+2746,2.3,2,2,2013.0,Landfill Gas,0.05
+2747,1.4,1.4,1.4,2010.0,Other Natural Gas,0.05
+2748,1.1,1,1,2011.0,Other Natural Gas,0.05
+2749,1.1,1,1,2011.0,Other Natural Gas,0.05
+2750,1.1,1,1,2011.0,Other Natural Gas,0.05
+2751,0.8,0.8,0.8,2010.0,Other Natural Gas,0.05
+2752,0.4,0.4,0.4,2010.0,Other Natural Gas,0.05
+2753,1.4,1.4,1.4,2010.0,Landfill Gas,0.05
+2754,1.4,1.4,1.4,2010.0,Landfill Gas,0.05
+2755,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+2756,1.6,1.5,1.5,2007.0,Landfill Gas,0.05
+2757,1.6,1.5,1.5,2009.0,Landfill Gas,0.05
+2758,2.0,1.9,1.9,2004.0,Natural Gas Internal Combustion Engine,0.05
+2759,2.0,1.9,1.9,2004.0,Natural Gas Internal Combustion Engine,0.05
+2760,2.0,1.9,1.9,2006.0,Natural Gas Internal Combustion Engine,0.05
+2761,2.0,1.9,1.9,2007.0,Natural Gas Internal Combustion Engine,0.05
+2762,2.0,1.9,1.9,2007.0,Natural Gas Internal Combustion Engine,0.05
+2763,198.0,195,195,2013.0,Natural Gas Fired Combined Cycle,0.05
+2764,70.7,60,60,2013.0,Natural Gas Fired Combined Cycle,0.05
+2765,198.0,195,195,2013.0,Natural Gas Fired Combined Cycle,0.05
+2766,70.7,60,60,2013.0,Natural Gas Fired Combined Cycle,0.05
+2767,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2768,1.6,1.6,1.6,2012.0,Landfill Gas,0.05
+2769,1.6,1.6,1.6,2011.0,Landfill Gas,0.05
+2770,2.0,2,2,1978.0,Natural Gas Steam Turbine,0.05
+2771,4.5,4.5,4.5,2007.0,Wood/Wood Waste Biomass,0.05
+2772,2.1,1.9,1.9,2002.0,Other Waste Biomass,0.05
+2773,3.0,2.5,2.8,2010.0,Natural Gas Internal Combustion Engine,0.05
+2774,3.0,2.5,2.8,2010.0,Natural Gas Internal Combustion Engine,0.05
+2775,185.0,162,181,2012.0,Natural Gas Fired Combined Cycle,0.05
+2776,103.9,95,96,2012.0,Natural Gas Fired Combined Cycle,0.05
+2777,0.8,0.8,0.8,2012.0,Landfill Gas,0.05
+2778,0.8,0.8,0.8,2012.0,Landfill Gas,0.05
+2779,0.8,0.8,0.8,2004.0,Landfill Gas,0.05
+2780,0.8,0.8,0.8,2004.0,Landfill Gas,0.05
+2781,0.8,0.8,0.8,2004.0,Landfill Gas,0.05
+2782,0.8,0.8,0.8,2012.0,Landfill Gas,0.05
+2783,6.3,6.8,6.8,2012.0,Landfill Gas,0.05
+2784,6.3,6.8,6.8,2012.0,Landfill Gas,0.05
+2785,6.3,6.8,6.8,2012.0,Landfill Gas,0.05
+2786,6.3,6.8,6.8,2012.0,Landfill Gas,0.05
+2787,10.5,10,10,2012.0,Landfill Gas,0.05
+2788,11.0,5.9,9.5,2012.0,Geothermal,0.05
+2789,11.0,5.9,9.5,2012.0,Geothermal,0.05
+2790,11.0,5.9,9.5,2012.0,Geothermal,0.05
+2791,0.5,0.6,0.6,2007.0,Other Waste Biomass,0.05
+2792,0.5,0.6,0.6,2007.0,Other Waste Biomass,0.05
+2793,5.2,4.1,4.7,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2794,5.2,4.1,4.7,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2795,19.0,12,13,2002.0,Natural Gas Fired Combined Cycle,0.05
+2796,2.0,1,1,2002.0,Natural Gas Fired Combined Cycle,0.05
+2797,4.5,4.9,4.9,2002.0,Natural Gas Fired Combustion Turbine,0.05
+2798,18.8,13.4,13.4,2007.0,Wood/Wood Waste Biomass,0.05
+2799,48.5,35,48.5,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2800,27.0,17,23,2013.0,Petroleum Liquids,0.05
+2801,0.2,0.2,0.2,2012.0,Landfill Gas,0.05
+2802,0.2,0.2,0.2,2012.0,Landfill Gas,0.05
+2803,0.2,0.2,0.2,2012.0,Landfill Gas,0.05
+2804,0.2,0.2,0.2,2012.0,Landfill Gas,0.05
+2805,0.2,0.2,0.2,2012.0,Landfill Gas,0.05
+2806,1.6,1.5,1.5,2012.0,Other Waste Biomass,0.05
+2807,1.6,1.5,1.5,2012.0,Other Waste Biomass,0.05
+2808,0.2,0.2,0.2,2012.0,Other Waste Biomass,0.05
+2809,0.2,0.2,0.2,2012.0,Other Waste Biomass,0.05
+2810,0.2,0.2,0.2,2012.0,Other Waste Biomass,0.05
+2811,0.2,0.2,0.2,2012.0,Other Waste Biomass,0.05
+2812,0.2,0.2,0.2,2012.0,Other Waste Biomass,0.05
+2813,5.0,4.4,4.6,2004.0,Natural Gas Fired Combustion Turbine,0.05
+2814,1.6,1.6,1.6,2012.0,Other Waste Biomass,0.05
+2815,1.6,1.6,1.6,2012.0,Other Waste Biomass,0.05
+2816,4.6,4.3,4.3,2010.0,Natural Gas Fired Combustion Turbine,0.05
+2817,4.8,5.2,5.2,1996.0,Natural Gas Fired Combined Cycle,0.05
+2818,4.8,5.5,5.5,1996.0,Natural Gas Fired Combined Cycle,0.05
+2819,3.8,1.8,1.8,1996.0,Natural Gas Fired Combined Cycle,0.05
+2820,9.2,9.2,6.9,2006.0,Natural Gas Fired Combined Cycle,0.05
+2821,4.0,3.2,3.2,1993.0,All Other,0.05
+2822,1.5,1.2,1.2,2006.0,Natural Gas Internal Combustion Engine,0.05
+2823,1.5,1.2,1.2,2006.0,Natural Gas Internal Combustion Engine,0.05
+2824,1.5,1.2,1.2,2006.0,Natural Gas Internal Combustion Engine,0.05
+2825,4.6,4.2,4.2,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2826,4.6,4.2,4.2,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2827,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2828,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2829,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2830,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2831,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2832,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2833,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2834,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2835,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2836,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2837,18.8,18.7,18.7,2014.0,Natural Gas Internal Combustion Engine,0.05
+2838,18.8,18.7,18.7,2015.0,Natural Gas Internal Combustion Engine,0.05
+2839,42.3,41,41.3,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2840,1.0,1,1,2012.0,Other Natural Gas,0.05
+2841,1.1,1,1,2012.0,Other Natural Gas,0.05
+2842,1.1,1,1,2012.0,Other Natural Gas,0.05
+2843,1.1,1,1,2012.0,Other Natural Gas,0.05
+2844,1.1,1,1,2012.0,Other Natural Gas,0.05
+2845,1.1,1,1,2012.0,Other Natural Gas,0.05
+2846,1.1,1,1,2012.0,Other Natural Gas,0.05
+2847,1.1,1,1,2012.0,Other Natural Gas,0.05
+2848,16.0,10,10,2013.0,Geothermal,0.05
+2849,16.0,10,10,2013.0,Geothermal,0.05
+2850,16.0,10,10,2013.0,Geothermal,0.05
+2851,1.6,1.5,1.5,2013.0,Landfill Gas,0.05
+2852,1.5,1.5,1.5,2013.0,Landfill Gas,0.05
+2853,1.6,1.6,1.6,2012.0,Other Waste Biomass,0.05
+2854,1.6,1.6,1.6,2012.0,Other Waste Biomass,0.05
+2855,1.6,1.6,1.6,2012.0,Other Waste Biomass,0.05
+2856,1.1,1.1,1.1,2013.0,Conventional Hydroelectric,0.05
+2857,2.0,2,2,2013.0,Conventional Hydroelectric,0.05
+2858,1.4,1.4,1.4,2013.0,Landfill Gas,0.05
+2859,4.6,4,4,2014.0,Landfill Gas,0.05
+2860,4.6,4,4,2014.0,Landfill Gas,0.05
+2861,4.6,4,4,2014.0,Landfill Gas,0.05
+2862,4.6,4,4,2014.0,Landfill Gas,0.05
+2863,4.6,4,4,2014.0,Landfill Gas,0.05
+2864,4.4,4.4,4.4,2012.0,Natural Gas Internal Combustion Engine,0.05
+2865,4.4,4.4,4.4,2012.0,Natural Gas Internal Combustion Engine,0.05
+2866,4.4,4.4,4.4,2013.0,Natural Gas Internal Combustion Engine,0.05
+2867,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2868,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2869,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2870,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2871,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2872,2.2,2.1,2.1,2014.0,Landfill Gas,0.05
+2873,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2874,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2875,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2876,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2877,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2878,0.4,0.4,0.4,2013.0,Other Natural Gas,0.05
+2879,1.0,1,1,2015.0,Conventional Hydroelectric,0.05
+2880,1.0,1,1,2015.0,Conventional Hydroelectric,0.05
+2881,1.0,1,1,2015.0,Conventional Hydroelectric,0.05
+2882,1.1,1.1,1.1,2012.0,Conventional Hydroelectric,0.05
+2883,300.0,246.7,279,2016.0,Natural Gas Fired Combined Cycle,0.05
+2884,200.0,166.3,188,2016.0,Natural Gas Fired Combined Cycle,0.05
+2885,2.8,3,3,2013.0,Wood/Wood Waste Biomass,0.05
+2886,1.1,1.1,1.1,2014.0,Other Waste Biomass,0.05
+2887,22.5,11.5,22.5,2014.0,Geothermal,0.05
+2888,185.3,153,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+2889,185.3,153,162,2003.0,Natural Gas Fired Combined Cycle,0.05
+2890,321.0,289,301,2003.0,Natural Gas Fired Combined Cycle,0.05
+2891,131.8,88.2,93.2,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2892,131.8,88.2,93.2,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2893,131.8,94.2,89.2,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2894,131.8,94.2,89.2,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2895,12.5,12.5,12.5,2013.0,Geothermal,0.05
+2896,12.5,12.5,12.5,2013.0,Geothermal,0.05
+2897,12.6,12.6,12.6,2013.0,Wood/Wood Waste Biomass,0.05
+2898,2.0,1.7,1.8,2016.0,Natural Gas Fired Combustion Turbine,0.05
+2899,7.4,5.6,6.6,2008.0,Natural Gas Fired Combustion Turbine,0.05
+2900,0.5,0.5,0.5,2003.0,Natural Gas Internal Combustion Engine,0.05
+2901,0.5,0.5,0.5,2003.0,Natural Gas Internal Combustion Engine,0.05
+2902,0.5,0.5,0.5,2003.0,Natural Gas Internal Combustion Engine,0.05
+2903,0.5,0.5,0.5,2007.0,Natural Gas Internal Combustion Engine,0.05
+2904,0.5,0.5,0.5,2007.0,Natural Gas Internal Combustion Engine,0.05
+2905,1.3,1.3,0.4,2012.0,Conventional Hydroelectric,0.05
+2906,1.3,1.3,0.4,2012.0,Conventional Hydroelectric,0.05
+2907,1.4,1.4,1.4,2017.0,Other Natural Gas,0.05
+2908,15.2,7,11,2018.0,Geothermal,0.05
+2909,1.0,0.4,0.7,2013.0,Geothermal,0.05
+2910,1.0,0.4,0.7,2013.0,Geothermal,0.05
+2911,1.0,0.4,0.7,2013.0,Geothermal,0.05
+2912,1.0,0.4,0.7,2013.0,Geothermal,0.05
+2913,1.6,1.6,1.6,2007.0,Landfill Gas,0.05
+2914,1.6,1.6,1.6,2007.0,Landfill Gas,0.05
+2915,1.6,1.6,1.6,2007.0,Landfill Gas,0.05
+2916,1.5,1.5,1.5,2013.0,Landfill Gas,0.05
+2917,1.5,1.5,1.5,2013.0,Landfill Gas,0.05
+2918,1.5,1.5,1.5,2013.0,Landfill Gas,0.05
+2919,1.5,2.8,2.6,1906.0,Conventional Hydroelectric,0.05
+2920,1.0,0.9,0.9,2013.0,Other Waste Biomass,0.05
+2921,1.0,0.9,0.9,2013.0,Other Waste Biomass,0.05
+2922,4.0,3.8,0.2,2013.0,Conventional Hydroelectric,0.05
+2923,3.5,3.3,0.2,2013.0,Conventional Hydroelectric,0.05
+2924,7.2,7.2,7.2,2014.0,Conventional Hydroelectric,0.05
+2925,0.8,0.8,0.8,2014.0,Conventional Hydroelectric,0.05
+2926,7.2,7,7,2003.0,Natural Gas Fired Combustion Turbine,0.05
+2927,4.6,4.6,2.5,2014.0,Natural Gas Fired Combustion Turbine,0.05
+2928,4.6,4.6,2.5,2014.0,Natural Gas Fired Combustion Turbine,0.05
+2929,1.1,1.1,1.1,2013.0,Other Waste Biomass,0.05
+2930,1.1,1.1,1.1,2013.0,Other Waste Biomass,0.05
+2931,1.1,1.1,1.1,2013.0,Other Waste Biomass,0.05
+2932,1.1,1.1,1.1,2013.0,Other Waste Biomass,0.05
+2933,1.5,1.5,1.5,2014.0,Other Waste Biomass,0.05
+2934,131.8,105.5,105.5,2018.0,Natural Gas Fired Combustion Turbine,0.05
+2935,131.8,105.5,105.5,2018.0,Natural Gas Fired Combustion Turbine,0.05
+2936,131.8,105.5,105.5,2018.0,Natural Gas Fired Combustion Turbine,0.05
+2937,131.8,105.5,105.5,2018.0,Natural Gas Fired Combustion Turbine,0.05
+2938,131.8,105.5,105.5,2018.0,Natural Gas Fired Combustion Turbine,0.05
+2939,3.2,3.1,3.1,2011.0,Landfill Gas,0.05
+2940,6.0,5,5,2002.0,Natural Gas Fired Combined Cycle,0.05
+2941,1.0,1,1,2013.0,Other Natural Gas,0.05
+2942,1.1,1,1,2013.0,Other Natural Gas,0.05
+2943,1.1,1,1,2013.0,Other Natural Gas,0.05
+2944,6.0,6,6,2013.0,Other Natural Gas,0.05
+2945,3.8,3.8,3.8,2015.0,Other Natural Gas,0.05
+2946,2.0,2,2,2017.0,Landfill Gas,0.05
+2947,2.0,2,2,2017.0,Landfill Gas,0.05
+2948,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2949,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2950,271.0,223,227,2003.0,Natural Gas Fired Combined Cycle,0.05
+2951,1.4,1.4,1.4,2014.0,Conventional Hydroelectric,0.05
+2952,6.1,6.1,6.1,2014.0,Conventional Hydroelectric,0.05
+2953,3.7,1.8,2.3,2015.0,Geothermal,0.05
+2954,1.4,1.4,1.4,2014.0,Conventional Hydroelectric,0.05
+2955,0.1,0.1,0.1,2014.0,Conventional Hydroelectric,0.05
+2956,1.0,1,0.8,2014.0,Other Waste Biomass,0.05
+2957,4.6,4,4,2007.0,Natural Gas Fired Combustion Turbine,0.05
+2958,4.6,4,4,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2959,4.6,4,4,2013.0,Natural Gas Fired Combustion Turbine,0.05
+2960,4.6,4,4,2005.0,Natural Gas Fired Combustion Turbine,0.05
+2961,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2962,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2963,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2964,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2965,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2966,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2967,3.4,3.4,3.4,2016.0,Landfill Gas,0.05
+2968,5.6,4.6,5.2,2015.0,Natural Gas Fired Combustion Turbine,0.05
+2969,1.6,1.4,1.4,2014.0,Landfill Gas,0.05
+2970,4.0,4,4,2017.0,Landfill Gas,0.05
+2971,30.2,27.2,27.2,2015.0,Wood/Wood Waste Biomass,0.05
+2972,2.0,2,2,2008.0,Natural Gas Internal Combustion Engine,0.05
+2973,2.0,2,2,2008.0,Natural Gas Internal Combustion Engine,0.05
+2974,2.0,2,2,2007.0,Natural Gas Internal Combustion Engine,0.05
+2975,1.6,1.6,1.6,2011.0,Other Waste Biomass,0.05
+2976,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2977,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+2978,271.0,223,227,2003.0,Natural Gas Fired Combined Cycle,0.05
+2979,1.1,1,1,2014.0,Other Natural Gas,0.05
+2980,1.1,1,1,2014.0,Other Natural Gas,0.05
+2981,1.1,1,1,2014.0,Other Natural Gas,0.05
+2982,1.1,1,1,2014.0,Other Natural Gas,0.05
+2983,1.1,1,1,2014.0,Other Natural Gas,0.05
+2984,1.4,1.4,1.4,2016.0,Other Waste Biomass,0.05
+2985,1.6,1.6,1.6,2016.0,Landfill Gas,0.05
+2986,1.6,1.6,1.6,2016.0,Landfill Gas,0.05
+2987,1.6,1.6,1.6,2016.0,Landfill Gas,0.05
+2988,1.6,1.6,1.6,2016.0,Landfill Gas,0.05
+2989,1.6,1.6,1.6,2016.0,Landfill Gas,0.05
+2990,1.2,1.2,0.2,2016.0,Conventional Hydroelectric,0.05
+2991,1.4,1.4,1.4,2015.0,Other Natural Gas,0.05
+2992,1.6,1.4,1.4,2015.0,Natural Gas Internal Combustion Engine,0.05
+2993,1.6,1.4,1.4,2015.0,Natural Gas Internal Combustion Engine,0.05
+2994,1.6,1.4,1.4,2015.0,Natural Gas Internal Combustion Engine,0.05
+2995,1.6,1.4,1.4,2015.0,Natural Gas Internal Combustion Engine,0.05
+2996,1.6,1.4,1.4,2015.0,Natural Gas Internal Combustion Engine,0.05
+2997,0.8,0.8,0.8,2015.0,Other Waste Biomass,0.05
+2998,0.8,0.8,0.8,2015.0,Other Waste Biomass,0.05
+2999,1.1,1,1,2015.0,Other Natural Gas,0.05
+3000,1.1,1,1,2015.0,Other Natural Gas,0.05
+3001,1.2,1.2,1.2,2015.0,Other Waste Biomass,0.05
+3002,0.8,0.7,0.7,2015.0,Other Waste Biomass,0.05
+3003,0.8,0.8,0.8,2015.0,Other Waste Biomass,0.05
+3004,0.6,0.6,0.6,2005.0,Landfill Gas,0.05
+3005,0.7,0.7,0.7,2005.0,Landfill Gas,0.05
+3006,1.0,0.9,1,2008.0,Landfill Gas,0.05
+3007,1.4,1.4,1.4,2016.0,Other Natural Gas,0.05
+3008,6.0,6,6,2018.0,Conventional Hydroelectric,0.05
+3009,25.0,16.2,22.5,2015.0,Geothermal,0.05
+3010,9.5,8.4,8.6,2016.0,All Other,0.05
+3011,6.0,6,6,2018.0,Conventional Hydroelectric,0.05
+3012,1.6,1.4,1.5,2013.0,Landfill Gas,0.05
+3013,1.6,1.6,1.6,2008.0,Landfill Gas,0.05
+3014,1.6,1.6,1.6,2008.0,Landfill Gas,0.05
+3015,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+3016,174.0,146,163,2003.0,Natural Gas Fired Combined Cycle,0.05
+3017,271.0,223,227,2003.0,Natural Gas Fired Combined Cycle,0.05
+3018,37.0,37,37,2017.0,Geothermal,0.05
+3019,6.0,3.3,3.6,2012.0,Landfill Gas,0.05
+3020,6.0,3.3,3.6,2012.0,Landfill Gas,0.05
+3021,1.2,1.1,1.1,2018.0,Conventional Hydroelectric,0.05
+3022,1.0,1,1,2016.0,Other Waste Biomass,0.05
+3023,11.0,10,10,2017.0,Other Waste Biomass,0.05
+3024,11.0,10,10,2017.0,Other Waste Biomass,0.05
+3025,11.0,2,2,2017.0,Other Waste Biomass,0.05
+3026,1.3,1.3,1.3,2016.0,Other Natural Gas,0.05
+3027,1.3,1.3,1.3,2016.0,Other Natural Gas,0.05
+3028,2.8,2.8,2.8,2015.0,Conventional Hydroelectric,0.05
+3029,4.8,4.5,4.5,2015.0,Conventional Hydroelectric,0.05
+3030,2.4,2.4,2.4,2017.0,Conventional Hydroelectric,0.05
+3031,1.2,1.2,1.2,2015.0,Conventional Hydroelectric,0.05
+3032,1.0,1,1,2018.0,Other Waste Biomass,0.05
+3033,1.0,1,1,2018.0,Other Waste Biomass,0.05
+3034,1.0,1,1,2018.0,Other Waste Biomass,0.05
+3035,2.4,2.4,2.4,2018.0,Natural Gas Internal Combustion Engine,0.05
+3036,2.4,2.4,2.4,2018.0,Natural Gas Internal Combustion Engine,0.05
+3037,2.4,2.4,2.4,2018.0,Natural Gas Internal Combustion Engine,0.05
+3038,2.4,2.4,2.4,2018.0,Natural Gas Internal Combustion Engine,0.05
+3039,2.4,2.4,2.4,2018.0,Natural Gas Internal Combustion Engine,0.05
+3040,1.3,1.3,0.1,2016.0,Conventional Hydroelectric,0.05
+3041,3.3,3.3,3.3,2018.0,Natural Gas Internal Combustion Engine,0.05
+3042,3.3,3.3,3.3,2018.0,Natural Gas Internal Combustion Engine,0.05
+3043,6.3,6.3,6.3,2006.0,Wood/Wood Waste Biomass,0.05
+3044,6.5,6.5,6.5,2008.0,Conventional Hydroelectric,0.05
+3045,6.5,6.5,6.5,2008.0,Conventional Hydroelectric,0.05
+3046,37.0,24.7,37,2018.0,Geothermal,0.05
+3047,37.0,24.7,37,2018.0,Geothermal,0.05
+3048,4.8,5.7,5,2017.0,Natural Gas Fired Combustion Turbine,0.05
+3049,4.8,5.7,5,2017.0,Natural Gas Fired Combustion Turbine,0.05
+3050,1.5,1.5,1.5,2011.0,Conventional Steam Coal,0.05
+3051,1.0,1,1,2018.0,Other Natural Gas,0.05
+3052,2.0,2,2,2018.0,Other Natural Gas,0.05
+3053,1.0,1,1,2017.0,Other Natural Gas,0.05
+3054,1.0,1,1,2017.0,Other Natural Gas,0.05
+3055,1.0,1,1,2017.0,Other Natural Gas,0.05
+3056,1.0,1,1,2017.0,Other Natural Gas,0.05
+3057,1.0,1,1,2017.0,Other Natural Gas,0.05
+3058,1.0,1,1,2017.0,Other Natural Gas,0.05
+3059,1.0,1,1,2017.0,Other Natural Gas,0.05
+3060,1.0,1,1,2017.0,Other Natural Gas,0.05
+3061,1.0,1,1,2008.0,Petroleum Liquids,0.05
+3062,1.0,1,1,2008.0,Petroleum Liquids,0.05
+3063,2.0,2,2,2017.0,Other Natural Gas,0.05
+3064,2.8,2.8,2.8,2017.0,Other Natural Gas,0.05
+3065,2.4,2.4,2.4,2017.0,Other Natural Gas,0.05
+3066,2.6,2.6,2.6,2017.0,Other Natural Gas,0.05
+3067,1.5,1.5,1.5,2017.0,Other Natural Gas,0.05
+3068,1.4,1.4,1.4,2017.0,Other Natural Gas,0.05
+3069,1.0,1,1,2017.0,Other Natural Gas,0.05
+3070,2.5,2.5,2.5,2017.0,Other Natural Gas,0.05
+3071,2.3,2.3,2.3,2017.0,Other Natural Gas,0.05
+3072,2.4,2.4,2.4,2017.0,Other Natural Gas,0.05
+3073,2.1,2.1,2.1,2017.0,Other Natural Gas,0.05
+3074,1.8,1.8,1.8,2017.0,Other Natural Gas,0.05
+3075,2.0,2,2,2017.0,Other Natural Gas,0.05
+3076,1.5,1.5,1.5,2017.0,Other Natural Gas,0.05
+3077,2.0,2,2,2017.0,Other Natural Gas,0.05
+3078,1393.0,1393.0,1393.0,9999.0,supplemental,0.07
