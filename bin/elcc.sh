@@ -3,4 +3,4 @@
 year=2018
 
 echo "Running: $year"
-sbatch powGen.sbat $year
+sbatch elcc_batch_job.sbat $year
