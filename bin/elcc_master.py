@@ -1,6 +1,6 @@
 import sys
 
-from elcc_impl import main, print_parameters
+from elcc_impl import main
 
 # Parameters
 
@@ -16,7 +16,7 @@ simulation["iterations"] = 1000 # number of iterations for monte carlo simulatio
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["debug"] = False # print all information flagged for debug
+simulation["debug"] = True # print all information flagged for debug
 
 ######## files ########
 
@@ -42,20 +42,18 @@ generator["lat"] = 41
 generator["lon"] = -112
 generator["efor"] = 0 #0.05 originally
 
-JOB = sys.argv[1]
+JOB = int(sys.argv[1])
 
-# default pace
+
 if JOB == 1:
-
-    print_parameters(simulation,files,system,generator)
+    # default pace
     main(simulation,files,system,generator)
 
-# default wecc
+
 if JOB == 2:
     files["demand file"] = "../demand/WESTERN_IC.csv"
     system["region"] = "WECC"
-
-    print_parameters(system)
+    # default wecc
     main(simulation,files,system,generator)
 
 ###### TESTING ########
