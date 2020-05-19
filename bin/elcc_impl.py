@@ -499,7 +499,13 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity
     return elcc, hourly_risk
 
 
-################ SAVE/LOAD ######################
+################ PRINT/SAVE/LOAD ######################
+
+# print all parameters
+def print_parameters(*parameters):
+    for sub_parameters in parameters:
+        for key, value in sub_parameters.items():
+            print(key,":",value)
 
 
 # save hourly fleet capacity to csv

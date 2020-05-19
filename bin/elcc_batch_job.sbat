@@ -8,8 +8,6 @@
 #SBATCH --time=5:00:00
 #SBATCH --account=mtcraig1
 
-year=$1 
+job=$1
 
-echo $year
-
-python -u elcc_master.py $year 
+python -u elcc_master.py $job

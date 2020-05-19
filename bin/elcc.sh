@@ -1,6 +1,6 @@
 #!/bin/bash
 
-year=2018
+for job in {1..2}
 
-echo "Running: $year"
-sbatch elcc_batch_job.sbat $year
+echo "Running Job: $job"
+sbatch elcc_batch_job.sbat $job

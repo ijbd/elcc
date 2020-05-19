@@ -1,6 +1,6 @@
 import sys
 
-from elcc_impl import main
+from elcc_impl import main, print_parameters
 
 # Parameters
 
@@ -11,7 +11,7 @@ generator = dict()
 
 ########## Generic ##########
 
-simulation["year"] = sys.argv[1]
+simulation["year"] = 2018
 simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
@@ -42,18 +42,26 @@ generator["lat"] = 41
 generator["lon"] = -112
 generator["efor"] = 0 #0.05 originally
 
+JOB = sys.argv[1]
 
-# Run a single calculation with parameters above
-main(simulation,files,system,generator)
+# default pace
+if JOB == 1:
 
+    print_parameters(simulation,files,system,generator)
+    main(simulation,files,system,generator)
 
-######## TESTING #########
-TEST = False
+# default wecc
+if JOB == 2:
+    files["demand file"] = "../demand/WESTERN_IC.csv"
+    system["region"] = "WECC"
 
-if TEST:
+    print_parameters(system)
+    main(simulation,files,system,generator)
 
-    for i in range(3):
-        main(simulation,files,system,generator)
+###### TESTING ########
+TESTING = False
+
+if TESTING:
 
     for dShift in [-1,0,1]:
         print('**************************SHIFT HOURS:',dShift)
