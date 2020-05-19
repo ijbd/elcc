@@ -1,10 +1,12 @@
 #!/bin/bash
 
-num_jobs=1
+conda activate myenv
 
-for job in $(seq 1 $num_jobs)
+year=2018
+for region in "PACE" "WECC"
 do
-    echo "Running Job: $job"
-    echo sbatch elcc_batch_job.sbat $job
+    echo "Running: $year $region"
+    sbatch elcc_batch_job.sbat $year $region
+    #bash elcc_batch_job.bash $year $region
 done
 

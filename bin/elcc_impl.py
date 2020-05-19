@@ -13,9 +13,10 @@ import matplotlib
 
 np.random.seed()
 
-# Global Variables
-DEBUG = 0
-TIMESTAMPS = 0
+# Globals
+DEBUG = False
+TIMESTAMPS = None
+OUTPUT_FOLDER = ""
 
 # Get all necessary information from powGen netCDF files: RE capacity factos and corresponding lat/lons
 #           Capacity factors in matrix of shape(lats, lon, 8760 hrs) 
@@ -586,7 +587,6 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity
 
 ################ PRINT/SAVE/LOAD ######################
 
-
 # print all parameters
 def print_parameters(*parameters):
     print("Parameters:")
@@ -609,7 +609,7 @@ def save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system):
                             columns=np.arange(simulation["iterations"]))
 
     # save to csv
-    hourly_capacity_df.to_csv(hourly_capacity_filename)
+    hourly_capacity_df.to_csv(OUTPUT_FOLDER+hourly_capacity_filename)
 
     return
 
@@ -644,7 +644,7 @@ def save_active_generators(conventional, solar, wind):
                                 columns=["Nameplate Capacity (MW)", "Summer Capacity (MW)", 
                                         "Winter Capacity (MW)", "Year", "Type", "EFOR"])
 
-    conventional_generator_df.to_csv("active_conventional.csv")
+    conventional_generator_df.to_csv(OUTPUT_FOLDER+"active_conventional.csv")
 
     #solar
     solar_generator_array = np.array([solar["nameplate"],solar["summer nameplate"],
@@ -656,7 +656,7 @@ def save_active_generators(conventional, solar, wind):
                                 columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
                                         "Winter Capacity (MW)","Latitude",
                                         "Longitude","EFOR"])
-    solar_generator_df.to_csv("active_solar.csv")
+    solar_generator_df.to_csv(OUTPUT_FOLDER+"active_solar.csv")
 
     #wind
     wind_generator_array = np.array([wind["nameplate"],wind["summer nameplate"],
@@ -668,19 +668,18 @@ def save_active_generators(conventional, solar, wind):
                                 columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
                                         "Winter Capacity (MW)","Latitude",
                                         "Longitude","EFOR"])
-    wind_generator_df.to_csv("active_wind.csv")
+    wind_generator_df.to_csv(OUTPUT_FOLDER+"active_wind.csv")
     return
 
 
 ################### RUNTIME STATS #######################
 
 
-def init_timestamp():
+def init_timestamps():
     global TIMESTAMPS
     first_timestamp = [[str(datetime.now().time()), "main(begin)"]]
     TIMESTAMPS =  pd.DataFrame(first_timestamp,columns=["Timestamp", "Event"])
     
-
 
 def add_timestamp(event):
     global TIMESTAMPS 
@@ -694,29 +693,38 @@ def save_timestamps():
     global TIMESTAMPS
 
     TIMESTAMPS.set_index("Timestamp")
-    TIMESTAMPS.to_csv("runtime_profile.csv",index=False)
+    TIMESTAMPS.to_csv(OUTPUT_FOLDER+"runtime_profile.csv",index=False)
 
 
 ##################### MAIN ##########################
 
 
 def main(simulation,files,system,generator):
-    # initialize global debug
+    
+    ####### SET-UP ######
+
+    # initialize global variables
     global DEBUG 
     DEBUG = simulation["debug"]
+
+    # initialize timestamps
+    init_timestamps()
+
+    # initialize output 
+    global OUTPUT_FOLDER
+    OUTPUT_FOLDER = simulation["output folder"]
     
     # Display params
     print_parameters(simulation,files,system,generator)
 
-    # initialize timestamps
-    init_timestamp()
+    ###### PROGRAM ######
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
     hourly_load = get_demand_data(files["demand file"],simulation["year"],simulation["shift load"]) 
 
     # save demand 
-    np.savetxt('demand.csv',hourly_load,delimiter=',')
+    np.savetxt(OUTPUT_FOLDER+'demand.csv',hourly_load,delimiter=',')
     
     # Load saved system
     if system["setting"] == "load":
@@ -725,10 +733,11 @@ def main(simulation,files,system,generator):
     # Find fleet 
     else:
         # Get conventional system (nameplate capacity, year, technology, and efor)
-        fleet_conventional_generators = get_conventional_fleet(files["eia folder"],system["region"],simulation["year"],system["conventional efor"])
+        fleet_conventional_generators = get_conventional_fleet(files["eia folder"],simulation["region"],
+                                                                simulation["year"],system["conventional efor"])
 
         # Get RE system (nameplate capacity, latitude, longitude, and efor)
-        fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],system["region"],
+        fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["region"],
                                                                                 simulation["year"], system["RE efor"])
 
         # add lat/lon indices for cf matrix
@@ -751,7 +760,7 @@ def main(simulation,files,system,generator):
     # filename contains simulation parameters
     if system["setting"] == "save":
         save_hourly_fleet_capacity(hourly_fleet_capacity,simulation,system)  
-        save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
+        
         
 
     # format RE generator and get hourly capacity matrix
@@ -771,6 +780,7 @@ def main(simulation,files,system,generator):
     add_timestamp("main(end)")  
     
     if DEBUG:
-        np.savetxt('hourlyRisk.csv',hourlyRisk,delimiter=',')
+        save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
+        np.savetxt(OUTPUT_FOLDER+'hourlyRisk.csv',hourlyRisk,delimiter=',')
         save_timestamps()
     return elcc,hourlyRisk
