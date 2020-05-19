@@ -1,7 +1,5 @@
 #!/bin/bash
 
-conda activate myenv
-
 year=2018
 for region in "PACE" "WECC"
 do
