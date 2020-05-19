@@ -1,5 +1,6 @@
+import sys
 
-from elcc import main
+from elcc_impl import main
 
 # Parameters
 
@@ -10,7 +11,7 @@ generator = dict()
 
 ########## Generic ##########
 
-simulation["year"] = 2018
+simulation["year"] = sys.argv[1]
 simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
@@ -45,49 +46,51 @@ generator["efor"] = 0 #0.05 originally
 # Run a single calculation with parameters above
 main(simulation,files,system,generator)
 
-aa
 
 ######## TESTING #########
+TEST = False
 
-for i in range(3):
-    main(simulation,files,system,generator)
+if TEST:
 
-for dShift in [-1,0,1]:
-    print('**************************SHIFT HOURS:',dShift)
+    for i in range(3):
+        main(simulation,files,system,generator)
 
-    test_simulation = dict(simulation)
-    test_simulation["shift load"] = dShift
+    for dShift in [-1,0,1]:
+        print('**************************SHIFT HOURS:',dShift)
 
-    main(test_simulation,files,system,generator)  
+        test_simulation = dict(simulation)
+        test_simulation["shift load"] = dShift
 
-for generator_efor in [0.0,.25,.5]:
-    print('****************************GENERATOR EFOR:',generator_efor)
+        main(test_simulation,files,system,generator)  
 
-    test_generator = dict(generator)
-    test_generator["efor"] = generator_efor
+    for generator_efor in [0.0,.25,.5]:
+        print('****************************GENERATOR EFOR:',generator_efor)
 
-    main(simulation,files,system,test_generator)
+        test_generator = dict(generator)
+        test_generator["efor"] = generator_efor
 
-for conventional_efor in [.025,.075,.125]:
-    print('***********************CONVENTIONAL EFOR:',conventional_efor)
-    
-    test_system = dict(system)
-    test_system["conventional efor"] = conventional_efor
+        main(simulation,files,system,test_generator)
 
-    main(simulation,files,test_system,test_generator)
+    for conventional_efor in [.025,.075,.125]:
+        print('***********************CONVENTIONAL EFOR:',conventional_efor)
+        
+        test_system = dict(system)
+        test_system["conventional efor"] = conventional_efor
 
-for tgtLolh in [2.4,20]:
-    print('************************TARGET LOLH:',tgtLolh)
+        main(simulation,files,test_system,test_generator)
 
-    test_simulation = dict(simulation) #deep copy
-    test_simulation["target lolh"] = tgtLolh
+    for tgtLolh in [2.4,20]:
+        print('************************TARGET LOLH:',tgtLolh)
 
-    main(test_simulation,files,system,generator)    
+        test_simulation = dict(simulation) #deep copy
+        test_simulation["target lolh"] = tgtLolh
 
-for i in range(4):
-    print('******************************YEAR:,',2017)
-    
-    test_simulation = dict(simulation)
-    test_simulation["year"] = 2017
+        main(test_simulation,files,system,generator)    
 
-    main(test_simulation,files,system,generator)
+    for i in range(4):
+        print('******************************YEAR:,',2017)
+        
+        test_simulation = dict(simulation)
+        test_simulation["year"] = 2017
+
+        main(test_simulation,files,system,generator)
