@@ -50,9 +50,7 @@ generator["efor"] = 0 #0.05 originally
 
 # handle arguments depending on job (note: argv[1] reserved for output folder)
 
-simulation["year"] = int(sys.argv[2])
-simulation["region"] = sys.argv[3]
-files["demand file"] = "../demand/"+simulation["region"]+".csv"
+system["conventional efor"] = float(sys.argv[2])
 
 # run elcc calculation
 

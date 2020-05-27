@@ -279,7 +279,7 @@ def get_hourly_RE_impl(RE_generators, cf):
 def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
 
     # Timestamps
-    add_timestamp("sample_outages_impl")
+    #add_timestamp("sample_outages_impl")
 
     hourly_capacity = np.zeros((8760,num_iterations))
 
@@ -308,7 +308,7 @@ def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
 def get_hourly_capacity(num_iterations, generators, cf=None):
     
     # Timestamp 
-    add_timestamp("get_hourly_capacity(begin)")
+    #add_timestamp("get_hourly_capacity(begin)")
 
     # check for conventional
     if cf is None:
@@ -324,7 +324,7 @@ def get_hourly_capacity(num_iterations, generators, cf=None):
     hourly_capacity = sample_outages_impl(num_iterations, pre_outage_capacity, generators)
 
     # Timestamp 
-    add_timestamp("get_hourly_capacity(end)")
+    #add_timestamp("get_hourly_capacity(end)")
 
     return hourly_capacity
 
@@ -352,7 +352,7 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
 def get_lolh(num_iterations, hourly_capacity, hourly_load):
 
     # Timestamps
-    add_timestamp("get_lolh")
+    #add_timestamp("get_lolh")
 
     # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
@@ -411,9 +411,9 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     if lolh >= target_lolh:
         error_message = "LOLH already greater than target. Under reliable system."
         oldest_year = "No generators removed"
-        print(error_message)
+        print(error_message, lolh)
 
-    while conventional_generators["nameplate"].size > 1 and lolh <= target_lolh:
+    while conventional_generators["nameplate"].size > 1 and lolh < target_lolh:
         conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators, oldest_year_manual)
         hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,wind_generators,cf)
         lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
