@@ -20,7 +20,7 @@ simulation["rm generators iterations"] = 100 # number of iterations used for rem
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
 simulation["debug"] = True # print all information flagged for debug
-simulation["output folder"] = sys.argv[1]
+simulation["output folder"] = "./"
 
 ######## files ########
 
@@ -48,9 +48,11 @@ generator["efor"] = 0 #0.05 originally
 
 ##############################################################################################
 
-# handle arguments depending on job (note: argv[1] reserved for output folder)
+# handle arguments depending on job
 
-system["conventional efor"] = float(sys.argv[2])
+simulation["output folder"] = sys.argv[1]
+simulation["year"] = int(sys.argv[2])
+simulation["region"] = sys.argv[3]
 
 # run elcc calculation
 

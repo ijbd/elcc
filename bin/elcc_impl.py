@@ -22,9 +22,6 @@ OUTPUT_FOLDER = ""
 #           Capacity factors in matrix of shape(lats, lon, 8760 hrs) 
 def get_powGen(solar_cf_file, wind_cf_file):
 
-    # Timestamps
-    add_timestamp("get_powGen")
-
     # Error Handling
     if not (path.exists(solar_cf_file) and path.exists(wind_cf_file)):
         error_message = 'Renewable Generation files not available:\n\t'+solar_cf_file+'\n\t'+wind_cf_file
@@ -48,9 +45,6 @@ def get_powGen(solar_cf_file, wind_cf_file):
 
 # Get hourly load vector
 def get_demand_data(demand_file_in, year, hrsShift=0):
-    
-    # Timestamps
-    add_timestamp("get_demand_data")
     
     # Open file
     demand_data = pd.read_csv(demand_file_in,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
@@ -80,9 +74,6 @@ def get_demand_data(demand_file_in, year, hrsShift=0):
 # Get conventional generators in fleet
 def get_conventional_fleet(eia_folder, region, year, conventional_efor):
     
-    # Timestamps
-    add_timestamp("get_conventional_fleet")
-
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Balancing Authority Code"])
     all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y2018.xlsx",skiprows=1,\
@@ -138,8 +129,6 @@ def get_conventional_fleet(eia_folder, region, year, conventional_efor):
 
 
 def derate(derate_conventional, conventional_generators):
-    # Timestamps
-    add_timestamp("derate")
 
     if derate_conventional:
         conventional_generators["nameplate"] *= .95
@@ -150,9 +139,6 @@ def derate(derate_conventional, conventional_generators):
 # Implementation of get_solar_and_wind_fleet
 def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor):
     
-    # Timestamps
-    add_timestamp("get_RE_fleet_impl")
-
     # Get operating generators
     active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes)) & (RE_generators["Status"] == "OP")]
     
@@ -189,9 +175,6 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
 # Get solar and wind generators in fleet
 def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
-    # Timestamps
-    add_timestamp("get_solar_and_wind_fleet(begin)")
-
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
                                                                                 "Longitude","Balancing Authority Code"])
@@ -215,9 +198,6 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
     solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,year,RE_efor)
     wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,year,RE_efor)
 
-    # Timestamps
-    add_timestamp("get_solar_and_wind_fleet(end)")
-
     if DEBUG:
         print("found",solar_generators["nameplate"].size+wind_generators["nameplate"].size,"renewable generators")
     
@@ -226,9 +206,6 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
 # Find index of nearest coordinate. Implementation of get_RE_index
 def find_nearest_impl(actual_coordinates, discrete_coordinates):
-    
-    # Timestamps
-    add_timestamp("find_nearest_impl")
     
     indices = []
     for coord in actual_coordinates:
@@ -244,14 +221,8 @@ def find_nearest_impl(actual_coordinates, discrete_coordinates):
 #               for the nearest simulated location in the capacity factor maps
 def get_cf_index(RE_generators, powGen_lats, powGen_lons):
 
-    # Timestamps
-    add_timestamp("get_cf_index(begin)")
-
     RE_generators["lat idx"] = find_nearest_impl(RE_generators["lat"], powGen_lats).astype(int)
     RE_generators["lon idx"] = find_nearest_impl(RE_generators["lon"], powGen_lons).astype(int)
-
-    # Timestamps
-    add_timestamp("get_cf_index(end)")
 
     return RE_generators
 
@@ -259,9 +230,6 @@ def get_cf_index(RE_generators, powGen_lats, powGen_lons):
 # Find expected hourly capacity for RE generators before sampling outages. Of shape (8760 hrs, num generators)
 # Implementation of get_hourly_capacity
 def get_hourly_RE_impl(RE_generators, cf):
-
-    # Timestamps
-    add_timestamp("get_hourly_RE_impl")
 
     # combine summer and winter capacities
     RE_winter_nameplate = np.tile(RE_generators["winter nameplate"],(8760//4,1))
@@ -277,9 +245,6 @@ def get_hourly_RE_impl(RE_generators, cf):
 # Get hourly capacity matrix for a generator by sampling outage rates over all hours/iterations. Of shape (8760 hrs, num iterations)
 # Implementation of get_hourly_capacity
 def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
-
-    # Timestamps
-    #add_timestamp("sample_outages_impl")
 
     hourly_capacity = np.zeros((8760,num_iterations))
 
@@ -307,9 +272,6 @@ def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
 # Get the hourly capacity matrix for a set of generators for a desired number of iterations
 def get_hourly_capacity(num_iterations, generators, cf=None):
     
-    # Timestamp 
-    #add_timestamp("get_hourly_capacity(begin)")
-
     # check for conventional
     if cf is None:
         pre_outage_winter_capacity = np.tile(generators["winter nameplate"],(8760//4,1)) # shape(8760 hrs, num generators)
@@ -323,17 +285,11 @@ def get_hourly_capacity(num_iterations, generators, cf=None):
     # sample outages
     hourly_capacity = sample_outages_impl(num_iterations, pre_outage_capacity, generators)
 
-    # Timestamp 
-    #add_timestamp("get_hourly_capacity(end)")
-
     return hourly_capacity
 
 
 # Get the hourly capacity matrix for the whole fleet (conventional, solar, and wind)
 def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_generators, wind_generators, cf):
-
-    # Timestamps
-    add_timestamp("get_hourly_fleet_capacity(begin)")
 
     hourly_fleet_capacity = np.zeros((8760,num_iterations))
 
@@ -342,17 +298,11 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
     hourly_fleet_capacity += get_hourly_capacity(num_iterations,solar_generators,cf["solar"])
     hourly_fleet_capacity += get_hourly_capacity(num_iterations,wind_generators,cf["wind"])
 
-    # Timestamps
-    add_timestamp("get_hourly_fleet_capacity(end)")
-   
     return hourly_fleet_capacity
 
 
 # Calculate number of expected hours in which load does not meet demand using monte carlo method
 def get_lolh(num_iterations, hourly_capacity, hourly_load):
-
-    # Timestamps
-    #add_timestamp("get_lolh")
 
     # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
@@ -364,9 +314,6 @@ def get_lolh(num_iterations, hourly_capacity, hourly_load):
 # Remove the oldest generators from the conventional system
 # Implementation of remove_generators
 def remove_oldest_impl(generators, manual_oldest_year=0):
-
-    # Timestamps
-    add_timestamp("remove_oldest_impl")
 
     # ignore hydroelectric plants
     not_hydro = generators["type"] != "Conventional Hydroelectric"
@@ -395,9 +342,6 @@ def remove_oldest_impl(generators, manual_oldest_year=0):
 # Remove generators to meet reliability requirement (LOLH of 2.4 by default)
 def remove_generators(num_iterations, conventional_generators, solar_generators, wind_generators, cf,
                         hourly_load, oldest_year_manual, target_lolh):
-    
-    # Timestamps
-    add_timestamp("remove_generators(begin)")
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
     low_iterations = 10
@@ -496,18 +440,11 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     print("Conventional fleet average capacity:",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
     print("lolh achieved:",lolh)
 
-    # Timestamps
-    add_timestamp("remove_generators(end)")
-
     return conventional_generators
 
 
 # move generator parameters into dictionary of numpy arrays (for function compatibility)
 def get_RE_generator(generator):
-
-    # Timestamps
-    add_timestamp("get_RE_generator")
-
     RE_generator = dict()
     RE_generator["nameplate"] = np.array([generator["nameplate"]])
     RE_generator["summer nameplate"] = np.array([generator["nameplate"]])
@@ -520,9 +457,6 @@ def get_RE_generator(generator):
 
 # use binary search to find elcc by adjusting additional load
 def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity, hourly_load, RE_generator_nameplate):
-    
-    # Timestamps
-    add_timestamp("get_elcc(begin)")
 
     print('getting ELCC!')
 
@@ -577,10 +511,6 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_RE_generator_capacity
         raise RuntimeWarning(error_message)
 
     elcc = additional_load
-
-
-    # Timestamps
-    add_timestamp("get_elcc(begin)")
 
     return elcc, hourly_risk
 
@@ -683,7 +613,6 @@ def init_timestamps():
 
 def add_timestamp(event):
     global TIMESTAMPS 
-
     # add new event
     new_timestamp = pd.DataFrame([[str(datetime.now().time()), event]],columns=["Timestamp", "Event"])
     TIMESTAMPS = TIMESTAMPS.append(new_timestamp)
@@ -691,7 +620,6 @@ def add_timestamp(event):
 
 def save_timestamps():
     global TIMESTAMPS
-
     TIMESTAMPS.set_index("Timestamp")
     TIMESTAMPS.to_csv(OUTPUT_FOLDER+"runtime_profile.csv",index=False)
 
@@ -706,9 +634,6 @@ def main(simulation,files,system,generator):
     # initialize global variables
     global DEBUG 
     DEBUG = simulation["debug"]
-
-    # initialize timestamps
-    init_timestamps()
 
     # initialize output 
     global OUTPUT_FOLDER
