@@ -52,8 +52,12 @@ def get_demand_data(demand_file_in, year, hrsShift=0):
     # Find Given Year
     hourly_load = np.array(demand_data["cleaned demand (MW)"][demand_data.index.str.find(str(year),0,10) != -1].values)
 
-    # Maintain 8760 horizon (remove 24 hrs for leap years)
-    hourly_load = hourly_load[:8760]
+    # Remove leap day
+    leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
+    demand_data.drop(leap_days, inplace=True) 
+        # two date_time formats from eia cleaned data
+    leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
+    demand_data.drop(leap_days, inplace=True)
 
     # Shift load
     if hrsShift!=0:

@@ -50,17 +50,9 @@ generator["efor"] = 0 #0.05 originally
 
 # handle arguments depending on job
 
-simulation["output folder"] = sys.argv[1]
-simulation["year"] = int(sys.argv[2])
-simulation["region"] = sys.argv[3]
-
 # run elcc calculation
 
 main(simulation,files,system,generator)
-
-
-
-
 
 ###### TESTING ########
 TESTING = False

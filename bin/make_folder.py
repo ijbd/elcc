@@ -9,6 +9,7 @@ for parameter in sys.argv[1:]:
 
 # add tag
 folder_name += ".elcc"
+folder_name.replace('/','.')
 
 # Error Handling
 if path.exists(folder_name):
