@@ -10,6 +10,7 @@ import pandas as pd
 from netCDF4 import Dataset
 from numpy import random
 import matplotlib
+import matplotlib.pyplot as plt
 
 np.random.seed()
 
@@ -17,6 +18,8 @@ np.random.seed()
 DEBUG = False
 TIMESTAMPS = None
 OUTPUT_FOLDER = ""
+
+
 
 # Get all necessary information from powGen netCDF files: RE capacity factos and corresponding lat/lons
 #           Capacity factors in matrix of shape(lats, lon, 8760 hrs) 
@@ -73,22 +76,135 @@ def get_demand_data(demand_file_in, year, hrsShift=0):
     if(hourly_load.size != 8760):
         error_message = 'Expected hourly load array of size 8760. Found array of size '+str(hourly_load.size)
         raise RuntimeError(error_message)
-
     return hourly_load
+#loads in hourly temperature for all the coordinates in desired region
+def get_temperature_data(temperature_file):
+    temperature_data = np.array(Dataset(temperature_file)["T2M"][:][:][:]).T
+    return (temperature_data-273.15)
+
+#loads in benchmark fors for temperature incrments of 5 celsius from -15 to 35 for 6 different types of technology
+def get_benchmark_fors(benchmark_FORs_file):
+    tech_categories = ["Temperature","HD","CC","CT","DS","HD","NU","ST","Other"]
+    forData = pd.read_excel(benchmark_FORs_file)    
+    benchmark_fors_tech = dict()
+    for tech in tech_categories:
+        benchmark_fors_tech[tech] = forData[tech].values
+    return benchmark_fors_tech
+
+#computes the forced outage rate given an input of temperature and a specific technology type
+def calculate_fors(total_efor_array, simplified_tech_list, benchmark_fors,hourly_temp_data):  
+    #rounding values to nearest 5 degree due to known for table being given in increments of 5 and rounding to known values
+    hourly_temp_data = (5 * np.round(hourly_temp_data/5))
+    hourly_temp_data = (np.where(hourly_temp_data > 35,35,hourly_temp_data))
+    hourly_temp_data = (np.where(hourly_temp_data < -15,-15,hourly_temp_data))
+    
+    #finds index of where each rounded temperature would be inserted on temperature array(-15 -> 35)
+    temperature_indices = np.searchsorted(benchmark_fors["Temperature"], hourly_temp_data)
+    
+    for tech in np.unique(simplified_tech_list):
+        if tech == '0.0':
+            benchmark_for_keyword = "Other"
+        else:
+            benchmark_for_keyword = tech
+        total_efor_array =  np.where(simplified_tech_list == tech,benchmark_fors[benchmark_for_keyword][temperature_indices[:]]/100,total_efor_array)
+    
+    print("Average annual temperature dependent FOR: " + str(np.average(total_efor_array)))
+    return total_efor_array
+
+#create total forced outage rate for all the generators in desired region's fleet
+def get_tech_efor_round_downs(simplified_tech_list, latitudes, longitudes,temperature_data,benchmark_fors):
+    total_efor_array = np.zeros((len(simplified_tech_list),8760))
+    hourly_temp_data = temperature_data[longitudes,latitudes]
+
+    simplified_tech_list = np.array([simplified_tech_list,]*8760).T
+    
+    return calculate_fors(total_efor_array, simplified_tech_list, benchmark_fors, hourly_temp_data)
+
+#function used to convert technologies of all generators into 6 known for technolgoy realtionships
+#if realtionship isnt known treated as constat 5%
+def find_desired_tech_indices(desired_tech_list,generator_technology):
+    simplified_tech_list = np.zeros(len(generator_technology))
+    generator_technology = pd.DataFrame(data=generator_technology.flatten())
+    for tech_type in desired_tech_list:
+        specific_tech = generator_technology.isin(desired_tech_list[tech_type])
+        simplified_tech_list = np.where((generator_technology[specific_tech].fillna(0).values).flatten() != 0,tech_type,simplified_tech_list) 
+    return simplified_tech_list
+
+#create main tech list where all the other different types of tech are divided into 6 main known temperature-for relatonships,
+# any tech that doesnt fall into 6 groups is given a constant for of .05    
+def get_temperature_dependent_efor(latitudes,longitudes,technology,temperature_data,benchmark_fors):
+    total_tech_list = dict()
+    total_tech_list["CC"] = np.array(["Natural Gas Fired Combined Cycle"])
+    total_tech_list["CT"] = np.array(["Natural Gas Steam Turbine","Natural Gas Fired Combustion Turbine","Landfill Gas",])
+    total_tech_list["DS"] = np.array(["Natural Gas Internal Combustion Engine"])
+    total_tech_list["ST"]  = np.array(["Conventional Steam Coal","Natural Gas Steam Turbine"])
+    total_tech_list["NU"]  = np.array(["Nuclear"])
+    total_tech_list["HD"]  =  np.array(["Conventional Hydroelectric","Solar Thermal without Energy Storage",
+                   "Hydroelectric Pumped Storage","Solar Thermal with Energy Storage","Wood/Wood Waste Biomass"])
+    simplified_tech_list = find_desired_tech_indices(total_tech_list,technology)
+    #FOR TESTING
+    #return simplified_tech_list
+    return get_tech_efor_round_downs(simplified_tech_list,latitudes,longitudes,temperature_data,benchmark_fors)
+
+# Implementation of get_conventional_fleet
+def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temperature_data, year,powGen_lats,powGen_lons,benchmark_fors):
+    # Remove generators added after simulation year
+    active_generators = NRE_generators[NRE_generators["Operating Year"] <= year]
+    # Remove renewable generators
+    renewable_technologies = np.array(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"])
+    active_generators = active_generators[~(active_generators["Technology"].isin(renewable_technologies))] # tilde -> is NOT in
+
+    # Fill empty summer/winter capacities
+    active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",
+                                                    active_generators["Nameplate Capacity (MW)"], inplace=True)
+    active_generators["Winter Capacity (MW)"].where(active_generators["Winter Capacity (MW)"].astype(str) != " ", 
+                                                    active_generators["Nameplate Capacity (MW)"], inplace=True)
+    #getting lats and longs correct indices
+    latitudes = find_nearest_impl(plants["Latitude"][active_generators["Plant Code"]].values,powGen_lats)
+    longitudes = find_nearest_impl(plants["Longitude"][active_generators["Plant Code"]].values,powGen_lons)
+     
+    # Convert Dataframe to Dictionary of numpy arrays
+    conventional_generators = dict()
+    conventional_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
+    conventional_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values
+    conventional_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values
+    conventional_generators["year"] = active_generators["Operating Year"].values
+    conventional_generators["type"] = active_generators["Technology"].values
+    if(system_preferences["Temperature-dependent FOR"]):
+        conventional_generators["efor"] = get_temperature_dependent_efor(latitudes,longitudes, active_generators["Technology"].values,temperature_data,benchmark_fors)
+        if not (system_preferences["Temperature-dependent FOR indpendent of size"]):
+            print("Removed temperature dependency FORs for generators smaller then 20 MW")
+            conventional_generators["efor"] = np.where(np.array([conventional_generators["nameplate"],]*8760).T <= 20,system_preferences["conventional efor"],conventional_generators["efor"])
+    else:
+        conventional_generators["efor"] = np.ones(conventional_generators["nameplate"].size) * system_preferences["conventional efor"]                                  
+        
+    # Error Handling
+
+    if conventional_generators["nameplate"].size == 0:
+        error_message = "No existing conventional found."
+        raise RuntimeError(error_message)
+    
+    if DEBUG:
+        print("found",conventional_generators["nameplate"].size,"conventional generators")
+
+    return conventional_generators
+
+
+
 
 
 # Get conventional generators in fleet
-def get_conventional_fleet(eia_folder, region, year, conventional_efor):
-    
+def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
+    # system_preferences
     # Timestamps
     add_timestamp("get_conventional_fleet")
 
     # Open files
-    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Balancing Authority Code"])
+    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
+                                                                                "Longitude","Balancing Authority Code"])
     all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y2018.xlsx",skiprows=1,\
                                                     usecols=["Plant Code","Technology","Nameplate Capacity (MW)","Status",
                                                             "Operating Year", "Summer Capacity (MW)", "Winter Capacity (MW)"])
-
     # Sort by NERC Region and Balancing Authority to filter correct plant codes
     nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
     balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
@@ -103,38 +219,8 @@ def get_conventional_fleet(eia_folder, region, year, conventional_efor):
     # Get operating generators
     active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes)) & (all_conventional_generators["Status"] == "OP")]
 
-    # Remove generators added after simulation year
-    active_generators = active_generators[active_generators["Operating Year"] <= year]
-
-    # Remove renewable generators
-    renewable_technologies = np.array(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"])
-    active_generators = active_generators[~(active_generators["Technology"].isin(renewable_technologies))] # tilde -> is NOT in
-
-    # Fill empty summer/winter capacities
-    active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",
-                                                    active_generators["Nameplate Capacity (MW)"], inplace=True)
-    active_generators["Winter Capacity (MW)"].where(active_generators["Winter Capacity (MW)"].astype(str) != " ", 
-                                                    active_generators["Nameplate Capacity (MW)"], inplace=True)
-    
-
-    # Convert Dataframe to Dictionary of numpy arrays
-    conventional_generators = dict()
-    conventional_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
-    conventional_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values
-    conventional_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values
-    conventional_generators["year"] = active_generators["Operating Year"].values
-    conventional_generators["type"] = active_generators["Technology"].values
-    conventional_generators["efor"] = np.ones(conventional_generators["nameplate"].size) * conventional_efor
-
-    # Error Handling
-    if conventional_generators["nameplate"].size == 0:
-        error_message = "No existing conventional found."
-        raise RuntimeError(error_message)
-    
-    if DEBUG:
-        print("found",conventional_generators["nameplate"].size,"conventional generators")
-
-    return conventional_generators
+    plants.set_index("Plant Code",inplace=True)   
+    return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
 
 
 def derate(derate_conventional, conventional_generators):
@@ -146,7 +232,8 @@ def derate(derate_conventional, conventional_generators):
         conventional_generators["summer nameplate"] *= .95
         conventional_generators["winter nameplate"] *= .95
 
-
+#def get_temperature_dependent_for(lats,longs,year):
+    
 # Implementation of get_solar_and_wind_fleet
 def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor):
     
@@ -168,7 +255,6 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
     # Get coordinates
     latitudes = plants["Latitude"][active_generators["Plant Code"]].values
     longitudes = plants["Longitude"][active_generators["Plant Code"]].values
-
     # Convert Dataframe to Dictionary of numpy arrays
     RE_generators = dict()
     RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
@@ -226,10 +312,8 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor):
 
 # Find index of nearest coordinate. Implementation of get_RE_index
 def find_nearest_impl(actual_coordinates, discrete_coordinates):
-    
     # Timestamps
     add_timestamp("find_nearest_impl")
-    
     indices = []
     for coord in actual_coordinates:
         indices.append((np.abs(coord-discrete_coordinates)).argmin())
@@ -280,28 +364,26 @@ def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
 
     # Timestamps
     add_timestamp("sample_outages_impl")
-
     hourly_capacity = np.zeros((8760,num_iterations))
-
     # otherwise sample outages and add generator contribution
     max_iterations = 2000 // generators["nameplate"].size # the largest # of iterations to compute at one time (solve memory issues)
     if max_iterations == 0: 
-        max_iterations = 1 
-
+        max_iterations = 1
     for i in range(num_iterations // max_iterations):
-        for_matrix = np.random.random_sample((max_iterations,8760,generators["nameplate"].size))>generators["efor"] # shape(its,hours,generators)
+        for_matrix = np.random.random_sample((max_iterations,8760,generators["nameplate"].size))>(generators["efor"].T) # shape(its,hours,generators)
+        #for_matrix = np.random.random_sample((max_iterations,8760,generators["nameplate"].size))>get_for(generators) # shape(its,hours,generators)
         capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T # shape(its,hours).T -> shape(hours,its)
         hourly_capacity[:,i*max_iterations:(i+1)*max_iterations] = capacity 
 
         if DEBUG:
             print(i,"of",num_iterations // max_iterations,"blocks complete")
-
     if num_iterations % max_iterations != 0:
         remaining_iterations = num_iterations % max_iterations
-        for_matrix = np.random.random_sample((remaining_iterations,8760,generators["nameplate"].size))>generators["efor"]
+        for_matrix = np.random.random_sample((remaining_iterations,8760,generators["nameplate"].size))>(generators["efor"].T)
         capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T
         hourly_capacity[:,-remaining_iterations:] = capacity
     return hourly_capacity
+
 
 
 # Get the hourly capacity matrix for a set of generators for a desired number of iterations
@@ -409,11 +491,12 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     
     # Error Handling: Under Reliable System
     if lolh >= target_lolh:
+        print("LOLH: " + str(lolh))
         error_message = "LOLH already greater than target. Under reliable system."
         oldest_year = "No generators removed"
         print(error_message)
-
     while conventional_generators["nameplate"].size > 1 and lolh <= target_lolh:
+        print("LOLH: " + str(lolh))
         conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators, oldest_year_manual)
         hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,wind_generators,cf)
         lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
@@ -433,7 +516,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     supplement_generator["nameplate"] = np.array([supplement_capacity])
     supplement_generator["summer nameplate"] = supplement_generator["nameplate"]
     supplement_generator["winter nameplate"] = supplement_generator["nameplate"]
-    supplement_generator["efor"] = np.array([.07]) #reasonable efor for conventional generator
+    supplement_generator["efor"] = np.array([.07,]*8760) #reasonable efor for conventional generator
 
     # get hourly capacity of supplemental generator and add to fleet capacity
     hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generator)
@@ -470,7 +553,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
         # find new lolh
         lolh, hourly_risk = get_lolh(num_iterations,hourly_total_capacity,hourly_load)
         binary_trial += 1
-
+    print("Generator shape: " + str(conventional_generators["efor"].shape))
     # add supplemental generator to fleet
     conventional_generators["nameplate"] = np.append(conventional_generators["nameplate"], supplement_generator["nameplate"])
     conventional_generators["summer nameplate"] = np.append(conventional_generators["summer nameplate"], supplement_generator["summer nameplate"])
@@ -714,6 +797,7 @@ def main(simulation,files,system,generator):
     global OUTPUT_FOLDER
     OUTPUT_FOLDER = simulation["output folder"]
     
+
     # Display params
     print_parameters(simulation,files,system,generator)
 
@@ -722,7 +806,8 @@ def main(simulation,files,system,generator):
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
     hourly_load = get_demand_data(files["demand file"],simulation["year"],simulation["shift load"]) 
-
+    temperature_data = get_temperature_data(files["temperature file"])
+    benchmark_fors = get_benchmark_fors(files["benchmark FORs file"])
     # save demand 
     np.savetxt(OUTPUT_FOLDER+'demand.csv',hourly_load,delimiter=',')
     
@@ -733,8 +818,9 @@ def main(simulation,files,system,generator):
     # Find fleet 
     else:
         # Get conventional system (nameplate capacity, year, technology, and efor)
-        fleet_conventional_generators = get_conventional_fleet(files["eia folder"],simulation["region"],
-                                                                simulation["year"],system["conventional efor"])
+        fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["region"],
+                                                               simulation["year"], system, powGen_lats, powGen_lons,
+                                                               temperature_data, benchmark_fors)
 
         # Get RE system (nameplate capacity, latitude, longitude, and efor)
         fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["region"],
