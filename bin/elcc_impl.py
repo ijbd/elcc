@@ -461,7 +461,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     supplement_generator["nameplate"] = np.array([supplement_capacity])
     supplement_generator["summer nameplate"] = supplement_generator["nameplate"]
     supplement_generator["winter nameplate"] = supplement_generator["nameplate"]
-    supplement_generator["efor"] = np.array([.07,]*8760) #reasonable efor for conventional generator
+    supplement_generator["efor"] = np.array([.07,]*8760).reshape(1,8760) #reasonable efor for conventional generator
 
     # get hourly capacity of supplemental generator and add to fleet capacity
     hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generator)
@@ -503,7 +503,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     conventional_generators["nameplate"] = np.append(conventional_generators["nameplate"], supplement_generator["nameplate"])
     conventional_generators["summer nameplate"] = np.append(conventional_generators["summer nameplate"], supplement_generator["summer nameplate"])
     conventional_generators["winter nameplate"] = np.append(conventional_generators["winter nameplate"], supplement_generator["winter nameplate"])
-    conventional_generators["efor"] = np.append(conventional_generators["efor"], supplement_generator["efor"])
+    conventional_generators["efor"] = np.concatenate((conventional_generators["efor"], supplement_generator["efor"]))
     conventional_generators["year"] = np.append(conventional_generators["year"], 9999) 
     conventional_generators["type"] = np.append(conventional_generators["type"], "supplemental")
 
@@ -789,10 +789,8 @@ def main(simulation,files,system,generator):
                                     hourly_load, generator["nameplate"])
 
     print("******!!!!!!!!!!!!***********ELCC:", int(elcc/generator["nameplate"]*100))
-    add_timestamp("main(end)")  
     
     if DEBUG:
         save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
         np.savetxt(OUTPUT_FOLDER+'hourlyRisk.csv',hourlyRisk,delimiter=',')
-        save_timestamps()
     return elcc,hourlyRisk

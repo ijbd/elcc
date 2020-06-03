@@ -40,7 +40,7 @@ system["conventional efor"] = .05
 system["RE efor"] = 1.0 #set to 1 to remove all W&S generators from current fleet
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
 system["oldest year"] = 0 #remove conventional generators older than this year
-system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["Temperature-dependent FOR"] = True #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["Temperature-dependent FOR indpendent of size"] = True #implemnts temeprature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
 
