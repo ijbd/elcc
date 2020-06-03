@@ -1,6 +1,7 @@
 import sys
 
 from elcc_impl import main
+#from elcc_impl_test import main
 
 # Parameters
 
@@ -14,12 +15,12 @@ generator = dict()
 ########## Generic ##########
 
 simulation["year"] = 2018
-simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
+simulation["region"] = "WECC" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
 simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["debug"] = True # print all information flagged for debug
+simulation["debug"] = False # print all information flagged for debug
 simulation["output folder"] = "./"
 
 ######## files ########
@@ -28,6 +29,8 @@ files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["eia folder"] = "../eia8602018/"
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
+files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 
 ########## System ########### 
 
@@ -37,6 +40,9 @@ system["conventional efor"] = .05
 system["RE efor"] = 1.0 #set to 1 to remove all W&S generators from current fleet
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
 system["oldest year"] = 0 #remove conventional generators older than this year
+system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["Temperature-dependent FOR indpendent of size"] = True #implemnts temeprature dependent forced outage rates for all generators, 
+                                                            #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
 
 ######## Generator ##########
 
