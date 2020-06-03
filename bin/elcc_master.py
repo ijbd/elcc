@@ -15,7 +15,7 @@ generator = dict()
 ########## Generic ##########
 
 simulation["year"] = 2018
-simulation["region"] = "WECC" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
+simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
 simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
@@ -55,6 +55,8 @@ generator["efor"] = 0 #0.05 originally
 ##############################################################################################
 
 # handle arguments depending on job
+simulation["debug"] = True
+simulation["output folder"] = 'testing/'
 
 # run elcc calculation
 
