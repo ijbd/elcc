@@ -424,7 +424,7 @@ def remove_oldest_impl(generators, manual_oldest_year=0):
 
 # Remove generators to meet reliability requirement (LOLH of 2.4 by default)
 def remove_generators(num_iterations, conventional_generators, solar_generators, wind_generators, cf,
-                        hourly_load, oldest_year_manual, target_lolh):
+                        hourly_load, oldest_year_manual, target_lolh, temperature_dependent_efor):
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
     low_iterations = 10
@@ -461,8 +461,10 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
     supplement_generator["nameplate"] = np.array([supplement_capacity])
     supplement_generator["summer nameplate"] = supplement_generator["nameplate"]
     supplement_generator["winter nameplate"] = supplement_generator["nameplate"]
-    supplement_generator["efor"] = np.array([.07,]*8760).reshape(1,8760) #reasonable efor for conventional generator
-
+    if temperature_dependent_efor:
+        supplement_generator["efor"] = np.array([.07,]*8760).reshape(1,8760) #reasonable efor for conventional generator
+    else:
+        supplement_generator["efor"] = np.array([.07])
     # get hourly capacity of supplemental generator and add to fleet capacity
     hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generator)
     hourly_total_capacity = np.add(hourly_fleet_capacity, hourly_supplement_capacity)
@@ -651,12 +653,12 @@ def save_active_generators(conventional, solar, wind):
     #conventional
     conventional_generator_array = np.array([conventional["nameplate"],conventional["summer nameplate"],
                                             conventional["winter nameplate"],conventional["year"],
-                                            conventional["type"],conventional["efor"]])
+                                            conventional["type"]])
 
     conventional_generator_df = pd.DataFrame(data=conventional_generator_array.T,
                                 index=np.arange(conventional["nameplate"].size),
                                 columns=["Nameplate Capacity (MW)", "Summer Capacity (MW)", 
-                                        "Winter Capacity (MW)", "Year", "Type", "EFOR"])
+                                        "Winter Capacity (MW)", "Year", "Type"])
 
     conventional_generator_df.to_csv(OUTPUT_FOLDER+"active_conventional.csv")
 
@@ -762,7 +764,7 @@ def main(simulation,files,system,generator):
         # remove generators to find a target reliability level (2.4 loss of load hours per year)
         fleet_conventional_generators = remove_generators(simulation["rm generators iterations"],fleet_conventional_generators,
                                                             fleet_solar_generators,fleet_wind_generators,cf,hourly_load,system["oldest year"],
-                                                            simulation["target lolh"])
+                                                            simulation["target lolh"], system["Temperature-dependent FOR"])
 
         # find hourly capacity
         hourly_fleet_capacity = get_hourly_fleet_capacity(simulation["iterations"],fleet_conventional_generators,

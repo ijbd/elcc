@@ -58,9 +58,14 @@ generator["efor"] = 0 #0.05 originally
 simulation["debug"] = True
 simulation["output folder"] = 'testing/'
 
+print("temp dependent")
 # run elcc calculation
-
 main(simulation,files,system,generator)
+
+system["Temperature-dependent FOR"] = False
+print("no temp dependence")
+main(simulation,files,system,generator)
+
 
 ###### TESTING ########
 TESTING = False
