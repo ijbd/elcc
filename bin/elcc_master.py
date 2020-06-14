@@ -16,7 +16,7 @@ generator = dict()
 
 simulation["year"] = 2018
 simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
-simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
+simulation["iterations"] = 100 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
@@ -37,12 +37,16 @@ files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships
 # Adjust parameters of existing fleet
 system["setting"] = "none" # none, save, or load
 system["conventional efor"] = .05
-system["RE efor"] = 1.0 #set to 1 to remove all W&S generators from current fleet
+system["RE efor"] = 0.0 #set to 1 to remove all W&S generators from current fleet
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
-system["oldest year"] = 0 #remove conventional generators older than this year
-system["Temperature-dependent FOR"] = True #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["oldest year"] = 1950 #remove conventional generators older than this year
+system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["Temperature-dependent FOR indpendent of size"] = True #implemnts temeprature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
+system["storage"] = True #implement storage in simulations
+system["storage efficiency"] = .8 #roundtrip (as decimal)
+system["storage strategy threshold"] = 0 #load threshold for switching between reliability strategy and peak-shaving strategy
+
 
 ######## Generator ##########
 
@@ -52,19 +56,26 @@ generator["lat"] = 41
 generator["lon"] = -112
 generator["efor"] = 0 #0.05 originally
 
+###### Added Storage ########
+
+generator["storage"] = True
+generator["storage charge rate"] = 500 #MW
+generator["storage discharge rate"] = 500 #MW
+generator["storage energy capacity"] = 500 #MWh 
+generator["storage efficiency"] = .8 #roundtrip (as decimal)
+generator["storage strategy threshold"] = 0 
+
 ##############################################################################################
 
 # handle arguments depending on job
 simulation["debug"] = True
 simulation["output folder"] = 'testing/'
 
-print("temp dependent")
-# run elcc calculation
-main(simulation,files,system,generator)
-
-system["Temperature-dependent FOR"] = False
-print("no temp dependence")
-main(simulation,files,system,generator)
+for storage_capacity in [0,500,1000,2000]:
+    generator["storage energy capacity"] = storage_capacity
+    print("****************",generator["storage energy capacity"])
+    # run elcc calculation
+    main(simulation,files,system,generator)
 
 
 ###### TESTING ########
