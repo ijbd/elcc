@@ -45,7 +45,7 @@ def get_powGen(solar_cf_file, wind_cf_file):
     return powGen_lats, powGen_lons, cf
 
 # Get hourly load vector
-def get_demand_data(demand_file_in, year, hrsShift=0):
+def get_hourly_load(demand_file_in, year, hrsShift=0):
     
     # Open file
     demand_data = pd.read_csv(demand_file_in,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
@@ -770,7 +770,7 @@ def main(simulation,files,system,generator):
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
-    hourly_load = get_demand_data(files["demand file"],simulation["year"],simulation["shift load"]) 
+    hourly_load = get_hourly_load(files["demand file"],simulation["year"],simulation["shift load"]) 
     temperature_data = get_temperature_data(files["temperature file"])
     benchmark_fors = get_benchmark_fors(files["benchmark FORs file"])
     fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["region"],

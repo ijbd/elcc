@@ -229,6 +229,7 @@ def charge_storage(additional_capacity, storage):
     p_d = storage["max discharge rate"]
     x_max = storage["max energy"] / storage["max discharge rate"]
     x = storage["time to discharge"]
+    n = storage["roundtrip efficiency"]
     
     u = storage["power"]
     
