@@ -1,14 +1,14 @@
 import sys, os
 from os import path
 
-folder_name = ""
+folder_name = "elcc."
 
 # add each passed parameter
 for parameter in sys.argv[1:]:
     folder_name += parameter + "_"
 
 # add tag
-folder_name += ".elcc"
+folder_name += ".out"
 folder_name.replace('/','.')
 
 # Error Handling
