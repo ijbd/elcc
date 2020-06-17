@@ -16,11 +16,11 @@ generator = dict()
 
 simulation["year"] = 2018
 simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
-simulation["iterations"] = 100 # number of iterations for monte carlo simulation
+simulation["iterations"] = 500 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["debug"] = False # print all information flagged for debug
+simulation["debug"] = True # print all information flagged for debug
 simulation["output folder"] = "./"
 
 ######## files ########
@@ -41,11 +41,18 @@ system["RE efor"] = 0.0 #set to 1 to remove all W&S generators from current flee
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
 system["oldest year"] = 1950 #remove conventional generators older than this year
 system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
-system["Temperature-dependent FOR indpendent of size"] = True #implemnts temeprature dependent forced outage rates for all generators, 
+system["Temperature-dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
-system["storage"] = True #implement storage in simulations
+
+######### Storage ###########
+
+system["fleet storage"] = True #include existing fleet storage 
 system["storage efficiency"] = .8 #roundtrip (as decimal)
 system["storage strategy threshold"] = 0 #load threshold for switching between reliability strategy and peak-shaving strategy
+system["supplemental storage"] = True # add supplemental storage to simulate higher storage penetration
+system["supplemental storage charge rate"] = 100 # MW
+system["supplemental storage discharge rate"] = 100 # MW
+system["supplemental storage energy capacity"] = 100 # MWh
 
 
 ######## Generator ##########
@@ -54,28 +61,38 @@ generator["type"] = "solar" #solar or wind
 generator["nameplate"] = 100 #MW
 generator["lat"] = 41
 generator["lon"] = -112
-generator["efor"] = 0 #0.05 originally
+generator["efor"] = 1.0 #0.05 originally
 
 ###### Added Storage ########
 
-generator["storage"] = True
-generator["storage charge rate"] = 500 #MW
-generator["storage discharge rate"] = 500 #MW
-generator["storage energy capacity"] = 500 #MWh 
-generator["storage efficiency"] = .8 #roundtrip (as decimal)
-generator["storage strategy threshold"] = 0 
+generator["generator storage"] = True #find elcc of additional storage
+generator["generator storage charge rate"] = 100 #MW
+generator["generator storage discharge rate"] = 100 #MW
+generator["generator storage energy capacity"] = 100 #MWh 
+generator["generator storage efficiency"] = .8 #roundtrip (as decimal) 
 
 ##############################################################################################
 
 # handle arguments depending on job
-simulation["debug"] = True
 simulation["output folder"] = 'testing/'
 
-for storage_capacity in [0,500,1000,2000]:
-    generator["storage energy capacity"] = storage_capacity
-    print("****************",generator["storage energy capacity"])
-    # run elcc calculation
-    main(simulation,files,system,generator)
+print('*********************** SOLAR ONLY')
+system["supplemental storage"] = False
+generator["generator storage"] = False
+
+main(simulation,files,system,generator)
+
+print('*********************** SOLAR W/ SUPPLEMENTAL FLEET STORAGE')
+system["supplemental storage"] = True
+generator["generator storage"] = False
+
+main(simulation,files,system,generator)
+
+print('*********************** SOLAR W/ GENERATOR STORAGE')
+system["supplemental storage"] = False
+generator["generator storage"] = False
+
+main(simulation,files,system,generator)
 
 
 ###### TESTING ########

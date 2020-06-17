@@ -60,9 +60,10 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
 
 def make_storage(include_storage, energy_capacity=None, charge_rate=None, discharge_rate=None, round_trip_efficiency=None, strategy_threshold=None):
     
-    if include_storage == False:
+    if include_storage == False or energy_capacity == 0:
         storage = dict()
         storage["num units"] = 0
+        return storage
 
     storage = dict()
 
@@ -74,7 +75,7 @@ def make_storage(include_storage, energy_capacity=None, charge_rate=None, discha
     
     # parametrized
     storage["strategy threshold"] = strategy_threshold
-    storage["roundtrip efficiency"] = round_trip_efficiency
+    storage["roundtrip efficiency"] = np.ones(storage["num units"]) * round_trip_efficiency
 
     #for simulation begin empty
     storage["power"] = np.zeros(storage["num units"])
@@ -83,9 +84,35 @@ def make_storage(include_storage, energy_capacity=None, charge_rate=None, discha
 
     #interpreted
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
-    storage["one way efficiency"] = np.array(round_trip_efficiency ** .5)
+    storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
 
     return storage
+
+def append_storage(fleet_storage, additional_storage):
+
+    #edge cases
+    if fleet_storage["num units"] == 0:
+        return additional_storage
+    
+    if additional_storage["num units"] == 0:
+        return fleet_storage
+    
+    #combine regular attribute(s)
+    fleet_storage["num units"] += additional_storage["num units"]
+    
+    #concatenate all array objects
+    for key in fleet_storage:
+        if isinstance(fleet_storage[key], np.ndarray):
+            fleet_storage[key] = np.append(fleet_storage[key],additional_storage[key])
+    
+    return fleet_storage
+
+def reset_storage(storage):
+    #for simulation begin empty
+    storage["power"] = np.zeros(storage["num units"])
+    storage["energy"] = np.zeros(storage["num units"])
+    storage["extractable energy"] = np.zeros(storage["num units"])
+    storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
 
 def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage):
     
@@ -93,19 +120,21 @@ def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load
     
     # edge case
     if storage["num units"] == 0:
-        return hourly_storage_contribution
+        return 0
 
     # dispatch in every iteration according to outages and available capacity
     for i in range(num_iterations):
         get_hourly_storage_contribution_impl(hourly_capacity[:,i],hourly_load,storage,hourly_storage_contribution[:,i])
+        reset_storage(storage)
+        if i%10 == 0:
+            print(i)
 
     return hourly_storage_contribution
 
 def get_hourly_storage_contribution_impl(hourly_capacity, hourly_load, storage, hourly_storage_contribution):
     
-    debug_num_days = 2
     #choose strategy on a daily basis
-    for day in range(debug_num_days):
+    for day in range(365):
         start = day*24
         end = (day+1)*24
         # check for "high risk day"
