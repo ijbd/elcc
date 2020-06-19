@@ -186,7 +186,6 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
 
     return conventional_generators
 
-
 # Get conventional generators in fleet
 def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
     # system_preferences
@@ -213,7 +212,6 @@ def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_l
 
     plants.set_index("Plant Code",inplace=True)   
     return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
-
 
 def derate(derate_conventional, conventional_generators):
 
@@ -256,7 +254,6 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
 
     return RE_generators
 
-
 # Get solar and wind generators in fleet
 def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, powGen_lons):
 
@@ -292,7 +289,6 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, pow
     
     return solar_generators, wind_generators
 
-
 # Find index of nearest coordinate. Implementation of get_RE_index
 def find_nearest_impl(actual_coordinates, discrete_coordinates):
     
@@ -300,7 +296,6 @@ def find_nearest_impl(actual_coordinates, discrete_coordinates):
     for coord in actual_coordinates:
         indices.append((np.abs(coord-discrete_coordinates)).argmin())
     return np.array(indices)
-
 
 # Convert the latitude and longitude of the vg into indices for capacity factor matrix
 #
@@ -314,7 +309,6 @@ def get_cf_index(RE_generators, powGen_lats, powGen_lons):
     RE_generators["lon idx"] = find_nearest_impl(RE_generators["lon"], powGen_lons).astype(int)
 
     return RE_generators
-
 
 # Find expected hourly capacity for RE generators before sampling outages. Of shape (8760 hrs, num generators)
 # Implementation of get_hourly_capacity
@@ -330,7 +324,6 @@ def get_hourly_RE_impl(RE_generators, cf):
     RE_capacity = np.multiply(RE_nameplate, cf[RE_generators["lat idx"], RE_generators["lon idx"], hours])
     return RE_capacity
 
-
 # Get hourly capacity matrix for a generator by sampling outage rates over all hours/iterations. Of shape (8760 hrs, num iterations)
 # Implementation of get_hourly_capacity
 def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
@@ -345,17 +338,12 @@ def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
         #for_matrix = np.random.random_sample((max_iterations,8760,generators["nameplate"].size))>get_for(generators) # shape(its,hours,generators)
         capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T # shape(its,hours).T -> shape(hours,its)
         hourly_capacity[:,i*max_iterations:(i+1)*max_iterations] = capacity 
-
-        if DEBUG:
-            print(i,"of",num_iterations // max_iterations,"blocks complete")
     if num_iterations % max_iterations != 0:
         remaining_iterations = num_iterations % max_iterations
         for_matrix = np.random.random_sample((remaining_iterations,8760,generators["nameplate"].size))>(generators["efor"].T)
         capacity = np.sum(np.multiply(pre_outage_capacity,for_matrix),axis=2).T
         hourly_capacity[:,-remaining_iterations:] = capacity
     return hourly_capacity
-
-
 
 # Get the hourly capacity matrix for a set of generators for a desired number of iterations
 def get_hourly_capacity(num_iterations, generators, cf=None):
@@ -375,7 +363,6 @@ def get_hourly_capacity(num_iterations, generators, cf=None):
 
     return hourly_capacity
 
-
 # Get the hourly capacity matrix for the whole fleet (conventional, solar, and wind)
 def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_generators, 
                                 wind_generators, cf, storage_units=None, hourly_load=None):
@@ -392,7 +379,6 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
     
     return hourly_fleet_capacity
 
-
 # Calculate number of expected hours in which load does not meet demand using monte carlo method
 def get_lolh(num_iterations, hourly_capacity, hourly_load):
 
@@ -401,7 +387,6 @@ def get_lolh(num_iterations, hourly_capacity, hourly_load):
     hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
     lolh = np.sum(lol_matrix) / float(num_iterations)
     return lolh, hourly_risk
-
 
 # Remove the oldest generators from the conventional system
 # Implementation of remove_generators
@@ -779,13 +764,15 @@ def main(simulation,files,system,generator):
     fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["region"],
                                                                             simulation["year"], system["RE efor"],
                                                                             powGen_lats, powGen_lons)
-    fleet_storage = get_storage_fleet(system["fleet storage"],files["eia folder"],simulation["region"],simulation["year"],
-                                        system["storage efficiency"], system["storage strategy threshold"])
+    fleet_storage = get_storage_fleet(  system["fleet storage"],files["eia folder"],simulation["region"],simulation["year"],
+                                        system["storage efficiency"], system["storage strategy threshold"],
+                                        system["storage efor"],system["high risk storage only"])
     
     # Supplemental fleet_storage
-    fleet_supplemental_storage = make_storage(system["supplemental storage"],system["supplemental storage energy capacity"],
-                                            system["supplemental storage charge rate"],system["supplemental storage discharge rate"],
-                                            system["storage efficiency"],system["storage strategy threshold"])
+    fleet_supplemental_storage = make_storage(  system["supplemental storage"],system["supplemental storage energy capacity"],
+                                                system["supplemental storage charge rate"],system["supplemental storage discharge rate"],
+                                                system["storage efficiency"],system["storage strategy threshold"],
+                                                system["storage efor"],system["high risk storage only"])
     fleet_storage = append_storage(fleet_storage, fleet_supplemental_storage)
 
     # Save demand 
@@ -824,16 +811,17 @@ def main(simulation,files,system,generator):
     hourly_RE_generator_capacity = get_hourly_capacity(simulation["iterations"],RE_generator,cf[generator["type"]])
     
     # get added storage
-    added_storage = make_storage(generator["generator storage"],generator["generator storage energy capacity"],
-                                            generator["generator storage charge rate"],generator["generator storage discharge rate"], 
-                                            generator["generator storage efficiency"],system["storage strategy threshold"])
+    added_storage = make_storage(   generator["generator storage"],generator["generator storage energy capacity"],
+                                    generator["generator storage charge rate"],generator["generator storage discharge rate"], 
+                                    system["storage efficiency"],system["storage strategy threshold"],
+                                    system["storage efor"],system["high risk storage only"])
     
     # calculate elcc
     added_capacity = generator["nameplate"] + generator["generator storage"]*generator["generator storage discharge rate"]
     elcc, hourlyRisk = get_elcc(simulation["iterations"],hourly_fleet_capacity,hourly_RE_generator_capacity, 
-                                    fleet_storage,added_storage, hourly_load, generator["nameplate"])
-
-    print("******!!!!!!!!!!!!***********ELCC:", int(elcc/generator["nameplate"]*100))
+                                    fleet_storage,added_storage, hourly_load, + generator["generator storage discharge rate"])
+    print(added_capacity)
+    print("******!!!!!!!!!!!!***********ELCC=", int(elcc/added_capacity*100))
 
     if DEBUG:
         save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)

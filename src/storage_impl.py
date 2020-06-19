@@ -5,11 +5,13 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 
-def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, strategy_threshold):
+def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, strategy_threshold, efor, high_risk_only):
     
     # return empty storage unit
     if include_storage == False:
-        return make_storage(False)
+        storage = dict()
+        storage["num units"] = 0
+        return storage
     
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
@@ -38,6 +40,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     # Fill data structure
     storage = dict()
     storage["strategy threshold"] = strategy_threshold
+    storage["high risk storage only"] = high_risk_only
     storage["num units"] = active_storage["Nameplate Energy Capacity (MWh)"].size
     storage["max charge rate"] = active_storage["Maximum Charge Rate (MW)"].values
     storage["max discharge rate"] = active_storage["Maximum Discharge Rate (MW)"].values
@@ -52,13 +55,15 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     storage["energy"] = np.zeros(storage["num units"])
     storage["extractable energy"] = np.zeros(storage["num units"])
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
+    storage["efor"] = efor
 
     if storage["num units"] == 0:
         print("No storage units found in region.")
 
     return storage
 
-def make_storage(include_storage, energy_capacity=None, charge_rate=None, discharge_rate=None, round_trip_efficiency=None, strategy_threshold=None):
+def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
+                 round_trip_efficiency, strategy_threshold, efor, high_risk_only):
     
     if include_storage == False or energy_capacity == 0:
         storage = dict()
@@ -67,24 +72,19 @@ def make_storage(include_storage, energy_capacity=None, charge_rate=None, discha
 
     storage = dict()
 
-    # from eia
+    storage["strategy threshold"] = strategy_threshold
+    storage["high risk storage only"] = high_risk_only
     storage["num units"] = 1
     storage["max charge rate"] = np.array(charge_rate)
     storage["max discharge rate"] = np.array(discharge_rate)
     storage["max energy"] = np.array(energy_capacity)
-    
-    # parametrized
-    storage["strategy threshold"] = strategy_threshold
     storage["roundtrip efficiency"] = np.ones(storage["num units"]) * round_trip_efficiency
-
-    #for simulation begin empty
+    storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
     storage["power"] = np.zeros(storage["num units"])
     storage["energy"] = np.zeros(storage["num units"])
     storage["extractable energy"] = np.zeros(storage["num units"])
-
-    #interpreted
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
-    storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
+    storage["efor"] = efor
 
     return storage
 
@@ -126,29 +126,38 @@ def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load
     for i in range(num_iterations):
         get_hourly_storage_contribution_impl(hourly_capacity[:,i],hourly_load,storage,hourly_storage_contribution[:,i])
         reset_storage(storage)
-        if i%10 == 0:
+        if i%10 == 0 and i != 0:
             print(i)
 
     return hourly_storage_contribution
 
 def get_hourly_storage_contribution_impl(hourly_capacity, hourly_load, storage, hourly_storage_contribution):
-    
+
+    simulation_days = np.arange(365)
+
+    if storage["high risk storage only"]:
+        risk_days = np.unique((np.argwhere(hourly_load > hourly_capacity)//24).flatten())
+        days_before = 3
+        for i in range(days_before):
+            simulation_days = np.append(risk_days,risk_days-(i+1)) #simulations begin three days before outage event
+        simulation_days = np.unique(np.minimum(np.maximum(simulation_days,0),364))
+
     #choose strategy on a daily basis
-    for day in range(365):
-        start = day*24
+    for day in simulation_days:
+        start = (day)*24
         end = (day+1)*24
         # check for "high risk day"
         if np.any(hourly_load[start:end] > storage["strategy threshold"]):
             reliability_dispatch(hourly_storage_contribution[start:end], hourly_load[start:end],
-                                hourly_capacity[start:end], storage,day)
+                                hourly_capacity[start:end], storage)
         # otherwise emulate "arbitrage" with peak-shaving
         else:
             arbitrage_dispatch(hourly_storage_contribution[start:end], hourly_load[start:end],
-                                hourly_capacity[start:end], storage,day)
+                                hourly_capacity[start:end], storage)
 
     return hourly_storage_contribution
 
-def arbitrage_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage, debug_day=None):
+def arbitrage_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage):
     
     net_load = hourly_load - hourly_capacity
 
@@ -163,7 +172,7 @@ def arbitrage_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity
             load_difference = charge_threshold - net_load[hour]
             hourly_storage_contribution[hour] = charge_storage(load_difference, storage)
 
-def reliability_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage, debug_day=None):
+def reliability_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage):
 
     for hour in range(24):
         # discharge if load is not met
@@ -186,7 +195,7 @@ def update_storage(storage, status):
         storage["extractable energy"] = storage["energy"] * storage["one way efficiency"]
     storage["time to discharge"] = np.divide(storage["extractable energy"],storage["max discharge rate"])
 
-# as implemented by Evans et.al.
+# as implemented by Evans et.al. w/ adjustments by ijbd
 def discharge_storage(unmet_load, storage):
     P_r = unmet_load
     p = storage["max discharge rate"]
@@ -212,13 +221,11 @@ def discharge_storage(unmet_load, storage):
     else:
         z = y[i-1] + (P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
     
-    u = p*np.maximum(np.minimum(x-z,1),0)
+    u = p*np.maximum(np.minimum(x-z,1),0) * (np.random.random_sample(x.shape)>storage["efor"])
 
     #update storage 
     storage["power"] = u
     update_storage(storage,"discharge")
-
-    
 
     return np.sum(storage["power"])
 
@@ -229,12 +236,13 @@ def charge_storage(additional_capacity, storage):
     p_d = storage["max discharge rate"]
     x_max = storage["max energy"] / storage["max discharge rate"]
     x = storage["time to discharge"]
-    n = storage["roundtrip efficiency"]
     
     u = storage["power"]
+
+    n = storage["roundtrip efficiency"]
     
     # sort unique "time to discharges", charge LOWEST first
-    z_max = np.minimum(x-p_c/p_d, x_max)
+    z_max = np.minimum(x-n*p_c/p_d, x_max)
     y = np.unique(np.concatenate((x,z_max)))
 
     E_max = 0
@@ -244,7 +252,7 @@ def charge_storage(additional_capacity, storage):
     while E_max < -P_r and i < len(y)-1:
         i += 1
         E_min = E_max
-        E_max = np.sum(p_d*np.maximum(np.minimum(y[i],z_max)-x,0))
+        E_max = np.sum(p_d/n*np.maximum(np.minimum(y[i],z_max)-x,0))
 
     if E_max <= -P_r:
         z = y[i]
@@ -252,7 +260,12 @@ def charge_storage(additional_capacity, storage):
     else:
         z = y[i-1] + (-P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
     
-    u = -1*p_d*np.maximum(np.minimum(z,z_max)-x,0)
+    if storage["efor"] == 0:
+        outage_factor = 1
+    else:
+        outage_factor = (np.random.random_sample(x.shape)>storage["efor"])
+        
+    u = -1*p_d/n*np.maximum(np.minimum(z,z_max)-x,0)*outage_factor
     
     #update storage 
     storage["power"] = u
