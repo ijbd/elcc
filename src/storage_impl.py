@@ -126,8 +126,6 @@ def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load
     for i in range(num_iterations):
         get_hourly_storage_contribution_impl(hourly_capacity[:,i],hourly_load,storage,hourly_storage_contribution[:,i])
         reset_storage(storage)
-        if i%10 == 0 and i != 0:
-            print(i)
 
     return hourly_storage_contribution
 
@@ -137,7 +135,7 @@ def get_hourly_storage_contribution_impl(hourly_capacity, hourly_load, storage, 
 
     if storage["high risk storage only"]:
         risk_days = np.unique((np.argwhere(hourly_load > hourly_capacity)//24).flatten())
-        days_before = 3
+        days_before = 5
         for i in range(days_before):
             simulation_days = np.append(risk_days,risk_days-(i+1)) #simulations begin three days before outage event
         simulation_days = np.unique(np.minimum(np.maximum(simulation_days,0),364))
@@ -223,6 +221,9 @@ def discharge_storage(unmet_load, storage):
     
     u = p*np.maximum(np.minimum(x-z,1),0) * (np.random.random_sample(x.shape)>storage["efor"])
 
+    if storage["efor"] > 0:
+        u *= np.random.random_sample(x.shape)>storage["efor"]
+
     #update storage 
     storage["power"] = u
     update_storage(storage,"discharge")
@@ -260,13 +261,11 @@ def charge_storage(additional_capacity, storage):
     else:
         z = y[i-1] + (-P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
     
-    if storage["efor"] == 0:
-        outage_factor = 1
-    else:
-        outage_factor = (np.random.random_sample(x.shape)>storage["efor"])
+    u = -1*p_d/n*np.maximum(np.minimum(z,z_max)-x,0)
+
+    if storage["efor"] > 0:
+        u *= np.random.random_sample(x.shape)>storage["efor"]
         
-    u = -1*p_d/n*np.maximum(np.minimum(z,z_max)-x,0)*outage_factor
-    
     #update storage 
     storage["power"] = u
     update_storage(storage, "charge")

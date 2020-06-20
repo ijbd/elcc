@@ -3,9 +3,15 @@ from os import path
 
 folder_name = "elcc."
 
-# add each passed parameter
-for parameter in sys.argv[1:]:
-    folder_name += parameter + "_"
+folder_type = sys.argv[1] 
+
+if folder_type == "parameters":
+    # add each passed parameter
+    for parameter in sys.argv[2:]:
+        folder_name += parameter + "__"
+
+if folder_type == "manual":
+    folder_name += sys.argv[2]
 
 # add tag
 folder_name += ".out"

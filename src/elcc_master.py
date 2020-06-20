@@ -37,7 +37,7 @@ files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships
 # Adjust parameters of existing fleet
 system["setting"] = "none" # none, save, or load
 system["conventional efor"] = .05
-system["RE efor"] = 0.0 #set to 1 to remove all W&S generators from current fleet
+system["RE efor"] = .05 #set to 1 to remove all W&S generators from current fleet
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
 system["oldest year"] = 1950 #remove conventional generators older than this year
 system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
@@ -46,13 +46,15 @@ system["Temperature-dependent FOR indpendent of size"] = True #implemnts tempera
 
 ######### Storage ###########
 
-system["fleet storage"] = True #include existing fleet storage 
-system["storage efficiency"] = .8 #roundtrip (as decimal)
 system["storage strategy threshold"] = 0 #load threshold for switching between reliability strategy and peak-shaving strategy
+system["high risk storage only"] = True #only simulate storage during high risk season
+system["storage efficiency"] = .8 #roundtrip 
+system["storage efor"] = 0
+system["fleet storage"] = True #include existing fleet storage 
 system["supplemental storage"] = True # add supplemental storage to simulate higher storage penetration
-system["supplemental storage charge rate"] = 100 # MW
-system["supplemental storage discharge rate"] = 100 # MW
-system["supplemental storage energy capacity"] = 100 # MWh
+system["supplemental storage charge rate"] = 1000 # MW
+system["supplemental storage discharge rate"] = 1000 # MW
+system["supplemental storage energy capacity"] = 1000 # MWh
 
 
 ######## Generator ##########
@@ -61,39 +63,21 @@ generator["type"] = "solar" #solar or wind
 generator["nameplate"] = 100 #MW
 generator["lat"] = 41
 generator["lon"] = -112
-generator["efor"] = 1.0 #0.05 originally
+generator["efor"] = .05 
 
 ###### Added Storage ########
 
-generator["generator storage"] = True #find elcc of additional storage
+generator["generator storage"] = False #find elcc of additional storage
 generator["generator storage charge rate"] = 100 #MW
 generator["generator storage discharge rate"] = 100 #MW
 generator["generator storage energy capacity"] = 100 #MWh 
-generator["generator storage efficiency"] = .8 #roundtrip (as decimal) 
 
 ##############################################################################################
 
 # handle arguments depending on job
 simulation["output folder"] = 'testing/'
 
-print('*********************** SOLAR ONLY')
-system["supplemental storage"] = False
-generator["generator storage"] = False
-
 main(simulation,files,system,generator)
-
-print('*********************** SOLAR W/ SUPPLEMENTAL FLEET STORAGE')
-system["supplemental storage"] = True
-generator["generator storage"] = False
-
-main(simulation,files,system,generator)
-
-print('*********************** SOLAR W/ GENERATOR STORAGE')
-system["supplemental storage"] = False
-generator["generator storage"] = False
-
-main(simulation,files,system,generator)
-
 
 ###### TESTING ########
 TESTING = False
