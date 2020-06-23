@@ -785,8 +785,6 @@ def main(simulation,files,system,generator):
     # Display parameters
     print_parameters(simulation,files,system,generator)
 
-    aa 
-
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
     hourly_load = get_hourly_load(files["demand file"],simulation["year"],simulation["shift load"]) 
