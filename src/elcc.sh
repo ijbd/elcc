@@ -10,8 +10,7 @@ root_directory="testing/"
         do
             parameter_string="$parameter_string $key ${parameters[$key]}"
         done
-        #sbatch elcc_batch_job.sbat $root_directory $parameter_string
-        bash elcc_batch_job.sh $root_directory $parameter_string
+        sbatch elcc_batch_job.sbat $root_directory $parameter_string
     }
 
     # parameters for job
@@ -26,10 +25,10 @@ root_directory="testing/"
     # experiments
     parameters["supplemental_storage"]="True"
     
-    for storage_power_capacity in 1 #100 500 1000 2000 3000
+    for storage_power_capacity in 100 500 1000 2000 3000
     do
         parameters["supplemental_storage_power_capacity"]=$storage_power_capacity
-        for storage_duration in 1 #{1..3}
+        for storage_duration in {1..3}
             do
             storage_energy_capacity=$(($storage_power_capacity * $storage_duration))
             parameters["supplemental_storage_energy_capacity"]=$storage_energy_capacity
