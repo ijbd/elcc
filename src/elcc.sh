@@ -1,32 +1,42 @@
 #!/bin/bash
 
-#1
-fleet_storage="False"
-supplemental_storage="False"
-generator_storage="False"
-storage_for=".05"
+root_directory="testing/"
 
-output_folder=$(python make_folder.py manual no_storage_benchmark)
+####################### IMPLEMENTATION #######################
 
-echo "sbatch elcc_batch_job.sbat" $output_folder $fleet_storage $supplemental_storage $generator_storage $storage_for
+    run_job() {
+        parameter_string=''
+        for key in "${!parameters[@]}"
+        do
+            parameter_string="$parameter_string $key ${parameters[$key]}"
+        done
+        #sbatch elcc_batch_job.sbat $root_directory $parameter_string
+        bash elcc_batch_job.sh $root_directory $parameter_string
+    }
 
-#2
-fleet_storage="True"
-supplemental_storage="True"
-generator_storage="True"
-storage_for=".05"
+    # parameters for job
+    declare -A parameters 
 
-output_folder=$(python make_folder.py manual fleet_storage__generator_storage__.05_generator_efor__)
+########################### JOBS #############################
 
-echo "sbatch elcc_batch_job.sbat" $output_folder $fleet_storage $supplemental_storage $generator_storage $storage_for
+    # control
+    echo "Running: No storage"
+    run_job
 
-#2
-fleet_storage="True"
-supplemental_storage="True"
-generator_storage="True"
-storage_for=".05"
+    # experiments
+    parameters["supplemental_storage"]="True"
+    
+    for storage_power_capacity in 1 #100 500 1000 2000 3000
+    do
+        parameters["supplemental_storage_power_capacity"]=$storage_power_capacity
+        for storage_duration in 1 #{1..3}
+            do
+            storage_energy_capacity=$(($storage_power_capacity * $storage_duration))
+            parameters["supplemental_storage_energy_capacity"]=$storage_energy_capacity
 
-output_folder=$(python make_folder.py manual fleet_storage__generator_storage__.05_generator_efor__)
+            echo "Running: " $storage_power_capacity "MW w/" $storage_energy_capacity "MWh"
+            run_job
+            done
+    done
 
-echo "sbatch elcc_batch_job.sbat" $output_folder $fleet_storage $supplemental_storage $generator_storage $storage_for
 

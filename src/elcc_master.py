@@ -16,12 +16,12 @@ generator = dict()
 
 simulation["year"] = 2018
 simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
-simulation["iterations"] = 500 # number of iterations for monte carlo simulation
+simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
-simulation["target lolh"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
+simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["debug"] = True # print all information flagged for debug
-simulation["output folder"] = "./"
+simulation["print debug"] = True # print all information flagged for debug
+simulation["output directory"] = "./"
 
 ######## files ########
 
@@ -36,30 +36,30 @@ files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships
 
 # Adjust parameters of existing fleet
 system["setting"] = "none" # none, save, or load
-system["conventional efor"] = .05
-system["RE efor"] = .05 #set to 1 to remove all W&S generators from current fleet
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
 system["oldest year"] = 1950 #remove conventional generators older than this year
-system["Temperature-dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
-system["Temperature-dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
+
+######### Outages ###########
+
+system["conventional efor"] = .05 #ignored if temperature-dependent FOR is true
+system["renewable efor"] = .05 #set to 1 to ignore all W&S generators from current fleet
+system["temperature dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["temperature dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
 
 ######### Storage ###########
 
-system["storage strategy threshold"] = 0 #load threshold for switching between reliability strategy and peak-shaving strategy
-system["high risk storage only"] = True #only simulate storage during high risk season
+system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
 system["storage efficiency"] = .8 #roundtrip 
 system["storage efor"] = 0
-system["fleet storage"] = True #include existing fleet storage 
-system["supplemental storage"] = True # add supplemental storage to simulate higher storage penetration
-system["supplemental storage charge rate"] = 1000 # MW
-system["supplemental storage discharge rate"] = 1000 # MW
-system["supplemental storage energy capacity"] = 1000 # MWh
-
+system["fleet storage"] = False #include existing fleet storage 
+system["supplemental storage"] = False # add supplemental storage to simulate higher storage penetration
+system["supplemental storage power capacity"] = 100 # MW
+system["supplemental storage energy capacity"] = 100 # MWh
 
 ######## Generator ##########
 
-generator["type"] = "solar" #solar or wind 
+generator["generator type"] = "solar" #solar or wind 
 generator["nameplate"] = 100 #MW
 generator["lat"] = 41
 generator["lon"] = -112
@@ -68,58 +68,48 @@ generator["efor"] = .05
 ###### Added Storage ########
 
 generator["generator storage"] = False #find elcc of additional storage
-generator["generator storage charge rate"] = 100 #MW
-generator["generator storage discharge rate"] = 100 #MW
+generator["generator storage power capacity"] = 100 #MW
 generator["generator storage energy capacity"] = 100 #MWh 
 
 ##############################################################################################
 
-# handle arguments depending on job
-simulation["output folder"] = 'testing/'
+# handle arguments depending on job based on key-value entries. for multi-word keys, use underscores.
+#
+#   e.g.        python elcc_master.py year 2017 region WECC print_debug False 
+#
+parameters = sys.argv[1:]
 
+i = 0
+while i < len(parameters):
+    key = parameters[i].replace('_',' ')
+    value = parameters[i+1]
+    for param_set in [simulation, files, system, generator]:
+        if key in param_set:
+
+            param_set[key] = str(value)
+
+            # handle numerical arguments
+            try:
+                # floats
+                float_value = float(value)
+                param_set[key] = float_value
+    
+                # ints
+                if float(value) == int(value):
+                    param_set[key] = int(value)
+            except:
+                pass
+
+            # handle boolean arguments
+            if value == "True": param_set[key] = True
+            elif value == "False": param_set[key] = False
+    i += 2 
+
+# dependent arguments
+files["demand file"] = "../demand/"+simulation["region"]+".csv"
+files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
+files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
+files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+
+# run program
 main(simulation,files,system,generator)
-
-###### TESTING ########
-TESTING = False
-
-if TESTING:
-
-    for dShift in [-1,0,1]:
-        print('**************************SHIFT HOURS:',dShift)
-
-        test_simulation = dict(simulation)
-        test_simulation["shift load"] = dShift
-
-        main(test_simulation,files,system,generator)  
-
-    for generator_efor in [0.0,.25,.5]:
-        print('****************************GENERATOR EFOR:',generator_efor)
-
-        test_generator = dict(generator)
-        test_generator["efor"] = generator_efor
-
-        main(simulation,files,system,test_generator)
-
-    for conventional_efor in [.025,.075,.125]:
-        print('***********************CONVENTIONAL EFOR:',conventional_efor)
-        
-        test_system = dict(system)
-        test_system["conventional efor"] = conventional_efor
-
-        main(simulation,files,test_system,test_generator)
-
-    for tgtLolh in [2.4,20]:
-        print('************************TARGET LOLH:',tgtLolh)
-
-        test_simulation = dict(simulation) #deep copy
-        test_simulation["target lolh"] = tgtLolh
-
-        main(test_simulation,files,system,generator)    
-
-    for i in range(4):
-        print('******************************YEAR:,',2017)
-        
-        test_simulation = dict(simulation)
-        test_simulation["year"] = 2017
-
-        main(test_simulation,files,system,generator)

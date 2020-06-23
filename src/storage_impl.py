@@ -1,11 +1,8 @@
 import numpy as np 
 import pandas as pd 
 
-import matplotlib
-import matplotlib.pyplot as plt
 
-
-def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, strategy_threshold, efor, high_risk_only):
+def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, efor, dispatch_strategy):
     
     # return empty storage unit
     if include_storage == False:
@@ -39,8 +36,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     
     # Fill data structure
     storage = dict()
-    storage["strategy threshold"] = strategy_threshold
-    storage["high risk storage only"] = high_risk_only
+    storage["dispatch strategy"] = dispatch_strategy
     storage["num units"] = active_storage["Nameplate Energy Capacity (MWh)"].size
     storage["max charge rate"] = active_storage["Maximum Charge Rate (MW)"].values
     storage["max discharge rate"] = active_storage["Maximum Discharge Rate (MW)"].values
@@ -56,6 +52,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     storage["extractable energy"] = np.zeros(storage["num units"])
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
+    storage["full"] = storage["extractable energy"] == storage["max energy"]
 
     if storage["num units"] == 0:
         print("No storage units found in region.")
@@ -63,7 +60,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     return storage
 
 def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
-                 round_trip_efficiency, strategy_threshold, efor, high_risk_only):
+                 round_trip_efficiency, efor, dispatch_strategy):
     
     if include_storage == False or energy_capacity == 0:
         storage = dict()
@@ -72,8 +69,7 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
 
     storage = dict()
 
-    storage["strategy threshold"] = strategy_threshold
-    storage["high risk storage only"] = high_risk_only
+    storage["dispatch strategy"] = dispatch_strategy
     storage["num units"] = 1
     storage["max charge rate"] = np.array(charge_rate)
     storage["max discharge rate"] = np.array(discharge_rate)
@@ -85,11 +81,12 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
     storage["extractable energy"] = np.zeros(storage["num units"])
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
+    storage["full"] = storage["extractable energy"] == storage["max energy"]
 
     return storage
 
 def append_storage(fleet_storage, additional_storage):
-
+      
     #edge cases
     if fleet_storage["num units"] == 0:
         return additional_storage
@@ -108,13 +105,16 @@ def append_storage(fleet_storage, additional_storage):
     return fleet_storage
 
 def reset_storage(storage):
+
     #for simulation begin empty
     storage["power"] = np.zeros(storage["num units"])
     storage["energy"] = np.zeros(storage["num units"])
     storage["extractable energy"] = np.zeros(storage["num units"])
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
 
-def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage):
+    return
+
+def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage, renewable_profile=None):
     
     hourly_storage_contribution = np.zeros((8760,num_iterations))
     
@@ -124,43 +124,37 @@ def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load
 
     # dispatch in every iteration according to outages and available capacity
     for i in range(num_iterations):
-        get_hourly_storage_contribution_impl(hourly_capacity[:,i],hourly_load,storage,hourly_storage_contribution[:,i])
+
+        if storage["dispatch strategy"] == "reliability":
+            reliability_strategy(hourly_capacity[:,i],hourly_load,storage,hourly_storage_contribution[:,i])
+
+        elif storage["dispatch strategy"] == "arbitrage":
+            net_load = hourly_load - renewable_profile
+            arbitrage_strategy(net_load,storage,hourly_storage_contribution[:,i])
+        
+        else:
+            error_message = "Invalid dispatch strategy: \""+storage["dispatch strategy"]+"\""
+            raise RuntimeWarning(error_message)
         reset_storage(storage)
 
     return hourly_storage_contribution
 
-def get_hourly_storage_contribution_impl(hourly_capacity, hourly_load, storage, hourly_storage_contribution):
+def arbitrage_strategy(net_load,storage,hourly_storage_contribution):
 
-    simulation_days = np.arange(365)
-
-    if storage["high risk storage only"]:
-        risk_days = np.unique((np.argwhere(hourly_load > hourly_capacity)//24).flatten())
-        days_before = 5
-        for i in range(days_before):
-            simulation_days = np.append(risk_days,risk_days-(i+1)) #simulations begin three days before outage event
-        simulation_days = np.unique(np.minimum(np.maximum(simulation_days,0),364))
-
-    #choose strategy on a daily basis
-    for day in simulation_days:
-        start = (day)*24
+    for day in range(365):
+        start = day*24
         end = (day+1)*24
-        # check for "high risk day"
-        if np.any(hourly_load[start:end] > storage["strategy threshold"]):
-            reliability_dispatch(hourly_storage_contribution[start:end], hourly_load[start:end],
-                                hourly_capacity[start:end], storage)
-        # otherwise emulate "arbitrage" with peak-shaving
-        else:
-            arbitrage_dispatch(hourly_storage_contribution[start:end], hourly_load[start:end],
-                                hourly_capacity[start:end], storage)
-
-    return hourly_storage_contribution
-
-def arbitrage_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage):
+        arbitrage_dispatch(net_load[start:end],storage,hourly_storage_contribution[start:end])
     
-    net_load = hourly_load - hourly_capacity
+    return 
 
-    discharge_threshold = np.percentile(net_load, 75)
-    charge_threshold = np.percentile(net_load, 25)
+def arbitrage_dispatch(net_load, storage, hourly_storage_contribution):
+
+    discharge_percentile = 75
+    charge_percentile = 25
+
+    discharge_threshold = np.percentile(net_load, discharge_percentile)
+    charge_threshold = np.percentile(net_load, charge_percentile)
 
     for hour in range(24):
         if net_load[hour] > discharge_threshold:
@@ -169,6 +163,33 @@ def arbitrage_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity
         elif net_load[hour] < charge_threshold:
             load_difference = charge_threshold - net_load[hour]
             hourly_storage_contribution[hour] = charge_storage(load_difference, storage)
+
+    return
+
+def reliability_strategy(hourly_capacity,hourly_load,storage,hourly_storage_contribution):
+    
+    simulation_days = np.unique((np.argwhere(hourly_load > hourly_capacity)//24).flatten())
+    simulation_days = np.append(simulation_days,0) 
+    simulation_days = np.unique(np.minimum(np.maximum(simulation_days,0),364))
+    
+    last_day = simulation_days[-1]
+    #choose strategy on a daily basis
+    for i in range(simulation_days.size):
+        day = simulation_days[i]
+        if day == last_day:
+            next_risk_day = day + 1
+        else:
+            next_risk_day = simulation_days[i+1]
+        # Simulate risk days or until storage is charged
+        storage["full"] = False
+        while day != next_risk_day  and storage["full"] == False:
+            start = (day)*24 
+            end = (day+1)*24
+            reliability_dispatch(hourly_storage_contribution[start:end], hourly_load[start:end],
+                                hourly_capacity[start:end], storage)
+            day += 1
+    
+    return
 
 def reliability_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage):
 
@@ -183,18 +204,12 @@ def reliability_dispatch(hourly_storage_contribution, hourly_load, hourly_capaci
             additional_capacity = hourly_capacity[hour] - hourly_load[hour]
             # charge storage
             hourly_storage_contribution[hour] = charge_storage(additional_capacity, storage)
-        
-def update_storage(storage, status):
-    if status == "discharge":
-        storage["extractable energy"] = storage["extractable energy"] - storage["power"] 
-        storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
-    if status == "charge":
-        storage["energy"] = storage["energy"] - storage["power"] * storage["one way efficiency"] 
-        storage["extractable energy"] = storage["energy"] * storage["one way efficiency"]
-    storage["time to discharge"] = np.divide(storage["extractable energy"],storage["max discharge rate"])
+
+    return
 
 # as implemented by Evans et.al. w/ adjustments by ijbd
 def discharge_storage(unmet_load, storage):
+
     P_r = unmet_load
     p = storage["max discharge rate"]
     x = storage["time to discharge"]
@@ -232,6 +247,7 @@ def discharge_storage(unmet_load, storage):
 
 # based on proposed charging policy by Evans et.al. with adjustments by ijbd
 def charge_storage(additional_capacity, storage):
+
     P_r = -additional_capacity
     p_c = -storage["max charge rate"]
     p_d = storage["max discharge rate"]
@@ -271,3 +287,19 @@ def charge_storage(additional_capacity, storage):
     update_storage(storage, "charge")
 
     return np.sum(storage["power"])
+
+def update_storage(storage, status):
+
+    if status == "discharge":
+        storage["extractable energy"] = storage["extractable energy"] - storage["power"] 
+        storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
+    if status == "charge":
+        storage["energy"] = storage["energy"] - storage["power"] * storage["one way efficiency"] 
+        storage["extractable energy"] = storage["energy"] * storage["one way efficiency"]
+    
+    # set storage state
+    storage["full"] = storage["extractable energy"] == storage["max energy"]
+
+    storage["time to discharge"] = np.divide(storage["extractable energy"],storage["max discharge rate"]) 
+
+    return
