@@ -538,12 +538,12 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
 
     total_capacity_removed = total_capacity_removed - supplement_capacity
 
-    print("Oldest operating year:",int(oldest_year))
-    print("Number of active generators:",conventional_generators["nameplate"].size)
-    print("Supplemental capacity:",supplement_capacity)
-    print("Capacity removed:",int(total_capacity_removed))
-    print("Conventional fleet average capacity:",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
-    print("lolh achieved:",lolh)
+    print("Oldest operating year :",int(oldest_year))
+    print("Number of active generators :",conventional_generators["nameplate"].size)
+    print("Supplemental capacity :",supplement_capacity)
+    print("Capacity removed :",int(total_capacity_removed))
+    print("Conventional fleet average capacity :",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
+    print("lolh achieved :",lolh)
 
     return conventional_generators
 
@@ -603,12 +603,12 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
                                                                 fleet_storage, fleet_renewable_profile)
     hourly_total_capacity = np.add(hourly_fleet_capacity,hourly_storage_capacity)
 
-    if fleet_storage["num units"] != 0:
+    if fleet_storage["num units"] != 0 and DEBUG:
         dbg_storage = np.array([hourly_load-hourly_fleet_capacity[:,0],hourly_storage_capacity[:,0]]).T
-        np.savetxt("storage_dbg.csv",dbg_storage,delimiter=',')
+        np.savetxt(OUTPUT_DIRECTORY+"storage_dbg.csv",dbg_storage,delimiter=',')
 
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
-    print("Target lolh:", target_lolh)
+    print("target lolh :", target_lolh)
     
     # use binary search to find amount of load needed to match base reliability
     additional_load_max = added_capacity
@@ -857,11 +857,11 @@ def main(simulation,files,system,generator):
                                     fleet_storage,added_storage, hourly_load, added_capacity, 
                                     fleet_renewable_profile, added_renewable_profile)
     print(added_capacity)
-    print("**********!!!!!!!!!!!!***********ELCC:", int(elcc/added_capacity*100))
+    print("**********!!!!!!!!!!!!*********** ELCC :", int(elcc/added_capacity*100))
 
     if DEBUG:
         save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
         np.savetxt(OUTPUT_DIRECTORY+'hourlyRisk.csv',hourlyRisk,delimiter=',')
 
-    print("End Main:\t",str(datetime.now().time()))
+    print("End Main :\t",str(datetime.now().time()))
     return elcc,hourlyRisk
