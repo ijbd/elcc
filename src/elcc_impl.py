@@ -1,17 +1,17 @@
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
+import datetime
 import math
 import os
-import os.path
 import sys
 from os import path
 import numpy as np
 import pandas as pd
 from netCDF4 import Dataset
 from numpy import random
+from numpy import genfromtxt
 import matplotlib
 import matplotlib.pyplot as plt
-
 from storage_impl import get_storage_fleet, get_hourly_storage_contribution, make_storage, append_storage
 
 np.random.seed()
@@ -20,9 +20,21 @@ np.random.seed()
 DEBUG = False
 OUTPUT_DIRECTORY = ""
 
-# Get all necessary information from powGen netCDF files: RE capacity factos and corresponding lat/lons
-#           Capacity factors in matrix of shape(lats, lon, 8760 hrs) 
+
 def get_powGen(solar_cf_file, wind_cf_file):
+    
+    """ Retrieves all necessary information from powGen netCDF files: RE capacity factors and corresponding lat/lons
+    
+    Capacity factors are in matrix of shape(lats, lon, 8760 hrs) for 1 year
+
+    ...
+
+    Args
+    ----------
+    `solar_cf_file` (str): file path to capacity factors of solar plants
+        
+    `wind_cf_file` (str): file path to capacity factors of wind plants
+    """
 
     # Error Handling
     if not (path.exists(solar_cf_file) and path.exists(wind_cf_file)):
@@ -44,19 +56,40 @@ def get_powGen(solar_cf_file, wind_cf_file):
 
     return powGen_lats, powGen_lons, cf
 
-# Get hourly load vector
+
 def get_hourly_load(demand_file_in, year, hrsShift=0):
-    
+    """ Retrieves hourly load vector from load file
+
+    ...
+
+    Args:
+    ----------
+    `demand_file_in` (str): file path to demand of system
+        
+    `year` (int): year of interest
+
+    `hrsShift` (int): optional parameter to shift load, default no shift
+    """
+
     # Open file
     demand_data = pd.read_csv(demand_file_in,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
+
+
+    # Remove leap day
+    leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
+    demand_data.drop(leap_days, inplace=True) 
+        # two date_time formats from eia cleaned data
+    leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
+    demand_data.drop(leap_days, inplace=True)
 
     # Find Given Year
     hourly_load = np.array(demand_data["cleaned demand (MW)"][demand_data.index.str.find(str(year),0,10) != -1].values)
 
     # Remove leap day
     leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
-    demand_data.drop(leap_days, inplace=True) 
-        # two date_time formats from eia cleaned data
+    demand_data.drop(leap_days, inplace=True)
+     
+    # two date_time formats from eia cleaned data
     leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
     demand_data.drop(leap_days, inplace=True)
 
@@ -73,6 +106,128 @@ def get_hourly_load(demand_file_in, year, hrsShift=0):
         error_message = 'Expected hourly load array of size 8760. Found array of size '+str(hourly_load.size)
         raise RuntimeError(error_message)
     return hourly_load
+
+
+
+def clean_total_interchange(total_interchange):
+    """ Cleans total interchange data by applying various methods of removing outliers/filling nan values
+
+    ...
+
+    Args:
+    ----------
+    `total_interchange` (panda array): TI data
+
+    """
+    #main interchange numpy array that will be passed back cleaned
+    total_interchange_array = np.array([])
+
+    clean_column = 'Adjusted TI'
+
+    #goes through monthly for more specific mean values to remove outliers
+    for month in range(1,13):
+
+        #gets one month to compute respective mean
+        subset_TI_data = total_interchange[
+            (total_interchange['UTC time'].dt.month == month)
+        ]
+
+        #generates TI data from adjusted Net Generation and Demand values using formula TI + D = NG and plugs into nan values
+        calculated_TI = subset_TI_data['Adjusted NG'] - subset_TI_data['Adjusted D']
+        subset_TI_data.loc[:,clean_column] = subset_TI_data.loc[:,clean_column].fillna(calculated_TI)
+
+
+        #removes outliers(sets to nan) greater then 3 standard deviations away from mean
+        mu = subset_TI_data[clean_column].mean()
+        sigma = subset_TI_data[clean_column].std()
+        ind_out = np.abs(subset_TI_data.loc[:, clean_column]-mu) > (3*sigma)
+        subset_TI_data.loc[ind_out, clean_column] = np.nan
+
+        # pad interpolates 2 hours max
+        subset_TI_data.loc[:,'Adjusted TI'] = subset_TI_data['Adjusted TI'].interpolate(method='pad', limit=2)
+
+        #uses data from a week ago, or a week forward for any other missing data not filled
+        ind_na = subset_TI_data.loc[:, clean_column].isna()
+        limit = 3
+        for ts in subset_TI_data.index[ind_na]:
+            try:
+                #looks week back and tries to set value
+                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
+                    ts - (7*24), clean_column]
+            except KeyError:
+                #looks week forward and tries to set value if prior empty
+                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
+                    ts + (7*24), clean_column]
+            except TypeError:
+                #included for type error of ts including 'Adjusted TI'
+                continue
+
+            # If we didn't manage to find a value, look forward even more then 1 week on each side
+            cnt = 0
+            while np.isnan(subset_TI_data.loc[ts, clean_column]):
+                cnt += 1
+                if cnt > limit:
+                    raise ValueError("Can't fill this NaN")
+                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
+                        ts+(cnt*7*24), clean_column]
+            
+        #inserting cleaned data into main np array
+        total_interchange_array = np.append(total_interchange_array,subset_TI_data['Adjusted TI'].values)
+
+    return total_interchange_array
+
+def get_total_interchange(year,region,folder):
+    """Retrieves all imports/exports for region of that year
+
+    Args:
+    ----------
+    `year` (int): year of interest
+
+    `region` (str): balancing authority
+
+    `folder` (str): location of total interchange data
+    """    
+    #loads in data
+    interchange_file_path = folder + region + "_TI.xlsx"
+
+    #check to see if total interchange cvs file is there
+    if (path.exists(interchange_file_path)):
+        raw_TI_Data = pd.read_excel(interchange_file_path)
+    else:
+        error_message = "No total interchange data found for " + region
+        raise RuntimeError(error_message)
+
+    #selecting data for desired year, uses datetime format encoded in excel spreadsheet
+    filtered_TI_data = raw_TI_Data[
+    (raw_TI_Data['UTC time'].dt.year == year)
+    ]
+
+    #cleaning for CISO, data is shifted forward 1 hour before 2016-9-13
+    if ((region == "CISO") & (year == 2016)):
+        #converting panda datetime to readable python date time
+        datetime_array = raw_TI_Data['UTC time'].dt.to_pydatetime()
+
+        #gets out time period of error
+        ind = ((datetime_array >= pd.to_datetime('2016-01-01')) & (datetime_array <= pd.to_datetime('2016-09-13')))
+
+        #shifts time period back 1 hour
+        raw_TI_Data.loc[ind,"Adjusted TI"] = raw_TI_Data.loc[ 
+        ind, "Adjusted TI"].shift(-1).values
+
+        #selecting data for desired year, uses datetime format encoded in excel spreadsheet
+        filtered_TI_data = raw_TI_Data[
+            raw_TI_Data['UTC time'].dt.year == year
+        ]
+
+    #gets rid of any leap year day
+    if ~(year % 4):
+            filtered_TI_data = filtered_TI_data[
+            ~((filtered_TI_data['UTC time'].dt.month == 2) & 
+            (filtered_TI_data['UTC time'].dt.day == 29))
+            ]
+
+    return clean_total_interchange(filtered_TI_data)
+
 
 #loads in hourly temperature for all the coordinates in desired region
 def get_temperature_data(temperature_file):
@@ -105,7 +260,9 @@ def calculate_fors(total_efor_array, simplified_tech_list, benchmark_fors,hourly
             benchmark_for_keyword = tech
         total_efor_array =  np.where(simplified_tech_list == tech,benchmark_fors[benchmark_for_keyword][temperature_indices[:]]/100,total_efor_array)
     
-    print("Average annual temperature dependent FOR: " + str(np.average(total_efor_array)))
+    #TESTING
+    #print("Average annual temperature dependent FOR: " + str(np.average(total_efor_array)))
+    
     return total_efor_array
 
 #create total forced outage rate for all the generators in desired region's fleet
@@ -117,8 +274,8 @@ def get_tech_efor_round_downs(simplified_tech_list, latitudes, longitudes,temper
     
     return calculate_fors(total_efor_array, simplified_tech_list, benchmark_fors, hourly_temp_data)
 
-#function used to convert technologies of all generators into 6 known for technolgoy realtionships
-#if realtionship isnt known treated as constat 5%
+#function used to convert technologies of all generators into 6 known for technology relationships
+#if relationship is not known treated as constant 5%
 def find_desired_tech_indices(desired_tech_list,generator_technology):
     simplified_tech_list = np.zeros(len(generator_technology))
     generator_technology = pd.DataFrame(data=generator_technology.flatten())
@@ -128,7 +285,7 @@ def find_desired_tech_indices(desired_tech_list,generator_technology):
     return simplified_tech_list
 
 #create main tech list where all the other different types of tech are divided into 6 main known temperature-for relatonships,
-# any tech that doesnt fall into 6 groups is given a constant for of .05    
+# any tech that does not fall into 6 groups is given a constant for of .05    
 def get_temperature_dependent_efor(latitudes,longitudes,technology,temperature_data,benchmark_fors):
     total_tech_list = dict()
     total_tech_list["CC"] = np.array(["Natural Gas Fired Combined Cycle"])
@@ -139,8 +296,7 @@ def get_temperature_dependent_efor(latitudes,longitudes,technology,temperature_d
     total_tech_list["HD"]  =  np.array(["Conventional Hydroelectric","Solar Thermal without Energy Storage",
                    "Hydroelectric Pumped Storage","Solar Thermal with Energy Storage","Wood/Wood Waste Biomass"])
     simplified_tech_list = find_desired_tech_indices(total_tech_list,technology)
-    #FOR TESTING
-    #return simplified_tech_list
+
     return get_tech_efor_round_downs(simplified_tech_list,latitudes,longitudes,temperature_data,benchmark_fors)
 
 # Implementation of get_conventional_fleet
@@ -159,7 +315,6 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
     #getting lats and longs correct indices
     latitudes = find_nearest_impl(plants["Latitude"][active_generators["Plant Code"]].values,powGen_lats)
     longitudes = find_nearest_impl(plants["Longitude"][active_generators["Plant Code"]].values,powGen_lons)
-     
     # Convert Dataframe to Dictionary of numpy arrays
     conventional_generators = dict()
     conventional_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
@@ -174,7 +329,7 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
             conventional_generators["efor"] = np.where(np.array([conventional_generators["nameplate"],]*8760).T <= 20,system_preferences["conventional efor"],conventional_generators["efor"])
     else:
         conventional_generators["efor"] = np.ones(conventional_generators["nameplate"].size) * system_preferences["conventional efor"]                                  
-        
+        print(conventional_generators["efor"].shape)
     # Error Handling
 
     if conventional_generators["nameplate"].size == 0:
@@ -185,6 +340,7 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
         print("found",conventional_generators["nameplate"].size,"conventional generators")
 
     return conventional_generators
+
 
 # Get conventional generators in fleet
 def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
@@ -391,7 +547,7 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
 
 # Calculate number of expected hours in which load does not meet demand using monte carlo method
 def get_lolh(num_iterations, hourly_capacity, hourly_load):
-
+    
     # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
     hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
@@ -435,7 +591,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
                         cf, hourly_load, oldest_year_manual, target_lolh, temperature_dependent_efor):
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
-    low_iterations = 10
+    low_iterations = 50
     total_capacity_removed = 0
 
     # Manual removal
@@ -772,9 +928,9 @@ def save_active_generators(conventional, solar, wind):
 ###################### MAIN ############################
 
 def main(simulation,files,system,generator):
-    print("Begin Main:\t",str(datetime.now().time()))
-
+    print("Begin Main:\t",str(datetime.datetime.now().time()))
     # initialize global variables
+    
     global DEBUG 
     DEBUG = simulation["print debug"]
 
@@ -808,6 +964,10 @@ def main(simulation,files,system,generator):
     # Save demand 
     np.savetxt(OUTPUT_DIRECTORY+'demand.csv',hourly_load,delimiter=',')
     
+    #implements imports/exports for balancing authority
+    if system["Enable Imports/Exports"]:
+        pd.options.mode.chained_assignment = None  #suppress warning occuring in get_total_interchange
+        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["Total Interchange folder"]).astype(np.int64)
     # Load saved system
     if system["setting"] == "load":
         hourly_fleet_capacity = load_hourly_fleet_capacity(simulation,system)
