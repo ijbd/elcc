@@ -3,7 +3,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt 
 import pandas as pd 
 
-root_directory = '../../archive/2018_PACE_storage_penetration_sensitivity/'
+root_directory = '../../archive/2018_PACE_3000MW_Storage/'
 results = pd.read_csv(root_directory+'results.csv')
 
 datum = dict()
@@ -14,7 +14,7 @@ datum["capacity removed"] = results["Capacity removed"].values
 datum["nameplate capacity"] *= datum["storage bool"]
 datum["elcc"] = results["ELCC"].values
 
-sort_order = np.argsort(datum["nameplate capacity"])
+sort_order = np.argsort(datum["duration"])
 
 for key in datum:
     datum[key] = datum[key][sort_order]
@@ -23,33 +23,23 @@ for key in datum:
 
 fig, ax = plt.subplots()
 
-for dur in datum["duration"]:
-    color=int((dur*331100)%999999)
-    plt_capacity = datum["nameplate capacity"][datum["duration"]==dur]
-    plt_elcc = datum["elcc"][datum["duration"]==dur]
-    ax.plot(plt_capacity/10000*100,plt_elcc,c="#"+str(color))
+ax.plot(datum["duration"],datum["elcc"],c='r')
 
-ax.set_xlabel('Storage Penetration (%)')
+ax.set_xlabel('Storage Duration (Hours)')
 ax.set_ylabel('ELCC (% of nameplate)')
-plt.legend(['1 Hour Storage', '2 Hour Storage', '3 Hour Storage'])
-plt.title('ELCC of 100 MW Solar in Salt Lake City\n Storage Penetration Sensitivity')
+plt.title('ELCC of 100 MW Solar in Salt Lake City\n 3000 MW Storage')
 
-plt.savefig("storage_elcc_sensitivity")
+plt.savefig("storage_duration_elcc_sensitivity")
 
 # plot 
 plt.close()
 
 fig, ax = plt.subplots()
 
-for dur in datum["duration"]:
-    color=int((dur*331100)%999999)
-    plt_capacity = datum["nameplate capacity"][datum["duration"]==dur]
-    plt_elcc = datum["capacity removed"][datum["duration"]==dur]
-    ax.plot(plt_capacity,plt_elcc,c="#"+str(color))
+ax.plot(datum["duration"],datum["capacity removed"],c='r')
 
-ax.set_xlabel('Storage Capacity (MW)')
+ax.set_xlabel('Storage Duration (Hours)')
 ax.set_ylabel('Capacity Offset (MW)')
-plt.legend(['1 Hour Storage', '2 Hour Storage', '3 Hour Storage'])
-plt.title('ELCC of 100 MW Solar in Salt Lake City\n Offset Conventional Capacity Sensitivity')
+plt.title('Capacity offset of 3000 MW storage')
 
-plt.savefig("storage_offset_capacity")
+plt.savefig("storage_duration_offset_capacity")
