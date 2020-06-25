@@ -25,7 +25,7 @@ root_directory="testing/"
     # experiments
     parameters["supplemental_storage"]="True"
     
-    for storage_power_capacity in {1:25}
+    for storage_power_capacity in {1..25}
     do
         parameters["supplemental_storage_power_capacity"]=$(($storage_power_capacity * 20))
         for storage_duration in 2 4 6 8

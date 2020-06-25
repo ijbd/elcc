@@ -608,6 +608,11 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
         dbg_storage = np.array(hourly_load-[hourly_fleet_capacity[:,1], hourly_storage_capacity[:,1]]).reshape(8760,2)
         np.savetxt(OUTPUT_DIRECTORY+"storage_dbg.csv",dbg_storage,delimiter=',')
 
+        aa, hourly_risk_1 = get_lolh(num_iterations, hourly_fleet_capacity, hourly_load)
+        aa, hourly_risk_2 = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
+        hourly_risk = np.array([hourly_risk_1,hourly_risk_2]).reshape(8760,2)
+        np.savetxt(OUTPUT_DIRECTORY+"storage_dbg_hourly_risk.csv",hourl_risk,delimiter=',')
+
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
     print("target lolh :", target_lolh)
     
