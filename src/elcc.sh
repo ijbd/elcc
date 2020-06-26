@@ -25,15 +25,15 @@ root_directory="testing/"
     # experiments
     parameters["supplemental_storage"]="True"
     
-    for storage_power_capacity in 100 500 1000 2000 3000
+    for storage_power_capacity in {1..25}
     do
-        parameters["supplemental_storage_power_capacity"]=$storage_power_capacity
-        for storage_duration in {1..3}
+        parameters["supplemental_storage_power_capacity"]=$(($storage_power_capacity * 20))
+        for storage_duration in 2 4 6 8
             do
-            storage_energy_capacity=$(($storage_power_capacity * $storage_duration))
+            storage_energy_capacity=$(($storage_power_capacity * 20 * $storage_duration))
             parameters["supplemental_storage_energy_capacity"]=$storage_energy_capacity
 
-            echo "Running: " $storage_power_capacity "MW w/" $storage_energy_capacity "MWh"
+            echo "Running: " $(($storage_power_capacity * 20)) "MW w/" $storage_energy_capacity "MWh"
             run_job
             done
     done

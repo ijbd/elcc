@@ -48,8 +48,8 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
 
     # Hourly Tracking (storage starts empty)
     storage["power"] = np.zeros(storage["num units"])
-    storage["energy"] = np.zeros(storage["num units"])
-    storage["extractable energy"] = np.zeros(storage["num units"])
+    storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"]
+    storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
     storage["full"] = storage["extractable energy"] == storage["max energy"]
@@ -77,8 +77,8 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
     storage["roundtrip efficiency"] = np.ones(storage["num units"]) * round_trip_efficiency
     storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
     storage["power"] = np.zeros(storage["num units"])
-    storage["energy"] = np.zeros(storage["num units"])
-    storage["extractable energy"] = np.zeros(storage["num units"])
+    storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"]
+    storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
     storage["full"] = storage["extractable energy"] == storage["max energy"]
@@ -108,8 +108,8 @@ def reset_storage(storage):
 
     #for simulation begin empty
     storage["power"] = np.zeros(storage["num units"])
-    storage["energy"] = np.zeros(storage["num units"])
-    storage["extractable energy"] = np.zeros(storage["num units"])
+    storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"]
+    storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
 
     return
@@ -169,10 +169,12 @@ def arbitrage_dispatch(net_load, storage, hourly_storage_contribution):
 def reliability_strategy(hourly_capacity,hourly_load,storage,hourly_storage_contribution):
     
     simulation_days = np.unique((np.argwhere(hourly_load > hourly_capacity)//24).flatten())
-    simulation_days = np.append(simulation_days,0) 
     simulation_days = np.unique(np.minimum(np.maximum(simulation_days,0),364))
     
-    last_day = simulation_days[-1]
+    # no risk days
+    if len(simulation_days) != 0:
+        last_day = simulation_days[-1]
+        
     #choose strategy on a daily basis
     for i in range(simulation_days.size):
         day = simulation_days[i]
