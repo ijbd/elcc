@@ -1,7 +1,6 @@
 import sys
 
 from elcc_impl import main
-#from elcc_impl_test import main
 
 # Parameters
 
@@ -31,7 +30,7 @@ files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_ge
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
-
+files["total interchange folder"] = "../total_interchange/"
 ########## System ########### 
 
 # Adjust parameters of existing fleet
@@ -46,7 +45,7 @@ system["renewable efor"] = .05 #set to 1 to ignore all W&S generators from curre
 system["temperature dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["temperature dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
-
+system["enable total interchange"] = True #gathers combined imports/exports data for balancing authority N/A for WECC
 ######### Storage ###########
 
 system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
