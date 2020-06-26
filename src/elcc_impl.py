@@ -440,6 +440,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
 
     # Manual removal
     conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators, oldest_year_manual)
+    total_capacity_removed += capacity_removed
 
     # get RE profile for storage
     renewable_profile = get_RE_profile_for_storage(cf,solar_generators,wind_generators)
@@ -461,7 +462,7 @@ def remove_generators(num_iterations, conventional_generators, solar_generators,
         hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,
                                                             wind_generators,cf,storage_units,hourly_load,renewable_profile)
         lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
-        total_capacity_removed = total_capacity_removed + capacity_removed
+        total_capacity_removed += capacity_removed
 
         if DEBUG:
             print("Oldest Year:\t",int(oldest_year),"\tLOLH:\t",lolh,"\tCapacity Removed:\t",capacity_removed)
@@ -605,13 +606,15 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
 
     # debug save storage
     if fleet_storage["num units"] != 0 and DEBUG:
-        dbg_storage = np.array(hourly_load-[hourly_fleet_capacity[:,1], hourly_storage_capacity[:,1]]).reshape(8760,2)
+        dbg_storage1 = (hourly_fleet_capacity[:,:3].T - hourly_load).T
+        dbg_storage2 = hourly_storage_capacity[:,:3]
+        dbg_storage = np.concatenate((dbg_storage1,dbg_storage2),axis=1)
         np.savetxt(OUTPUT_DIRECTORY+"storage_dbg.csv",dbg_storage,delimiter=',')
 
         aa, hourly_risk_1 = get_lolh(num_iterations, hourly_fleet_capacity, hourly_load)
         aa, hourly_risk_2 = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
         hourly_risk = np.array([hourly_risk_1,hourly_risk_2]).reshape(8760,2)
-        np.savetxt(OUTPUT_DIRECTORY+"storage_dbg_hourly_risk.csv",hourl_risk,delimiter=',')
+        np.savetxt(OUTPUT_DIRECTORY+"storage_dbg_hourly_risk.csv",hourly_risk,delimiter=',')
 
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
     print("target lolh :", target_lolh)

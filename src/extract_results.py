@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd 
 import os
 
-root_directory = "../../archive/2018_PACE_3000MW_storage/"
+root_directory = "../../archive/2018_PACE_storage_high_res/"
 key_words = ['supplemental storage','supplemental storage power capacity','supplemental storage energy capacity','Capacity removed']
 key_words.append('ELCC')
 
