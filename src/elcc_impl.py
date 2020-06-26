@@ -190,7 +190,7 @@ def get_total_interchange(year,region,folder):
     #loads in data
     interchange_file_path = folder + region + "_TI.xlsx"
 
-    #check to see if total interchange cvs file is there
+    #check to see if total interchange xlsx file is there
     if (path.exists(interchange_file_path)):
         raw_TI_Data = pd.read_excel(interchange_file_path)
     else:
@@ -218,9 +218,8 @@ def get_total_interchange(year,region,folder):
         filtered_TI_data = raw_TI_Data[
             raw_TI_Data['UTC time'].dt.year == year
         ]
-
     #gets rid of any leap year day
-    if ~(year % 4):
+    if (filtered_TI_data['UTC time'].dt.is_leap_year.empty):
             filtered_TI_data = filtered_TI_data[
             ~((filtered_TI_data['UTC time'].dt.month == 2) & 
             (filtered_TI_data['UTC time'].dt.day == 29))
@@ -944,7 +943,7 @@ def main(simulation,files,system,generator):
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
-    hourly_load = get_hourly_load(files["demand file"],simulation["year"],simulation["shift load"]) 
+    hourly_load = get_hourly_load(files["demand file"],simulation["year"],simulation["shift load"])
     temperature_data = get_temperature_data(files["temperature file"])
     benchmark_fors = get_benchmark_fors(files["benchmark FORs file"])
     fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["region"],
@@ -966,9 +965,9 @@ def main(simulation,files,system,generator):
     np.savetxt(OUTPUT_DIRECTORY+'demand.csv',hourly_load,delimiter=',')
     
     #implements imports/exports for balancing authority
-    if system["Enable Imports/Exports"]:
+    if system["enable total interchange"]:
         pd.options.mode.chained_assignment = None  #suppress warning occuring in get_total_interchange
-        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["Total Interchange folder"]).astype(np.int64)
+        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["total interchange folder"]).astype(np.int64)
     # Load saved system
     if system["setting"] == "load":
         hourly_fleet_capacity = load_hourly_fleet_capacity(simulation,system)
