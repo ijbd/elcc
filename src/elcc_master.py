@@ -45,7 +45,7 @@ system["renewable efor"] = .05 #set to 1 to ignore all W&S generators from curre
 system["temperature dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["temperature dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
-system["enable total interchange"] = False #gathers combined imports/exports data for balancing authority N/A for WECC
+system["enable total interchange"] = True #gathers combined imports/exports data for balancing authority N/A for WECC
 ######### Storage ###########
 
 system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
