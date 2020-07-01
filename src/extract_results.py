@@ -34,10 +34,8 @@ def main():
     # go through file by file and extract key words
     for filename in printout_files:
         job_results = get_results(filename, key_words)
-        print(job_results)
         all_results = all_results.append(job_results,ignore_index=True)
 
-    print(all_results.head)
     all_results.to_csv(root_directory+'results.csv')
 
 if __name__ == "__main__":
