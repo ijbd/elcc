@@ -1,0 +1,93 @@
+Begin Main:	 00:52:38.558739
+Parameters:
+	 year : 2018
+	 region : PACE
+	 iterations : 1000
+	 rm generators iterations : 100
+	 target reliability : 2.4
+	 shift load : 0
+	 debug : True
+	 output directory : testing/elcc.default.out/
+	 demand file : ../demand/PACE.csv
+	 eia folder : ../eia8602018/
+	 solar cf file : ../wecc_powGen/2018_solar_ac_generation.nc
+	 wind cf file : ../wecc_powGen/2018_wind_ac_generation.nc
+	 temperature file : ../efor/temperatureDataset2018.nc
+	 benchmark FORs file : ../efor/Temperature_dependent_for_realtionships.xlsx
+	 total interchange folder : ../total_interchange/
+	 setting : none
+	 derate conventional : False
+	 oldest year : 0
+	 conventional efor : 0.05
+	 renewable efor : 0.05
+	 temperature dependent FOR : False
+	 temperature dependent FOR indpendent of size : True
+	 enable total interchange : True
+	 dispatch strategy : reliability
+	 storage efficiency : 0.8
+	 storage efor : 0
+	 fleet storage : True
+	 supplemental storage : False
+	 supplemental storage power capacity : 100
+	 supplemental storage energy capacity : 100
+	 generator type : solar
+	 nameplate : 100
+	 lat : 41
+	 lon : -112
+	 efor : 0.05
+	 generator storage : False
+	 generator storage power capacity : 100
+	 generator storage energy capacity : 100
+found 217 conventional generators (11667 MW)
+found 59 renewable generators (2796 MW)
+No storage units found in region.
+348.7035199776301 [[  15 5568]]
+353.4796640895329 [[  49 5568]]
+Oldest Year:	 1951 	LOLH:	 0.04 	Capacity Removed:	 70.5
+35.67441397044149 [[  29 4997]]
+Oldest Year:	 1952 	LOLH:	 0.08 	Capacity Removed:	 75.0
+2.803484173678953 [[  31 5015]]
+Oldest Year:	 1953 	LOLH:	 0.08 	Capacity Removed:	 7.0
+127.80824017309442 [[  18 4994]]
+Oldest Year:	 1954 	LOLH:	 0.04 	Capacity Removed:	 1.3
+28.158594548507608 [[  11 4993]]
+Oldest Year:	 1955 	LOLH:	 0.12 	Capacity Removed:	 133.6
+15.903842497977166 [[  37 5016]]
+Oldest Year:	 1959 	LOLH:	 0.1 	Capacity Removed:	 133.6
+68.46230723813733 [[  17 5593]]
+Oldest Year:	 1961 	LOLH:	 0.1 	Capacity Removed:	 133.6
+2.0396570777575107 [[  49 5593]]
+Oldest Year:	 1963 	LOLH:	 0.44 	Capacity Removed:	 192.0
+12.866866535136978 [[   8 6048]]
+Oldest Year:	 1964 	LOLH:	 0.72 	Capacity Removed:	 259.0
+0.9149501752590368 [[   2 6025]]
+Oldest Year:	 1968 	LOLH:	 1.8 	Capacity Removed:	 271.0
+0.2926048261115284 [[  40 4968]]
+Oldest Year:	 1971 	LOLH:	 6.54 	Capacity Removed:	 384.0
+Binary Trial: 1
+Supplement Capacity:	 2501 	LOLH:	 0.0 
+
+22.205711307249658 [[  36 4993]]
+Binary Trial: 2
+Supplement Capacity:	 1251 	LOLH:	 0.05 
+
+8.627924428692495 [[  16 5567]]
+Binary Trial: 3
+Supplement Capacity:	 626 	LOLH:	 0.59 
+
+2.035541612790439 [[  14 4466]]
+Binary Trial: 4
+Supplement Capacity:	 313 	LOLH:	 2.11 
+
+0.9703639502422448 [[  16 4730]]
+Binary Trial: 5
+Supplement Capacity:	 157 	LOLH:	 3.9 
+
+0.17805204596606927 [[  13 5255]]
+Binary Trial: 6
+Supplement Capacity:	 235 	LOLH:	 2.8 
+
+0.1544455386710979 [[   2 5690]]
+Binary Trial: 7
+Supplement Capacity:	 274 	LOLH:	 2.46 
+
