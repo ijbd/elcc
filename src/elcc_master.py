@@ -42,10 +42,11 @@ system["oldest year"] = 0 #remove conventional generators older than this year
 
 system["conventional efor"] = .05 #ignored if temperature-dependent FOR is true
 system["renewable efor"] = .05 #set to 1 to ignore all W&S generators from current fleet
-system["temperature dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["temperature dependent FOR"] = True #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["temperature dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
 system["enable total interchange"] = True #gathers combined imports/exports data for balancing authority N/A for WECC
+
 ######### Storage ###########
 
 system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
