@@ -1,8 +1,12 @@
 import numpy as np 
 import pandas as pd 
 import os
+import sys
 
-root_directory = "../../archive/2018_PACE_storage_high_res/"
+root_directory = "../../"+sys.argv[1]
+# save mistakes
+if root_directory[-1] != '/': root_directory = root_directory + '/'
+
 key_words = ['supplemental storage','supplemental storage power capacity','supplemental storage energy capacity','Capacity removed']
 key_words.append('ELCC')
 
@@ -14,7 +18,6 @@ def get_results(filename, key_words):
             for key in key_words:
                 query = key+' : '
                 if line.find(query) != -1:
-                    print(line.find(query))
                     results[key] = line[line.find(query)+len(query):-1]
     return results
 
@@ -29,6 +32,8 @@ def main():
             if filename.endswith("print.out"):
                 printout_files.append(os.path.join(root, filename))
     
+    print(len(printout_files),"jobs found")
+
     all_results = pd.DataFrame()
 
     # go through file by file and extract key words

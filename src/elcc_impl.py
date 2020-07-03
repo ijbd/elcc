@@ -545,6 +545,12 @@ def get_lolh(num_iterations, hourly_capacity, hourly_load):
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
     hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
     lolh = np.sum(lol_matrix) / float(num_iterations)
+
+    #### DEBUG STORAGE
+    if np.any(hourly_load > hourly_capacity.T):
+        min_loss = np.min((hourly_load - hourly_capacity.T)[hourly_load > hourly_capacity.T])
+        print(min_loss, np.argwhere(hourly_load - hourly_capacity.T == min_loss))
+    
     return lolh, hourly_risk
 
 # Remove the oldest generators from the conventional system
@@ -582,6 +588,7 @@ def remove_generators_binary_constraints(binary_trial,lolh,target_lolh,num_itera
 # Remove generators to meet reliability requirement (LOLH of 2.4 by default)
 def remove_generators(  num_iterations, conventional_generators, solar_generators, wind_generators, storage_units, cf, 
                         hourly_load, oldest_year_manual, target_lolh, temperature_dependent_efor, conventional_efor, renewable_profile):
+    np.random.seed(0)
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
     low_iterations = 50
@@ -612,8 +619,11 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
         if DEBUG:
             print("Oldest Year:\t",int(oldest_year),"\tLOLH:\t",lolh,"\tCapacity Removed:\t",capacity_removed)
-
+    
     # find reliability of higher iteration simulation
+
+    np.random.seed(900)
+
     hourly_fleet_capacity = get_hourly_fleet_capacity(num_iterations,conventional_generators,solar_generators,
                                                         wind_generators,cf)
 
@@ -667,7 +677,14 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
         binary_trial += 1
         
         if DEBUG:
-            print("Supplement Capacity:\t",int(supplement_capacity),"\tLOLH:\t", lolh)
+            print("Binary Trial:",binary_trial)
+            print("Supplement Capacity:\t",int(supplement_capacity),"\tLOLH:\t", lolh,'\n')
+
+        
+    np.savetxt(OUTPUT_DIRECTORY+'fleet.csv',hourly_fleet_capacity+hourly_supplement_capacity,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'storage.csv',hourly_storage_capacity,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'load.csv',hourly_load,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'risk.csv',hourly_risk,delimiter=',')
 
     # add supplemental generator to fleet
     conventional_generators = append_conventional_generator(conventional_generators,supplement_generators)
@@ -948,7 +965,7 @@ def main(simulation,files,system,generator):
 
     # initialize output 
     global OUTPUT_DIRECTORY
-    OUTPUT_DIRECTORY = simulation["output directory"]
+    OUTPUT_DIRECTORY = files["output directory"]
     
     # Display parameters
     print_parameters(simulation,files,system,generator)

@@ -20,10 +20,10 @@ simulation["rm generators iterations"] = 100 # number of iterations used for rem
 simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
 simulation["debug"] = True # print all information flagged for debug
-simulation["output directory"] = "./"
 
 ######## files ########
 
+files["output directory"] = "./"
 files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["eia folder"] = "../eia8602018/"
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
@@ -109,6 +109,8 @@ files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+
+if files["output directory"][-1] != '/': files["output directory"] += '/'
 
 # run program
 main(simulation,files,system,generator)
