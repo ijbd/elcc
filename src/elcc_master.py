@@ -24,11 +24,7 @@ simulation["debug"] = True # print all information flagged for debug
 ######## files ########
 
 files["output directory"] = "./"
-files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["eia folder"] = "../eia8602018/"
-files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
-files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
-files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
 ########## System ########### 
@@ -105,11 +101,14 @@ while i < len(parameters):
             elif value == "False": param_set[key] = False
     i += 2 
 
-# dependent arguments
+# dependent parameters
+
 files["demand file"] = "../demand/"+simulation["region"]+".csv"
-files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
-files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
+files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
+files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+
+# save time for stupidity
 
 if files["output directory"][-1] != '/': files["output directory"] += '/'
 
