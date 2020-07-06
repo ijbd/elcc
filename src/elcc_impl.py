@@ -106,72 +106,6 @@ def get_hourly_load(demand_file_in, year, hrsShift=0):
         raise RuntimeError(error_message)
     return hourly_load
 
-def clean_total_interchange(total_interchange):
-    """ Cleans total interchange data by applying various methods of removing outliers/filling nan values
-
-    ...
-
-    Args:
-    ----------
-    `total_interchange` (panda array): TI data
-
-    """
-    #main interchange numpy array that will be passed back cleaned
-    total_interchange_array = np.array([])
-
-    clean_column = 'Adjusted TI'
-
-    #goes through monthly for more specific mean values to remove outliers
-    for month in range(1,13):
-
-        #gets one month to compute respective mean
-        subset_TI_data = total_interchange[
-            (total_interchange['UTC time'].dt.month == month)
-        ]
-
-        #generates TI data from adjusted Net Generation and Demand values using formula TI + D = NG and plugs into nan values
-        calculated_TI = subset_TI_data['Adjusted NG'] - subset_TI_data['Adjusted D']
-        subset_TI_data.loc[:,clean_column] = subset_TI_data.loc[:,clean_column].fillna(calculated_TI)
-
-
-        #removes outliers(sets to nan) greater then 3 standard deviations away from mean
-        mu = subset_TI_data[clean_column].mean()
-        sigma = subset_TI_data[clean_column].std()
-        ind_out = np.abs(subset_TI_data.loc[:, clean_column]-mu) > (3*sigma)
-        subset_TI_data.loc[ind_out, clean_column] = np.nan
-
-        # pad interpolates 2 hours max
-        subset_TI_data.loc[:,'Adjusted TI'] = subset_TI_data['Adjusted TI'].interpolate(method='pad', limit=2)
-
-        #uses data from a week ago, or a week forward for any other missing data not filled
-        ind_na = subset_TI_data.loc[:, clean_column].isna()
-        limit = 3
-        for ts in subset_TI_data.index[ind_na]:
-            try:
-                #looks week back and tries to set value
-                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
-                    ts - (7*24), clean_column]
-            except KeyError:
-                #looks week forward and tries to set value if prior empty
-                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
-                    ts + (7*24), clean_column]
-            except TypeError:
-                #included for type error of ts including 'Adjusted TI'
-                continue
-
-            # If we didn't manage to find a value, look forward even more then 1 week on each side
-            cnt = 0
-            while np.isnan(subset_TI_data.loc[ts, clean_column]):
-                cnt += 1
-                if cnt > limit:
-                    raise ValueError("Can't fill this NaN")
-                subset_TI_data.loc[ts, clean_column] = subset_TI_data.loc[
-                        ts+(cnt*7*24), clean_column]
-            
-        #inserting cleaned data into main np array
-        total_interchange_array = np.append(total_interchange_array,subset_TI_data['Adjusted TI'].values)
-
-    return total_interchange_array
 
 def get_total_interchange(year,region,folder):
     """Retrieves all imports/exports for region of that year
@@ -183,21 +117,21 @@ def get_total_interchange(year,region,folder):
     `region` (str): balancing authority
 
     `folder` (str): location of total interchange data
-    """    
-    #loads in data
-    interchange_file_path = folder + region + "_TI.xlsx"
-
-    #check to see if total interchange xlsx file is there
+    """  
+    interchange_file_path = folder + "WECC_TI.csv"
     if (path.exists(interchange_file_path)):
-        raw_TI_Data = pd.read_excel(interchange_file_path)
+
+        #loads in data from already cleaned total interchange data
+        raw_TI_Data = pd.read_csv(interchange_file_path,usecols= ['UTC time',region],parse_dates= ['UTC time'])
+
+        #selecting data for desired year, uses datetime format
+        filtered_TI_data = raw_TI_Data[
+            (raw_TI_Data['UTC time'].dt.year == year)
+        ][region].values
     else:
         error_message = "No total interchange data found for " + region
         raise RuntimeError(error_message)
-
-    #selecting data for desired year, uses datetime format encoded in excel spreadsheet
-    filtered_TI_data = raw_TI_Data[
-    (raw_TI_Data['UTC time'].dt.year == year)
-    ]
+    
 
     #cleaning for CISO, data is shifted forward 1 hour before 2016-9-13
     if ((region == "CISO") & (year == 2016)):
@@ -208,21 +142,21 @@ def get_total_interchange(year,region,folder):
         ind = ((datetime_array >= pd.to_datetime('2016-01-01')) & (datetime_array <= pd.to_datetime('2016-09-13')))
 
         #shifts time period back 1 hour
-        raw_TI_Data.loc[ind,"Adjusted TI"] = raw_TI_Data.loc[ 
-        ind, "Adjusted TI"].shift(-1).values
+        raw_TI_Data.loc[ind,region] = raw_TI_Data.loc[ 
+        ind, region].shift(-1).values
 
         #selecting data for desired year, uses datetime format encoded in excel spreadsheet
         filtered_TI_data = raw_TI_Data[
             raw_TI_Data['UTC time'].dt.year == year
         ]
-    #gets rid of any leap year day
-    if (filtered_TI_data['UTC time'].dt.is_leap_year.any):
+    #gets rid of any leap year day if applicable
+    if (np.unique(filtered_TI_data['UTC time'].dt.is_leap_year)):
             filtered_TI_data = filtered_TI_data[
             ~((filtered_TI_data['UTC time'].dt.month == 2) & 
             (filtered_TI_data['UTC time'].dt.day == 29))
             ]
 
-    return clean_total_interchange(filtered_TI_data)
+    return filtered_TI_data[region].values
 
 #loads in hourly temperature for all the coordinates in desired region
 def get_temperature_data(temperature_file):
@@ -954,7 +888,6 @@ def save_active_generators(conventional, solar, wind):
 def main(simulation,files,system,generator):
     print("Begin Main:\t",str(datetime.datetime.now().time()))
     # initialize global variables
-    
     global DEBUG 
     DEBUG = simulation["debug"]
 
@@ -992,7 +925,6 @@ def main(simulation,files,system,generator):
     
     #implements imports/exports for balancing authority
     if system["enable total interchange"]:
-        pd.options.mode.chained_assignment = None  #suppress warning occuring in get_total_interchange
         hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["total interchange folder"]).astype(np.int64)
 
     # derate conventional generators' capacities
