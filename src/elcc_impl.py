@@ -127,7 +127,7 @@ def get_total_interchange(year,region,folder):
         #selecting data for desired year, uses datetime format
         filtered_TI_data = raw_TI_Data[
             (raw_TI_Data['UTC time'].dt.year == year)
-        ][region].values
+        ]
     else:
         error_message = "No total interchange data found for " + region
         raise RuntimeError(error_message)
@@ -149,12 +149,9 @@ def get_total_interchange(year,region,folder):
         filtered_TI_data = raw_TI_Data[
             raw_TI_Data['UTC time'].dt.year == year
         ]
+
     #gets rid of any leap year day if applicable
-    if (np.unique(filtered_TI_data['UTC time'].dt.is_leap_year)):
-            filtered_TI_data = filtered_TI_data[
-            ~((filtered_TI_data['UTC time'].dt.month == 2) & 
-            (filtered_TI_data['UTC time'].dt.day == 29))
-            ]
+    filtered_TI_data = filtered_TI_data[~((filtered_TI_data['UTC time'].dt.month == 2) & (filtered_TI_data['UTC time'].dt.day == 29))]
 
     return filtered_TI_data[region].values
 
