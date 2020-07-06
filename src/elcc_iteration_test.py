@@ -1,6 +1,6 @@
 import os
 
-root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/tests/'
+root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/tests/variableIterationTest'
 
 def error_handling():
 
@@ -35,7 +35,17 @@ def main():
 
     # variable parameters
 
-    run_job(parameters)
+    regions = ['WECC', 'PACE']
+    iterations = [1000, 2000, 5000, 10000]
+
+    for region in regions:
+        parameters['region'] = region
+        for num_iterations in iterations:
+            parameters['iterations'] = num_iterations
+            print('Running:',region,num_iterations,'iterations')
+            run_job(parameters)
+
+
 
 if __name__ == "__main__":
     error_handling()

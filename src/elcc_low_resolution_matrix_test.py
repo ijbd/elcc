@@ -27,10 +27,11 @@ def main():
     parameters = dict()
 
     # universal parameters
+
     parameters['nameplate'] = 100
     parameters['generator_type'] = 'solar'
 
-    # variables
+    # variable parameters
 
     locations = dict()
     locations['name'] =     ['Seattle', 'Missoula', 'Miles City',   'Fort Collins', 'Albuquerque',  'Phoenix',  'Wendover', 'Los Angeles',  'Sacramento']
