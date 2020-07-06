@@ -80,7 +80,7 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
     storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
-    storage["full"] = np.sum(storage["extractable energy"]) == np.sum(storage["max energy"])
+    storage["full"] = True
 
     return storage
 
@@ -110,7 +110,8 @@ def reset_storage(storage):
     storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"] # storage begins full
     storage["energy"] = storage["extractable energy"] / storage["one way efficiency"] 
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
-
+    storage["full"] = True
+    
     return
 
 def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage, renewable_profile=None):
@@ -302,7 +303,7 @@ def update_storage(storage, status):
         storage["extractable energy"] = storage["energy"] * storage["one way efficiency"]
     
     # set storage state
-    storage["full"] = storage["extractable energy"] == storage["max energy"]
+    storage["full"] = np.sum(storage["extractable energy"]) == np.sum(storage["max energy"])
 
     storage["time to discharge"] = np.divide(storage["extractable energy"],storage["max discharge rate"]) 
 
