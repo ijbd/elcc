@@ -20,7 +20,7 @@ def run_job(parameters):
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
     
-    os.system('echo sbatch elcc_batch_job.sbat' + parameter_string)
+    os.system('echo sbatch elcc_batch_job.sbat ' + parameter_string)
 
 
 def main():
