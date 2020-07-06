@@ -112,10 +112,9 @@ files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])
 
 if simulation["region"] == "WECC":
     system['enable total interchange'] = False
-    system['oldest year'] = 1977
+    system['oldest year'] = 1973
 
-if simulation["region"] == "CISO":
-    system['oldest year'] = 1963
+
 
 if files["output directory"][-1] != '/': files["output directory"] += '/'
 
