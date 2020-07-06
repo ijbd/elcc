@@ -80,7 +80,7 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
     storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
-    storage["full"] = storage["extractable energy"] == storage["max energy"]
+    storage["full"] = np.sum(storage["extractable energy"]) == np.sum(storage["max energy"])
 
     return storage
 
