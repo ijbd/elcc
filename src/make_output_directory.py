@@ -3,7 +3,7 @@ from os import path
 
 root_directory = sys.argv[1]
 
-output_directory = root_directory+"elcc."
+output_directory = root_directory+"elcc.__"
 
 # default parameters
 if len(sys.argv) == 2:

@@ -1,6 +1,6 @@
 import numpy as np 
 import pandas as pd 
-
+import sys
 
 def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, efor, dispatch_strategy):
     
@@ -37,7 +37,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     # Fill data structure
     storage = dict()
     storage["dispatch strategy"] = dispatch_strategy
-    storage["num units"] = active_storage["Nameplate Energy Capacity (MWh)"].size
+    storage["num units"] = active_storage["Nameplate Energy Capacity (MWh)"].values.size
     storage["max charge rate"] = active_storage["Maximum Charge Rate (MW)"].values
     storage["max discharge rate"] = active_storage["Maximum Discharge Rate (MW)"].values
     storage["max energy"] = active_storage["Nameplate Energy Capacity (MWh)"].values
@@ -54,8 +54,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     storage["efor"] = efor
     storage["full"] = storage["extractable energy"] == storage["max energy"]
 
-    if storage["num units"] == 0:
-        print("No storage units found in region.")
+    sys.stdout.flush()
 
     return storage
 
@@ -81,7 +80,7 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate,
     storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
-    storage["full"] = storage["extractable energy"] == storage["max energy"]
+    storage["full"] = True
 
     return storage
 
@@ -108,10 +107,11 @@ def reset_storage(storage):
 
     #for simulation begin empty
     storage["power"] = np.zeros(storage["num units"])
-    storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"]
-    storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
+    storage["extractable energy"] = np.ones(storage["num units"])*storage["max energy"] # storage begins full
+    storage["energy"] = storage["extractable energy"] / storage["one way efficiency"] 
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
-
+    storage["full"] = True
+    
     return
 
 def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage, renewable_profile=None):
@@ -195,15 +195,17 @@ def reliability_strategy(hourly_capacity,hourly_load,storage,hourly_storage_cont
 
 def reliability_dispatch(hourly_storage_contribution, hourly_load, hourly_capacity, storage):
 
+    floating_point_buffer = 1e-6 # 1 W buffer to avoid false loss-of-loads
+
     for hour in range(24):
         # discharge if load is not met
         if hourly_load[hour] > hourly_capacity[hour]:
-            unmet_load = hourly_load[hour] - hourly_capacity[hour]
+            unmet_load = hourly_load[hour] - hourly_capacity[hour] + floating_point_buffer
             # discharge storage
             hourly_storage_contribution[hour] = discharge_storage(unmet_load, storage)
         # charge if surplus
         else:
-            additional_capacity = hourly_capacity[hour] - hourly_load[hour]
+            additional_capacity = hourly_capacity[hour] - hourly_load[hour] - floating_point_buffer
             # charge storage
             hourly_storage_contribution[hour] = charge_storage(additional_capacity, storage)
 
@@ -265,6 +267,7 @@ def charge_storage(additional_capacity, storage):
     y = np.unique(np.concatenate((x,z_max)))
 
     E_max = 0
+    E_min = 0
     i = 0
 
     # Find devices partaking in charge
@@ -300,7 +303,7 @@ def update_storage(storage, status):
         storage["extractable energy"] = storage["energy"] * storage["one way efficiency"]
     
     # set storage state
-    storage["full"] = storage["extractable energy"] == storage["max energy"]
+    storage["full"] = np.sum(storage["extractable energy"]) == np.sum(storage["max energy"])
 
     storage["time to discharge"] = np.divide(storage["extractable energy"],storage["max discharge rate"]) 
 

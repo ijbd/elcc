@@ -19,16 +19,12 @@ simulation["iterations"] = 1000 # number of iterations for monte carlo simulatio
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["print debug"] = True # print all information flagged for debug
-simulation["output directory"] = "./"
+simulation["debug"] = False # print all information flagged for debug
 
 ######## files ########
 
-files["demand file"] = "../demand/"+simulation["region"]+".csv"
+files["output directory"] = "./"
 files["eia folder"] = "../eia8602018/"
-files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
-files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
-files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
 ########## System ########### 
@@ -36,22 +32,23 @@ files["total interchange folder"] = "../total_interchange/"
 # Adjust parameters of existing fleet
 system["setting"] = "none" # none, save, or load
 system["derate conventional"] = False #decrease conventional generators' capacity by 5%
-system["oldest year"] = 1950 #remove conventional generators older than this year
+system["oldest year"] = 0 #remove conventional generators older than this year
 
 ######### Outages ###########
 
 system["conventional efor"] = .05 #ignored if temperature-dependent FOR is true
 system["renewable efor"] = .05 #set to 1 to ignore all W&S generators from current fleet
-system["temperature dependent FOR"] = False #implemnts temeprature dependent forced outage rates for 6 known technologies
+system["temperature dependent FOR"] = True #implemnts temeprature dependent forced outage rates for 6 known technologies
 system["temperature dependent FOR indpendent of size"] = True #implemnts temperature dependent forced outage rates for all generators, 
                                                             #if false only applies to generators greater then 15 MW, ignore if not using temp dependent FORs
 system["enable total interchange"] = True #gathers combined imports/exports data for balancing authority N/A for WECC
+
 ######### Storage ###########
 
 system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
 system["storage efficiency"] = .8 #roundtrip 
 system["storage efor"] = 0
-system["fleet storage"] = False #include existing fleet storage 
+system["fleet storage"] = True #include existing fleet storage 
 system["supplemental storage"] = False # add supplemental storage to simulate higher storage penetration
 system["supplemental storage power capacity"] = 100 # MW
 system["supplemental storage energy capacity"] = 100 # MWh
@@ -60,8 +57,8 @@ system["supplemental storage energy capacity"] = 100 # MWh
 
 generator["generator type"] = "solar" #solar or wind 
 generator["nameplate"] = 100 #MW
-generator["lat"] = 41
-generator["lon"] = -112
+generator["latitude"] = 41
+generator["longitude"] = -112
 generator["efor"] = .05 
 
 ###### Added Storage ########
@@ -104,11 +101,19 @@ while i < len(parameters):
             elif value == "False": param_set[key] = False
     i += 2 
 
-# dependent arguments
+# dependent parameters
+
 files["demand file"] = "../demand/"+simulation["region"]+".csv"
-files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_ac_generation.nc"
-files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_ac_generation.nc"
+files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
+files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+
+if not simulation["region"] in ['PACE', 'CISO']:
+    system['enable total interchange'] = False
+
+# save time for stupidity
+
+if files["output directory"][-1] != '/': files["output directory"] += '/'
 
 # run program
 main(simulation,files,system,generator)
