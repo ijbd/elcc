@@ -56,7 +56,6 @@ def get_powGen(solar_cf_file, wind_cf_file):
 
     return powGen_lats, powGen_lons, cf
 
-
 def get_hourly_load(demand_file_in, year, hrsShift=0):
     """ Retrieves hourly load vector from load file
 
@@ -106,8 +105,6 @@ def get_hourly_load(demand_file_in, year, hrsShift=0):
         error_message = 'Expected hourly load array of size 8760. Found array of size '+str(hourly_load.size)
         raise RuntimeError(error_message)
     return hourly_load
-
-
 
 def clean_total_interchange(total_interchange):
     """ Cleans total interchange data by applying various methods of removing outliers/filling nan values
@@ -227,7 +224,6 @@ def get_total_interchange(year,region,folder):
 
     return clean_total_interchange(filtered_TI_data)
 
-
 #loads in hourly temperature for all the coordinates in desired region
 def get_temperature_data(temperature_file):
     temperature_data = np.array(Dataset(temperature_file)["T2M"][:][:][:]).T
@@ -335,7 +331,6 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
         raise RuntimeError(error_message)
     
     return conventional_generators
-
 
 # Get conventional generators in fleet
 def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
@@ -643,8 +638,6 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
     while remove_generators_binary_constraints(binary_trial,lolh,target_lolh,num_iterations):
         
-        old_supplement_capacity = supplement_capacity
-
         # under reliable, add supplement capacity
         if lolh > target_lolh: 
             supplement_capacity_min = supplement_capacity
@@ -752,10 +745,12 @@ def make_RE_generator(generator):
     return RE_generator
 
 def elcc_binary_constraints(binary_trial, lolh, target_lolh, num_iterations, additional_load, added_capacity):
+    
     trial_limit_met = binary_trial < 20
     reliability_met = abs(lolh - target_lolh) > (10/num_iterations)
     lower_bound_met = additional_load > 1
     upper_bound_met = additional_load < added_capacity - 1
+    
     return trial_limit_met and reliability_met and lower_bound_met and upper_bound_met
 
 # use binary search to find elcc by adjusting additional load
@@ -854,6 +849,7 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
 
 # print all parameters
 def print_parameters(*parameters):
+    
     print("Parameters:")
     for sub_parameters in parameters:
         for key, value in sub_parameters.items():
