@@ -41,9 +41,11 @@ def main():
     for region in regions:
         parameters['region'] = region
         for num_iterations in iterations:
-            parameters['iterations'] = num_iterations
-            print('Running:',region,num_iterations,'iterations')
-            run_job(parameters)
+            for count in range(5):
+                parameters['count'] = count
+                parameters['iterations'] = num_iterations
+                print('Running:',region,num_iterations,'iterations')
+                run_job(parameters)
 
 
 
