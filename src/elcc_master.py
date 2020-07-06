@@ -19,7 +19,7 @@ simulation["iterations"] = 1000 # number of iterations for monte carlo simulatio
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
 simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
-simulation["debug"] = True # print all information flagged for debug
+simulation["debug"] = False # print all information flagged for debug
 
 ######## files ########
 
@@ -57,8 +57,8 @@ system["supplemental storage energy capacity"] = 100 # MWh
 
 generator["generator type"] = "solar" #solar or wind 
 generator["nameplate"] = 100 #MW
-generator["lat"] = 41
-generator["lon"] = -112
+generator["latitude"] = 41
+generator["longitude"] = -112
 generator["efor"] = .05 
 
 ###### Added Storage ########
@@ -107,6 +107,9 @@ files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+
+if not simulation["region"] in ['PACE', 'CISO']:
+    system['enable total interchange'] = False
 
 # save time for stupidity
 
