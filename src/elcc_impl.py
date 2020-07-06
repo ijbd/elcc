@@ -219,7 +219,7 @@ def get_total_interchange(year,region,folder):
             raw_TI_Data['UTC time'].dt.year == year
         ]
     #gets rid of any leap year day
-    if (filtered_TI_data['UTC time'].dt.is_leap_year.empty):
+    if (filtered_TI_data['UTC time'].dt.is_leap_year.any):
             filtered_TI_data = filtered_TI_data[
             ~((filtered_TI_data['UTC time'].dt.month == 2) & 
             (filtered_TI_data['UTC time'].dt.day == 29))
