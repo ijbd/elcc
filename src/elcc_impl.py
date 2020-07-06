@@ -747,7 +747,7 @@ def make_RE_generator(generator):
 def elcc_binary_constraints(binary_trial, lolh, target_lolh, num_iterations, additional_load, added_capacity):
     
     trial_limit_met = binary_trial < 20
-    reliability_met = abs(lolh - target_lolh) > (10/num_iterations)
+    reliability_met = abs(lolh - target_lolh) > (1/num_iterations)
     lower_bound_met = additional_load > 1
     upper_bound_met = additional_load < added_capacity - 1
     
