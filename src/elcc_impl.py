@@ -117,7 +117,8 @@ def get_total_interchange(year,region,folder):
     `region` (str): balancing authority
 
     `folder` (str): location of total interchange data
-    """  
+    """
+
     interchange_file_path = folder + "WECC_TI.csv"
     if (path.exists(interchange_file_path)):
 
@@ -127,7 +128,7 @@ def get_total_interchange(year,region,folder):
         #selecting data for desired year, uses datetime format
         filtered_TI_data = raw_TI_Data[
             (raw_TI_Data['UTC time'].dt.year == year)
-        ][region].values
+        ]
     else:
         error_message = "No total interchange data found for " + region
         raise RuntimeError(error_message)
@@ -149,14 +150,18 @@ def get_total_interchange(year,region,folder):
         filtered_TI_data = raw_TI_Data[
             raw_TI_Data['UTC time'].dt.year == year
         ]
+
     #gets rid of any leap year day if applicable
     if (np.unique(filtered_TI_data['UTC time'].dt.is_leap_year)):
             filtered_TI_data = filtered_TI_data[
             ~((filtered_TI_data['UTC time'].dt.month == 2) & 
             (filtered_TI_data['UTC time'].dt.day == 29))
             ]
+    #converting nan values to 0
+    total_interchange_array = filtered_TI_data[region].values
+    total_interchange_array[np.isnan(total_interchange_array)] = 0
 
-    return filtered_TI_data[region].values
+    return total_interchange_array
 
 #loads in hourly temperature for all the coordinates in desired region
 def get_temperature_data(temperature_file):
