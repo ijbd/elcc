@@ -20,7 +20,9 @@ def get_results(filename, key_words):
             for key in key_words:
                 query = key+' : '
                 if line.find(query) != -1:
-                    results[key] = line[line.find(query)+len(query):-1]
+                    if key not in results:
+                        results[key] = line[line.find(query)+len(query):-1]
+                    
     return results
 
 
