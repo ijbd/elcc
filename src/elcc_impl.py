@@ -152,11 +152,8 @@ def get_total_interchange(year,region,folder):
         ]
 
     #gets rid of any leap year day if applicable
-    if (np.unique(filtered_TI_data['UTC time'].dt.is_leap_year)):
-            filtered_TI_data = filtered_TI_data[
-            ~((filtered_TI_data['UTC time'].dt.month == 2) & 
-            (filtered_TI_data['UTC time'].dt.day == 29))
-            ]
+    filtered_TI_data = filtered_TI_data[~((filtered_TI_data['UTC time'].dt.month == 2) & (filtered_TI_data['UTC time'].dt.day == 29))]
+    
     #converting nan values to 0
     total_interchange_array = filtered_TI_data[region].values
     total_interchange_array[np.isnan(total_interchange_array)] = 0
@@ -605,11 +602,6 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
     
     print('')
 
-    #np.savetxt(OUTPUT_DIRECTORY+'fleet.csv',hourly_fleet_capacity+hourly_supplement_capacity,delimiter=',')
-    #np.savetxt(OUTPUT_DIRECTORY+'storage.csv',hourly_storage_capacity,delimiter=',')
-    #np.savetxt(OUTPUT_DIRECTORY+'load.csv',hourly_load,delimiter=',')
-    #np.savetxt(OUTPUT_DIRECTORY+'risk.csv',hourly_risk,delimiter=',')
-
     # add supplemental generator to fleet
     conventional_generators = append_conventional_generator(conventional_generators,supplement_generators)
 
@@ -686,7 +678,7 @@ def make_RE_generator(generator):
 def elcc_binary_constraints(binary_trial, lolh, target_lolh, num_iterations, additional_load, added_capacity):
     
     trial_limit_met = binary_trial < 20
-    reliability_met = abs(lolh - target_lolh) > (10/num_iterations)
+    reliability_met = abs(lolh - target_lolh) > (1/num_iterations)
     lower_bound_met = additional_load > 1
     upper_bound_met = additional_load < added_capacity - 1
     
@@ -700,10 +692,31 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
     hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,hourly_fleet_capacity,hourly_load,
                                                                 fleet_storage, fleet_renewable_profile)
     hourly_total_capacity = hourly_fleet_capacity + hourly_storage_capacity
-
+  
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
     print("Target LOLH :", target_lolh)
+
+
+
+
+
+
+
+    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    np.savetxt(OUTPUT_DIRECTORY+'load1.csv',hourly_load,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'risk1.csv',hourly_risk,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'fleet1.csv',hourly_fleet_capacity,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'storage1.csv',hourly_storage_capacity,delimiter=',')
     
+    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
     # use binary search to find amount of load needed to match base reliability
     additional_load_max = added_capacity
     additional_load_min = 0
@@ -763,6 +776,24 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
             print([i for i in hourly_risk if i>0])
 
         binary_trial += 1
+
+
+
+
+
+
+
+    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    np.savetxt(OUTPUT_DIRECTORY+'load2.csv',hourly_load,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'risk2.csv',hourly_risk,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'fleet2.csv',hourly_fleet_capacity,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'storage2.csv',hourly_storage_capacity,delimiter=',')
+    np.savetxt(OUTPUT_DIRECTORY+'generator2.csv',hourly_added_generator_capacity,delimiter=',')
+    
+    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 
     if DEBUG == True:
         print(lolh)

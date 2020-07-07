@@ -108,10 +108,13 @@ files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_gener
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
 
-if not simulation["region"] in ['PACE', 'CISO']:
-    system['enable total interchange'] = False
+# time savers
 
-# save time for stupidity
+if simulation["region"] == "WECC":
+    system['enable total interchange'] = False
+    system['oldest year'] = 1975
+
+
 
 if files["output directory"][-1] != '/': files["output directory"] += '/'
 

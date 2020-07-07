@@ -3,12 +3,14 @@ import pandas as pd
 import os
 import sys
 
-root_directory = "../../"+sys.argv[1]
+root_directory = "../../"+sys.argv[1] # from NASWCV/ or shared_data/
+title = sys.argv[2]
+
 # save mistakes
 if root_directory[-1] != '/': root_directory = root_directory + '/'
 
-key_words = ['supplemental storage','supplemental storage power capacity','supplemental storage energy capacity','Capacity removed']
-key_words.append('ELCC')
+key_words = sys.argv[3:]
+
 
 def get_results(filename, key_words):
     results = dict()
@@ -18,7 +20,9 @@ def get_results(filename, key_words):
             for key in key_words:
                 query = key+' : '
                 if line.find(query) != -1:
-                    results[key] = line[line.find(query)+len(query):-1]
+                    if key not in results:
+                        results[key] = line[line.find(query)+len(query):-1]
+                    
     return results
 
 
@@ -42,6 +46,7 @@ def main():
         all_results = all_results.append(job_results,ignore_index=True)
 
     all_results.to_csv(root_directory+'results.csv')
+    all_results.to_csv(title+'_results.csv')
 
 if __name__ == "__main__":
     main()
