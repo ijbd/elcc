@@ -13,7 +13,7 @@ generator = dict()
 
 ########## Generic ##########
 
-simulation["year"] = 2018
+simulation["year"] = 2016
 simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
 simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
 simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
