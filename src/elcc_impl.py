@@ -507,7 +507,7 @@ def remove_generators_binary_constraints(binary_trial,lolh,target_lolh,num_itera
     return trial_limit_met and reliability_met
 
 # Remove generators to meet reliability requirement (LOLH of 2.4 by default)
-def remove_generators(  num_iterations, conventional_generators, solar_generators, wind_generators, storage_units, cf, 
+def remove_generators_alpha(  num_iterations, conventional_generators, solar_generators, wind_generators, storage_units, cf, 
                         hourly_load, oldest_year_manual, target_lolh, temperature_dependent_efor, conventional_efor, renewable_profile):
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
@@ -548,7 +548,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
     # create a supplemental units to match target reliability level
     supplement_capacity = np.sum(conventional_generators["nameplate"]) // 2
-    supplement_generators = make_supplemental_generators(supplement_capacity,conventional_efor,temperature_dependent_efor)    
+    supplement_generators = make_supplemental_generators(supplement_capacity,conventional_efor,temperature_dependent_efor,50)    
     
     # get hourly capacity of supplemental generator and add to fleet capacity
     hourly_supplement_capacity = get_hourly_capacity( num_iterations,supplement_generators)
@@ -580,7 +580,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
             supplement_capacity -= (supplement_capacity - supplement_capacity_min) // 2
 
         # find new contribution from supplemental generators
-        supplement_generators = make_supplemental_generators(supplement_capacity,conventional_efor,temperature_dependent_efor)
+        supplement_generators = make_supplemental_generators(supplement_capacity,conventional_efor,temperature_dependent_efor,50)
         hourly_supplement_capacity = get_hourly_capacity(num_iterations,supplement_generators)
         hourly_storage_capacity = get_hourly_storage_contribution(num_iterations,
                                                             hourly_fleet_capacity+hourly_supplement_capacity, 
@@ -619,12 +619,118 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
     return conventional_generators
 
-# make fleet of (< 50 MW) generators which combine to make capacity
-def make_supplemental_generators(capacity,efor,temperature_dependent_efor):
-    supplemental_generators = make_conventional_generator(capacity%50,efor,temperature_dependent_efor)
+# Remove generators to meet reliability requirement (LOLH of 2.4 by default)
+def remove_generators(  num_iterations, conventional_generators, solar_generators, wind_generators, storage_units, cf, 
+                        hourly_load, oldest_year_manual, target_lolh, temperature_dependent_efor, conventional_efor, renewable_profile):
 
-    for i in range(int(capacity/50)):
-        fifty_MW_generator = make_conventional_generator(50,efor,temperature_dependent_efor)
+    # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
+    low_iterations = 50
+    total_capacity_removed = 0
+    oldest_year = np.amin(conventional_generators["year"][conventional_generators["technology"] != "Conventional Hydroelectric"]) 
+    
+    # manual removal
+    if oldest_year_manual > oldest_year:
+        conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators, oldest_year_manual)
+        total_capacity_removed += capacity_removed 
+
+          
+
+    # Find original reliability
+    hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,
+                                                        wind_generators,cf,storage_units,hourly_load,renewable_profile)
+    lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
+    
+    # Error Handling: Under Reliable System
+    if lolh >= target_lolh:
+        print("LOLH:", round(lolh,2))
+        error_message = "LOLH already greater than target. Under reliable system."
+        print(error_message)
+
+    while conventional_generators["nameplate"].size > 1 and lolh < target_lolh:
+        conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators)
+        hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,
+                                                            wind_generators,cf,storage_units,hourly_load,renewable_profile)
+        lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
+        total_capacity_removed += capacity_removed
+
+        print("Oldest Year:\t",int(oldest_year),"\tLOLH:\t",round(lolh,2),"\tCapacity Removed:\t",capacity_removed)
+    
+    print('')
+
+    # find reliability of higher iteration simulation
+
+    hourly_fleet_capacity = get_hourly_fleet_capacity(num_iterations,conventional_generators,solar_generators,
+                                                        wind_generators,cf)
+
+    hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,
+                                                                hourly_fleet_capacity, 
+                                                                hourly_load, 
+                                                                storage_units,
+                                                                renewable_profile)
+                                                                
+    hourly_total_capacity = hourly_fleet_capacity + hourly_storage_capacity 
+
+    lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
+
+    # add supplemental units to match target reliability
+
+    supplemental_capacity = 0
+    supplemental_generator_unit_size = 50
+    hourly_unit_supplemental_capacity = 0
+    hourly_total_supplemental_capacity = 0
+
+    # add supplemental generators of constant size until system is over reliable
+    while lolh > target_lolh:
+
+        # make new generator
+        supplemental_generator = make_conventional_generator(supplemental_generator_unit_size, 
+                                                            conventional_efor, temperature_dependent_efor)
+
+        # get hourly capacity of supplemental generator and add to fleet capacity
+        hourly_unit_supplemental_capacity = get_hourly_capacity( num_iterations, supplemental_generator)
+
+        hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,
+                                                                    hourly_fleet_capacity+hourly_total_supplemental_capacity +\
+                                                                    hourly_unit_supplemental_capacity, 
+                                                                    hourly_load, 
+                                                                    storage_units,
+                                                                    renewable_profile)
+        hourly_total_capacity = hourly_fleet_capacity + hourly_total_supplemental_capacity \
+                                + hourly_unit_supplemental_capacity + hourly_storage_capacity
+
+        lolh, hourly_risk = get_lolh(num_iterations,hourly_total_capacity,hourly_load)
+
+        
+        hourly_total_supplemental_capacity += hourly_unit_supplemental_capacity
+        supplemental_capacity += supplemental_generator_unit_size
+        print("Supplement Capacity:\t",int(supplemental_capacity),"\tLOLH:\t", round(lolh,2))
+    
+    print('')
+
+    # add supplemental generator to fleet
+    supplemental_generators = make_supplemental_generators( supplemental_capacity, conventional_efor, 
+                                                            temperature_dependent_efor, supplemental_generator_unit_size)
+    conventional_generators = append_conventional_generator(conventional_generators,supplemental_generators)
+
+    total_capacity_removed = total_capacity_removed - supplemental_capacity
+
+    print("Oldest operating year :",int(oldest_year))
+    print("Number of active generators :",conventional_generators["nameplate"].size)
+    print("Supplemental capacity :",supplemental_capacity)
+    print("Capacity removed :",int(total_capacity_removed))
+    print("Conventional fleet capacity :",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
+
+    print('')
+    return conventional_generators
+
+# make fleet of small generators generators to provide supplemental capacity
+def make_supplemental_generators(capacity,efor,temperature_dependent_efor,generator_size):
+    
+    supplemental_generators = make_conventional_generator(capacity%generator_size,efor,temperature_dependent_efor)
+
+    for i in range(int(capacity/generator_size)):
+
+        fifty_MW_generator = make_conventional_generator(generator_size,efor,temperature_dependent_efor)
         supplemental_generators = append_conventional_generator(supplemental_generators, fifty_MW_generator)
 
     return supplemental_generators
@@ -670,18 +776,20 @@ def make_RE_generator(generator):
 
     return RE_generator
 
-def elcc_binary_constraints(binary_trial, lolh, target_lolh, num_iterations, additional_load, added_capacity):
+def elcc_binary_constraints(binary_trial, lolh, target_lolh, additional_load_max, additional_load_min, added_capacity):
     
-    trial_limit_met = binary_trial < 20
-    reliability_met = abs(lolh - target_lolh) > (1/num_iterations)
-    lower_bound_met = additional_load > 1
-    upper_bound_met = additional_load < added_capacity - 1
+    trial_limit_not_met = binary_trial < 20
+    convergence_not_met = additional_load_max - additional_load_min > 2 * added_capacity / 100
+    reliability_not_met = abs(lolh - target_lolh) > 1e-9
     
-    return trial_limit_met and reliability_met and lower_bound_met and upper_bound_met
+    return trial_limit_not_met and convergence_not_met and reliability_not_met
 
 # use binary search to find elcc by adjusting additional load
-def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_capacity,fleet_storage, 
+def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_capacity, fleet_storage, 
                 added_storage, hourly_load, added_capacity, fleet_renewable_profile, added_renewable_profile):
+
+    # precision for printing lolh
+    precision = int(math.log10(num_iterations))
 
     # find original reliability
     hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,hourly_fleet_capacity,hourly_load,
@@ -689,37 +797,16 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
     hourly_total_capacity = hourly_fleet_capacity + hourly_storage_capacity
   
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
-    print("Target LOLH :", target_lolh)
-
-
-
-
-
-
-
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    np.savetxt(OUTPUT_DIRECTORY+'load1.csv',hourly_load,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'risk1.csv',hourly_risk,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'fleet1.csv',hourly_fleet_capacity,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'storage1.csv',hourly_storage_capacity,delimiter=',')
-    
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-
-
-
-
-    # use binary search to find amount of load needed to match base reliability
-    additional_load_max = added_capacity
-    additional_load_min = 0
-    additional_load = added_capacity / 2.0
+    print("Target LOLH :", round(target_lolh,precision))
 
     # combine fleet storage with generator storage
     all_storage = append_storage(fleet_storage, added_storage)
     combined_renewable_profile = fleet_renewable_profile + added_renewable_profile
+
+    # use binary search to find amount of load needed to match base reliability
+    additional_load_max = added_capacity
+    additional_load_min = 0
+    additional_load = additional_load_max / 2
 
     # include storage operation
     hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,
@@ -733,13 +820,13 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
     lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load + additional_load)
     
     if DEBUG:
-            print(lolh)
+            print(round(lolh,precision))
             print([i%24 for i in range(len(hourly_risk)) if hourly_risk[i]>0])
             print([i for i in hourly_risk if i>0])
 
     binary_trial = 0
 
-    while elcc_binary_constraints(binary_trial, lolh, target_lolh, num_iterations, additional_load, added_capacity):
+    while elcc_binary_constraints(binary_trial, lolh, target_lolh, additional_load_max, additional_load_min, added_capacity):
         
         #under reliable, remove load
         if lolh > target_lolh: 
@@ -763,7 +850,7 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
         # find new lolh
         lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load + additional_load)
     
-        print('Additional Load:',additional_load,'LOLH:',lolh)
+        print('Additional Load:',additional_load,'LOLH:',round(lolh,precision))
 
         # print additional debugging information
         if DEBUG:
@@ -771,24 +858,6 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
             print([i for i in hourly_risk if i>0])
 
         binary_trial += 1
-
-
-
-
-
-
-
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    np.savetxt(OUTPUT_DIRECTORY+'load2.csv',hourly_load,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'risk2.csv',hourly_risk,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'fleet2.csv',hourly_fleet_capacity,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'storage2.csv',hourly_storage_capacity,delimiter=',')
-    np.savetxt(OUTPUT_DIRECTORY+'generator2.csv',hourly_added_generator_capacity,delimiter=',')
-    
-    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 
     if DEBUG == True:
         print(lolh)
@@ -1005,7 +1074,7 @@ def main(simulation,files,system,generator):
     if DEBUG:
         np.savetxt(OUTPUT_DIRECTORY+'demand.csv',hourly_load,delimiter=',')
         save_active_generators(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators)
-        np.savetxt(OUTPUT_DIRECTORY+'hourlyRisk.csv',hourlyRisk,delimiter=',')
+        np.savetxt(OUTPUT_DIRECTORY+'hourly_risk.csv',hourlyRisk,delimiter=',')
         np.savetxt(OUTPUT_DIRECTORY+'renewable_generator_profile.csv',added_renewable_profile,delimiter=',')
         np.savetxt(OUTPUT_DIRECTORY+'renewable_fleet_profile.csv',fleet_renewable_profile,delimiter=',')
 
