@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 
 def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, efor, dispatch_strategy):
-    
+
     # return empty storage unit
     if include_storage == False:
         storage = dict()
@@ -52,7 +52,7 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
     storage["energy"] = storage["extractable energy"] / storage["one way efficiency"]
     storage["time to discharge"] = storage["extractable energy"] / storage["max discharge rate"]
     storage["efor"] = efor
-    storage["full"] = storage["extractable energy"] == storage["max energy"]
+    storage["full"] = True
 
     sys.stdout.flush()
 

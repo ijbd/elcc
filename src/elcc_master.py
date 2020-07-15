@@ -13,10 +13,9 @@ generator = dict()
 
 ########## Generic ##########
 
-simulation["year"] = 2016
+simulation["year"] = 2018
 simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
-simulation["iterations"] = 1000 # number of iterations for monte carlo simulation
-simulation["rm generators iterations"] = 100 # number of iterations used for removing generators (smaller to save time)
+simulation["iterations"] = 10000 # number of iterations for monte carlo simulation
 simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
 simulation["debug"] = False # print all information flagged for debug
@@ -27,11 +26,12 @@ files["output directory"] = "./"
 files["eia folder"] = "../eia8602018/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
+files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/"
+
 ########## System ########### 
 
 # Adjust parameters of existing fleet
-system["setting"] = "none" # none, save, or load
-system["derate conventional"] = False #decrease conventional generators' capacity by 5%
+system["system setting"] = "save" # none or save (save will load existing fleet capacity or save new folder)
 system["oldest year"] = 0 #remove conventional generators older than this year
 
 ######### Outages ###########
@@ -45,7 +45,7 @@ system["enable total interchange"] = True #gathers combined imports/exports data
 
 ######### Storage ###########
 
-system["dispatch strategy"] = "reliability" # "reliability" or "arbitrage"
+system["dispatch strategy"] = "reliability" 
 system["storage efficiency"] = .8 #roundtrip 
 system["storage efor"] = 0
 system["fleet storage"] = True #include existing fleet storage 
@@ -115,8 +115,8 @@ if simulation["region"] == "WECC":
     system['oldest year'] = 1975
 
 
-
 if files["output directory"][-1] != '/': files["output directory"] += '/'
+if files["saved systems folder"][-1] != '/': files["saved systems folder"] += '/'
 
 # run program
 main(simulation,files,system,generator)
