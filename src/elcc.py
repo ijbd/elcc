@@ -1,6 +1,6 @@
 import os
 
-root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/tests/'
+root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/tests/save_system/'
 
 def error_handling():
 
@@ -30,6 +30,7 @@ def main():
     # universal parameters
 
     parameters['year'] = 2018
+    parameters['region'] = 'PACE'
     parameters['nameplate'] = 100
     parameters['generator_type'] = 'solar'
 
