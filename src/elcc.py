@@ -1,6 +1,7 @@
 import os
+import sys
 
-root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/tests/save_system/'
+root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
 
 def error_handling():
 
