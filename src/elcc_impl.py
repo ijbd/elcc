@@ -929,7 +929,7 @@ def save_active_generators(root_directory, conventional, solar, wind, storage, r
 
     return
 
-def get_saved_system_name(simulation, files, system):
+def get_saved_system_name(simulation, files, system, create=False):
 
     root_directory = files['saved systems folder']
 
@@ -937,14 +937,14 @@ def get_saved_system_name(simulation, files, system):
     year = str(simulation['year'])
     root_directory += year + '/'
 
-    if not path.exists(root_directory):
+    if not path.exists(root_directory) and create:
         os.system('mkdir '+root_directory)
     
     # level 2 - region
     region = str(simulation['region'])
     root_directory += region + '/'
 
-    if not path.exists(root_directory):
+    if not path.exists(root_directory) and create:
         os.system('mkdir '+root_directory)
 
     # level 3 - remaining parameters
@@ -980,7 +980,7 @@ def get_saved_system_name(simulation, files, system):
 def save_hourly_fleet_capacity( hourly_capacity, conventional_generators, solar_generators,
                                 wind_generators, storage, renewable_profile, simulation, files, system):
     
-    saved_system_directory = get_saved_system_name(simulation,files,system)
+    saved_system_directory = get_saved_system_name(simulation,files,system,True)
 
     if not path.exists(saved_system_directory):
         os.system('mkdir '+saved_system_directory)
@@ -1001,8 +1001,8 @@ def load_hourly_fleet_capacity(simulation,files,system):
     
     saved_system_name = get_saved_system_name(simulation,files,system)
 
-    if not path.exists(saved_system_name) or not system["system setting"]:
-        return None
+    if not path.exists(saved_system_name) or not system["system setting"] == "save":
+        return None, None
     else:
         hourly_capacity = np.load(saved_system_name+'fleet_capacity.npy',allow_pickle=True)
         renewable_profile = np.load(saved_system_name+'fleet_renewable_profile.npy',allow_pickle=True)
