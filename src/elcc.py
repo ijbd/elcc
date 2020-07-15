@@ -33,7 +33,7 @@ def main():
     parameters['year'] = 2018
     parameters['region'] = 'PACE'
     parameters['nameplate'] = 100
-    parameters['iterations'] = 1000
+    parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'
 
     # variable parameters

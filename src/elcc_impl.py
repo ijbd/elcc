@@ -1002,7 +1002,7 @@ def load_hourly_fleet_capacity(simulation,files,system):
     saved_system_name = get_saved_system_name(simulation,files,system)
 
     if not path.exists(saved_system_name) or not system["system setting"]:
-        return 0, 0
+        return None
     else:
         hourly_capacity = np.load(saved_system_name+'fleet_capacity.npy',allow_pickle=True)
         renewable_profile = np.load(saved_system_name+'fleet_renewable_profile.npy',allow_pickle=True)
@@ -1043,7 +1043,7 @@ def main(simulation,files,system,generator):
     # try loading system
     hourly_fleet_capacity, fleet_renewable_profile = load_hourly_fleet_capacity(simulation, files, system)
 
-    if isinstance(hourly_fleet_capacity, int):
+    if hourly_fleet_capacity is None:
         # system 
         fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["region"],
                                                                 simulation["year"], system, powGen_lats, powGen_lons,
