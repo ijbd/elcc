@@ -44,8 +44,9 @@ def main():
     parameters['generator_type'] = 'solar'
 
     # variable parameters
-
-    run_job(parameters)
+    for count in range(5):
+        parameters['count'] = count
+        run_job(parameters)
 
 if __name__ == "__main__":
     error_handling()
