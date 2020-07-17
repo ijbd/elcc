@@ -50,7 +50,7 @@ def main():
             parameters['longitude'] = lon
             
             print('Running:',lat,lon)
-            #run_job(parameters)
+            run_job(parameters)
 
 if __name__ == "__main__":
     error_handling()
