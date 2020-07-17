@@ -1076,6 +1076,7 @@ def main(simulation,files,system,generator):
         if system["system setting"] == "save":
             save_hourly_fleet_capacity( hourly_fleet_capacity, fleet_conventional_generators, fleet_solar_generators,
                                         fleet_wind_generators, fleet_storage, fleet_renewable_profile, simulation, files, system)  
+            return 0
 
     # format RE generator 
     RE_generator = make_RE_generator(generator)
@@ -1107,4 +1108,4 @@ def main(simulation,files,system,generator):
         np.savetxt(OUTPUT_DIRECTORY+'hourly_risk.csv',hourlyRisk,delimiter=',')
 
     print("End Main :\t",str(datetime.datetime.now().time()))
-    return elcc, hourlyRisk
+    return elcc

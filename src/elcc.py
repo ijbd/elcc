@@ -37,16 +37,16 @@ def main():
 
     # universal parameters
 
-    parameters['year'] = 2018
-    parameters['region'] = 'PACE'
-    parameters['nameplate'] = 100
+    parameters['nameplate'] = 1000
     parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'
 
     # variable parameters
-    for count in range(5):
-        parameters['count'] = count
-        run_job(parameters)
+    for region in ['PSCO','PNM','NEVP','LDWP','CISO','PGE','SCL','IPCO','PACE','NWMT','WACM','AZPS','WECC']:
+        for year in [2016, 2017, 2018]:
+            parameters['region'] = region
+            parameters['year'] = year
+            run_job(parameters)
 
 if __name__ == "__main__":
     error_handling()

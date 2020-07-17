@@ -5,9 +5,11 @@
 #SBATCH --job-name=elcc_calc
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --mem-per-cpu=8GB
 #SBATCH --time=24:00:00
 #SBATCH --account=mtcraig1
+
 
 output_directory=$(python make_output_directory.py "$@")
 
