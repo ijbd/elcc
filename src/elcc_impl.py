@@ -514,8 +514,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
 
-    print("!!!!!!!!!!!DEUVGU")
-    low_iterations = 1
+    low_iterations = 50
     total_capacity_removed = 0
     oldest_year = np.amin(conventional_generators["year"][conventional_generators["technology"] != "Conventional Hydroelectric"]) 
     

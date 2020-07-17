@@ -1,5 +1,6 @@
 import os
 import sys
+from elcc_impl import get_powGen
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
 email = False
@@ -45,7 +46,18 @@ def main():
 
     # variable parameters
 
-    run_job(parameters)
+    solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc"
+    wind_cf_file = "../wecc_powGen/2018_wind_generation_cf.nc"
+
+    lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
+
+    for lat in lats:
+        parameters['latitude'] = lat
+        for lon in lons:
+            parameters['longitude'] = lon
+            
+            print('Running:',lat,lon)
+            #run_job(parameters)
 
 if __name__ == "__main__":
     error_handling()
