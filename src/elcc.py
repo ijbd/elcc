@@ -2,7 +2,7 @@ import os
 import sys
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
-RAM = sys.argv[2] #1GB, 4GB, 8GB (8GB will send email; used for saving systems)
+RAM = sys.argv[2] #4GB, 8GB (8GB will send email; used for saving systems)
 
 def error_handling():
 

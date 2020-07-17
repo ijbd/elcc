@@ -1,7 +1,5 @@
 import os
 import sys
-import time
-from elcc_impl import get_powGen
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
 RAM = sys.argv[2] #4GB, 8GB (8GB will send email; used for saving systems)
@@ -31,28 +29,21 @@ def main():
     parameters = dict()
 
     # universal parameters
-
-    parameters['year'] = 2018
-    parameters['region'] = 'PACE'
     parameters['nameplate'] = 1000
     parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'
 
     # variable parameters
 
-    solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc"
-    wind_cf_file = "../wecc_powGen/2018_wind_generation_cf.nc"
+    
+    for year in [2016, 2017, 2018]:
+        parameters['year'] = year
+        for region in ['PSCO','PNM','NEVP','LDWP','CISO','PGE','SCL','IPCO','PACE','NWMT','WACM','AZPS','WECC']:
+            parameters['region'] = region
 
-    lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
-
-    for lat in lats[1:]:
-        parameters['latitude'] = lat
-
-        for lon in lons:
-            parameters['longitude'] = lon
-            
-            print('Running:',lat,lon)
+            print('Running:',region,year)
             run_job(parameters)
+    
 
 if __name__ == "__main__":
     error_handling()

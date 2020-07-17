@@ -683,8 +683,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
     print("Supplemental capacity :",supplemental_capacity)
     print("Capacity removed :",int(total_capacity_removed - supplemental_capacity))
     print("Conventional fleet capacity :",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
-
-    print('')
+    print('Base LOLH :', lolh)
     return conventional_generators, hourly_fleet_capacity
 
 # make fleet of small generators generators to provide supplemental capacity

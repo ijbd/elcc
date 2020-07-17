@@ -56,7 +56,7 @@ system["supplemental storage energy capacity"] = 100 # MWh
 ######## Generator ##########
 
 generator["generator type"] = "solar" #solar or wind 
-generator["nameplate"] = 100 #MW
+generator["nameplate"] = 1000 #MW
 generator["latitude"] = 41
 generator["longitude"] = -112
 generator["efor"] = .05 
@@ -64,8 +64,8 @@ generator["efor"] = .05
 ###### Added Storage ########
 
 generator["generator storage"] = False #find elcc of additional storage
-generator["generator storage power capacity"] = 100 #MW
-generator["generator storage energy capacity"] = 100 #MWh 
+generator["generator storage power capacity"] = 1000 #MW
+generator["generator storage energy capacity"] = 1000 #MWh 
 
 ##############################################################################################
 
