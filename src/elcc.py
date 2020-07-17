@@ -38,7 +38,7 @@ def main():
     # universal parameters
 
     parameters['year'] = 2018
-    parameters['region'] = 'WECC'
+    parameters['region'] = 'PACE'
     parameters['nameplate'] = 100
     parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'
