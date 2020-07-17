@@ -2,6 +2,11 @@ import os
 import sys
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
+email = False
+
+if len(sys.argv) == 3:
+    if sys.argv[2] == "email":
+        email = True
 
 def error_handling():
 
@@ -21,8 +26,10 @@ def run_job(parameters):
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
     
-    os.system('sbatch elcc_batch_job.sbat ' + parameter_string)
-
+    if email:
+        os.system('sbatch elcc_batch_job_email.sbat ' + parameter_string)
+    else:
+        os.system('sbatch elcc_batch_job.sbat ' + parameter_string)
 
 def main():
 
@@ -31,7 +38,7 @@ def main():
     # universal parameters
 
     parameters['year'] = 2018
-    parameters['region'] = 'WECC'
+    parameters['region'] = 'PACE'
     parameters['nameplate'] = 100
     parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'

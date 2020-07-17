@@ -514,7 +514,8 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
     # Remove capacity until reliability drops beyond target LOLH/year (low iterations to save time)
 
-    low_iterations = 50
+    print("!!!!!!!!!!!DEUVGU")
+    low_iterations = 1
     total_capacity_removed = 0
     oldest_year = np.amin(conventional_generators["year"][conventional_generators["technology"] != "Conventional Hydroelectric"]) 
     
@@ -918,10 +919,10 @@ def save_active_generators(root_directory, conventional, solar, wind, storage, r
 
     #storage
     if storage["num units"] != 0:
-        storage_array = np.array([  storage["max charge rate"],storage["max discharge rate"],
-                                    storage["max energy"],storage["max energy"]/storage["max discharge rate"]])
+        storage_array = np.around(np.array([storage["max charge rate"],storage["max discharge rate"],
+                                            storage["max energy"],storage["max energy"]/storage["max discharge rate"]]),2)
         
-        storage_df = pd.DataFrame(  data=storage_array,
+        storage_df = pd.DataFrame(  data=storage_array.T,
                                     index=np.arange(storage["max charge rate"].size),
                                     columns=[   "Charge Rate (MW)","Discharge Rate (MW)",
                                                 "Nameplate Energy Capacity (MWh)", "Duration (Hours)"])
