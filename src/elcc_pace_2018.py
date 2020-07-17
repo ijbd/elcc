@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 from elcc_impl import get_powGen
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
@@ -44,8 +45,10 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    for lat in lats[:1]:
+    for lat in lats[1:]:
         parameters['latitude'] = lat
+
+        time.sleep(40)
 
         for lon in lons:
             parameters['longitude'] = lon
