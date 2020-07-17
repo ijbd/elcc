@@ -3,11 +3,7 @@ import sys
 from elcc_impl import get_powGen
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
-email = False
-
-if len(sys.argv) == 3:
-    if sys.argv[2] == "email":
-        email = True
+RAM = sys.argv[2] #1GB, 4GB, 8GB (8GB will send email; used for saving systems)
 
 def error_handling():
 
@@ -27,10 +23,7 @@ def run_job(parameters):
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
     
-    if email:
-        os.system('sbatch elcc_batch_job_email.sbat ' + parameter_string)
-    else:
-        os.system('sbatch elcc_batch_job.sbat ' + parameter_string)
+    os.system('sbatch elcc_batch_job_'+RAM+'.sbat ' + parameter_string)
 
 def main():
 
