@@ -44,7 +44,7 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    for lat in lats[0]:
+    for lat in lats[:1]:
         parameters['latitude'] = lat
 
         for lon in lons:
