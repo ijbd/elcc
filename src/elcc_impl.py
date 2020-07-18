@@ -897,12 +897,6 @@ def save_active_generators(root_directory, conventional, solar, wind, storage, r
     #solar
     if solar['num units'] != 0:
 
-        print(  solar["nameplate"])
-        print(  solar["summer nameplate"])
-        print(  solar["winter nameplate"])
-        print(  solar["lat"])
-        print(  solar["lon"])
-
         solar_generator_array = np.array([  solar["nameplate"],solar["summer nameplate"],
                                             solar["winter nameplate"],solar["lat"],
                                             solar["lon"]])
@@ -916,12 +910,6 @@ def save_active_generators(root_directory, conventional, solar, wind, storage, r
 
     #wind
     if wind['num units'] != 0:
-
-        print(  wind["nameplate"])
-        print(  wind["summer nameplate"])
-        print(  wind["winter nameplate"])
-        print(  wind["lat"])
-        print(  wind["lon"])
 
         wind_generator_array = np.array([   wind["nameplate"],wind["summer nameplate"],
                                             wind["winter nameplate"],wind["lat"],
