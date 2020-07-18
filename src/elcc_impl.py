@@ -572,7 +572,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
                                                                 wind_generators,cf,storage_units,hourly_load,renewable_profile)
             lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
             total_capacity_removed += capacity_removed
-            print("Oldest Year:\t",int(oldest_year),"\tLOLH:\t",round(lolh,2),"\tCapacity Removed:\t",capacity_removed)
+            print("Oldest Year:\t",int(oldest_year),"\tLOLH:\t",round(lolh,2),"\tCapacity Removed:\t",capacity_removed,flush=True)
         
         hourly_fleet_capacity = get_hourly_fleet_capacity(num_iterations,conventional_generators,solar_generators,
                                                         wind_generators,cf)
@@ -664,7 +664,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
 
         lolh, hourly_risk = get_lolh(num_iterations,hourly_total_capacity,hourly_load)  
 
-        print("Supplement Capacity:\t",int(supplemental_capacity+generator_size_new),"\tLOLH:\t", round(lolh,precision))
+        print("Supplement Capacity:\t",int(supplemental_capacity+generator_size_new),"\tLOLH:\t", round(lolh,precision),flush=True)
     
     print('')
 
@@ -683,7 +683,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
     print("Supplemental capacity :",supplemental_capacity)
     print("Capacity removed :",int(total_capacity_removed - supplemental_capacity))
     print("Conventional fleet capacity :",(np.sum(conventional_generators["summer nameplate"])+np.sum(conventional_generators["winter nameplate"]))//2)
-    print('Base LOLH :', lolh)
+    print('Base LOLH :', lolh,flush=True)
     return conventional_generators, hourly_fleet_capacity
 
 # make fleet of small generators generators to provide supplemental capacity
@@ -765,7 +765,7 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
   
     target_lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
 
-    print("Target LOLH :", round(target_lolh,precision))
+    print("Target LOLH :", round(target_lolh,precision),flush=True)
     print('')
 
     # combine fleet storage with generator storage
@@ -821,7 +821,7 @@ def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_ca
         # find new lolh
         lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load + additional_load)
     
-        print('Additional Load:',additional_load,'LOLH:',round(lolh,precision))
+        print('Additional Load:',additional_load,'LOLH:',round(lolh,precision), flush=True)
 
         # print additional debugging information
         if DEBUG:
@@ -997,7 +997,7 @@ def save_hourly_fleet_capacity( hourly_capacity, conventional_generators, solar_
     save_active_generators( saved_system_directory,conventional_generators,
                             solar_generators,wind_generators, storage, renewable_profile)
 
-    print("System Saved:\t",str(datetime.datetime.now().time()))
+    print("System Saved:\t",str(datetime.datetime.now().time()),flush=True)
     print('')
 
     return 
