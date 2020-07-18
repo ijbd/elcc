@@ -40,6 +40,7 @@ def main():
     parameters['nameplate'] = 1000
     parameters['iterations'] = 10000
     parameters['generator_type'] = 'solar'
+    parameters['generator_storage'] = True
 
     # variable parameters
     add_job(parameters)
