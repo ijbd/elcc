@@ -45,7 +45,7 @@ def main():
     # variable parameters
     add_job(parameters)
 
-    os.system('bash elcc_batch_job_'+RAM+'.sbat')
+    os.system('sbatch elcc_batch_job_'+RAM+'.sbat')
 
     print('Jobs submitted')
 
