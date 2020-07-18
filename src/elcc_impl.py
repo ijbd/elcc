@@ -247,6 +247,7 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
     longitudes = find_nearest_impl(plants["Longitude"][active_generators["Plant Code"]].values,powGen_lons)
     # Convert Dataframe to Dictionary of numpy arrays
     conventional_generators = dict()
+    conventional_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
     conventional_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
     conventional_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values
     conventional_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values
@@ -314,17 +315,13 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
     longitudes = plants["Longitude"][active_generators["Plant Code"]].values
     # Convert Dataframe to Dictionary of numpy arrays
     RE_generators = dict()
+    RE_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
     RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
     RE_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"]
     RE_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"]
     RE_generators["lat"] = latitudes
     RE_generators["lon"] = longitudes
     RE_generators["efor"] = np.ones(RE_generators["nameplate"].size) * RE_efor 
-
-    # Error Handling
-    if RE_generators["nameplate"].size == 0:
-        error_message = "No existing renewables found."
-        raise RuntimeWarning(error_message)
 
     return RE_generators
 
@@ -429,6 +426,9 @@ def sample_outages_impl(num_iterations, pre_outage_capacity, generators):
 # Get the hourly capacity matrix for a set of generators for a desired number of iterations
 def get_hourly_capacity(num_iterations, generators, cf=None):
     
+    if generators["num units"] == 0:
+        return 0
+
     # check for conventional
     if cf is None:
         pre_outage_winter_capacity = np.tile(generators["winter nameplate"],(8760//4,1)) # shape(8760 hrs, num generators)
@@ -702,6 +702,7 @@ def make_conventional_generator(capacity,efor,temperature_dependent_efor):
 
     new_generator = dict()
 
+    new_generator["num units"] = 1
     new_generator["nameplate"] = np.array(capacity)
     new_generator["summer nameplate"] = new_generator["nameplate"]
     new_generator["winter nameplate"] = new_generator["nameplate"]
@@ -720,6 +721,8 @@ def append_conventional_generator(fleet_conventional_generators,additional_gener
     for key in fleet_conventional_generators:
         if key == "efor":
             fleet_conventional_generators[key] = np.concatenate((fleet_conventional_generators[key],additional_generator[key]))
+        elif key == "num units":
+            fleet_conventional_generators[key] += additional_generator[key]
         else:
             fleet_conventional_generators[key] = np.append(fleet_conventional_generators[key],additional_generator[key])
 
@@ -729,6 +732,7 @@ def append_conventional_generator(fleet_conventional_generators,additional_gener
 def make_RE_generator(generator):
 
     RE_generator = dict()
+    RE_generator["num units"] = 1
     RE_generator["nameplate"] = np.array([generator["nameplate"]])
     RE_generator["summer nameplate"] = np.array([generator["nameplate"]])
     RE_generator["winter nameplate"] = np.array([generator["nameplate"]])
@@ -858,21 +862,19 @@ def print_parameters(*parameters):
 
     print('')
 
-def print_fleet(conventional_generators,solar_generators,wind_generators,storage):
+def print_fleet(conventional_generators,solar_generators,wind_generators,storage_units):
 
     # conventional
-    print("found",conventional_generators["nameplate"].size,
+    print(  "found",conventional_generators["num units"],
             "conventional generators ("+str(int(np.sum(conventional_generators["nameplate"])))+" MW)")
 
     # renewables
-    print("found",solar_generators["nameplate"].size+wind_generators["nameplate"].size,
-        "renewable generators ("+str(int(np.sum(solar_generators["nameplate"])+np.sum(wind_generators["nameplate"])))+" MW)")
+    print(  "found",solar_generators["num units"],"solar generators ("+str(int(np.sum(solar_generators["nameplate"])))+" MW)")
+
+    print(  "found",wind_generators["num units"],"wind generators ("+str(int(np.sum(wind_generators["nameplate"])))+" MW)")
 
     # storage
-    if storage["num units"] == 0: 
-        print("No storage units found in region.")
-    else:
-        print("found", storage["num units"], "storage units ("+str(int(np.sum(storage["max discharge rate"])))+" MW)")
+    print(  "found", storage_units["num units"],"storage units ("+str(int(np.sum(storage_units["max discharge rate"])))+" MW)")
 
     print('')
 
@@ -880,50 +882,53 @@ def print_fleet(conventional_generators,solar_generators,wind_generators,storage
 def save_active_generators(root_directory, conventional, solar, wind, storage, renewable_profile):
     
     #conventional
-    conventional_generator_array = np.array([   conventional["nameplate"],conventional["summer nameplate"],
-                                                conventional["winter nameplate"],conventional["year"],
-                                                conventional["technology"]])
+    if conventional['num units'] != 0:
+        conventional_generator_array = np.array([   conventional["nameplate"],conventional["summer nameplate"],
+                                                    conventional["winter nameplate"],conventional["year"],
+                                                    conventional["technology"]])
 
-    conventional_generator_df = pd.DataFrame(   data=conventional_generator_array.T,
-                                                index=np.arange(conventional["nameplate"].size),
-                                                columns=["Nameplate Capacity (MW)", "Summer Capacity (MW)", 
-                                                        "Winter Capacity (MW)", "Year", "Technology"])
+        conventional_generator_df = pd.DataFrame(   data=conventional_generator_array.T,
+                                                    index=np.arange(conventional["nameplate"].size),
+                                                    columns=["Nameplate Capacity (MW)", "Summer Capacity (MW)", 
+                                                            "Winter Capacity (MW)", "Year", "Technology"])
 
-    conventional_generator_df.to_csv(root_directory+"active_conventional.csv")
+        conventional_generator_df.to_csv(root_directory+"active_conventional.csv")
 
     #solar
-    solar_generator_array = np.array([  solar["nameplate"],solar["summer nameplate"],
-                                        solar["winter nameplate"],solar["lat"],
-                                        solar["lon"]])
+    if solar['num units'] != 0:
+        solar_generator_array = np.array([  solar["nameplate"],solar["summer nameplate"],
+                                            solar["winter nameplate"],solar["lat"],
+                                            solar["lon"]])
 
-    solar_generator_df = pd.DataFrame(  data=solar_generator_array.T,
-                                        index=np.arange(solar["nameplate"].size),
-                                        columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
-                                                "Winter Capacity (MW)","Latitude",
-                                                "Longitude"])
-    solar_generator_df.to_csv(root_directory+"active_solar.csv")
+        solar_generator_df = pd.DataFrame(  data=solar_generator_array.T,
+                                            index=np.arange(solar["nameplate"].size),
+                                            columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
+                                                    "Winter Capacity (MW)","Latitude",
+                                                    "Longitude"])
+        solar_generator_df.to_csv(root_directory+"active_solar.csv")
 
     #wind
-    wind_generator_array = np.array([   wind["nameplate"],wind["summer nameplate"],
-                                        wind["winter nameplate"],wind["lat"],
-                                        wind["lon"]])
+    if wind['num units'] != 0:
+        wind_generator_array = np.array([   wind["nameplate"],wind["summer nameplate"],
+                                            wind["winter nameplate"],wind["lat"],
+                                            wind["lon"]])
 
-    wind_generator_df = pd.DataFrame(   data=wind_generator_array.T,
-                                        index=np.arange(wind["nameplate"].size),
-                                        columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
-                                                "Winter Capacity (MW)","Latitude",
-                                                "Longitude"])
-    wind_generator_df.to_csv(root_directory+"active_wind.csv")
+        wind_generator_df = pd.DataFrame(   data=wind_generator_array.T,
+                                            index=np.arange(wind["nameplate"].size),
+                                            columns=["Nameplate Capacity (MW)","Summer Capacity (MW)",
+                                                    "Winter Capacity (MW)","Latitude",
+                                                    "Longitude"])
+        wind_generator_df.to_csv(root_directory+"active_wind.csv")
 
     #storage
-    if storage["num units"] != 0:
-        storage_array = np.around(np.array([storage["max charge rate"],storage["max discharge rate"],
-                                            storage["max energy"],storage["max energy"]/storage["max discharge rate"]]),2)
+    if storage['num units'] != 0:
+        storage_array = np.array([storage["max charge rate"],storage["max discharge rate"],
+                                            storage["max energy"]])
         
         storage_df = pd.DataFrame(  data=storage_array.T,
                                     index=np.arange(storage["max charge rate"].size),
                                     columns=[   "Charge Rate (MW)","Discharge Rate (MW)",
-                                                "Nameplate Energy Capacity (MWh)", "Duration (Hours)"])
+                                                "Nameplate Energy Capacity (MWh)"])
         storage_df.to_csv(root_directory+"active_storage.csv")
 
     return

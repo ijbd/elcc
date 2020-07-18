@@ -50,8 +50,8 @@ system["storage efficiency"] = .8 #roundtrip
 system["storage efor"] = 0
 system["fleet storage"] = True #include existing fleet storage 
 system["supplemental storage"] = False # add supplemental storage to simulate higher storage penetration
-system["supplemental storage power capacity"] = 100 # MW
-system["supplemental storage energy capacity"] = 100 # MWh
+system["supplemental storage power capacity"] = 1000 # MW
+system["supplemental storage energy capacity"] = 1000 # MWh
 
 ######## Generator ##########
 

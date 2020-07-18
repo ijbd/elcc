@@ -38,7 +38,7 @@ def main():
     
     for year in [2016, 2017, 2018]:
         parameters['year'] = year
-        for region in ['PSCO','PNM','NEVP','LDWP','CISO','PGE','SCL','IPCO','PACE','NWMT','WACM','AZPS','WECC']:
+        for region in ['LDWP','NEVP','PACE','PGE']:
             parameters['region'] = region
 
             print('Running:',region,year)

@@ -115,7 +115,7 @@ def reset_storage(storage):
     return
 
 def get_hourly_storage_contribution(num_iterations, hourly_capacity, hourly_load, storage, renewable_profile=None):
-    
+
     hourly_storage_contribution = np.zeros((8760,num_iterations))
     
     # edge case
@@ -237,6 +237,7 @@ def discharge_storage(unmet_load, storage):
     #interpolate
     else:
         z = y[i-1] + (P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
+        
     
     u = p*np.maximum(np.minimum(x-z,1),0) * (np.random.random_sample(x.shape)>storage["efor"])
 
@@ -280,7 +281,11 @@ def charge_storage(additional_capacity, storage):
         z = y[i]
     #interpolate
     else:
-        z = y[i-1] + (-P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
+        if E_max == 0 and E_min == 0:
+            return 0
+        else:
+            z = y[i-1] + (-P_r - E_min)/(E_max - E_min)*(y[i]-y[i-1])
+        
     
     u = -1*p_d/n*np.maximum(np.minimum(z,z_max)-x,0)
 
