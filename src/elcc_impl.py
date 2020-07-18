@@ -317,8 +317,8 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
     RE_generators = dict()
     RE_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
     RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
-    RE_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"]
-    RE_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"]
+    RE_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values
+    RE_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values
     RE_generators["lat"] = latitudes
     RE_generators["lon"] = longitudes
     RE_generators["efor"] = np.ones(RE_generators["nameplate"].size) * RE_efor 
