@@ -10,19 +10,24 @@ def error_handling():
 
     if root_directory[-1] != '/':
         root_directory += '/'
+
     if not os.path.exists(root_directory):
         raise RuntimeError('Invalid root directory\n' + root_directory)
 
-def run_job(parameters):
+    if os.path.exists('elcc_job.txt'):
+        os.system('rm elcc_job.txt')
+
+def add_job(parameters):
 
     global root_directory
 
-    parameter_string = str(root_directory)
+    parameter_string = root_directory
 
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
     
-    os.system('sbatch elcc_batch_job_'+RAM+'.sbat ' + parameter_string)
+    with open('elcc_job.txt','a') as f:
+        f.write('python -u elcc_master.py ' + parameter_string + '\n')
 
 def main():
 
@@ -37,8 +42,13 @@ def main():
     parameters['generator_type'] = 'solar'
 
     # variable parameters
+    add_job(parameters)
 
-    run_job(parameters)
+    os.system('bash elcc_batch_job_'+RAM+'.sbat')
+
+    print('Jobs submitted')
+
+
 
 if __name__ == "__main__":
     error_handling()

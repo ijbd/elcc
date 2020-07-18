@@ -11,6 +11,6 @@
 #SBATCH --account=mtcraig1
 
 
-output_directory=$(python make_output_directory.py "$@")
+export LAUNCHER_JOB_FILE=elcc_job.txt
 
-python -u elcc_master.py "output_directory" $output_directory "${@:2}" > "$output_directory"print.out
+paramrun
