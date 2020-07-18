@@ -12,5 +12,6 @@
 
 
 export LAUNCHER_JOB_FILE=elcc_job.txt
+export LAUNCHER_WORKDIR=/scratch/mtcraig_root/mtcraig1/shared_data/elcc
 
 paramrun

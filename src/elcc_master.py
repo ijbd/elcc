@@ -2,7 +2,6 @@ import sys
 import os
 
 from elcc_impl import main
-from make_output_directory import make_directory
 
 
 # Parameters
@@ -165,6 +164,8 @@ if redirect_output:
 
     sys.stdout = open(output_directory + 'print.out', 'w')
     sys.stderr = sys.stdout
+
+    simulation['output directory'] = output_directory
 
 
 # run program
