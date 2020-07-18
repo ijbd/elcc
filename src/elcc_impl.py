@@ -909,6 +909,12 @@ def save_active_generators(root_directory, conventional, solar, wind, storage, r
 
     #wind
     if wind['num units'] != 0:
+        
+        print(  wind["nameplate"],
+                wind["summer nameplate"],
+                wind["winter nameplate"],wind["lat"],
+                wind["lon"])
+
         wind_generator_array = np.array([   wind["nameplate"],wind["summer nameplate"],
                                             wind["winter nameplate"],wind["lat"],
                                             wind["lon"]])
