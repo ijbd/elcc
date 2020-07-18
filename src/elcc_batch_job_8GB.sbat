@@ -11,7 +11,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --account=mtcraig1
 
-export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/srcelcc_job.txt
+export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/elcc_job.txt
 export LAUNCHER_WORKDIR=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src
 
 paramrun
