@@ -1,8 +1,8 @@
 #!/bin/bash
 
+#SBATCH --job-name=elcc_calc
 #SBATCH --mail-user=ijbd@umich.edu
 #SBATCH --mail-type=END
-#SBATCH --job-name=elcc_calc
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks-per-node=2
@@ -12,6 +12,5 @@
 #SBATCH --account=mtcraig1
 
 export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/elcc_job.txt
-export LAUNCHER_WORKDIR=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src
 
 paramrun
