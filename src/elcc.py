@@ -27,7 +27,6 @@ def add_job(parameters):
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
     
     with open('elcc_job.txt','a') as f:
-        f.write('echo '+str(parameters['year'])+' '+parameters['region'] + '\n')
         f.write('python -u elcc_master.py ' + parameter_string + '\n')
 
 def main():
