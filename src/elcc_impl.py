@@ -1012,7 +1012,7 @@ def load_hourly_fleet_capacity(simulation,files,system):
     else:
         hourly_capacity = np.load(saved_system_name+'fleet_capacity.npy',allow_pickle=True)
         renewable_profile = np.load(saved_system_name+'fleet_renewable_profile.npy',allow_pickle=True)
-        print("System Loaded:\t",str(datetime.datetime.now().time()))
+        print("System Loaded:\t",str(datetime.datetime.now().time()),flush=True)
         print('')
 
     return hourly_capacity, renewable_profile
