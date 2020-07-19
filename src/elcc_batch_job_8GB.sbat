@@ -3,9 +3,7 @@
 #SBATCH --job-name=elcc_calc
 #SBATCH --mail-user=ijbd@umich.edu
 #SBATCH --mail-type=END
-#SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
-#SBATCH --ntasks-per-node=1
 #SBATCH --partition=standard
 #SBATCH --mem-per-cpu=8GB
 #SBATCH --time=24:00:00
