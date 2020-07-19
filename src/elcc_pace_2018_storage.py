@@ -56,7 +56,7 @@ def main():
             parameters['longitude'] = lon
             add_job(parameters)
 
-    os.system('sbatch elcc_batch_job_.sbat')
+    os.system('sbatch elcc_batch_job.sbat')
 
     print('Jobs submitted')
 
