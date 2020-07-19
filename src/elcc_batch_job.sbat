@@ -9,6 +9,10 @@
 #SBATCH --time=24:00:00
 #SBATCH --account=mtcraig1
 
-export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/elcc_job.txt
+job = $1
 
-paramrun
+
+#python -u elcc_master.py $@ 
+
+echo $job
+echo $(($job+1))
