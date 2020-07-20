@@ -11,7 +11,6 @@ if root_directory[-1] != '/': root_directory = root_directory + '/'
 
 key_words = sys.argv[3:]
 
-
 def get_results(filename, key_words):
     results = dict()
 
