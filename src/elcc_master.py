@@ -16,7 +16,7 @@ generator = dict()
 ########## Generic ##########
 
 simulation["year"] = 2018
-simulation["region"] = "PACE" # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
+simulation["region"] = ["PACE"] # identify the nerc region or balancing authority (e.g. "PACE", "WECC", etc.)
 simulation["iterations"] = 10000 # number of iterations for monte carlo simulation
 simulation["target reliability"] = 2.4 # loss-of-load-hours per year (2.4 is standard)
 simulation["shift load"] = 0 # +/- hours
@@ -82,9 +82,11 @@ if redirect_output:
     root_directory = sys.argv[1]
     parameters = sys.argv[2:]
 
+    if root_directory[-1] != '/': root_directory += '/'
     if not os.path.exists(root_directory):
         print('Invalid directory:', root_directory)
         sys.exit(1)
+
 else:
     parameters = sys.argv[1:]
 
@@ -92,38 +94,44 @@ i = 0
 while i < len(parameters):
     key = parameters[i].replace('_',' ')
     value = parameters[i+1]
-    for param_set in [simulation, files, system, generator]:
-        if key in param_set:
 
-            param_set[key] = str(value)
+    if key == "region":
+        simulation['region'] = value.split()
 
-            # handle numerical arguments
-            try:
-                # floats
-                float_value = float(value)
-                param_set[key] = float_value
-    
-                # ints
-                if float(value) == int(value):
-                    param_set[key] = int(value)
-            except:
-                pass
+    else:
+        for param_set in [simulation, files, system, generator]:
+            if key in param_set:
 
-            # handle boolean arguments
-            if value == "True": param_set[key] = True
-            elif value == "False": param_set[key] = False
+                param_set[key] = str(value)
+
+                # handle numerical arguments
+                try:
+                    # floats
+                    float_value = float(value)
+                    param_set[key] = float_value
+        
+                    # ints
+                    if float(value) == int(value):
+                        param_set[key] = int(value)
+                except:
+                    pass
+
+                # handle boolean arguments
+                if value == "True": param_set[key] = True
+                elif value == "False": param_set[key] = False
+            
     i += 2 
 
 # dependent parameters
 
-files["demand file"] = "../demand/"+simulation["region"]+".csv"
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 
 # time savers
 
-if simulation["region"] == "WECC":
+if simulation["region"] == ["WECC"]:
     system['enable total interchange'] = False
     system['oldest year'] = 1975
 
@@ -165,7 +173,7 @@ if redirect_output:
     sys.stdout = open(output_directory + 'print.out', 'w')
     sys.stderr = sys.stdout
 
-    simulation['output directory'] = output_directory
+    files['output directory'] = output_directory
 
 
 # run program

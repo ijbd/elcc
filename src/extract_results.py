@@ -24,8 +24,6 @@ def get_results(filename, key_words):
                     
     return results
 
-
-
 def main():
     # find desired output files for all jobs in batch
     printout_files = []

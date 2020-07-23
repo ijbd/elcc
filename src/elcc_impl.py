@@ -56,7 +56,7 @@ def get_powGen(solar_cf_file, wind_cf_file):
 
     return powGen_lats, powGen_lons, cf
 
-def get_hourly_load(demand_file_in, year, hrsShift=0):
+def get_hourly_load(year,regions, hrsShift=0):
     """ Retrieves hourly load vector from load file
 
     ...
@@ -69,28 +69,29 @@ def get_hourly_load(demand_file_in, year, hrsShift=0):
 
     `hrsShift` (int): optional parameter to shift load, default no shift
     """
+    hourly_load = np.zeros(8760)
 
-    # Open file
-    demand_data = pd.read_csv(demand_file_in,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
+    for region in regions:
 
+        load_file = "../demand/"+region+".csv"
+        # error handling
+        if not path.exists(load_file):
+            error_message = "Invalid region or demand data unavailable. "+region
+            raise RuntimeError(error_message)
 
-    # Remove leap day
-    leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
-    demand_data.drop(leap_days, inplace=True) 
-        # two date_time formats from eia cleaned data
-    leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
-    demand_data.drop(leap_days, inplace=True)
+        # Open file
+        regional_load = pd.read_csv(load_file,delimiter=',',usecols=["date_time","cleaned demand (MW)"],index_col="date_time")
 
-    # Find Given Year
-    hourly_load = np.array(demand_data["cleaned demand (MW)"][demand_data.index.str.find(str(year),0,10) != -1].values)
+        # Remove leap days
+        leap_days=regional_load.index[regional_load.index.str.find("-02-29",0,10) != -1]
+        regional_load.drop(leap_days, inplace=True) 
+            # two date_time formats from eia cleaned data
+        leap_days=regional_load.index[regional_load.index.str.find(str(year)+"0229",0,10) != -1]
+        regional_load.drop(leap_days, inplace=True)
 
-    # Remove leap day
-    leap_days=demand_data.index[demand_data.index.str.find("-02-29",0,10) != -1]
-    demand_data.drop(leap_days, inplace=True)
-     
-    # two date_time formats from eia cleaned data
-    leap_days=demand_data.index[demand_data.index.str.find(str(year)+"0229",0,10) != -1]
-    demand_data.drop(leap_days, inplace=True)
+        # Find Given Year
+        hourly_regional_load = np.array(regional_load["cleaned demand (MW)"][regional_load.index.str.find(str(year),0,10) != -1].values)
+        hourly_load += hourly_regional_load
 
     # Shift load
     if hrsShift!=0:
@@ -100,13 +101,9 @@ def get_hourly_load(demand_file_in, year, hrsShift=0):
         else:
             hourly_load = np.concatenate([hourly_load[abs(hrsShift):],newLoad])
 
-    # Error Handling
-    if(hourly_load.size != 8760):
-        error_message = 'Expected hourly load array of size 8760. Found array of size '+str(hourly_load.size)
-        raise RuntimeError(error_message)
     return hourly_load
 
-def get_total_interchange(year,region,folder):
+def get_total_interchange(year,regions,interchange_folder, hrsShift=0):
     """Retrieves all imports/exports for region of that year
 
     Args:
@@ -117,47 +114,64 @@ def get_total_interchange(year,region,folder):
 
     `folder` (str): location of total interchange data
     """
+    total_interchange = np.zeros(8760)
 
-    interchange_file_path = folder + "WECC_TI.csv"
-    if (path.exists(interchange_file_path)):
+    interchange_file_path = interchange_folder + "WECC_TI.csv"
+    
+    if not path.exists(interchange_file_path):
+        error_message = "No interchange file found."
+        raise RuntimeError(error_message)
 
+    for region in regions:
+    
         #loads in data from already cleaned total interchange data
         raw_TI_Data = pd.read_csv(interchange_file_path,usecols= ['UTC time',region],parse_dates= ['UTC time'])
 
         #selecting data for desired year, uses datetime format
-        filtered_TI_data = raw_TI_Data[
-            (raw_TI_Data['UTC time'].dt.year == year)
-        ]
-    else:
-        error_message = "No total interchange data found for " + region
-        raise RuntimeError(error_message)
+        filtered_TI_data = raw_TI_Data[(raw_TI_Data['UTC time'].dt.year == year)]
+        
+        #cleaning for CISO, data is shifted forward 1 hour before 2016-9-13
+        if ((region == "CISO") & (year == 2016)):
+            #converting panda datetime to readable python date time
+            datetime_array = raw_TI_Data['UTC time'].dt.to_pydatetime()
+
+            #gets out time period of error
+            ind = ((datetime_array >= pd.to_datetime('2016-01-01')) & (datetime_array <= pd.to_datetime('2016-09-13')))
+
+            #shifts time period back 1 hour
+            raw_TI_Data.loc[ind,region] = raw_TI_Data.loc[ 
+            ind, region].shift(-1).values
+
+            #selecting data for desired year, uses datetime format encoded in excel spreadsheet
+            filtered_TI_data = raw_TI_Data[
+                raw_TI_Data['UTC time'].dt.year == year
+            ]
+
+        #gets rid of any leap year day if applicable
+        filtered_TI_data = filtered_TI_data[~((filtered_TI_data['UTC time'].dt.month == 2) & (filtered_TI_data['UTC time'].dt.day == 29))]
+        
+        #converting nan values to 0
+        regional_interchange = filtered_TI_data[region].values
+        regional_interchange[np.isnan(regional_interchange)] = 0
+        
+        if np.sum(regional_interchange) > 0:
+            print(region+' '+str(year)+': Net Exporter')
+        else:
+            print(region+' '+str(year)+': Net Importer')
+
+        total_interchange += regional_interchange
     
+    # Shift interchange
+    if hrsShift!=0:
+        newInterchange = np.array([0]*abs(hrsShift))
+        if hrsShift>0:
+            total_interchange = np.concatenate([newInterchange,total_interchange[:-hrsShift]])
+        else:
+            total_interchange = np.concatenate([total_interchange[abs(hrsShift):],newInterchange])
 
-    #cleaning for CISO, data is shifted forward 1 hour before 2016-9-13
-    if ((region == "CISO") & (year == 2016)):
-        #converting panda datetime to readable python date time
-        datetime_array = raw_TI_Data['UTC time'].dt.to_pydatetime()
+    print('')
 
-        #gets out time period of error
-        ind = ((datetime_array >= pd.to_datetime('2016-01-01')) & (datetime_array <= pd.to_datetime('2016-09-13')))
-
-        #shifts time period back 1 hour
-        raw_TI_Data.loc[ind,region] = raw_TI_Data.loc[ 
-        ind, region].shift(-1).values
-
-        #selecting data for desired year, uses datetime format encoded in excel spreadsheet
-        filtered_TI_data = raw_TI_Data[
-            raw_TI_Data['UTC time'].dt.year == year
-        ]
-
-    #gets rid of any leap year day if applicable
-    filtered_TI_data = filtered_TI_data[~((filtered_TI_data['UTC time'].dt.month == 2) & (filtered_TI_data['UTC time'].dt.day == 29))]
-    
-    #converting nan values to 0
-    total_interchange_array = filtered_TI_data[region].values
-    total_interchange_array[np.isnan(total_interchange_array)] = 0
-
-    return total_interchange_array
+    return total_interchange
 
 #loads in hourly temperature for all the coordinates in desired region
 def get_temperature_data(temperature_file):
@@ -229,22 +243,24 @@ def get_temperature_dependent_efor(latitudes,longitudes,technology,temperature_d
 
     return get_tech_efor_round_downs(simplified_tech_list,latitudes,longitudes,temperature_data,benchmark_fors)
 
-# Implementation of get_conventional_fleet
-def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temperature_data, year,powGen_lats,powGen_lons,benchmark_fors):
-    # Remove generators added after simulation year
-    active_generators = NRE_generators[NRE_generators["Operating Year"] <= year]
-    # Remove renewable generators
-    renewable_technologies = np.array(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"])
-    active_generators = active_generators[~(active_generators["Technology"].isin(renewable_technologies))] # tilde -> is NOT in
-
+def get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data, year,powGen_lats,powGen_lons,benchmark_fors):
+    
+    # filtering
+    active_generators = active_generators[(active_generators["Operating Year"] <= year)]
+    active_generators = active_generators[(active_generators["Status"] == "OP")]
+    active_generators = active_generators[(~active_generators["Technology"].isin(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"]))]
+    
     # Fill empty summer/winter capacities
     active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",
                                                     active_generators["Nameplate Capacity (MW)"], inplace=True)
     active_generators["Winter Capacity (MW)"].where(active_generators["Winter Capacity (MW)"].astype(str) != " ", 
                                                     active_generators["Nameplate Capacity (MW)"], inplace=True)
+    
     #getting lats and longs correct indices
+    plants.set_index("Plant Code",inplace=True)
     latitudes = find_nearest_impl(plants["Latitude"][active_generators["Plant Code"]].values,powGen_lats)
     longitudes = find_nearest_impl(plants["Longitude"][active_generators["Plant Code"]].values,powGen_lons)
+
     # Convert Dataframe to Dictionary of numpy arrays
     conventional_generators = dict()
     conventional_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
@@ -268,40 +284,44 @@ def get_conventional_fleet_impl(plants, NRE_generators,system_preferences,temper
     
     return conventional_generators
 
-# Get conventional generators in fleet
 def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
     # system_preferences
 
     # Open files
-    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
+    plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
                                                                                 "Longitude","Balancing Authority Code"])
-    all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y2018.xlsx",skiprows=1,\
-                                                    usecols=["Plant Code","Technology","Nameplate Capacity (MW)","Status",
+    all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y"+str(year)+".xlsx",skiprows=1,\
+                                                    usecols=["Plant Code","Generator ID","Technology","Nameplate Capacity (MW)","Status",
                                                             "Operating Year", "Summer Capacity (MW)", "Winter Capacity (MW)"])
     # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
     
     desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
     # Error Handling
     if desired_plant_codes.size == 0:
-        error_message = "Invalid region/balancing authority: " + region
+        error_message = "Invalid region(s): " + region
         raise RuntimeError(error_message)
 
     # Get operating generators
-    active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes)) & (all_conventional_generators["Status"] == "OP")]
+    active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes))]
 
-    plants.set_index("Plant Code",inplace=True)   
+    # Get partially-owned plants
+    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, all_conventional_generators)
+    
     return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
     
-# Implementation of get_solar_and_wind_fleet
-def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor):
+def get_RE_fleet_impl(eia_folder, region, year, plants, RE_generators, desired_plant_codes, RE_efor):
     
-    # Get operating generators
-    active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes)) & (RE_generators["Status"] == "OP")]
-    
-    # Remove generators added after simulation year
+    # Get generators in region
+    active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes))]
+
+    # Get partially-owned plants
+    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, RE_generators)
+
+    # filtering
+    active_generators = active_generators[active_generators["Status"] == 'OP']
     active_generators = active_generators[active_generators["Operating Year"] <= year]
 
     # Fill empty summer/winter capacities
@@ -313,6 +333,7 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
     # Get coordinates
     latitudes = plants["Latitude"][active_generators["Plant Code"]].values
     longitudes = plants["Longitude"][active_generators["Plant Code"]].values
+
     # Convert Dataframe to Dictionary of numpy arrays
     RE_generators = dict()
     RE_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
@@ -329,27 +350,27 @@ def get_RE_fleet_impl(plants, RE_generators, desired_plant_codes, year, RE_efor)
 def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, powGen_lons):
 
     # Open files
-    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
-                                                                                "Longitude","Balancing Authority Code"])
-    all_solar_generators = pd.read_excel(eia_folder+"3_3_Solar_Y2018.xlsx",skiprows=1,\
-                                usecols=["Plant Code","Nameplate Capacity (MW)",
+    plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=[  "Plant Code","NERC Region","Latitude",
+                                                                                            "Longitude","Balancing Authority Code"])
+    all_solar_generators = pd.read_excel(eia_folder+"3_3_Solar_Y"+str(year)+".xlsx",skiprows=1,\
+                                usecols=["Plant Code","Generator ID","Nameplate Capacity (MW)",
                                         "Summer Capacity (MW)", "Winter Capacity (MW)",
                                         "Status","Operating Year"])
-    all_wind_generators = pd.read_excel(eia_folder+"3_2_Wind_Y2018.xlsx",skiprows=1,\
-                                usecols=["Plant Code","Nameplate Capacity (MW)",
+    all_wind_generators = pd.read_excel(eia_folder+"3_2_Wind_Y"+str(year)+".xlsx",skiprows=1,\
+                                usecols=["Plant Code","Generator ID","Nameplate Capacity (MW)",
                                         "Summer Capacity (MW)", "Winter Capacity (MW)",
                                         "Status","Operating Year"])
 
      # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
     
     desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
     # Repeat process for solar and wind
     plants.set_index("Plant Code",inplace=True)
-    solar_generators = get_RE_fleet_impl(plants,all_solar_generators,desired_plant_codes,year,RE_efor)
-    wind_generators = get_RE_fleet_impl(plants,all_wind_generators,desired_plant_codes,year,RE_efor)
+    solar_generators = get_RE_fleet_impl(eia_folder,region,year,plants,all_solar_generators,desired_plant_codes,RE_efor)
+    wind_generators = get_RE_fleet_impl(eia_folder,region,year,plants,all_wind_generators,desired_plant_codes,RE_efor)
 
     solar_generators["generator type"] = "solar"
     wind_generators["generator type"] = "wind"
@@ -358,8 +379,53 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, pow
     solar_generators = get_cf_index(solar_generators,powGen_lats,powGen_lons)
     wind_generators = get_cf_index(wind_generators,powGen_lats,powGen_lons)
 
-    
     return solar_generators, wind_generators
+
+def add_partial_ownership_generators(eia_folder,regions,year,generators,all_generators):
+
+    # Working dictionary for utilities associated with balancing authorities        
+    known_utilities = { "AZPS" : "Arizona Public Service Co",
+                        "PSCO" : "Public Service Co of Colorado",
+                        "SRP" : "Salt River Project"}
+
+    utilities = []
+    for region in regions:
+        if region in known_utilities:
+            utilities.append(known_utilities[region])
+    
+    if len(utilities) == 0:
+        return generators
+
+    # EIA 860 schedule 4
+    owners = pd.read_excel(eia_folder+"4___Owner_Y"+str(year)+".xlsx",skiprows=1,usecols=[  "Plant Code","Generator ID",
+                                                                                            "Status","Owner Name","Percent Owned"])
+
+    # filtering
+    owners = owners[owners["Owner Name"].isin(utilities)]
+    generators = generators[~generators["Plant Code"].isin(owners["Plant Code"])]
+
+    if owners.empty:
+        return generators
+    
+    total_added = 0
+
+    for ind, row in owners.iterrows():
+            generator = all_generators[     (all_generators["Plant Code"] == row["Plant Code"]) &\
+                                            (all_generators["Generator ID"] == row["Generator ID"])]
+            if generator.empty:
+                continue
+            partial_generator = generator.copy()
+            idx = partial_generator.index[0]                       
+            partial_generator.at[idx,"Nameplate Capacity (MW)"] *= row["Percent Owned"]
+            partial_generator.at[idx,"Summer Capacity (MW)"] *= row["Percent Owned"]
+            partial_generator.at[idx,"Winter Capacity (MW)"] *= row["Percent Owned"]
+            generators = generators.append(partial_generator)
+
+            total_added += partial_generator.at[idx,"Nameplate Capacity (MW)"]
+    
+    print('Capacity from Partial Ownership Generators:',total_added)
+    print('')
+    return generators
 
 # Find index of nearest coordinate. Implementation of get_RE_index
 def find_nearest_impl(actual_coordinates, discrete_coordinates):
@@ -462,12 +528,18 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
     return hourly_fleet_capacity
 
 # Calculate number of expected hours in which load does not meet demand using monte carlo method
-def get_lolh(num_iterations, hourly_capacity, hourly_load):
+def get_lolh(num_iterations, hourly_capacity, hourly_load, print_shortfall=False):
     
     # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
     hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
     lolh = np.sum(hourly_risk)
+
+    if print_shortfall:
+        shortfall = np.where(hourly_load > hourly_capacity.T,hourly_load-hourly_capacity.T,0).flatten()
+        print('Mean shortfall:', np.average(shortfall[shortfall > 0]))
+        print('Median shortfall:',np.median(shortfall[shortfall > 0]))
+
     
     return lolh, hourly_risk
 
@@ -526,13 +598,19 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
     # Find original reliability
     hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,
                                                         wind_generators,cf,storage_units,hourly_load,renewable_profile)
-    lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
+    lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load,True) 
     
     # Error Handling: Under Reliable System
     if lolh >= target_lolh:
         print("LOLH:", round(lolh,2))
-        error_message = "LOLH already greater than target. Under reliable system."
-        print(error_message)
+        print("LOLH already greater than target. Under reliable system.")
+
+        if DEBUG:
+            print("Hour of year:",np.argwhere(hourly_risk != 0).flatten())
+            print("Hour of Day:",np.argwhere(hourly_risk != 0).flatten()%24)
+            print("Risk:",hourly_risk[hourly_risk != 0].flatten()*50)
+            np.savetxt(OUTPUT_DIRECTORY+'hourly_risk.csv',hourly_risk,delimiter=',')
+        
 
     while conventional_generators["nameplate"].size > 1 and lolh < target_lolh:
         conventional_generators, oldest_year, capacity_removed = remove_oldest_impl(conventional_generators)
@@ -752,7 +830,7 @@ def elcc_binary_constraints(binary_trial, lolh, target_lolh, additional_load_max
     return trial_limit_not_met and convergence_not_met and reliability_not_met
 
 # use binary search to find elcc by adjusting additional load
-def get_elcc(   num_iterations, hourly_fleet_capacity, hourly_added_generator_capacity, fleet_storage, 
+def get_elcc(num_iterations, hourly_fleet_capacity, hourly_added_generator_capacity, fleet_storage, 
                 added_storage, hourly_load, added_capacity, fleet_renewable_profile, added_renewable_profile):
 
     # precision for printing lolh
@@ -945,9 +1023,10 @@ def get_saved_system_name(simulation, files, system, create=False):
 
     if not path.exists(root_directory) and create:
         os.system('mkdir '+root_directory)
-    
+
     # level 2 - region
-    region = str(simulation['region'])
+    
+    region = str(simulation['region']).replace('[','').replace('\'','').replace(',','').replace(' ','_')
     root_directory += region + '/'
 
     if not path.exists(root_directory) and create:
@@ -1029,18 +1108,18 @@ def main(simulation,files,system,generator):
     global OUTPUT_DIRECTORY
     OUTPUT_DIRECTORY = files["output directory"]
     
-    # Display parameters
+    # display parameters
     print_parameters(simulation,files,system,generator)
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
-    hourly_load = get_hourly_load(files["demand file"],simulation["year"],simulation["shift load"])
+    hourly_load = get_hourly_load(simulation["year"],simulation["region"],simulation["shift load"])
     temperature_data = get_temperature_data(files["temperature file"])
     benchmark_fors = get_benchmark_fors(files["benchmark FORs file"])
 
-    #implements imports/exports for balancing authority
+    # implements imports/exports for balancing authority
     if system["enable total interchange"]:
-        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["total interchange folder"]).astype(np.int64)
+        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
     
     # always get storage
     fleet_storage = get_storage_fleet(  system["fleet storage"],files["eia folder"],simulation["region"],simulation["year"],

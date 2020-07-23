@@ -11,26 +11,24 @@ def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_effi
         return storage
     
     # Open files
-    plants = pd.read_excel(eia_folder+"2___Plant_Y2018.xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
+    plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
                                                                                 "Longitude","Balancing Authority Code"])
-    all_storage_units = pd.read_excel(eia_folder+"3_4_Energy_Storage_Y2018.xlsx",skiprows=1,\
+    all_storage_units = pd.read_excel(eia_folder+"3_4_Energy_Storage_Y"+str(year)+".xlsx",skiprows=1,\
                                                     usecols=["Plant Code","Technology","Nameplate Energy Capacity (MWh)","Status",
                                                             "Operating Year", "Maximum Charge Rate (MW)", "Maximum Discharge Rate (MW)"])
     # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"] == region].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"] == region].values
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
     
     desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))   
 
     # Error Handling
     if desired_plant_codes.size == 0:
-        error_message = "Invalid region/balancing authority: " + region
+        error_message = "Invalid region(s): "+region
         raise RuntimeError(error_message)
 
-    # Get operating generators
+    # filtering
     active_storage = all_storage_units[(all_storage_units["Plant Code"].isin(desired_plant_codes)) & (all_storage_units["Status"] == "OP")]
-
-    # Remove empty
     active_storage = active_storage[active_storage["Nameplate Energy Capacity (MWh)"].astype(str) != " "]
     active_storage = active_storage[active_storage["Operating Year"] <= year]
     
