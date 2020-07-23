@@ -547,18 +547,34 @@ def get_lolh(num_iterations, hourly_capacity, hourly_load, print_shortfall=False
 # Implementation of remove_generators
 def remove_oldest_impl(generators, manual_oldest_year=0):
 
-    # ignore hydroelectric plants
+    # non-hydro plants
     not_hydro = generators["technology"] != "Conventional Hydroelectric"
 
-    # find oldest plant
-    oldest_year = np.amin(generators["year"][not_hydro]) 
+    # while conventional units still exist, remove those first
+    if len(generators["nameplate"][not_hydro]) != 0:
+        
 
-    # check for manual removal
-    if manual_oldest_year > oldest_year:
-        oldest_year = manual_oldest_year
+        # find oldest plant
+        oldest_year = np.amin(generators["year"][not_hydro]) 
 
-    # erase all generators older than that year
-    erase = np.logical_and(generators["year"] <= oldest_year, not_hydro)
+        # check for manual removal
+        if manual_oldest_year > oldest_year:
+            oldest_year = manual_oldest_year
+
+        # erase all generators older than that year
+        erase = np.logical_and(generators["year"] <= oldest_year, not_hydro)
+
+    # if there are no more conventional units, remove hydro
+    else:
+        # find smallest plant
+        smallest_capacity = np.amin(generators["nameplate"])
+
+        # erase all generators with capacities smaller than this
+        erase = generators["nameplate"] <= smallest_capacity
+
+        # avoid error
+        oldest_year = 9999
+
     capacity_removed = np.sum(generators["nameplate"][erase])
 
     generators["nameplate"] = generators["nameplate"][np.logical_not(erase)]
@@ -567,6 +583,8 @@ def remove_oldest_impl(generators, manual_oldest_year=0):
     generators["year"] = generators["year"][np.logical_not(erase)]
     generators["technology"] = generators["technology"][np.logical_not(erase)]
     generators["efor"] = generators["efor"][np.logical_not(erase)]
+
+    generators["num units"] = len(generators["nameplate"])
 
     return generators, oldest_year, capacity_removed
 
