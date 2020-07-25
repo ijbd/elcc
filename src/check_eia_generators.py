@@ -2,8 +2,10 @@ import pandas as pd
 import numpy as np
 import sys
 
+from elcc_impl import add_partial_ownership_generators
+
 year = int(sys.argv[1])
-region = sys.argv[2]
+region = sys.argv[2].split()
 eia_folder = '../eia860'+str(year)+'/'
 
 all_plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Balancing Authority Code"])
@@ -21,53 +23,24 @@ all_wind = pd.read_excel(eia_folder+"3_2_Wind_Y"+str(year)+".xlsx",skiprows=1,
 
 # get plant_codes
 
-plants = all_plants[(all_plants["Balancing Authority Code"] == region) | (all_plants["NERC Region"] == region)]
+plants = all_plants[(all_plants["Balancing Authority Code"].isin(region)) | (all_plants["NERC Region"].isin(region))]
 
 # conventional
+generators = all_generators[all_generators['Plant Code'].isin(plants["Plant Code"])]
+generators = add_partial_ownership_generators(eia_folder,region,year,generators,all_generators)
+
+#filtering
 renewables = ["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"]
 
-generators = all_generators[~all_generators['Technology'].isin(renewables)]
-generators = generators[generators['Plant Code'].isin(plants["Plant Code"])]
+generators = generators[~generators['Technology'].isin(renewables)]
 generators = generators[generators['Status'] == 'OP']
 generators = generators[generators['Operating Year'] <= year]
 generators["Summer Capacity (MW)"].where(   generators["Summer Capacity (MW)"].astype(str) != " ",
                                             generators["Nameplate Capacity (MW)"], inplace=True)
 generators["Winter Capacity (MW)"].where(   generators["Winter Capacity (MW)"].astype(str) != " ", 
-                                            generators["Nameplate Capacity (MW)"], inplace=True)
+                                            generators["Nameplate Capacity (MW)"], inplace=True)                              
 
-# joint ownership
-def add_partial_ownership_generators(eia_folder,region,year,generators,all_generators,renewable=False):
-        if region in ["AZPS","PSCO"]:
-                utilities = {"AZPS" : "Arizona Public Service Co","PSCO" : "Public Service Co of Colorado"}
-                utility_name = utilities[region]
 
-                owners = pd.read_excel(eia_folder+"4___Owner_Y"+str(year)+".xlsx",skiprows=1,usecols=[  "Plant Code","Generator ID",
-                                                                                                        "Status","Owner Name","Percent Owned"])
-
-                # filtering
-                owners = owners[owners["Status"] == "OP"]
-                owners = owners[owners["Owner Name"] == utility_name]
-                generators= generators[~generators["Plant Code"].isin(owners["Plant Code"])]
-
-                if not renewable:
-                        renewables = ["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"]
-                        all_generators = all_generators[~all_generators['Technology'].isin(renewables)]
-
-                if not owners.empty:
-                        for ind, row in owners.iterrows():
-                                generator = all_generators[     (all_generators["Plant Code"] == row["Plant Code"]) &\
-                                                                (all_generators["Generator ID"] == row["Generator ID"])]
-                                partial_generator = generator.copy()
-                                idx = partial_generator.index[0]                       
-                                partial_generator.at[idx,"Nameplate Capacity (MW)"] *= row["Percent Owned"]
-                                partial_generator.at[idx,"Summer Capacity (MW)"] *= row["Percent Owned"]
-                                partial_generator.at[idx,"Winter Capacity (MW)"] *= row["Percent Owned"]
-                                generators = generators.append(partial_generator)
-                
-                return generators
-                                
-
-generators = add_partial_ownership_generators(eia_folder,region,year,generators,all_generators,True)
 
 # solar
 solar = all_solar[all_solar['Plant Code'].isin(plants["Plant Code"])]
@@ -114,9 +87,7 @@ print('Pct. RE:','\t','\t',round((solar_nameplate+wind_nameplate)/(solar_namepla
 generators = generators.append(solar)
 generators = generators.append(wind)
 
-generators.to_csv(region+'_'+str(year)+'_generators.csv')
-
-
+generators.to_csv('_'.join(region)+'_'+str(year)+'_generators.csv')
 
 
 

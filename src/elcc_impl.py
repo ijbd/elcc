@@ -101,7 +101,20 @@ def get_hourly_load(year,regions, hrsShift=0):
         else:
             hourly_load = np.concatenate([hourly_load[abs(hrsShift):],newLoad])
 
+    hourly_load = manually_scale_load(hourly_load, region)
+
+    print("Peak load:",np.amax(hourly_load),"MW")
+    print('')
     return hourly_load
+
+def manually_scale_load(hourly_load, region):
+    load_scales = { "NWMT" : 1.2/1.9,
+                    "PNM" : 2/2.6,
+                  }
+
+    if region in load_scales: hourly_load *= load_scales[region]
+
+    return hourly_load.astype(int)
 
 def get_total_interchange(year,regions,interchange_folder, hrsShift=0):
     """Retrieves all imports/exports for region of that year
@@ -308,7 +321,7 @@ def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_l
     active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes))]
 
     # Get partially-owned plants
-    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, all_conventional_generators)
+    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, all_conventional_generators,True)
     
     return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
     
@@ -381,19 +394,25 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, pow
 
     return solar_generators, wind_generators
 
-def add_partial_ownership_generators(eia_folder,regions,year,generators,all_generators):
+def add_partial_ownership_generators(eia_folder,regions,year,generators,all_generators,print_utilities=False):
 
     # Working dictionary for utilities associated with balancing authorities        
     known_utilities = { "AZPS" : "Arizona Public Service Co",
                         "PSCO" : "Public Service Co of Colorado",
-                        "SRP" : "Salt River Project"}
+                        "SRP" : "Salt River Project",
+                        "PNM" : "Public Service Co of NM",
+                        "NWMT" : ["NorthWestern Energy","NorthWestern Energy LLC - (MT)","Talen Montana LLC"]
+                        }
 
-    utilities = []
-    for region in regions:
-        if region in known_utilities:
-            utilities.append(known_utilities[region])
+    utilities = np.array([known_utilities[region] for region in regions if region in known_utilities]).flatten()
     
-    if len(utilities) == 0:
+    # flatten if necessary
+
+    if len(utilities) != 0:
+        if print_utilities:
+            print('Utilites:', utilities)
+            print('')
+    else:
         return generators
 
     # EIA 860 schedule 4
@@ -402,7 +421,11 @@ def add_partial_ownership_generators(eia_folder,regions,year,generators,all_gene
 
     # filtering
     owners = owners[owners["Owner Name"].isin(utilities)]
-    generators = generators[~generators["Plant Code"].isin(owners["Plant Code"])]
+
+    if len(owners["Plant Code"]) == 0 and print_utilities:
+            print('No partially-owned plants found')
+    
+    generators = generators[~(generators["Plant Code"].isin(owners["Plant Code"]))]
 
     if owners.empty:
         return generators
@@ -423,8 +446,6 @@ def add_partial_ownership_generators(eia_folder,regions,year,generators,all_gene
 
             total_added += partial_generator.at[idx,"Nameplate Capacity (MW)"]
     
-    print('Capacity from Partial Ownership Generators:',total_added)
-    print('')
     return generators
 
 # Find index of nearest coordinate. Implementation of get_RE_index
