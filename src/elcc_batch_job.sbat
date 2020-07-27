@@ -11,7 +11,7 @@
 #SBATCH --time=24:00:00
 #SBATCH --account=mtcraig1
 
-module load launcher/3.7 <and any other modules>
+module load launcher/3.7 
 my_job_header
 
 export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/elcc_job.txt
