@@ -1,5 +1,7 @@
 import sys
 import os
+import numpy as np
+import pandas as pd
 
 from elcc_impl import main
 
@@ -25,7 +27,7 @@ simulation["debug"] = False # print all information flagged for debug
 ######## files ########
 
 files["output directory"] = "./"
-files["eia folder"] = "../eia8602018/"
+files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
 files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/"
@@ -129,16 +131,6 @@ files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generat
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
 files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 
-# time savers
-
-if simulation["region"] == ["WECC"]:
-    system['enable total interchange'] = False
-    system['oldest year'] = 1975
-
-
-if files["output directory"][-1] != '/': files["output directory"] += '/'
-if files["saved systems folder"][-1] != '/': files["saved systems folder"] += '/'
-
 # handle output directory and print location
 
 if redirect_output:
@@ -175,6 +167,29 @@ if redirect_output:
 
     files['output directory'] = output_directory
 
+# time savers
+
+if simulation["region"] == ["WECC"]:
+    system['enable total interchange'] = False
+    system['oldest year'] = 1975
+
+
+if files["output directory"][-1] != '/': files["output directory"] += '/'
+if files["saved systems folder"][-1] != '/': files["saved systems folder"] += '/'
+
+# TEPPC Pools
+
+TEPPC_regions = pd.read_csv('../demand/_regions.csv').fillna('nan')
+
+regions = np.append([region for region in simulation["region"] if not region in(TEPPC_regions.columns)],
+                    [TEPPC_regions[region].values.flatten().astype(str) for region in simulation["region"] if region in TEPPC_regions.columns]).flatten()
+regions = np.unique(regions[regions != 'nan'])
+
+if len(regions) == 0:
+    print("Invalid region(s):",simulation["region"])
+    sys.exit(1)
+
+simulation["all_regions"] = regions
 
 # run program
 main(simulation,files,system,generator)

@@ -297,7 +297,7 @@ def get_conventional_fleet_impl(plants,active_generators,system_preferences,temp
     
     return conventional_generators
 
-def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
+def get_conventional_fleet(eia_folder, regions, year, system_preferences,powGen_lats,powGen_lons,temperature_data,benchmark_fors):
     # system_preferences
 
     # Open files
@@ -307,31 +307,31 @@ def get_conventional_fleet(eia_folder, region, year, system_preferences,powGen_l
                                                     usecols=["Plant Code","Generator ID","Technology","Nameplate Capacity (MW)","Status",
                                                             "Operating Year", "Summer Capacity (MW)", "Winter Capacity (MW)"])
     # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(regions)].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(regions)].values
     
     desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
     # Error Handling
     if desired_plant_codes.size == 0:
-        error_message = "Invalid region(s): " + region
+        error_message = "Invalid region(s): " + str(regions)
         raise RuntimeError(error_message)
 
     # Get operating generators
     active_generators = all_conventional_generators[(all_conventional_generators["Plant Code"].isin(desired_plant_codes))]
 
     # Get partially-owned plants
-    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, all_conventional_generators,True)
+    active_generators = add_partial_ownership_generators(eia_folder, regions, year, active_generators, all_conventional_generators,True)
     
     return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
     
-def get_RE_fleet_impl(eia_folder, region, year, plants, RE_generators, desired_plant_codes, RE_efor):
+def get_RE_fleet_impl(eia_folder, regions, year, plants, RE_generators, desired_plant_codes, RE_efor):
     
     # Get generators in region
     active_generators = RE_generators[(RE_generators["Plant Code"].isin(desired_plant_codes))]
 
     # Get partially-owned plants
-    active_generators = add_partial_ownership_generators(eia_folder, region, year, active_generators, RE_generators)
+    active_generators = add_partial_ownership_generators(eia_folder, regions, year, active_generators, RE_generators)
 
     # filtering
     active_generators = active_generators[active_generators["Status"] == 'OP']
@@ -360,7 +360,7 @@ def get_RE_fleet_impl(eia_folder, region, year, plants, RE_generators, desired_p
     return RE_generators
 
 # Get solar and wind generators in fleet
-def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, powGen_lons):
+def get_solar_and_wind_fleet(eia_folder, regions, year, RE_efor, powGen_lats, powGen_lons):
 
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=[  "Plant Code","NERC Region","Latitude",
@@ -375,15 +375,15 @@ def get_solar_and_wind_fleet(eia_folder, region, year, RE_efor, powGen_lats, pow
                                         "Status","Operating Year"])
 
      # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
+    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(regions)].values
+    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(regions)].values
     
     desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
 
     # Repeat process for solar and wind
     plants.set_index("Plant Code",inplace=True)
-    solar_generators = get_RE_fleet_impl(eia_folder,region,year,plants,all_solar_generators,desired_plant_codes,RE_efor)
-    wind_generators = get_RE_fleet_impl(eia_folder,region,year,plants,all_wind_generators,desired_plant_codes,RE_efor)
+    solar_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_solar_generators,desired_plant_codes,RE_efor)
+    wind_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_wind_generators,desired_plant_codes,RE_efor)
 
     solar_generators["generator type"] = "solar"
     wind_generators["generator type"] = "wind"
@@ -549,19 +549,13 @@ def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_gen
     return hourly_fleet_capacity
 
 # Calculate number of expected hours in which load does not meet demand using monte carlo method
-def get_lolh(num_iterations, hourly_capacity, hourly_load, print_shortfall=False):
+def get_lolh(num_iterations, hourly_capacity, hourly_load):
     
     # identify where load exceeds capacity (loss-of-load). Of shape(8760 hrs, num iterations)
     lol_matrix = np.where(hourly_load > hourly_capacity.T, 1, 0).T
     hourly_risk = np.sum(lol_matrix,axis=1) / float(num_iterations)
     lolh = np.sum(hourly_risk)
 
-    if print_shortfall:
-        shortfall = np.where(hourly_load > hourly_capacity.T,hourly_load-hourly_capacity.T,0).flatten()
-        print('Mean shortfall:', np.average(shortfall[shortfall > 0]))
-        print('Median shortfall:',np.median(shortfall[shortfall > 0]))
-
-    
     return lolh, hourly_risk
 
 # Remove the oldest generators from the conventional system
@@ -637,7 +631,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
     # Find original reliability
     hourly_fleet_capacity = get_hourly_fleet_capacity(low_iterations,conventional_generators,solar_generators,
                                                         wind_generators,cf,storage_units,hourly_load,renewable_profile)
-    lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load,True) 
+    lolh, hourly_risk = get_lolh(low_iterations,hourly_fleet_capacity,hourly_load) 
     
     # Error Handling: Under Reliable System
     if lolh >= target_lolh:
@@ -1065,7 +1059,7 @@ def get_saved_system_name(simulation, files, system, create=False):
 
     # level 2 - region
     
-    region = str(simulation['region']).replace('[','').replace('\'','').replace(',','').replace(' ','_')
+    region = str(simulation['region']).replace('[','').replace('\'','').replace(',','').replace(']','').replace(' ','_')
     root_directory += region + '/'
 
     if not path.exists(root_directory) and create:
@@ -1152,16 +1146,16 @@ def main(simulation,files,system,generator):
 
     # get file data
     powGen_lats, powGen_lons, cf = get_powGen(files["solar cf file"],files["wind cf file"])
-    hourly_load = get_hourly_load(simulation["year"],simulation["region"],simulation["shift load"])
+    hourly_load = get_hourly_load(simulation["year"],simulation["all_regions"],simulation["shift load"])
     temperature_data = get_temperature_data(files["temperature file"])
     benchmark_fors = get_benchmark_fors(files["benchmark FORs file"])
 
     # implements imports/exports for balancing authority
     if system["enable total interchange"]:
-        hourly_load += get_total_interchange(simulation["year"],simulation["region"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
+        hourly_load += get_total_interchange(simulation["year"],simulation["all_regions"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
     
     # always get storage
-    fleet_storage = get_storage_fleet(  system["fleet storage"],files["eia folder"],simulation["region"],simulation["year"],
+    fleet_storage = get_storage_fleet(  system["fleet storage"],files["eia folder"],simulation["all_regions"],simulation["year"],
                                         system["storage efficiency"],system["storage efor"],system["dispatch strategy"])
 
     # try loading system
@@ -1169,10 +1163,10 @@ def main(simulation,files,system,generator):
 
     if hourly_fleet_capacity is None:
         # system 
-        fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["region"],
+        fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["all_regions"],
                                                                 simulation["year"], system, powGen_lats, powGen_lons,
                                                                 temperature_data, benchmark_fors)
-        fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["region"],
+        fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["all_regions"],
                                                                                 simulation["year"], system["renewable efor"],
                                                                                 powGen_lats, powGen_lons)
         
