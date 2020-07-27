@@ -26,6 +26,7 @@ simulation["debug"] = False # print all information flagged for debug
 
 ######## files ########
 
+files["root directory"] = "./"
 files["output directory"] = "./"
 files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
@@ -73,24 +74,15 @@ generator["generator storage energy capacity"] = 1000 #MWh
 
 ##############################################################################################
 
-redirect_output = len(sys.argv[1:]) % 2 == 1
+
 
 # handle arguments depending on job based on key-value entries. for multi-word keys, use underscores.
 #
 #   e.g.        python elcc_master.py year 2017 region WECC print_debug False 
 #
 
-if redirect_output:
-    root_directory = sys.argv[1]
-    parameters = sys.argv[2:]
 
-    if root_directory[-1] != '/': root_directory += '/'
-    if not os.path.exists(root_directory):
-        print('Invalid directory:', root_directory)
-        sys.exit(1)
-
-else:
-    parameters = sys.argv[1:]
+parameters = sys.argv[1:]
 
 i = 0
 while i < len(parameters):
@@ -133,24 +125,28 @@ files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 
 # handle output directory and print location
 
+root_directory = files["root directory"]
+
+redirect_output = root_directory !='./'
+
 if redirect_output:
+
+    if root_directory[-1] != '/': root_directory += '/'
+    if not os.path.exists(root_directory):
+        print('Invalid directory:', root_directory)
+        sys.exit(1)
 
     output_directory = root_directory+"elcc.__"
 
-    # default parameters
-    if len(sys.argv) == 2:
-        output_directory += "default.out"
-
     # handle all parameters
-    else: 
-        # add each passed parameter
-        for parameter in sys.argv[1:]:
-            if parameter.find('/') == -1: #don't include files/directories
-                output_directory += parameter + "__"
+    # add each passed parameter
+    for parameter in parameters:
+        if parameter.find('/') == -1 and not parameter in ["root_directory","root directory"]: #don't include files/directories
+            output_directory += parameter.replace(' ','_') + "__"
 
-        # add tag
-        output_directory += ".out"
-        output_directory.replace('/','.')
+    # add tag
+    output_directory += ".out"
+    output_directory.replace('/','.').replace('\"','')
 
     # Error Handling
     if os.path.exists(output_directory):

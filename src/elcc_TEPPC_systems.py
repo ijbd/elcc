@@ -16,11 +16,34 @@ def error_handling():
     if os.path.exists('elcc_job.txt'):
         os.system('rm elcc_job.txt')
 
+    print("Job Checklist: Have you...")
+    status = input("Activated conda environment? (y/n):") == "y"
+    status *= input("Checked batch resources? (y/n):") == "y"
+
+    if not status:
+        sys.exit(1)
+
+def fix_region_string(parameters):
+    if 'region' in parameters:
+
+        region_str = '\"'
+        for region in parameters['region']:
+            region_str += region + ' '
+
+        region_str = region_str[:-1] + '\"'
+
+        parameters['region'] = region_str
+    
+    return parameters
+
 def add_job(parameters):
 
     global root_directory
 
-    parameter_string = root_directory
+    # start string with
+    parameter_string = ''
+
+    parameters = fix_region_string(parameters)
 
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
@@ -31,6 +54,7 @@ def add_job(parameters):
 def main():
 
     parameters = dict()
+    parameters['root directory'] = root_directory
 
     # universal parameters
     parameters['year'] = 2018
@@ -43,7 +67,7 @@ def main():
     parameters['region'] = 'SCL'
     add_job(parameters)
 
-    parameters['region'] = '\"Mountains SCL\"'
+    parameters['region'] = ['Mountains','SCL']
     add_job(parameters)
 
     os.system('sbatch elcc_batch_job.sbat')
