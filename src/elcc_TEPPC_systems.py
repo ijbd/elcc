@@ -43,9 +43,6 @@ def main():
     parameters['region'] = 'SCL'
     add_job(parameters)
 
-    parameters['region'] = 'Mountains'
-    add_job(parameters)
-
     parameters['region'] = '\"Mountains SCL\"'
     add_job(parameters)
 

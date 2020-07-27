@@ -1059,7 +1059,7 @@ def get_saved_system_name(simulation, files, system, create=False):
 
     # level 2 - region
     
-    region = str(simulation['region']).replace('[','').replace('\'','').replace(',','').replace(']','').replace(' ','_')
+    region = str(np.sort(simulation['region'])).replace('[','').replace('\'','').replace(',','').replace(']','').replace(' ','_')
     root_directory += region + '/'
 
     if not path.exists(root_directory) and create:
