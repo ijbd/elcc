@@ -16,6 +16,14 @@ def error_handling():
     if os.path.exists('elcc_job.txt'):
         os.system('rm elcc_job.txt')
 
+    print("Job Checklist: Have you...")
+    status = input("Activated conda environment? (y/n):") == "y"
+    status *= input("Checked batch resources? (y/n):") == "y"
+
+    if not status:
+        sys.exit(1)
+
+
 def add_job(parameters):
 
     global root_directory
