@@ -52,7 +52,7 @@ def add_job(parameters):
     parameters = fix_region_string(parameters)
 
     for key in parameters:
-        parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
+        parameter_string = parameter_string + ' ' + str(key.replace(' ','_')) + ' ' + str(parameters[key])
     
     with open('elcc_job.txt','a') as f:
         f.write('python -u elcc_master.py ' + parameter_string + '\n')
