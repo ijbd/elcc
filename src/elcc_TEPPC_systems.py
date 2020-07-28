@@ -63,18 +63,14 @@ def main():
     parameters['root directory'] = root_directory
 
     # universal parameters
-    parameters['year'] = 2018
+    parameters['year'] = 2016
     parameters['nameplate'] = 1000
-    parameters['iterations'] = 10
-    parameters['generator_type'] = 'solar'
-    parameters['generator_storage'] = True
+    parameters['iterations'] = 10000
 
     # variable parameters
-    parameters['region'] = 'SCL'
-    add_job(parameters)
-
-    parameters['region'] = ['Mountains','SCL']
-    add_job(parameters)
+    for region in ['Northwest','Mountains','California','Southwest','Basin']:
+        parameters['region'] = region
+        add_job(parameters)
 
     os.system('sbatch elcc_batch_job.sbat')
 
