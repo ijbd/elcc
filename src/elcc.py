@@ -23,12 +23,33 @@ def error_handling():
     if not status:
         sys.exit(1)
 
+def fix_region_string(parameters):
+    if 'region' in parameters:
+        
+        regions = parameters['region']
+
+        if isinstance(regions,str):
+            return parameters
+
+        #otherwise fix string
+        region_str = '\"'
+        for region in regions:
+            region_str += region + ' '
+
+        region_str = region_str[:-1] + '\"'
+
+        parameters['region'] = region_str
+    
+    return parameters
 
 def add_job(parameters):
 
     global root_directory
 
-    parameter_string = root_directory
+    # start string with
+    parameter_string = ''
+
+    parameters = fix_region_string(parameters)
 
     for key in parameters:
         parameter_string = parameter_string + ' ' + str(key) + ' ' + str(parameters[key])
