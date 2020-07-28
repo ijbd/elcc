@@ -65,15 +65,16 @@ def main():
     # universal parameters
     parameters['year'] = 2016
     parameters['nameplate'] = 1000
-    parameters['iterations'] = 100
     parameters['system_setting'] = 'none'
 
     # variable parameters
-    for region in ['Northwest','Mountains','California','Southwest','Basin']:
-        parameters['region'] = region
-        for count in range(5):
-            parameters['count'] = count
-            add_job(parameters)
+    for iterations in [500, 1000]:
+        parameters['iterations'] = iterations
+        for region in ['Northwest','Mountains','California','Southwest','Basin']:
+            parameters['region'] = region
+            for count in range(5):
+                parameters['count'] = count
+                add_job(parameters)
 
     os.system('sbatch elcc_batch_job.sbat')
 
