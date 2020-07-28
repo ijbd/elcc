@@ -25,8 +25,13 @@ def error_handling():
 
 def fix_region_string(parameters):
     if 'region' in parameters:
-        regions = parameters['region'].split()
+        
+        regions = parameters['region']
 
+        if isinstance(regions,str):
+            return parameters
+
+        #otherwise fix string
         region_str = '\"'
         for region in regions:
             region_str += region + ' '
