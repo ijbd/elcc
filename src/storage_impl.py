@@ -2,14 +2,8 @@ import numpy as np
 import pandas as pd 
 import sys
 
-def get_storage_fleet(include_storage, eia_folder, region, year, round_trip_efficiency, efor, dispatch_strategy):
+def get_storage_fleet(eia_folder, region, year, round_trip_efficiency, efor, dispatch_strategy):
 
-    # return empty storage unit
-    if include_storage == False:
-        storage = dict()
-        storage["num units"] = 0
-        return storage
-    
     # Open files
     plants = pd.read_excel(eia_folder+"2___Plant_Y"+str(year)+".xlsx",skiprows=1,usecols=["Plant Code","NERC Region","Latitude",
                                                                                 "Longitude","Balancing Authority Code"])

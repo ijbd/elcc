@@ -101,20 +101,9 @@ def get_hourly_load(year,regions, hrsShift=0):
         else:
             hourly_load = np.concatenate([hourly_load[abs(hrsShift):],newLoad])
 
-    hourly_load = manually_scale_load(hourly_load, region)
-
     print("Peak load:",np.amax(hourly_load),"MW")
     print('')
     return hourly_load
-
-def manually_scale_load(hourly_load, region):
-    load_scales = { "NWMT" : 1.2/1.9,
-                    "PNM" : 2/2.6,
-                  }
-
-    if region in load_scales: hourly_load *= load_scales[region]
-
-    return hourly_load.astype(int)
 
 def get_total_interchange(year,regions,interchange_folder, hrsShift=0):
     """Retrieves all imports/exports for region of that year
@@ -397,16 +386,9 @@ def get_solar_and_wind_fleet(eia_folder, regions, year, RE_efor, powGen_lats, po
 def add_partial_ownership_generators(eia_folder,regions,year,generators,all_generators,print_utilities=False):
 
     # Working dictionary for utilities associated with balancing authorities        
-    known_utilities = { "AZPS" : "Arizona Public Service Co",
-                        "PSCO" : "Public Service Co of Colorado",
-                        "SRP" : "Salt River Project",
-                        "PNM" : "Public Service Co of NM",
-                        "NWMT" : ["NorthWestern Energy","NorthWestern Energy LLC - (MT)","Talen Montana LLC"]
-                        }
+    known_utilities = dict()
 
     utilities = np.array([known_utilities[region] for region in regions if region in known_utilities]).flatten()
-    
-    # flatten if necessary
 
     if len(utilities) != 0:
         if print_utilities:
@@ -448,7 +430,7 @@ def add_partial_ownership_generators(eia_folder,regions,year,generators,all_gene
     
     return generators
 
-# Find index of nearest coordinate. Implementation of get_RE_index
+# Find index of nearest coordinate. 
 def find_nearest_impl(actual_coordinates, discrete_coordinates):
     
     indices = []
@@ -728,7 +710,7 @@ def remove_generators(  num_iterations, conventional_generators, solar_generator
         if lolh > target_lolh:
             supplemental_capacity += supplemental_generator_unit_size
             hourly_fleet_capacity += hourly_supplemental_unit_capacity
-            print("Supplement Capacity:\t",int(supplemental_capacity),"\tLOLH:\t", round(lolh,precision))
+            print("Supplement Capacity:\t",int(supplemental_capacity),"\tLOLH:\t", round(lolh,precision),flush=True)
     
     #binary search to find last supplemental generator size
 
@@ -987,6 +969,9 @@ def print_fleet(conventional_generators,solar_generators,wind_generators,storage
     # storage
     print(  "found", storage_units["num units"],"storage units ("+str(int(np.sum(storage_units["max discharge rate"])))+" MW)")
 
+    print(  "Total Installed Capacity :",   np.sum(conventional_generators["nameplate"])+np.sum(solar_generators["nameplate"])+\
+                                            np.sum(wind_generators["nameplate"])+np.sum(storage_units["max discharge rate"]))
+
     print('')
 
 # save generators to csv
@@ -1067,11 +1052,11 @@ def get_saved_system_name(simulation, files, system, create=False):
 
     # level 3 - remaining parameters
     key_words = [   'iterations','target reliability', 'shift load', 'conventional efor', 'renewable efor',
-                    'temperature dependent FOR', 'enable total interchange', 'fleet storage', 
+                    'temperature dependent FOR', 'enable total interchange', 
                     'dispatch strategy', 'storage efficiency', 'supplemental storage',
                     'supplemental storage power capacity', 'supplemental storage energy capacity']
     key_short = [   'its','tgt_rel', 'shift_hrs', 'conv_efor', 'RE_efor','temp_dep_efor', 'tot_inter',  
-                    'fleet_stor', 'disp_strat', 'stor_eff', 'supp_stor','supp_power', 'supp_energy']
+                    'disp_strat', 'stor_eff', 'supp_stor','supp_power', 'supp_energy']
 
     parameters = dict() 
 
@@ -1155,7 +1140,7 @@ def main(simulation,files,system,generator):
         hourly_load += get_total_interchange(simulation["year"],simulation["all_regions"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
     
     # always get storage
-    fleet_storage = get_storage_fleet(  system["fleet storage"],files["eia folder"],simulation["all_regions"],simulation["year"],
+    fleet_storage = get_storage_fleet(  files["eia folder"],simulation["all_regions"],simulation["year"],
                                         system["storage efficiency"],system["storage efor"],system["dispatch strategy"])
 
     # try loading system
