@@ -100,7 +100,7 @@ def main():
     parameters['system setting'] = 'none'
 
     # variable parameters
-    for iterations in [5000]:
+    for iterations in [10000]:
 
         parameters['iterations'] = iterations
         for region in ['Northwest','Mountains','California','Southwest','Basin']:
