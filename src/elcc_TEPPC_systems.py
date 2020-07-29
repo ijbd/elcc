@@ -19,15 +19,16 @@ def init():
 
     # Save time and money 
     print("Job Checklist: Have you...")
-    user_check("Activated conda environment? (y/n):")
-    user_check("Checked batch resources? (y/n):")
+    user_check("Activated conda environment? (y/n):",'y')
+    user_check("Checked batch resources? (y/n):",'y')
+    user_check("Completed 10 iteration test job? (y/n)",'y')
 
     # New launcher file
     new_job()
 
-def user_check(message):
+def user_check(message, test_response):
 
-    status = input(message) == "y"
+    status = input(message) == test_response
     if not status:
         sys.exit(1)
 
@@ -99,7 +100,7 @@ def main():
     parameters['system setting'] = 'none'
 
     # variable parameters
-    for iterations in [10]:
+    for iterations in [5000]:
 
         parameters['iterations'] = iterations
         for region in ['Northwest','Mountains','California','Southwest','Basin']:
