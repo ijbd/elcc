@@ -78,18 +78,23 @@ generator["generator storage energy capacity"] = 1000 #MWh
 # handle arguments depending on job based on key-value entries. for multi-word keys, use underscores.
 #
 #   e.g.        python elcc_master.py year 2017 region WECC print_debug False 
-#
 
+parameters = dict()
 
-parameters = sys.argv[1:]
+params = sys.argv[1:]
 
+# fill dictionary with arguments
 i = 0
-while i < len(parameters):
+while i < len(params):
     key = parameters[i].replace('_',' ')
     value = parameters[i+1]
+    parameters[key] = value
 
-    if key == "region":
-        simulation['region'] = value.split()
+# fill job parameter dictionaries with passed arguments 
+for key in parameters:
+
+    if key == 'region':
+        simulation['region'] = parameters['region'].split()
 
     else:
         for param_set in [simulation, files, system, generator]:
@@ -115,7 +120,7 @@ while i < len(parameters):
             
     i += 2 
 
-# dependent parameters
+# fix dependent parameters
 
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
@@ -123,7 +128,6 @@ files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])
 files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 
 # handle output directory and print location
-
 root_directory = files["root directory"]
 
 redirect_output = root_directory !='./'
@@ -137,15 +141,14 @@ if redirect_output:
 
     output_directory = root_directory+"elcc.__"
 
-    # handle all parameters
     # add each passed parameter
-    for parameter in parameters:
-        if parameter.find('/') == -1 and not parameter in ["root_directory","root directory"]: #don't include files/directories
-            output_directory += parameter.replace(' ','_') + "__"
+    for key in sorted(parameters):
+        if parameters[key].find('/') == -1 and not key in ["root directory", "output directory"]: #don't include files/directories
+            output_directory += key + '__' + parameters[key].replace(' ','_') + '__'
 
     # add tag
     output_directory += ".out"
-    output_directory.replace('/','.').replace('\"','')
+    output_directory.replace('\"','')
 
     # Error Handling
     if os.path.exists(output_directory):
@@ -163,16 +166,14 @@ if redirect_output:
     files['output directory'] = output_directory
 
 # time savers
-
 if simulation["region"] == ["WECC"]:
     system['enable total interchange'] = False
     system['oldest year'] = 1975
 
-
 if files["output directory"][-1] != '/': files["output directory"] += '/'
 if files["saved systems folder"][-1] != '/': files["saved systems folder"] += '/'
 
-# TEPPC Pools
+# TEPPC regions
 
 TEPPC_regions = pd.read_csv('../demand/_regions.csv').fillna('nan')
 
@@ -184,7 +185,7 @@ if len(regions) == 0:
     print("Invalid region(s):",simulation["region"])
     sys.exit(1)
 
-simulation["all_regions"] = regions
+simulation["all regions"] = regions
 
 # run program
 main(simulation,files,system,generator)

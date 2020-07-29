@@ -14,6 +14,10 @@
 module load launcher/3.7 
 my_job_header
 
-export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/elcc_job.txt
+launch_file=$1
+
+export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/$launch_file
 
 paramrun
+
+rm $launch_file 
