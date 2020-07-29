@@ -96,7 +96,7 @@ def main():
     # universal parameters
     parameters['year'] = 2016
     parameters['nameplate'] = 1000
-    parameters['system_setting'] = 'none'
+    parameters['system setting'] = 'none'
 
     # variable parameters
     for iterations in [10]:

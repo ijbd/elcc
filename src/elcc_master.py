@@ -98,7 +98,7 @@ while i < len(params):
 for key in parameters:
 
     value = parameters[key]
-    
+
     if key == 'region':
         simulation['region'] = parameters['region'].split()
 
@@ -150,7 +150,7 @@ if redirect_output:
     # add each passed parameter
     for key in sorted(parameters):
         if parameters[key].find('/') == -1 and not key in ["root directory", "output directory"]: #don't include files/directories
-            output_directory += key + '__' + parameters[key].replace(' ','_') + '__'
+            output_directory += key.replace(' ','_') + '__' + parameters[key].replace(' ','_') + '__'
 
     # add tag
     output_directory += ".out"
