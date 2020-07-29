@@ -102,10 +102,10 @@ def main():
     for iterations in [10]:
 
         parameters['iterations'] = iterations
-        for region in ['Northwest','Mountains','California','Southwest','Basin']:
+        for region in ['Northwest']:#,'Mountains','California','Southwest','Basin']:
             
             parameters['region'] = region
-            for count in range(5):
+            for count in range(1):#5):
                 parameters['count'] = count
                 add_job(parameters)
 

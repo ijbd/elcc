@@ -86,9 +86,12 @@ params = sys.argv[1:]
 # fill dictionary with arguments
 i = 0
 while i < len(params):
+    
     key = params[i].replace('_',' ')
     value = params[i+1]
     parameters[key] = value
+
+    i += 2 
 
 # fill job parameter dictionaries with passed arguments 
 for key in parameters:
@@ -118,7 +121,6 @@ for key in parameters:
                 if value == "True": param_set[key] = True
                 elif value == "False": param_set[key] = False
             
-    i += 2 
 
 # fix dependent parameters
 
