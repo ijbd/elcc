@@ -86,8 +86,8 @@ params = sys.argv[1:]
 # fill dictionary with arguments
 i = 0
 while i < len(params):
-    key = parameters[i].replace('_',' ')
-    value = parameters[i+1]
+    key = params[i].replace('_',' ')
+    value = params[i+1]
     parameters[key] = value
 
 # fill job parameter dictionaries with passed arguments 
