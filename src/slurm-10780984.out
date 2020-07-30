@@ -1,0 +1,68 @@
+
+Job information
+#-------------------------------------------------------------------
+SLURM_SUBMIT_HOST    gl-login1.arc-ts.umich.edu
+SLURM_JOB_ACCOUNT    mtcraig1
+SLURM_JOB_PARTITION  standard
+SLURM_JOB_NAME       elcc_calc
+SLURM_JOBID          10780984
+SLURM_NODELIST       gl3077
+SLURM_JOB_NUM_NODES  1
+SLURM_NTASKS         5
+SLURM_TASKS_PER_NODE 5
+SLURM_CPUS_PER_TASK  1
+SLURM_NPROCS         5
+SLURM_MEM_PER_CPU    8192
+SLURM_SUBMIT_DIR     /gpfs/accounts/mtcraig_root/mtcraig1/shared_data/elcc/src
+
+scheduling priority             (-e) 0
+pending signals                 (-i) 765665
+max memory size         (kbytes, -m) 41943040
+open files                      (-n) 131072
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+max user processes              (-u) 765665
+
+Running on gl3077.arc-ts.umich.edu at Wed Jul 29 17:04:24 EDT 2020
+
+Currently Loaded Modules:
+  1) launcher/3.7
+
+Your job output begins below the line
+#-------------------------------------------------------------------
+WARNING (07/29/20 17:04:24): LAUNCHER_WORKDIR variable not set. Using current directory.
+windowsP is false
+WARNING (07/29/20 17:04:25): Unable to start dynamic task service on 9471. Retrying...
+windowsP is false
+NOTE (07/29/20 17:04:32): Started dynamic task service on port 9472
+Launcher: Setup complete.
+
+------------- SUMMARY ---------------
+   Number of hosts:    1
+   Working directory:  /scratch/mtcraig_root/mtcraig1/shared_data/elcc/src
+   Processes per host: 5
+   Total processes:    5
+   Total jobs:         5
+   Scheduling method:  dynamic
+
+-------------------------------------
+Launcher: Starting parallel tasks...
+using /tmp/launcher.10780984.hostlist.DkNY9ugi to get hosts
+starting job on gl3077
+Launcher: Task 4 running job 1 on gl3077.arc-ts.umich.edu (python -u elcc_master.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/SampleSizeValidation/ year 2016 nameplate 1000 system_setting none iterations 10000 region California count 0)
+Launcher: Task 0 running job 2 on gl3077.arc-ts.umich.edu (python -u elcc_master.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/SampleSizeValidation/ year 2016 nameplate 1000 system_setting none iterations 10000 region California count 1)
+Launcher: Task 3 running job 3 on gl3077.arc-ts.umich.edu (python -u elcc_master.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/SampleSizeValidation/ year 2016 nameplate 1000 system_setting none iterations 10000 region California count 2)
+Launcher: Task 1 running job 4 on gl3077.arc-ts.umich.edu (python -u elcc_master.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/SampleSizeValidation/ year 2016 nameplate 1000 system_setting none iterations 10000 region California count 3)
+Launcher: Task 2 running job 5 on gl3077.arc-ts.umich.edu (python -u elcc_master.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/SampleSizeValidation/ year 2016 nameplate 1000 system_setting none iterations 10000 region California count 4)
+Launcher: Job 2 completed in 17764 seconds.
+Launcher: Task 0 done. Exiting.
+Launcher: Job 4 completed in 17782 seconds.
+Launcher: Task 1 done. Exiting.
+Launcher: Job 3 completed in 19226 seconds.
+Launcher: Task 3 done. Exiting.
+Launcher: Job 1 completed in 19538 seconds.
+Launcher: Task 4 done. Exiting.
+Launcher: Job 5 completed in 32867 seconds.
+Launcher: Task 2 done. Exiting.
+Launcher: Done. Job exited without errors
