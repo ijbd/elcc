@@ -112,7 +112,8 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-
+    print(len(lats[::2]),len(lons[::2]))
+    
     i = 0 # keep track of job num
     for lat in lats[::2]: # half resolution
         parameters['latitude'] = lat
