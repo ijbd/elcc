@@ -28,7 +28,7 @@ Instructions:
 
 6. Changing the root directory will create a unique folder based on the passed arguments and redirect output
 
-    `python elcc_master.py root_directory testing/ region 'CISO'`
+    `python elcc_master.py root_directory testing/ region CISO`
 
     This will create create a folder called "elcc.__region__CISO__.out/" and redirect print output to a file print.out
 
