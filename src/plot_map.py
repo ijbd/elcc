@@ -58,8 +58,10 @@ cs = ax.contourf(lons,lats,elcc_map,levels=levels,vmax=vmax,vmin=vmin,cmap='plas
 
 cbar = fig.colorbar(cs)
 cbar.ax.set_ylabel('ELCC (% of Nameplate)')
-cbar.set_ticks(np.linspace(min_elcc,max_elcc,int(levels/4)))
 
+tick_max = min_elcc + int((max_elcc - min_elcc)/3)*3 
+print(tick_max)
+cbar.set_ticks(np.linspace(min_elcc,tick_max,4))
 
 ax.set_xlabel('Longitude')
 ax.set_ylabel('Latitude')

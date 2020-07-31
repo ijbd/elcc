@@ -69,8 +69,8 @@ generator["efor"] = .05
 ###### Added Storage ########
 
 generator["generator storage"] = False #find elcc of additional storage
-generator["generator storage power capacity"] = 1000 #MW
-generator["generator storage energy capacity"] = 1000 #MWh 
+generator["generator storage power capacity"] = 500 #MW
+generator["generator storage energy capacity"] = 500 #MWh 
 
 ##############################################################################################
 
