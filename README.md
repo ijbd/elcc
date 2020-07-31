@@ -30,7 +30,7 @@ Instructions:
 
     `python elcc_master.py root_directory testing/ region CISO`
 
-    This will create create a folder called "elcc.__region__CISO__.out/" and redirect print output to a file print.out
+    This will create create a folder called "elcc.\__region\__CISO\__.out/" and redirect print output to a file print.out
 
 7. To add a region to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
 
