@@ -60,8 +60,12 @@ cbar = fig.colorbar(cs)
 cbar.ax.set_ylabel('ELCC (% of Nameplate)')
 
 tick_max = min_elcc + int((max_elcc - min_elcc)/3)*3 
-print(tick_max)
-cbar.set_ticks(np.linspace(min_elcc,tick_max,4))
+
+if (max_elcc - min_elcc) >= 6: 
+    cbar.set_ticks(np.linspace(min_elcc,tick_max,4))
+else:
+    cbar.set_ticks(np.linspace(min_elcc,max_elcc,int(max_elcc-min_elcc)+1))
+
 
 ax.set_xlabel('Longitude')
 ax.set_ylabel('Latitude')
