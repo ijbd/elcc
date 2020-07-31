@@ -67,7 +67,7 @@ def run_job():
     # only launch non-empty jobs
     if os.path.exists(LAUNCH_FILE):
         # launch job
-        os.system('sbatch elcc_batch_job.sbat '+LAUNCH_FILE)
+        #os.system('sbatch elcc_batch_job.sbat '+LAUNCH_FILE)
 
         # start new file for running
         new_job()
