@@ -10,15 +10,33 @@ Instructions:
 
     `git clone https://github.com/ijbd/elcc.git`
 
-2. Change parameters in bin/elcc_master.py
 
-3. Run simulation in foreground from command-line
+2. Run simulation from bin in foreground from command-line
 
+    `cd bin/`
     `python elcc_master.py`
 
-4. Run simulation in background from command-line
+3. Change parameters via key-value pairs on command line
 
-    `nohup python -u elcc_master.py > output_filename.out &`
+    `python elcc_master.py year 2016 region CISO`
+
+4. See a full list of parameters in elcc_master.py
+
+5. For multi-worded parameters use underscores
+
+    `python elcc_master.py conventional_efor .1`
+
+6. Changing the root directory will create a unique folder based on the passed arguments and redirect output
+
+    `python elcc_master.py root_directory testing/ region 'CISO'`
+
+    This will create create a folder called "elcc.__region__CISO__.out/" and redirect print output to a file print.out
+
+7. To add a region to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
+
+8. To use, ARC-TS launcher use elcc.py, refer to 9.
+
+9. This manual is incomplete, but I'm happy to help if you're having trouble with anything! Email me at ijbd@umich.edu
 
 Citations:
 ----------
