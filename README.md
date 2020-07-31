@@ -11,28 +11,27 @@ Instructions:
     `git clone https://github.com/ijbd/elcc.git`
 
 
-2. Run simulation from bin in foreground from command-line
+2. Run ELCC calculation from bin via command line
 
-    `cd bin/`
-    `python elcc_master.py`
+    `python elcc_driver.py`
 
-3. Change parameters via key-value pairs on command line
+3. Change parameters with key-value pairs
 
-    `python elcc_master.py year 2016 region CISO`
+    `python elcc_driver.py year 2016 region CISO`
 
 4. See a full list of parameters in elcc_master.py
 
 5. For multi-worded parameters use underscores
 
-    `python elcc_master.py conventional_efor .1`
+    `python elcc_driver.py conventional_efor .1`
 
-6. Changing the root directory will create a unique folder based on the arguments and redirect output
+6. Changing the root directory will create a unique folder based on the arguments and redirect output to a file
 
-    `python elcc_master.py root_directory testing/ region CISO`
+    `python elcc_driver.py root_directory testing/ region CISO`
 
-7. To add a region to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
+7. To add a balancing authority to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
 
-8. To use, ARC-TS launcher use elcc.py, refer to 9.
+8. To use, ARC-TS launcher calculate ELCC values synchronously, refer to 9.
 
 9. This manual is incomplete, but I'm happy to help if you're having trouble with anything! Email me at ijbd@umich.edu
 

@@ -1,6 +1,7 @@
 import os
 import sys
 import numpy as np
+from elcc_impl import get_powGen
 
 root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
 
@@ -63,11 +64,13 @@ def run_job():
 
     global LAUNCH_FILE
 
-    # launch job
-    os.system('sbatch elcc_single_job.sbat '+LAUNCH_FILE)
+    # only launch non-empty jobs
+    if os.path.exists(LAUNCH_FILE):
+        # launch job
+        os.system('sbatch elcc_batch_job.sbat '+LAUNCH_FILE)
 
-    # start new file for running
-    new_job()
+        # start new file for running
+        new_job()
 
 def fix_region_string(parameters):
 #list to formatted string
@@ -103,9 +106,27 @@ def main():
     parameters['generator type'] = 'solar'
     parameters['nameplate'] = 1000
     
-    add_job(parameters)
-    run_job()
+    # variable parameters
+    solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
+    wind_cf_file = "../wecc_powGen/2018_wind_generation_cf.nc" 
 
+    lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
+
+
+    i = 0 # keep track of job num
+    for lat in lats[::2]: # half resolution
+        parameters['latitude'] = lat
+
+        for lon in lons[::2]: # half resolution
+            parameters['longitude'] = lon
+            add_job(parameters)
+            
+            i += 1
+            # nine jobs/node
+            if i % 9 == 0: run_job()
+    
+    # run last set if necessary
+    run_job()
 
 
 if __name__ == "__main__":
