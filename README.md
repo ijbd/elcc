@@ -26,11 +26,9 @@ Instructions:
 
     `python elcc_master.py conventional_efor .1`
 
-6. Changing the root directory will create a unique folder based on the passed arguments and redirect output
+6. Changing the root directory will create a unique folder in the root directory based on the arguments and redirect output
 
     `python elcc_master.py root_directory testing/ region CISO`
-
-    This will create create a folder called "elcc.\__region__CISO__.out/" and redirect print output to a file print.out
 
 7. To add a region to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
 
