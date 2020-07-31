@@ -34,23 +34,13 @@ max_elcc = np.amax(elcc_map)
 min_elcc = np.amin(elcc_map)
 
 #vmax 
-vmax = max_elcc + 15
-
-if max_elcc > 50:
-    vmax = max_elcc + 5
-
-if max_elcc > 75:
-    vmax = max_elcc
+vmax = int(max_elcc + (100-max_elcc)/3)
 
 #vmin
-vmin = min_elcc -15
+vmin = int(min_elcc - (min_elcc)/3)
 
-if min_elcc < 50:
-    vmin = min_elcc -5
-
-if min_elcc < 25:
-    vmin = min_elcc
-
+print(max_elcc,min_elcc)
+print(vmax, vmin)
 levels = int(vmax-vmin)
 
 # contour plot
