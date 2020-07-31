@@ -26,7 +26,7 @@ Instructions:
 
     `python elcc_master.py conventional_efor .1`
 
-6. Changing the root directory will create a unique folder in the root directory based on the arguments and redirect output
+6. Changing the root directory will create a unique folder based on the arguments and redirect output
 
     `python elcc_master.py root_directory testing/ region CISO`
 

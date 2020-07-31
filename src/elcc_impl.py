@@ -1188,11 +1188,11 @@ def get_saved_system_name(simulation, files, system, create=False):
         os.system('mkdir '+root_directory)
 
     # level 3 - remaining parameters
-    key_words = [   'iterations','target reliability', 'shift load', 'conventional efor', 'renewable efor',
+    key_words = [   'iterations','target reliability', 'shift load', 'renewable scale' 'conventional efor', 'renewable efor',
                     'temperature dependent FOR', 'enable total interchange', 
                     'dispatch strategy', 'storage efficiency', 'supplemental storage',
                     'supplemental storage power capacity', 'supplemental storage energy capacity']
-    key_short = [   'its','tgt_rel', 'shift_hrs', 'conv_efor', 're_efor','temp_dep_efor', 'tot_inter',  
+    key_short = [   'its','tgt_rel', 'shift_hrs', 're_scale' 'conv_efor', 're_efor','temp_dep_efor', 'tot_inter',  
                     'disp_strat', 'stor_eff', 'supp_stor','supp_power', 'supp_energy']
 
     parameters = dict() 

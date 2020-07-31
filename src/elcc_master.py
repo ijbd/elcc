@@ -38,6 +38,7 @@ files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elcc
 # Adjust parameters of existing fleet
 system["system setting"] = "save" # none or save (save will load existing fleet capacity or save new folder)
 system["oldest year"] = 0 #remove conventional generators older than this year
+system["renewable scale"] = 1 #multiplier for existing renewables
 
 ######### Outages ###########
 

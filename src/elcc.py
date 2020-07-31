@@ -59,6 +59,7 @@ def add_job(parameters):
         f.write('python -u elcc_master.py ' + parameter_string + '\n')
 
 def run_job():
+# call batch script on current job
 
     global LAUNCH_FILE
 
@@ -69,6 +70,7 @@ def run_job():
     new_job()
 
 def fix_region_string(parameters):
+#list to formatted string
 
     if 'region' in parameters:
         
@@ -96,9 +98,8 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'PACE'
-    parameters['nameplate'] = 1000
-    parameters['system setting'] = 'none'
+    parameters['region'] = 'California'
+    parameters['iterations'] = 5000
     
     add_job(parameters)
     run_job()
