@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from netCDF4 import Dataset 
 
 filename = sys.argv[1]
-plot_title = str(sys.argv[2].replace('\"',''))
+lines_of_title = sys.argv[2:]
 
 # load results
 results = pd.read_csv(filename,index_col=0)
@@ -73,7 +73,12 @@ ax.set_yticks([np.min(lats),40,np.max(lats)])
 ax.set_xticks([np.min(lons),-120,-110,np.max(lons)])
 ax.grid(True)
 
-plt.title(plot_title)
+
+title = ''
+for line in lines_of_title:
+    title += line.replace('\"','') + '\n'
+
+plt.title(title[:-1])
 
 plt.savefig(filename[:-4],bbox_inches='tight',dpi=100)
 

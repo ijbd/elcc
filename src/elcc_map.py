@@ -103,8 +103,7 @@ def main():
     parameters['year'] = 2016
     parameters['region'] = 'California'
     parameters['iterations'] = 5000
-    parameters['generator type'] = 'wind'
-    parameters['nameplate'] = 1000
+    parameters['nameplate'] = 0
     parameters['generator storage'] = 'True'
     parameters['generator storage power capacity'] = 500
     parameters['generator storage energy capacity'] = 500
