@@ -1,0 +1,78 @@
+
+Job information
+#-------------------------------------------------------------------
+SLURM_SUBMIT_HOST    gl-login1.arc-ts.umich.edu
+SLURM_JOB_ACCOUNT    mtcraig1
+SLURM_JOB_PARTITION  standard
+SLURM_JOB_NAME       elcc_calc
+SLURM_JOBID          10987889
+SLURM_NODELIST       gl3035
+SLURM_JOB_NUM_NODES  1
+SLURM_NTASKS         9
+SLURM_TASKS_PER_NODE 9
+SLURM_CPUS_PER_TASK  1
+SLURM_NPROCS         9
+SLURM_MEM_PER_CPU    8192
+SLURM_SUBMIT_DIR     /gpfs/accounts/mtcraig_root/mtcraig1/shared_data/elcc/src
+
+scheduling priority             (-e) 0
+pending signals                 (-i) 765656
+max memory size         (kbytes, -m) 75497472
+open files                      (-n) 131072
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+max user processes              (-u) 765656
+
+Running on gl3035.arc-ts.umich.edu at Fri Jul 31 18:53:52 EDT 2020
+
+Currently Loaded Modules:
+  1) launcher/3.7
+
+Your job output begins below the line
+#-------------------------------------------------------------------
+WARNING (07/31/20 18:53:52): LAUNCHER_WORKDIR variable not set. Using current directory.
+windowsP is false
+NOTE (07/31/20 18:53:53): Started dynamic task service on port 9471
+Launcher: Setup complete.
+
+------------- SUMMARY ---------------
+   Number of hosts:    1
+   Working directory:  /scratch/mtcraig_root/mtcraig1/shared_data/elcc/src
+   Processes per host: 9
+   Total processes:    9
+   Total jobs:         9
+   Scheduling method:  dynamic
+
+-------------------------------------
+Launcher: Starting parallel tasks...
+using /tmp/launcher.10987889.hostlist.PHAlJHvc to get hosts
+starting job on gl3035
+Launcher: Task 3 running job 1 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -124.375)
+Launcher: Task 1 running job 2 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -123.125)
+Launcher: Task 0 running job 3 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -121.875)
+Launcher: Task 5 running job 4 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -120.625)
+Launcher: Task 7 running job 5 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -119.375)
+Launcher: Task 6 running job 6 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -118.125)
+Launcher: Task 2 running job 7 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -116.875)
+Launcher: Task 4 running job 8 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -115.625)
+Launcher: Task 8 running job 9 on gl3035.arc-ts.umich.edu (python -u elcc_driver.py  root_directory /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/california/2016/5GWwind/ year 2016 region California iterations 5000 nameplate 5000 generator_type wind latitude 32.0 longitude -114.375)
+Launcher: Job 3 completed in 302 seconds.
+Launcher: Task 0 done. Exiting.
+Launcher: Job 5 completed in 293 seconds.
+Launcher: Task 7 done. Exiting.
+Launcher: Job 4 completed in 302 seconds.
+Launcher: Task 5 done. Exiting.
+Launcher: Job 2 completed in 310 seconds.
+Launcher: Task 1 done. Exiting.
+Launcher: Job 9 completed in 318 seconds.
+Launcher: Task 8 done. Exiting.
+Launcher: Job 1 completed in 343 seconds.
+Launcher: Task 3 done. Exiting.
+Launcher: Job 6 completed in 350 seconds.
+Launcher: Task 6 done. Exiting.
+Launcher: Job 7 completed in 396 seconds.
+Launcher: Task 2 done. Exiting.
+Launcher: Job 8 completed in 423 seconds.
+Launcher: Task 4 done. Exiting.
+Launcher: Done. Job exited without errors
