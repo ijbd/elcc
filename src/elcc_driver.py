@@ -28,7 +28,7 @@ simulation["debug"] = False # print all information flagged for debug
 
 files["root directory"] = "./"
 files["output directory"] = "./"
-files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
+files["eia folder"] = "../eia8602018/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
 files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/"
@@ -38,7 +38,7 @@ files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elcc
 # Adjust parameters of existing fleet
 system["system setting"] = "save" # none or save (save will load existing fleet capacity or save new folder)
 system["oldest year"] = 0 #remove conventional generators older than this year
-system["renewable scale"] = 1 #multiplier for existing renewables
+system["renewable multiplier"] = 1 #multiplier for existing renewables
 
 ######### Outages ###########
 
@@ -132,7 +132,6 @@ for key in parameters:
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
-files["eia folder"] = "../eia860"+str(simulation["year"])+"/"
 
 # handle output directory and print location
 root_directory = files["root directory"]

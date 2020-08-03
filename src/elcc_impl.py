@@ -698,7 +698,7 @@ def get_conventional_fleet(eia_folder, regions, year, system_preferences,powGen_
     
     return get_conventional_fleet_impl(plants,active_generators,system_preferences,temperature_data,year,powGen_lats,powGen_lons,benchmark_fors)
     
-def get_RE_fleet_impl(eia_folder, regions, year, plants, RE_generators, desired_plant_codes, RE_efor):
+def get_RE_fleet_impl(eia_folder, regions, year, plants, RE_generators, desired_plant_codes, RE_efor, renewable_multiplier):
 # Filter generators for operation status, and map generators to powGen coordinates
 
     # Get generators in region
@@ -723,17 +723,17 @@ def get_RE_fleet_impl(eia_folder, regions, year, plants, RE_generators, desired_
 
     # Convert Dataframe to Dictionary of numpy arrays
     RE_generators = dict()
-    RE_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size
-    RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values
-    RE_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values
-    RE_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values
+    RE_generators["num units"] = active_generators["Nameplate Capacity (MW)"].values.size 
+    RE_generators["nameplate"] = active_generators["Nameplate Capacity (MW)"].values * renewable_multiplier
+    RE_generators["summer nameplate"] = active_generators["Summer Capacity (MW)"].values * renewable_multiplier
+    RE_generators["winter nameplate"] = active_generators["Winter Capacity (MW)"].values * renewable_multiplier
     RE_generators["lat"] = latitudes
     RE_generators["lon"] = longitudes
     RE_generators["efor"] = np.ones(RE_generators["nameplate"].size) * RE_efor 
 
     return RE_generators
 
-def get_solar_and_wind_fleet(eia_folder, regions, year, RE_efor, powGen_lats, powGen_lons):
+def get_solar_and_wind_fleet(eia_folder, regions, year, RE_efor, powGen_lats, powGen_lons, renewable_multiplier):
     """ Retrieve all active wind and solar generators
 
     ...
@@ -773,8 +773,8 @@ def get_solar_and_wind_fleet(eia_folder, regions, year, RE_efor, powGen_lats, po
 
     # Repeat process for solar and wind
     plants.set_index("Plant Code",inplace=True)
-    solar_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_solar_generators,desired_plant_codes,RE_efor)
-    wind_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_wind_generators,desired_plant_codes,RE_efor)
+    solar_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_solar_generators,desired_plant_codes,RE_efor,renewable_multiplier)
+    wind_generators = get_RE_fleet_impl(eia_folder,regions,year,plants,all_wind_generators,desired_plant_codes,RE_efor,renewable_multiplier)
 
     solar_generators["generator type"] = "solar"
     wind_generators["generator type"] = "wind"
@@ -1532,11 +1532,11 @@ def get_saved_system_name(simulation, files, system, create=False):
         os.system('mkdir '+root_directory)
 
     # level 3 - remaining parameters
-    key_words = [   'iterations','target reliability', 'shift load', 'renewable scale', 'conventional efor', 'renewable efor',
+    key_words = [   'iterations','target reliability', 'shift load', 'renewable multiplier', 'conventional efor', 'renewable efor',
                     'temperature dependent FOR', 'enable total interchange', 
                     'dispatch strategy', 'storage efficiency', 'supplemental storage',
                     'supplemental storage power capacity', 'supplemental storage energy capacity']
-    key_short = [   'its','tgt_rel', 'shift_hrs', 're_scale', 'conv_efor', 're_efor','temp_dep_efor', 'tot_inter',  
+    key_short = [   'its','tgt_rel', 'shift_hrs', 're_mult', 'conv_efor', 're_efor','temp_dep_efor', 'tot_inter',  
                     'disp_strat', 'stor_eff', 'supp_stor','supp_power', 'supp_energy']
 
     parameters = dict() 
@@ -1620,7 +1620,7 @@ def main(simulation,files,system,generator):
         hourly_load += get_total_interchange(simulation["year"],simulation["all regions"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
     
     # always get storage
-    fleet_storage = get_storage_fleet(  files["eia folder"],simulation["all regions"],simulation["year"],
+    fleet_storage = get_storage_fleet(  files["eia folder"],simulation["all regions"],2018,
                                         system["storage efficiency"],system["storage efor"],system["dispatch strategy"])
 
     # try loading system
@@ -1629,12 +1629,11 @@ def main(simulation,files,system,generator):
     if hourly_fleet_capacity is None:
         # system 
         fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["all regions"],
-                                                                simulation["year"], system, powGen_lats, powGen_lons,
+                                                                2018, system, powGen_lats, powGen_lons,
                                                                 temperature_data, benchmark_fors)
         fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["all regions"],
-                                                                                simulation["year"], system["renewable efor"],
-                                                                                powGen_lats, powGen_lons)
-        
+                                                                                2018, system["renewable efor"],
+                                                                                powGen_lats, powGen_lons,system["renewable multiplier"])
         
         print_fleet(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators,fleet_storage)
 
