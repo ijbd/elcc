@@ -2,7 +2,7 @@ import os
 import sys
 import numpy as np
 
-root_directory = '/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/' + sys.argv[1]
+root_directory = sys.argv[1]
 
 LAUNCH_FILE = 'elcc_job_0.txt'
 

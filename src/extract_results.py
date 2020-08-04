@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import sys
 
-root_directory = "../../"+sys.argv[1] # from NASWCV/ or shared_data/
+root_directory = sys.argv[1]
 title = sys.argv[2]
 
 # save mistakes
