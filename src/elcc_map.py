@@ -106,9 +106,9 @@ def main():
 
     parameters['nameplate'] = 5000
     parameters['generator type'] = 'wind'
-    #parameters['generator storage'] = 'True'
-    #parameters['generator storage power capacity'] = 500
-    #parameters['generator storage energy capacity'] = 2000
+    parameters['generator storage'] = 'True'
+    parameters['generator storage power capacity'] = 500
+    parameters['generator storage energy capacity'] = 500
     
     # variable parameters
     solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
