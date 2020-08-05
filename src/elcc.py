@@ -19,9 +19,9 @@ def init():
 
     # Save time and money 
     print("Job Checklist: Have you...")
-    user_check("Activated conda environment? (y/n):",'y')
-    user_check("Checked batch resources? (y/n):",'y')
-    user_check("Completed 10 iteration test job? (y/n)",'y')
+    user_check("Activated conda environment? (y/n): ",'y')
+    user_check("Checked batch resources? (y/n): ",'y')
+    user_check("Completed 10 iteration test job? (y/n): ",'y')
 
     # New launcher file
     new_job()

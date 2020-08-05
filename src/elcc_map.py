@@ -20,9 +20,9 @@ def init():
 
     # Save time and money 
     print("Job Checklist: Have you...")
-    user_check("Activated conda environment? (y/n):",'y')
-    user_check("Checked batch resources? (y/n):",'y')
-    user_check("Completed 10 iteration test job? (y/n)",'y')
+    user_check("Activated conda environment? (y/n): ",'y')
+    user_check("Checked batch resources? (y/n): ",'y')
+    user_check("Completed 10 iteration test job? (y/n): ",'y')
 
     # New launcher file
     new_job()
@@ -103,9 +103,9 @@ def main():
     parameters['year'] = 2016
     parameters['region'] = 'Mountains'
     parameters['iterations'] = 5000
-    
+
     parameters['nameplate'] = 1000
-    parameters['generator type'] = 'solar'
+    parameters['generator type'] = 'wind'
     #parameters['generator storage'] = 'True'
     #parameters['generator storage power capacity'] = 500
     #parameters['generator storage energy capacity'] = 2000
