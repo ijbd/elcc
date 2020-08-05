@@ -64,7 +64,7 @@ generator["generator type"] = "solar" #solar or wind
 generator["nameplate"] = 1000 #MW
 generator["latitude"] = 41
 generator["longitude"] = -112
-generator["efor"] = .05 
+generator["efor"] = .05
 
 ###### Added Storage ########
 
@@ -73,7 +73,6 @@ generator["generator storage power capacity"] = 500 #MW
 generator["generator storage energy capacity"] = 500 #MWh 
 
 ##############################################################################################
-
 
 
 # handle arguments depending on job based on key-value entries. for multi-word keys, use underscores.

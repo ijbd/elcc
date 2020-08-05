@@ -98,10 +98,8 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'California'
+    parameters['region'] = 'Mountains'
     parameters['iterations'] = 5000
-    parameters['generator type'] = 'solar'
-    parameters['nameplate'] = 1000
     
     add_job(parameters)
     run_job()
