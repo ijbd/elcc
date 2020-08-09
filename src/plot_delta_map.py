@@ -42,7 +42,7 @@ def get_elcc_map(results_filename, **kwargs):
 
 elcc_map_1,lats,lons = get_elcc_map(results_filename_1,return_lat_lons=True)
 elcc_map_2 = get_elcc_map(results_filename_2)
-elcc_map = elcc_map_1 - elcc_map_2
+elcc_map = elcc_map_2 - elcc_map_1
 
 fig, ax = plt.subplots(figsize=(12,10))
 
