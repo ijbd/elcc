@@ -106,7 +106,7 @@ def main():
 
     parameters['nameplate'] = 5000
     parameters['generator type'] = 'solar'
-    parameters['generator storage'] = 'True'
+    parameters['generator storage'] = 'False'
     parameters['generator storage power capacity'] = 500
     parameters['generator storage energy capacity'] = 2000
     
