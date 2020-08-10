@@ -104,7 +104,7 @@ def main():
     parameters['region'] = 'Northwest'
     parameters['iterations'] = 5000
 
-    parameters['nameplate'] = 5000
+    parameters['nameplate'] = 1000
     parameters['generator type'] = 'wind'
     #parameters['generator storage'] = 'True'
     #parameters['generator storage power capacity'] = 500
