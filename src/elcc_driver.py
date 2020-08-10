@@ -26,8 +26,8 @@ simulation["debug"] = False # print all information flagged for debug
 
 ######## files ########
 
-files["root directory"] = "./"
-files["output directory"] = "./"
+files["root directory"] = None # change to valid directory to create output directory
+files["output directory"] = './'
 files["eia folder"] = "../eia8602018/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
@@ -135,7 +135,7 @@ files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])
 # handle output directory and print location
 root_directory = files["root directory"]
 
-redirect_output = root_directory !='./'
+redirect_output = not root_directory is None
 
 if redirect_output:
 
