@@ -98,7 +98,7 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'Northwest'
+    parameters['region'] = 'California'
     parameters['iterations'] = 5000
     
     add_job(parameters)
