@@ -101,7 +101,7 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'Southwest'
+    parameters['region'] = 'Basin'
     parameters['iterations'] = 5000
 
     parameters['nameplate'] = 5000
