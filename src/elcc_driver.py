@@ -127,7 +127,6 @@ for key in parameters:
             
 
 # fix dependent parameters
-
 files["solar cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "../wecc_powGen/"+str(simulation["year"])+"_wind_generation_cf.nc"
 files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
