@@ -101,11 +101,11 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'Basin'
+    parameters['region'] = 'Northwest'
     parameters['iterations'] = 5000
 
     parameters['nameplate'] = 1000
-    parameters['generator type'] = 'wind'
+    parameters['generator type'] = 'solar'
     parameters['renewable multiplier'] = 2
     
     # variable parameters
