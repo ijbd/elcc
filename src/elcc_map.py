@@ -105,7 +105,7 @@ def main():
     parameters['iterations'] = 5000
 
     parameters['nameplate'] = 1000
-    parameters['generator type'] = 'solar'
+    parameters['generator type'] = 'wind'
     parameters['renewable multiplier'] = 2
     
     # variable parameters
