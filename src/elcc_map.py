@@ -100,12 +100,13 @@ def main():
     ########### DO NOT WRITE ABOVE THIS LINE (please?) #############
 
     # universal parameters
-    parameters['year'] = 2018
+    parameters['year'] = 2016
     parameters['region'] = 'Basin'
     parameters['iterations'] = 5000
 
     parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
+    parameters['renewable multiplier'] = 2
     
     # variable parameters
     solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
