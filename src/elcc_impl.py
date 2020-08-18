@@ -1666,6 +1666,9 @@ def main(simulation,files,system,generator):
     get_cf_index(RE_generator,powGen_lats,powGen_lons)
 
     # get hourly capacity matrix
+    
+    print('TMP SEED RANDOM NUM GENERATOR')
+    np.random.seed(81820)
     hourly_RE_generator_capacity = get_hourly_capacity(simulation["iterations"],RE_generator,cf[generator["generator type"]])
     
     # new generator profile for storage arbitrage
@@ -1685,7 +1688,6 @@ def main(simulation,files,system,generator):
     print('**********!!!!!!!!!!!!*********** ELCC :', int(elcc/added_capacity*100),'\n')
 
     if DEBUG:
-        np.savetxt(OUTPUT_DIRECTORY+'demand.csv',hourly_load,delimiter=',')
         np.savetxt(OUTPUT_DIRECTORY+'hourly_risk.csv',hourlyRisk,delimiter=',')
 
     print("End Main :\t",str(datetime.datetime.now().time()))
