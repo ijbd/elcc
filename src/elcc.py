@@ -100,7 +100,15 @@ def main():
     parameters['year'] = 2016
     parameters['region'] = 'California'
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 2
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'wind'
+    parameters['latitude'] = 45.0
+    parameters['longitude'] = -124.375
+
+    parameters['generator storage'] = 'True'
+    parameters['generator storage power capacity'] = 500
+    parameters['generator storage energy capacity'] = 500
 
 
     add_job(parameters)
