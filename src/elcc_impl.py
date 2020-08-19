@@ -1668,7 +1668,7 @@ def main(simulation,files,system,generator):
     # get hourly capacity matrix
     
     print('TMP SEED RANDOM NUM GENERATOR')
-    np.random.seed(81820)
+    np.random.seed(81920)
     hourly_RE_generator_capacity = get_hourly_capacity(simulation["iterations"],RE_generator,cf[generator["generator type"]])
     
     # new generator profile for storage arbitrage

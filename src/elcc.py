@@ -97,9 +97,10 @@ def main():
     ########### DO NOT WRITE ABOVE THIS LINE (please?) #############
 
     # universal parameters
-    parameters['year'] = 2018
-    parameters['region'] = 'Basin'
+    parameters['year'] = 2016
+    parameters['region'] = 'California'
     parameters['iterations'] = 5000
+    parameters['renewable multiplier'] = 2
 
 
     add_job(parameters)
