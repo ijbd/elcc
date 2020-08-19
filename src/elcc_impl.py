@@ -921,6 +921,9 @@ def get_hourly_capacity(num_iterations, generators, cf=None):
     # sample outages
     hourly_capacity = sample_outages_impl(num_iterations, pre_outage_capacity, generators)
 
+    print('TMP in get_hourly_capacity... REMOVE')
+    print(np.random.random_sample(1))
+
     return hourly_capacity
 
 def get_hourly_fleet_capacity(num_iterations, conventional_generators, solar_generators, wind_generators, cf, storage_units=None, hourly_load=None, renewable_profile=None):
@@ -1669,6 +1672,8 @@ def main(simulation,files,system,generator):
     
     print('TMP SEED RANDOM NUM GENERATOR')
     np.random.seed(81920)
+    print(np.random.random_sample(1))
+
     hourly_RE_generator_capacity = get_hourly_capacity(simulation["iterations"],RE_generator,cf[generator["generator type"]])
     
     # new generator profile for storage arbitrage
