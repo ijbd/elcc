@@ -106,6 +106,7 @@ def main():
     parameters['latitude'] = 45.0
     parameters['longitude'] = -124.375
 
+    parameters['debug'] = 'True'
     parameters['generator storage'] = 'True'
     parameters['generator storage power capacity'] = 500
     parameters['generator storage energy capacity'] = 500
