@@ -100,7 +100,7 @@ def main():
     parameters['year'] = 2016
     parameters['region'] = 'Mountains'
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 1
+    parameters['renewable multiplier'] = 2
 
     parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
