@@ -106,7 +106,7 @@ def main():
     parameters['renewable multiplier'] = 5
 
     parameters['nameplate'] = 1000
-    parameters['generator type'] = 'solar'
+    parameters['generator type'] = 'wind'
     
     # variable parameters
     solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
