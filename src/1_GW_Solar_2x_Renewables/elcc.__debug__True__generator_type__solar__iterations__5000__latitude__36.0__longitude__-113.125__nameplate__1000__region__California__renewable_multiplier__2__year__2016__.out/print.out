@@ -1,0 +1,84 @@
+Begin Main:	 23:21:48.030764
+Parameters:
+	 year : 2016
+	 region : ['California']
+	 iterations : 5000
+	 target reliability : 2.4
+	 shift load : 0
+	 debug : True
+	 all regions : ['BANC' 'CISO' 'IID' 'LDWP' 'TIDC']
+	 root directory : 1_GW_Solar_2x_Renewables/
+	 output directory : 1_GW_Solar_2x_Renewables/elcc.__debug__True__generator_type__solar__iterations__5000__latitude__36.0__longitude__-113.125__nameplate__1000__region__California__renewable_multiplier__2__year__2016__.out/
+	 eia folder : ../eia8602018/
+	 benchmark FORs file : ../efor/Temperature_dependent_for_realtionships.xlsx
+	 total interchange folder : ../total_interchange/
+	 saved systems folder : /scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/
+	 solar cf file : ../wecc_powGen/2016_solar_generation_cf.nc
+	 wind cf file : ../wecc_powGen/2016_wind_generation_cf.nc
+	 temperature file : ../efor/temperatureDataset2016.nc
+	 system setting : save
+	 oldest year : 0
+	 renewable multiplier : 2
+	 conventional efor : 0.05
+	 renewable efor : 0.05
+	 temperature dependent FOR : True
+	 temperature dependent FOR indpendent of size : True
+	 enable total interchange : True
+	 dispatch strategy : reliability
+	 storage efficiency : 0.8
+	 storage efor : 0
+	 supplemental storage : False
+	 supplemental storage power capacity : 1000
+	 supplemental storage energy capacity : 1000
+	 generator type : solar
+	 nameplate : 1000
+	 latitude : 36.0
+	 longitude : -113.125
+	 efor : 0.05
+	 generator storage : False
+	 generator storage power capacity : 500
+	 generator storage energy capacity : 500
+
+Peak load: 57747.0 MW
+
+BANC 2016: Net Importer
+CISO 2016: Net Importer
+IID 2016: Net Exporter
+LDWP 2016: Net Importer
+TIDC 2016: Net Importer
+
+System Loaded:	 23:23:07.236667
+
+Target LOLH : 2.401
+
+Additional Load: 500.0 LOLH: 3.425
+3.425
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2, 2]
+[0.0016, 0.0052, 0.8854, 0.9732, 0.2192, 0.0232, 0.9782, 0.186, 0.0732, 0.0772, 0.0024]
+Additional Load: 250.0 LOLH: 2.927
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2, 2]
+[0.001, 0.0022, 0.7562, 0.9016, 0.1368, 0.0122, 0.919, 0.1098, 0.0422, 0.0446, 0.001]
+Additional Load: 125.0 LOLH: 2.65
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2, 2]
+[0.0008, 0.0018, 0.682, 0.8382, 0.102, 0.0096, 0.87, 0.0822, 0.0314, 0.0314, 0.0006]
+Additional Load: 62.5 LOLH: 2.503
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2, 2]
+[0.0004, 0.0016, 0.6414, 0.8006, 0.0892, 0.0076, 0.8388, 0.0692, 0.0264, 0.0272, 0.0004]
+Additional Load: 31.25 LOLH: 2.432
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2]
+[0.0004, 0.0014, 0.6194, 0.7842, 0.0836, 0.007, 0.8214, 0.0644, 0.025, 0.025]
+Additional Load: 15.625 LOLH: 2.393
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2]
+[0.0004, 0.0014, 0.6092, 0.7744, 0.0812, 0.0068, 0.8112, 0.0616, 0.0234, 0.0234]
+Additional Load: 23.4375 LOLH: 2.411
+[1, 2, 1, 2, 3, 1, 2, 3, 1, 2]
+[0.0004, 0.0014, 0.6128, 0.7786, 0.082, 0.007, 0.8174, 0.0632, 0.0242, 0.0242]
+2.4112
+[7, 7, 7, 7, 7, 7, 7, 7, 8, 8]
+[18, 19, 18, 19, 20, 18, 19, 20, 18, 19]
+[4969, 4970, 4993, 4994, 4995, 5017, 5018, 5019, 5041, 5042]
+[0.0004, 0.0014, 0.6128, 0.7786, 0.082, 0.007, 0.8174, 0.0632, 0.0242, 0.0242]
+
+**********!!!!!!!!!!!!*********** ELCC : 2 
+
+End Main :	 23:35:06.575450
