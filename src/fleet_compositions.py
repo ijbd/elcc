@@ -89,10 +89,13 @@ def main():
     fleet = pd.DataFrame(columns=regions,index=['Conventional (MW)','Solar (MW)','Wind (MW)','Total (MW)','Conventional (%)','Solar (%)','Wind (%)'])
     
     # powGen
-    powGen_lats, powGen_lons, cf = get_powGen('../wecc_powGen/2016_solar_generation_cf.nc','../wecc_powGen/2016_solar_generation_cf.nc')
+    powGen_lats, powGen_lons, cf = get_powGen('../wecc_powGen/2016_solar_generation_cf.nc','../wecc_powGen/2016_wind_generation_cf.nc')
 
     # map setup
-    fig, ((solar_ax, wind_ax), (solar_idx_ax, wind_idx_ax))= plt.subplots(nrows=2, ncols=2,figsize=(20,15))
+    fig, ((solar_ax, wind_ax), (solar_idx_ax, wind_idx_ax), (solar_cf_ax, wind_cf_ax))= plt.subplots(nrows=3, ncols=2,figsize=(20,20))
+
+    solar_cf_ax.imshow(np.average(cf['solar'],axis=2),aspect='auto',alpha=.6,cmap='plasma',origin='lower')
+    wind_cf_ax.imshow(np.average(cf['wind'],axis=2),aspect='auto',alpha=.6,cmap='plasma',origin='lower')
 
     for region in regions:
 
@@ -119,10 +122,19 @@ def main():
         solar_idx_ax.scatter(powGen_lons[solar['lon idx']],powGen_lats[solar['lat idx']])
         wind_idx_ax.scatter(powGen_lons[wind['lon idx']],powGen_lats[wind['lat idx']])
 
-    for ax in [solar_ax, wind_ax, solar_idx_ax, wind_idx_ax]:
+        solar_cf_ax.scatter(powGen_lons[solar['lon idx']],powGen_lats[solar['lat idx']])
+        wind_cf_ax.scatter(powGen_lons[wind['lon idx']],powGen_lats[wind['lat idx']])
+
+    for ax in [solar_ax, wind_ax, solar_idx_ax, wind_idx_ax, solar_cf_ax, wind_cf_ax]:
         ax.legend(regions)
-        ax.set_xlabel('Longitude')
-        ax.set_ylabel('Latitude')
+        if ax != solar_cf_ax and ax != wind_cf_ax:
+            ax.set_xlim([np.min(powGen_lons),np.max(powGen_lons)])
+            ax.set_ylim([np.min(powGen_lats),np.max(powGen_lats)])
+            ax.set_xlabel('Longitude')
+            ax.set_ylabel('Latitude')
+        if ax == solar_cf_ax or ax == wind_cf_ax:
+            ax.set_xlabel('Nearest Capacity Factor Longitude Index')
+            ax.set_xlabel('Nearest Capacity Factor Latitude Index')
 
     solar_ax.set_title('Solar Plant Locations')
     wind_ax.set_title('Wind Plant Locations')
