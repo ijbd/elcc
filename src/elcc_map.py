@@ -101,7 +101,7 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'Southwest'
+    parameters['region'] = 'Northwet'
     parameters['iterations'] = 5000
     parameters['renewable multiplier'] = 5
 

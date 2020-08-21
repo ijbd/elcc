@@ -134,12 +134,14 @@ def main():
             ax.set_ylabel('Latitude')
         if ax == solar_cf_ax or ax == wind_cf_ax:
             ax.set_xlabel('Nearest Capacity Factor Longitude Index')
-            ax.set_xlabel('Nearest Capacity Factor Latitude Index')
+            ax.set_ylabel('Nearest Capacity Factor Latitude Index')
 
     solar_ax.set_title('Solar Plant Locations')
     wind_ax.set_title('Wind Plant Locations')
     solar_idx_ax.set_title('Solar Plant Closest CF Locations')
     wind_idx_ax.set_title('Wind Plant Closest CF Locations')
+    solar_cf_ax.set_title('Solar Plant Closest CF Location over Average Solar CF')
+    wind_cf_ax.set_title('Wind Plant Closest CF Location over Average Wind CF')
 
     # wrap up
 
