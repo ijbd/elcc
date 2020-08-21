@@ -101,9 +101,9 @@ def main():
 
     # universal parameters
     parameters['year'] = 2016
-    parameters['region'] = 'Northwest'
+    parameters['region'] = 'California'
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 5
+    parameters['renewable multiplier'] = 1.5
 
     parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
