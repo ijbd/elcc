@@ -1342,7 +1342,7 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_added_generator_capac
     print('')
 
     if DEBUG:
-        np.savetxt('fleet_hourly_risk',hourly_risk)
+        np.savetxt(OUTPUT_DIRECTORY+'fleet_hourly_risk',hourly_risk)
 
     # combine fleet storage with generator storage
     all_storage = append_storage(fleet_storage, added_storage)
@@ -1366,7 +1366,7 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_added_generator_capac
 
         lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
 
-        np.savetxt('generator_hourly_risk',hourly_risk)
+        np.savetxt(OUTPUT_DIRECTORY+'generator_hourly_risk',hourly_risk)
 
     # include storage operation
     hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,
