@@ -122,8 +122,8 @@ def main():
         solar_idx_ax.scatter(powGen_lons[solar['lon idx']],powGen_lats[solar['lat idx']])
         wind_idx_ax.scatter(powGen_lons[wind['lon idx']],powGen_lats[wind['lat idx']])
 
-        solar_cf_ax.scatter(powGen_lons[solar['lon idx']],powGen_lats[solar['lat idx']])
-        wind_cf_ax.scatter(powGen_lons[wind['lon idx']],powGen_lats[wind['lat idx']])
+        solar_cf_ax.scatter(solar['lon idx'],solar['lat idx'])
+        wind_cf_ax.scatter(wind['lon idx'],wind['lat idx'])
 
     for ax in [solar_ax, wind_ax, solar_idx_ax, wind_idx_ax, solar_cf_ax, wind_cf_ax]:
         ax.legend(regions)
