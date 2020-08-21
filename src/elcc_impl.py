@@ -1341,6 +1341,9 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_added_generator_capac
     print("Target LOLH :", round(target_lolh,precision),flush=True)
     print('')
 
+    if DEBUG:
+        np.savetxt('fleet_hourly_risk',hourly_risk)
+
     # combine fleet storage with generator storage
     all_storage = append_storage(fleet_storage, added_storage)
     combined_renewable_profile = fleet_renewable_profile + added_renewable_profile
@@ -1349,6 +1352,21 @@ def get_elcc(num_iterations, hourly_fleet_capacity, hourly_added_generator_capac
     additional_load_max = added_capacity
     additional_load_min = 0
     additional_load = additional_load_max / 2
+
+
+    if DEBUG:
+        # include storage operation
+        hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,
+                                                                    hourly_fleet_capacity+hourly_added_generator_capacity,
+                                                                    hourly_load,
+                                                                    all_storage, combined_renewable_profile)
+
+        # combine contribution from fleet, RE generator, and added storage
+        hourly_total_capacity = hourly_fleet_capacity + hourly_storage_capacity + hourly_added_generator_capacity
+
+        lolh, hourly_risk = get_lolh(num_iterations, hourly_total_capacity, hourly_load)
+
+        np.savetxt('generator_hourly_risk',hourly_risk)
 
     # include storage operation
     hourly_storage_capacity = get_hourly_storage_contribution(  num_iterations,

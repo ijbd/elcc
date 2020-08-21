@@ -1,14 +1,15 @@
+import sys
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt 
 from netCDF4 import Dataset 
 from elcc_impl import get_hourly_load, get_total_interchange
 
-region = 'California'
+region = sys.argv[1]
 year = 2016
 
-risk_1x = np.loadtxt('1x_renewables_hourly_risk.csv')
-risk_2x = np.loadtxt('2x_renewables_hourly_risk.csv')
+risk_1x = np.loadtxt(region+'_1x_renewables_hourly_risk.csv')
+risk_2x = np.loadtxt(region+'_2x_renewables_hourly_risk.csv')
 risk_diff = risk_2x - risk_1x
 
 # load
@@ -16,15 +17,15 @@ risk_diff = risk_2x - risk_1x
 # get correct regions
 TEPPC_regions = pd.read_csv('../demand/_regions.csv').fillna('nan')
 
-regions = TEPPC_regions[region].values.flatten().astype(str)
+regions = TEPPC_regions[region.capitalize()].values.flatten().astype(str)
 regions = np.unique(regions[regions != 'nan'])
 
 load = get_hourly_load(year,regions) + get_total_interchange(year,regions,'../total_interchange/')
 
 # renewable profile
 
-renewables_1x = np.load('1x_fleet_renewable_profile.npy',allow_pickle=True)
-renewables_2x = np.load('2x_fleet_renewable_profile.npy',allow_pickle=True)
+renewables_1x = np.load(region+'_1x_fleet_renewable_profile.npy',allow_pickle=True)
+renewables_2x = np.load(region+'_2x_fleet_renewable_profile.npy',allow_pickle=True)
 
 # generation
 
@@ -36,9 +37,13 @@ cf = np.array(Dataset('../wecc_powGen/2016_solar_generation_cf.nc').variables['c
 cf = cf[np.argwhere(lats==lat)[0],np.argwhere(lons==lon)[0],:].flatten()
 
 # plot
+starts = {  'california' : 4980,
+            'mountains' : 4980,
+            'southwest' : 4930}
 
-start = 4980
-end = 5050
+
+start = starts[region]
+end = start+90
 
 fig = plt.figure(figsize=(11,7))
 
@@ -56,11 +61,16 @@ ax2.plot(cf)
 ax.set_xlim([start,end])
 ax2.set_ylim([0,1])
 
-ax.legend(['Load','Original Renewable Profile','2x Renewable Profile'])
-ax2.legend(['Original Risk','2x Renewable Risk','Generator Capacity Factor'])
+ax.legend(['Load','Original Renewable Profile','2x Renewable Profile'],loc='upper left')
+ax2.legend(['Original Risk','2x Renewable Risk','Generator Capacity Factor'],loc='upper right')
 
+ax.set_ylabel('Power (MW)')
+ax2.set_ylabel('LOLP / Capacity Factor')
+ax.set_xlabel('Hour of Year')
 
-plt.savefig('risk_profile')
+ax.set_title('Time Series \n'+region.capitalize()+' '+str(year))
+
+plt.savefig(region+'_risk_profile')
 
 # print
 
