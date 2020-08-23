@@ -10,15 +10,30 @@ Instructions:
 
     `git clone https://github.com/ijbd/elcc.git`
 
-2. Change parameters in bin/elcc_master.py
 
-3. Run simulation in foreground from command-line
+2. Run ELCC calculation from bin via command line
 
-    `python elcc_master.py`
+    `python elcc_driver.py`
 
-4. Run simulation in background from command-line
+3. Change parameters with key-value pairs
 
-    `nohup python -u elcc_master.py > output_filename.out &`
+    `python elcc_driver.py year 2016 region CISO`
+
+4. See a full list of parameters in elcc_master.py
+
+5. For multi-worded parameters use underscores
+
+    `python elcc_driver.py conventional_efor .1`
+
+6. Changing the root directory will create a unique folder based on the arguments and redirect output to a file
+
+    `python elcc_driver.py root_directory testing/ region CISO`
+
+7. To add a balancing authority to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
+
+8. To use, ARC-TS launcher calculate ELCC values synchronously, refer to 9.
+
+9. This manual is incomplete, but I'm happy to help if you're having trouble with anything! Email me at ijbd@umich.edu
 
 Citations:
 ----------
@@ -34,3 +49,5 @@ Citations:
 [5] Blair, Nate, Nicholas DiOrio, Janine Freeman, Paul Gilman, Steven Janzou, Ty Neises, and Michael Wagner. 2018. System Advisor Model (SAM) General Description (Version 2017.9.5). Golden, CO: National Renewable Energy Laboratory. NREL/ TP-6A20-70414. https://www.nrel.gov/docs/fy18osti/70414.pdf
 
 [6] de Chalendar, Jacques A., John Taggart, and Sally M. Benson. "Tracking emissions in the US electricity system." Proceedings of the National Academy of Sciences 116.51 (2019): 25497-25502.
+
+*citations not up-to-date*
