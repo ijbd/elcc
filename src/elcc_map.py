@@ -111,42 +111,133 @@ def fix_region_string(parameters):
 
 def main():
 
+    global root_directory
+
     parameters = dict()
     parameters['root directory'] = root_directory
 
     ########### DO NOT WRITE ABOVE THIS LINE (please?) #############
 
     # universal parameters
-    parameters['year'] = 2016
-    parameters['region'] = 'California'
+    region = sys.argv[2]
+    year = sys.argv[3]
+    parameters['year'] = year
+    parameters['region'] = region
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 5
 
-    parameters['nameplate'] = 1000
-    parameters['generator type'] = 'wind'
-    
     # variable parameters
     solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
     wind_cf_file = "../wecc_powGen/2018_wind_generation_cf.nc" 
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    run_map(lats,lons,parameters)
 
     # 1 GW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'solar'
+    
+    run_map(lats,lons,parameters)
 
     # 1 GW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
 
     # 5 GW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/5GWsolar/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 5000
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
 
     # 5 GW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/5GWwind/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 5000
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
+
+    # 1 GW solar 2x renewables
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar2xRenewables/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'solar'
+    parameters['renewable multiplier'] = 2
+    
+    run_map(lats,lons,parameters)
+
+    # 1 GW wind 2x renewables
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind2xRenewables/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'wind'
+    parameters['renewable multiplier'] = 2
+    
+    run_map(lats,lons,parameters)
 
     # 1 GW solar + storage
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar500MWstorage1hour/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'solar'
+    parameters['renewable multiplier'] = 1
+    parameters['generator storage'] = 'True'
+    parameters['generator storage power capacity'] = 500
+    parameters['generator storage energy capacity'] = 500
+
+    run_map(lats,lons,parameters)
 
     # 1 GW wind + storage
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind500MWstorage1hour/'
+    parameters['root directory'] = root_directory
 
-    # 
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
 
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'wind'
+    parameters['renewable multiplier'] = 1
+    parameters['generator storage'] = 'True'
+    parameters['generator storage power capacity'] = 500
+    parameters['generator storage energy capacity'] = 500
+
+    run_map(lats,lons,parameters)
+    
 
 if __name__ == "__main__":
     init()
