@@ -101,35 +101,17 @@ def main():
     # universal parameters
     parameters['year'] = 2016
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 5
-
-    # 5x Renewables for all
-    for region in ['basin','california','mountains','northwest','southwest']:
-
-        #finagle
-        root_directory = '../../elccJobs/'+region+'/'+str(parameters['year'])+'/'
-        parameters['root directory'] = root_directory
-
-        #change region
-        parameters['region'] = region.capitalize()
-        add_job(parameters)
-        run_job()
-
-    # 1.5x and 3x for Cal
     parameters['region'] = 'California'
-    root_directory = '../../elccJobs/california/2016/'
-    parameters['root directory'] = root_directory
 
-    for multiplier in [1.5, 3]:
+    parameters['generator type'] = 'solar'
+    parameters['latitude'] = 36
+    parameters['longitude'] = -113.125
+    parameters['debug'] = 'True'
+
+    for multiplier in [1.5, 2, 3, 5]:
         parameters['renewable multiplier'] = multiplier
         add_job(parameters)
         run_job()
-
-
-
-
-
-
 
 if __name__ == "__main__":
     init()
