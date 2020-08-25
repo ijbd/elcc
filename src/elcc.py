@@ -101,6 +101,7 @@ def main():
     # universal parameters
 
     parameters['iterations'] = 5000
+    parameters['renewable multiplier'] = 2
 
     for year in [2017, 2018]:
         parameters['year'] = year
@@ -110,8 +111,6 @@ def main():
             #finagle
             root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
             parameters['root_directory'] = root_directory
-
-            os.system('mkdir '+root_directory)
 
             add_job(parameters)
             run_job()

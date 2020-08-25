@@ -72,6 +72,23 @@ def run_job():
         # start new file for running
         new_job()
 
+def run_map(lats,lons,parameters):
+
+    i = 0 # keep track of job num
+    for lat in lats[1::2]: # half resolution
+        parameters['latitude'] = lat
+
+        for lon in lons[1::2]: # half resolution
+            parameters['longitude'] = lon
+            add_job(parameters)
+            
+            i += 1
+            # nine jobs/node
+            if i % 9 == 0: run_job()
+    
+    # run last set if necessary
+    run_job()
+
 def fix_region_string(parameters):
 #list to formatted string
 
@@ -114,20 +131,21 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    i = 0 # keep track of job num
-    for lat in lats[1::2]: # half resolution
-        parameters['latitude'] = lat
+    run_map(lats,lons,parameters)
 
-        for lon in lons[1::2]: # half resolution
-            parameters['longitude'] = lon
-            add_job(parameters)
-            
-            i += 1
-            # nine jobs/node
-            if i % 9 == 0: run_job()
-    
-    # run last set if necessary
-    run_job()
+    # 1 GW solar
+
+    # 1 GW wind
+
+    # 5 GW solar
+
+    # 5 GW wind
+
+    # 1 GW solar + storage
+
+    # 1 GW wind + storage
+
+    # 
 
 
 if __name__ == "__main__":
