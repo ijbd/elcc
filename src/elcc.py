@@ -99,19 +99,22 @@ def main():
     ########### DO NOT WRITE ABOVE THIS LINE (please?) #############
 
     # universal parameters
-    parameters['year'] = 2016
+
     parameters['iterations'] = 5000
-    parameters['region'] = 'California'
 
-    parameters['generator type'] = 'solar'
-    parameters['latitude'] = 36
-    parameters['longitude'] = -113.125
-    parameters['debug'] = 'True'
+    for year in [2016, 2017]:
+        parameters['year'] = year
+        for region in ['basin','california',',mountains','northwest','southwest']:
+            parameters['region'] = region.capitalize()
+            
+            #finagle
+            root_directory = '../../elccJobs/'+region+'/'+year+'/'
+            parameters['root_directory'] = root_directory
 
-    for multiplier in [1.5, 2, 3, 5]:
-        parameters['renewable multiplier'] = multiplier
-        add_job(parameters)
-        run_job()
+            os.system('mkdir '+root_directory)
+
+            add_job(parameters)
+            run_job()
 
 if __name__ == "__main__":
     init()
