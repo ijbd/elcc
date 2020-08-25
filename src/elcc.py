@@ -104,7 +104,7 @@ def main():
 
     for year in [2016, 2017]:
         parameters['year'] = year
-        for region in ['basin','california',',mountains','northwest','southwest']:
+        for region in ['basin','california','mountains','northwest','southwest']:
             parameters['region'] = region.capitalize()
             
             #finagle
