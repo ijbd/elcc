@@ -102,7 +102,7 @@ def main():
 
     parameters['iterations'] = 5000
 
-    for year in [2016, 2017]:
+    for year in [2017, 2018]:
         parameters['year'] = year
         for region in ['basin','california','mountains','northwest','southwest']:
             parameters['region'] = region.capitalize()
