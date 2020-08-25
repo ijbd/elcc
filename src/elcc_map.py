@@ -84,7 +84,7 @@ def run_map(lats,lons,parameters):
             
             i += 1
             # nine jobs/node
-            if i % 9 == 0: run_job()
+            if i % 18 == 0: run_job()
     
     # run last set if necessary
     run_job()
