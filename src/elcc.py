@@ -108,7 +108,7 @@ def main():
             parameters['region'] = region.capitalize()
             
             #finagle
-            root_directory = '../../elccJobs/'+region+'/'+year+'/'
+            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
             parameters['root_directory'] = root_directory
 
             os.system('mkdir '+root_directory)
