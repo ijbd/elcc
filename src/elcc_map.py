@@ -156,6 +156,30 @@ def main():
     
     run_map(lats,lons,parameters)
 
+    # 100 MW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/100MWsolar/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 100
+    parameters['generator type'] = 'solar'
+    
+    run_map(lats,lons,parameters)
+
+    # 100 MW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/100MWwind/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 100
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
+
     # 5 GW solar
     root_directory = '../../elccJobs/'+region+'/'+str(year)+'/5GWsolar/'
     parameters['root directory'] = root_directory
@@ -164,7 +188,7 @@ def main():
         os.system('mkdir '+root_directory)
 
     parameters['nameplate'] = 5000
-    parameters['generator type'] = 'wind'
+    parameters['generator type'] = 'solar'
     
     run_map(lats,lons,parameters)
 
