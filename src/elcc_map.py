@@ -240,7 +240,6 @@ def main():
     if 'renewable multiplier' in parameters: parameters.pop('renewable multiplier')
     parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
-    parameters['renewable multiplier'] = 1
     parameters['generator storage'] = 'True'
     parameters['generator storage power capacity'] = 500
     parameters['generator storage energy capacity'] = 500
@@ -261,7 +260,7 @@ def main():
     parameters['generator storage power capacity'] = 500
     parameters['generator storage energy capacity'] = 500
 
-    run_map(lats,lons,parameters)
+    #run_map(lats,lons,parameters)
     
 
 if __name__ == "__main__":
