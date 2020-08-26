@@ -122,7 +122,7 @@ def main():
     region = sys.argv[2]
     year = sys.argv[3]
     parameters['year'] = year
-    parameters['region'] = region
+    parameters['region'] = region.capitalize()
     parameters['iterations'] = 5000
 
     # variable parameters
