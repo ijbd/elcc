@@ -100,12 +100,14 @@ def main():
 
     # universal parameters
 
-    parameters['iterations'] = 5000
+    parameters['iterations'] = 1000
+    parameters['system setting'] = 'none'
     parameters['year'] = 2018
     parameters['region'] = 'PACE'
     parameters['nameplate'] = 100
     parameters['latitude'] = 41
     parameters['longitude'] = -112
+
 
     add_job(parameters)
     run_job()
