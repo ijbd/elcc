@@ -122,7 +122,7 @@ def main():
     parameters['iterations'] = 5000
     parameters['year'] = 2017
     parameters['region'] = 'California'
-    parameters['temperature dependent FOR'] = 'True'  
+    parameters['temperature dependent FOR'] = 'False'  
 
     # variable parameters
     solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons

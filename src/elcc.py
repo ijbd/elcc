@@ -103,7 +103,7 @@ def main():
     parameters['iterations'] = 5000
     parameters['year'] = 2017
     parameters['region'] = 'California'
-    parameters['temperature dependent FOR'] = 'True'        
+    parameters['temperature dependent FOR'] = 'False'        
 
     add_job(parameters)
     run_job()
