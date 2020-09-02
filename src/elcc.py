@@ -101,19 +101,12 @@ def main():
     # universal parameters
 
     parameters['iterations'] = 5000
-    parameters['renewable multiplier'] = 2
+    parameters['year'] = 2017
+    parameters['region'] = 'California'
+    parameters['temperature dependent FOR'] = 'True'        
 
-    for year in [2017, 2018]:
-        parameters['year'] = year
-        for region in ['basin','california','mountains','northwest','southwest']:
-            parameters['region'] = region.capitalize()
-            
-            #finagle
-            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
-            parameters['root_directory'] = root_directory
-
-            add_job(parameters)
-            run_job()
+    add_job(parameters)
+    run_job()
 
 if __name__ == "__main__":
     init()
