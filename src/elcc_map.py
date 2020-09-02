@@ -132,26 +132,11 @@ def main():
 
     
     # 1 GW solar
-    root_directory = '../../elccJobs/California/2017/1GWsolar/'
-    parameters['root directory'] = root_directory
-
     if not os.path.exists(root_directory):
         os.system('mkdir '+root_directory) 
 
     parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
-    
-    run_map(lats,lons,parameters)
-
-    # 1 GW wind
-    root_directory = '../../elccJobs/California/2017/1GWwind/'
-    parameters['root directory'] = root_directory
-
-    if not os.path.exists(root_directory):
-        os.system('mkdir '+root_directory)
-
-    parameters['nameplate'] = 1000
-    parameters['generator type'] = 'wind'
     
     run_map(lats,lons,parameters)
     
