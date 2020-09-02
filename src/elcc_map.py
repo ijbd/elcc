@@ -130,13 +130,11 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    
-    # 1 GW solar
     if not os.path.exists(root_directory):
         os.system('mkdir '+root_directory) 
 
     parameters['nameplate'] = 1000
-    parameters['generator type'] = 'solar'
+    parameters['generator type'] = 'wind'
     
     run_map(lats,lons,parameters)
     
