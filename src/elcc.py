@@ -101,8 +101,15 @@ def main():
     # universal parameters
 
     parameters['iterations'] = 5000
-    parameters['year'] = 2017
-    parameters['region'] = 'California'
+    parameters['year'] = 2018
+    parameters['region'] = 'PACE'
+    parameters['nameplate'] = 100
+    parameters['latitude'] = 41
+    parameters['longitude'] = -112
+
+    add_job(parameters)
+    run_job()
+
     parameters['temperature dependent FOR'] = 'False'        
 
     add_job(parameters)
