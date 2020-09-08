@@ -100,22 +100,39 @@ def main():
 
     # universal parameters
 
-    parameters['iterations'] = 1000
-    parameters['system setting'] = 'none'
-    parameters['year'] = 2018
-    parameters['region'] = 'PACE'
-    parameters['nameplate'] = 100
-    parameters['latitude'] = 41
-    parameters['longitude'] = -112
+    parameters['iterations'] = 5000
 
+    for year in [2016, 2017, 2018]:
+        parameters['year'] = year
+        for region in ['basin','california','mountains','northwest','southwest']:
+            parameters['region'] = region.capitalize()
+            
+            #finagle
+            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
+            parameters['root_directory'] = root_directory
 
-    add_job(parameters)
-    run_job()
+            if not os.path.exists(root_directory):
+                os.system('mkdir '+root_directory)
 
-    parameters['temperature dependent FOR'] = 'False'        
+            add_job(parameters)
+            run_job()
 
-    add_job(parameters)
-    run_job()
+    parameters['renewable multiplier'] = 2
+
+    for year in [2016, 2017, 2018]:
+        parameters['year'] = year
+        for region in ['basin','california','mountains','northwest','southwest']:
+            parameters['region'] = region.capitalize()
+            
+            #finagle
+            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
+            parameters['root_directory'] = root_directory
+
+            if not os.path.exists(root_directory):
+                os.system('mkdir '+root_directory)
+
+            add_job(parameters)
+            run_job()
 
 if __name__ == "__main__":
     init()
