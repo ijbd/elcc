@@ -126,12 +126,12 @@ def main():
     parameters['iterations'] = 5000
 
     # variable parameters
-    solar_cf_file = "../wecc_powGen/2018_solar_generation_cf.nc" # only used for getting lat/lons
-    wind_cf_file = "../wecc_powGen/2018_wind_generation_cf.nc" 
+    solar_cf_file = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/2018_solar_generation_cf.nc" # only used for getting lat/lons
+    wind_cf_file = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/2018_wind_generation_cf.nc" 
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    
+
     # 1 GW solar
     root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar/'
     parameters['root directory'] = root_directory
