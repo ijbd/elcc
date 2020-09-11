@@ -2,7 +2,7 @@
 """
 Created on Sun May 24 12:47:45 2020
 
-@author: julian
+@author: julia
 """
 from netCDF4 import Dataset
 from datetime import date, timedelta
@@ -79,7 +79,7 @@ def main(year):
     plt.show()
     '''
     
-    baseWord = "../../scratch/mtcraig_root/mtcraig1/shared_data/merraData/resource/wecc/raw/MERRA2_400.tavg1_2d_slv_Nx."
+    baseWord = "../../scratch/mtcraig_root/mtcraig1/shared_data/merraData/resource/%s/raw/MERRA2_400.tavg1_2d_slv_Nx." % (sys.argv[2])
     fileName = "temperatureDataset%s.nc" % (year)#change for new year or month!!!
     #start date for dataset, may need to change
     start_date = datetime.date(year, 1, 1)
