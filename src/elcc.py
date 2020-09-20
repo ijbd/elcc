@@ -100,8 +100,11 @@ def main():
 
     # universal parameters
 
+    region = sys.argv[2]
+
     parameters['iterations'] = 5000
     parameters['year'] = 2018
+    parameters['region'] = region
     
     capacity = dict()
     capacity['basin'] = 300
@@ -111,7 +114,7 @@ def main():
     capacity['southwest'] = 400
 
 
-    region = sys.argv[2]
+    
         
     #storage only
     parameters['nameplate'] = 0
