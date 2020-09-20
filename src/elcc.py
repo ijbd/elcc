@@ -101,38 +101,26 @@ def main():
     # universal parameters
 
     parameters['iterations'] = 5000
+    parameters['year'] = 2018
     
-    for year in [2016, 2017, 2018]:
-        parameters['year'] = year
-        for region in ['basin','california','mountains','northwest','southwest']:
-            parameters['region'] = region.capitalize()
-            
-            #finagle
-            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
-            parameters['root_directory'] = root_directory
+    capacity = dict()
+    capacity['basin'] = 300
+    capacity['california'] = 800
+    capacity['mountains'] = 220
+    capacity['northwest'] = 500
+    capacity['southwest'] = 400
 
-            if not os.path.exists(root_directory):
-                os.system('mkdir '+root_directory)
 
-            add_job(parameters)
-            run_job()
+    region = sys.argv[2]
+        
+    #storage only
+    parameters['nameplate'] = 0
+    parameters['generator storage'] = True
+    parameters['generator storage power capacity'] = capacity[region]/2
+    parameters['generator storage energy capacity'] = capacity[region]/2
 
-    parameters['renewable multiplier'] = 2
-
-    for year in [2016, 2017, 2018]:
-        parameters['year'] = year
-        for region in ['basin','california','mountains','northwest','southwest']:
-            parameters['region'] = region.capitalize()
-            
-            #finagle
-            root_directory = '../../elccJobs/'+region+'/'+str(year)+'/'
-            parameters['root_directory'] = root_directory
-
-            if not os.path.exists(root_directory):
-                os.system('mkdir '+root_directory)
-
-            add_job(parameters)
-            run_job()
+    add_job(parameters)
+    run_job()
 
 if __name__ == "__main__":
     init()

@@ -3,8 +3,6 @@ import sys
 import numpy as np
 from elcc_impl import get_powGen
 
-root_directory = './'
-
 LAUNCH_FILE = 'elcc_job_0.txt'
 
 def init():
@@ -120,7 +118,7 @@ def main():
 
     # universal parameters
     region = sys.argv[1]
-    year = 2018
+    year = sys.argv[2]
     parameters['year'] = year
     parameters['region'] = region.capitalize()
     parameters['iterations'] = 5000
@@ -131,52 +129,123 @@ def main():
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
 
-    capacity = dict()
-    capacity['california'] = 800
-    capacity['mountains'] = 220
 
-    # 1% solar
-    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1\%solar/'
+    # 1 GW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar/'
     parameters['root directory'] = root_directory
 
     if not os.path.exists(root_directory):
         os.system('mkdir '+root_directory)
 
-    parameters['nameplate'] = capacity[region]
+    parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
     
     run_map(lats,lons,parameters)
 
-    # 1% wind
-    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1\%wind/'
+    # 1 GW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind/'
     parameters['root directory'] = root_directory
 
     if not os.path.exists(root_directory):
         os.system('mkdir '+root_directory)
 
-    parameters['nameplate'] = capacity[region]
+    parameters['nameplate'] = 1000
     parameters['generator type'] = 'wind'
     
     run_map(lats,lons,parameters)
 
-    # 1 % solar + storage
-    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1\%solar.5\%storage1hour/'
+    # 100 MW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/100MWsolar/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 100
+    parameters['generator type'] = 'solar'
+    
+    run_map(lats,lons,parameters)
+
+    # 100 MW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/100MWwind/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 100
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
+
+    # 5 GW solar
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/5GWsolar/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 5000
+    parameters['generator type'] = 'solar'
+    
+    run_map(lats,lons,parameters)
+
+    # 5 GW wind
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/5GWwind/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 5000
+    parameters['generator type'] = 'wind'
+    
+    run_map(lats,lons,parameters)
+
+    # 1 GW solar 2x renewables
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar2xRenewables/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'solar'
+    parameters['renewable multiplier'] = 2
+    
+    run_map(lats,lons,parameters)
+
+    # 1 GW wind 2x renewables
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind2xRenewables/'
+    parameters['root directory'] = root_directory
+
+    if not os.path.exists(root_directory):
+        os.system('mkdir '+root_directory)
+
+    parameters['nameplate'] = 1000
+    parameters['generator type'] = 'wind'
+    parameters['renewable multiplier'] = 2
+    
+    run_map(lats,lons,parameters)
+
+    # 1 GW solar + storage
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWsolar500MWstorage1hour/'
     parameters['root directory'] = root_directory
 
     if not os.path.exists(root_directory):
         os.system('mkdir '+root_directory)
 
     if 'renewable multiplier' in parameters: parameters.pop('renewable multiplier')
-    parameters['nameplate'] = capacity[region]
+    parameters['nameplate'] = 1000
     parameters['generator type'] = 'solar'
     parameters['generator storage'] = 'True'
-    parameters['generator storage power capacity'] = capacity[region]/2
-    parameters['generator storage energy capacity'] = capacity[region]/2
+    parameters['generator storage power capacity'] = 500
+    parameters['generator storage energy capacity'] = 500
 
     run_map(lats,lons,parameters)
 
-    # 1 % wind + storage
-    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1\%wind.5\%storage1hour/'
+    # 1 GW wind + storage
+    root_directory = '../../elccJobs/'+region+'/'+str(year)+'/1GWwind500MWstorage1hour/'
     parameters['root directory'] = root_directory
 
     if not os.path.exists(root_directory):
