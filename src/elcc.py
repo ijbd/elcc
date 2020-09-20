@@ -104,7 +104,7 @@ def main():
 
     parameters['iterations'] = 5000
     parameters['year'] = 2018
-    parameters['region'] = region
+    parameters['region'] = region.capitalize()
     
     capacity = dict()
     capacity['basin'] = 300
