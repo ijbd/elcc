@@ -1638,7 +1638,7 @@ def main(simulation,files,system,generator):
         hourly_load += get_total_interchange(simulation["year"],simulation["all regions"],files["total interchange folder"],simulation["shift load"]).astype(np.int64)
     
     # always get storage
-    fleet_storage = get_storage_fleet(  files["eia folder"],simulation["all regions"],2018,
+    fleet_storage = get_storage_fleet(  files["eia folder"],simulation["all regions"],2019,
                                         system["storage efficiency"],system["storage efor"],system["dispatch strategy"])
 
     # try loading system
@@ -1647,10 +1647,10 @@ def main(simulation,files,system,generator):
     if hourly_fleet_capacity is None:
         # system 
         fleet_conventional_generators = get_conventional_fleet(files["eia folder"], simulation["all regions"],
-                                                                2018, system, powGen_lats, powGen_lons,
+                                                                2019, system, powGen_lats, powGen_lons,
                                                                 temperature_data, benchmark_fors)
         fleet_solar_generators, fleet_wind_generators = get_solar_and_wind_fleet(files["eia folder"],simulation["all regions"],
-                                                                                2018, system["renewable efor"],
+                                                                                2019, system["renewable efor"],
                                                                                 powGen_lats, powGen_lons,system["renewable multiplier"])
         
         print_fleet(fleet_conventional_generators,fleet_solar_generators,fleet_wind_generators,fleet_storage)

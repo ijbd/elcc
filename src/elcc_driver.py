@@ -28,7 +28,7 @@ simulation["debug"] = False # print all information flagged for debug
 
 files["root directory"] = None # change to valid directory to create output directory
 files["output directory"] = './'
-files["eia folder"] = "../eia8602018/"
+files["eia folder"] = "../eia8602019/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
 files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/"
