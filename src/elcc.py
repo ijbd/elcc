@@ -99,31 +99,16 @@ def main():
     ########### DO NOT WRITE ABOVE THIS LINE (please?) #############
 
     # universal parameters
-
-    region = sys.argv[2]
-
     parameters['iterations'] = 5000
     parameters['year'] = 2018
+    parameters['temperature dependent FOR'] = False
+    region = sys.argv[2]
     parameters['region'] = region.capitalize()
-    
-    capacity = dict()
-    capacity['basin'] = 300
-    capacity['california'] = 800
-    capacity['mountains'] = 220
-    capacity['northwest'] = 500
-    capacity['southwest'] = 400
-
-
-    
-        
-    #storage only
-    parameters['nameplate'] = 0
-    parameters['generator storage'] = True
-    parameters['generator storage power capacity'] = capacity[region]/2
-    parameters['generator storage energy capacity'] = capacity[region]/2
-
     add_job(parameters)
     run_job()
+
+    
+    
 
 if __name__ == "__main__":
     init()

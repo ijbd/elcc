@@ -2,7 +2,7 @@
 """
 Created on Sun May 24 12:47:45 2020
 
-@author: julia
+@author: julian
 """
 from netCDF4 import Dataset
 from datetime import date, timedelta
