@@ -16,7 +16,7 @@ my_job_header
 
 launch_file=$1
 
-export LAUNCHER_JOB_FILE=/scratch/mtcraig_root/mtcraig1/shared_data/elcc/src/$launch_file
+export LAUNCHER_JOB_FILE=$launch_file
 
 paramrun
 
