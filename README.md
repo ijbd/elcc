@@ -19,7 +19,7 @@ Instructions:
 
     `python elcc_driver.py year 2016 region CISO`
 
-4. See a full list of parameters in elcc_master.py
+4. See a full list of parameters in elcc_driver.py
 
 5. For multi-worded parameters use underscores
 
@@ -29,11 +29,29 @@ Instructions:
 
     `python elcc_driver.py root_directory testing/ region CISO`
 
-7. To add a balancing authority to simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
+7. To add a balancing authority for a simulation. Use Tyler Ruggles' cleaned EIA-860 data from GitHub. Place it in the demand folder with the capitalized abbreviation for that balancing authority
 
-8. To use, ARC-TS launcher calculate ELCC values synchronously, refer to 9.
+8. To use, ARC-TS launcher to calculate ELCC values synchronously, refer to 9.
 
 9. This manual is incomplete, but I'm happy to help if you're having trouble with anything! Email me at ijbd@umich.edu
+
+`src/` File Overview:
+----------
+`elcc_impl.py`: Contains the actual ELCC calculation, including file I/O, state sampling Monte Carlo simulation, storage operation, etc.
+
+`elcc_driver.py`: Contains and fills dictionaries of parameters needed for the elcc calculation. At bare minimum to run an ELCC calculation, this is the script that must be run.
+
+`elcc.py`: Poorly-named. Used for running a single ELCC calculations with SLURM. For calculations with many iterations (>1000), this is necessary as greatlakes will halt jobs not running on SLURM after a few hours. `argv[1]` should be a valid output directory. 
+
+`elcc_single_job.sbat`: Contains the SLURM resource allocations associated with the `elcc.py`
+
+`elcc_map_base_cases.py`: For generating ELCC maps. The current file is set up for our particular study, so a fair bit of adjustment needs to be done. **CAUTION:** This script will start off potentially thousands of SLURM jobs at one time incurring a not insignificant charge! 
+
+`elcc_batch_job.sbat`: Contains the SLURM resource allocations associated with the `elcc.py`. The difference between `elcc_batch_job.sbat` and `elcc_single_job.sbat` are the number of tasks per node. Which can be optimized to minimize the charge incurred by SLURM. 
+
+`extract_results.py`: Used for extracting all ELCC values for a batch job (i.e. map). In the future, should automatically be run, but for now it's manual.
+
+**NOTE:** Running maps of ELCCs is a little messy, but there are a few really important steps that need to be followed. If you need to run an ELCC map with SLURM. Please reach out, and we should schedule a meeting so I can explain it better.
 
 Citations:
 ----------
