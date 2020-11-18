@@ -129,7 +129,7 @@ for key in parameters:
 # fix dependent parameters
 files["solar cf file"] = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/"+str(simulation["year"])+"_solar_generation_cf.nc"
 files["wind cf file"] = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/"+str(simulation["year"])+"_wind_generation_cf.nc"
-files["temperature file"] = "../efor/temperatureDataset"+str(simulation["year"])+".nc"
+files["temperature file"] = "/home/ijbd/elcc/efor/temperatureDataset"+str(simulation["year"])+".nc"
 
 # handle output directory and print location
 root_directory = files["root directory"]
