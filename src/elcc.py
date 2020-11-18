@@ -101,7 +101,6 @@ def main():
     # universal parameters
     parameters['iterations'] = 5000
     parameters['year'] = 2018
-    parameters['temperature dependent FOR'] = False
     region = sys.argv[2]
     parameters['region'] = region.capitalize()
     add_job(parameters)

@@ -1,8 +1,6 @@
 #!/bin/bash
 
 #SBATCH --job-name=elcc_calc
-#SBATCH --mail-user=ijbd@umich.edu
-#SBATCH --mail-type=END
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=18
 #SBATCH --cpus-per-task=1
