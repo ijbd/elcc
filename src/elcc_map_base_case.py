@@ -116,7 +116,7 @@ def main(region,year,tech,tdf):
     parameters['year'] = year
     parameters['region'] = region.capitalize()
     parameters['iterations'] = 5000
-    parameters['nameplate']=500
+        
     parameters['generator type']=tech
     parameters['temperature dependent FOR'] = tdf
 

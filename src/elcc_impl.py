@@ -861,7 +861,7 @@ def get_hourly_RE_impl(RE_generators, cf):
     return RE_capacity
 
 def get_RE_profile_for_storage(cf, *generators):
-# Return expected renewable output for generator. Used for storage
+# Return expected renewable output for generator. Used for arbitrage storage operation
     renewable_profile = np.zeros(8760)
     for generator in generators:
         renewable_profile = np.add(renewable_profile,np.sum(get_hourly_RE_impl(generator,cf[generator["generator type"]]),axis=1))
