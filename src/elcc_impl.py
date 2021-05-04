@@ -248,6 +248,8 @@ def get_storage_fleet(eia_folder, region, year, round_trip_efficiency, efor, dis
     active_storage = all_storage_units[(all_storage_units["Plant Code"].isin(desired_plant_codes)) & (all_storage_units["Status"] == "OP")]
     active_storage = active_storage[active_storage["Nameplate Energy Capacity (MWh)"].astype(str) != " "]
     active_storage = active_storage[active_storage["Operating Year"] <= year]
+
+
     
     # Fill data structure
     storage = dict()
@@ -612,7 +614,14 @@ def get_conventional_fleet_impl(plants,active_generators,system_preferences,temp
     # filtering
     active_generators = active_generators[(active_generators["Operating Year"] <= year)]
     active_generators = active_generators[(active_generators["Status"] == "OP")]
-    active_generators = active_generators[(~active_generators["Technology"].isin(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"]))]
+
+    not_conventional = ['Solar Photovoltaic','Onshore Wind Turbine','Offshore Wind Turbine','Batteries','Hydroelectric Pumped Storage']
+    active_generators = active_generators[(~active_generators["Technology"].isin(not_conventional))]
+
+    ### DBG
+    print('DBG ERASE... (EXITING)')
+    print(np.unique(active_generators['Technology'].values))
+    sys.exit(0)
     
     # Fill empty summer/winter capacities
     active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",
