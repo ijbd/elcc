@@ -10,7 +10,6 @@ Instructions:
 
     `git clone https://github.com/ijbd/elcc.git`
 
-
 2. Run ELCC calculation from bin via command line
 
     `python elcc_driver.py`
