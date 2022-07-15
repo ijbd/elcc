@@ -276,7 +276,7 @@ def get_storage_fleet(eia_folder, region, year, round_trip_efficiency, efor, dis
     storage["max energy"] = active_storage["Nameplate Energy Capacity (MWh)"].values
     storage["roundtrip efficiency"] = np.ones(storage["num units"]) * round_trip_efficiency
     storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
-
+    
     # combine phs
     storage = append_storage(storage, phs)
 
@@ -632,11 +632,6 @@ def get_conventional_fleet_impl(plants,active_generators,system_preferences,temp
 
     not_conventional = ['Solar Photovoltaic','Onshore Wind Turbine','Offshore Wind Turbine','Batteries','Hydroelectric Pumped Storage']
     active_generators = active_generators[(~active_generators["Technology"].isin(not_conventional))]
-
-    ### DBG
-    print('DBG ERASE... (EXITING)')
-    print(np.unique(active_generators['Technology'].values))
-    sys.exit(0)
     
     # Fill empty summer/winter capacities
     active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",

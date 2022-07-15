@@ -112,7 +112,9 @@ def main(region,year,tech,tdf):
         add_on = '_fixed_for'
     else:
         add_on = ''
-    parameters['root directory'] = '/home/ijbd/output/'+region+'/'+str(year)+'/500_MW_'+tech+add_on+'/'
+    parameters['root directory'] = '/home/ijbd/output-revisions/'+region+'/'+str(year)+'/500_MW_'+tech+add_on+'/'
+    if not os.path.exists(parameters['root directory']):
+        os.system('mkdir '+parameters['root directory'])
     parameters['year'] = year
     parameters['region'] = region.capitalize()
     parameters['iterations'] = 5000
@@ -121,8 +123,8 @@ def main(region,year,tech,tdf):
     parameters['temperature dependent FOR'] = tdf
 
     # variable parameters
-    solar_cf_file = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/2018_solar_generation_cf.nc" # only used for getting lat/lons
-    wind_cf_file = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/2018_wind_generation_cf.nc" 
+    solar_cf_file = "/home/ijbd/resource/cfs/2019_solar_generation_cf.nc" # only used for getting lat/lons
+    wind_cf_file = "/home/ijbd/resource/cfs/2019_wind_generation_cf.nc" 
 
     lats, lons, cf = get_powGen(solar_cf_file, wind_cf_file)
     

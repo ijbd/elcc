@@ -1,4 +1,5 @@
 .vscode
+data
 src/__pycache__/
 src/all_base_cases.py
 src/all_sensitivities.py
