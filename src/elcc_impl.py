@@ -20,7 +20,6 @@ np.random.seed()
 DEBUG = False
 OUTPUT_DIRECTORY = ""
 
-
 def get_powGen(solar_cf_file, wind_cf_file):
     
     """ Retrieve all necessary information from powGen netCDF files: RE capacity factors and corresponding lat/lons
@@ -233,11 +232,9 @@ def get_storage_fleet(eia_folder, region, year, round_trip_efficiency, efor, dis
     all_storage_units = pd.read_excel(eia_folder+"3_4_Energy_Storage_Y"+str(year)+".xlsx",skiprows=1,\
                                                     usecols=["Plant Code","Technology","Nameplate Energy Capacity (MWh)","Status",
                                                             "Operating Year", "Maximum Charge Rate (MW)", "Maximum Discharge Rate (MW)"])
-    # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region)].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(region)].values
     
-    desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))   
+    # Filter by NERC Region and Balancing Authority to filter correct plant codes
+    desired_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(region) | plants["Balancing Authority Code"].isin(region)].values
 
     # Error Handling
     if desired_plant_codes.size == 0:
@@ -248,18 +245,40 @@ def get_storage_fleet(eia_folder, region, year, round_trip_efficiency, efor, dis
     active_storage = all_storage_units[(all_storage_units["Plant Code"].isin(desired_plant_codes)) & (all_storage_units["Status"] == "OP")]
     active_storage = active_storage[active_storage["Nameplate Energy Capacity (MWh)"].astype(str) != " "]
     active_storage = active_storage[active_storage["Operating Year"] <= year]
-    
-    # Fill data structure
+
+    # get phs
+    all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y"+str(year)+".xlsx",skiprows=1,\
+                                                    usecols=["Plant Code","Technology","Nameplate Capacity (MW)","Status",
+                                                            "Operating Year"])
+
+    # filter
+    active_phs = all_conventional_generators[all_conventional_generators["Technology"]=='Hydroelectric Pumped Storage']
+    active_phs = active_phs[active_phs["Plant Code"].isin(desired_plant_codes)]
+    active_phs = active_phs[active_phs["Operating Year"] <= year]
+    active_phs = active_phs[active_phs["Status"] == "OP"]
+
+    # make phs dict
+    phs = dict()
+    phs["dispatch strategy"] = dispatch_strategy
+    phs["num units"] = active_phs["Nameplate Capacity (MW)"].values.size
+    phs["max charge rate"] = active_phs["Nameplate Capacity (MW)"].values
+    phs["max discharge rate"] = active_phs["Nameplate Capacity (MW)"].values
+    phs["max energy"] = active_phs["Nameplate Capacity (MW)"].values * 10. # assume 10 hour pumped hydro duration
+    phs["roundtrip efficiency"] = np.ones(phs["num units"]) * .8 # from eia (average monthly efficiency)
+    phs["one way efficiency"] = phs["roundtrip efficiency"] ** .5
+
+    # make regular storage dict
     storage = dict()
     storage["dispatch strategy"] = dispatch_strategy
     storage["num units"] = active_storage["Nameplate Energy Capacity (MWh)"].values.size
     storage["max charge rate"] = active_storage["Maximum Charge Rate (MW)"].values
     storage["max discharge rate"] = active_storage["Maximum Discharge Rate (MW)"].values
     storage["max energy"] = active_storage["Nameplate Energy Capacity (MWh)"].values
-
-    # Parametrized (for now)
     storage["roundtrip efficiency"] = np.ones(storage["num units"]) * round_trip_efficiency
     storage["one way efficiency"] = storage["roundtrip efficiency"] ** .5
+
+    # combine phs
+    storage = append_storage(storage, phs)
 
     # Hourly Tracking (storage starts empty)
     storage["power"] = np.zeros(storage["num units"])
@@ -301,9 +320,7 @@ def make_storage(include_storage, energy_capacity, charge_rate, discharge_rate, 
 
 def append_storage(fleet_storage, additional_storage):
     """ Combine two storage dictionaries
-
     ...
-
     Args:
         -----------
         `fleet_storage` (dict): dictionary of storage units
@@ -612,7 +629,14 @@ def get_conventional_fleet_impl(plants,active_generators,system_preferences,temp
     # filtering
     active_generators = active_generators[(active_generators["Operating Year"] <= year)]
     active_generators = active_generators[(active_generators["Status"] == "OP")]
-    active_generators = active_generators[(~active_generators["Technology"].isin(["Solar Photovoltaic", "Onshore Wind Turbine", "Offshore Wind Turbine", "Batteries"]))]
+
+    not_conventional = ['Solar Photovoltaic','Onshore Wind Turbine','Offshore Wind Turbine','Batteries','Hydroelectric Pumped Storage']
+    active_generators = active_generators[(~active_generators["Technology"].isin(not_conventional))]
+
+    ### DBG
+    print('DBG ERASE... (EXITING)')
+    print(np.unique(active_generators['Technology'].values))
+    sys.exit(0)
     
     # Fill empty summer/winter capacities
     active_generators["Summer Capacity (MW)"].where(active_generators["Summer Capacity (MW)"].astype(str) != " ",
@@ -679,11 +703,8 @@ def get_conventional_fleet(eia_folder, regions, year, system_preferences,powGen_
     all_conventional_generators = pd.read_excel(eia_folder+"3_1_Generator_Y"+str(year)+".xlsx",skiprows=1,\
                                                     usecols=["Plant Code","Generator ID","Technology","Nameplate Capacity (MW)","Status",
                                                             "Operating Year", "Summer Capacity (MW)", "Winter Capacity (MW)"])
-    # Sort by NERC Region and Balancing Authority to filter correct plant codes
-    nerc_region_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(regions)].values
-    balancing_authority_plant_codes = plants["Plant Code"][plants["Balancing Authority Code"].isin(regions)].values
-    
-    desired_plant_codes = np.concatenate((nerc_region_plant_codes, balancing_authority_plant_codes))
+    # Filter by NERC Region and Balancing Authority to filter correct plant codes
+    desired_plant_codes = plants["Plant Code"][plants["NERC Region"].isin(regions) | plants["Balancing Authority Code"].isin(regions)].values
 
     # Error Handling
     if desired_plant_codes.size == 0:

@@ -31,7 +31,7 @@ files["output directory"] = './'
 files["eia folder"] = "../eia8602019/"
 files["benchmark FORs file"] =  "../efor/Temperature_dependent_for_realtionships.xlsx"
 files["total interchange folder"] = "../total_interchange/"
-files["saved systems folder"] = "/scratch/mtcraig_root/mtcraig1/shared_data/elccJobs/savedSystems/"
+files["saved systems folder"] = "/home/ijbd/savedSystems-revisions/"
 
 ########## System ########### 
 
@@ -127,9 +127,9 @@ for key in parameters:
             
 
 # fix dependent parameters
-files["solar cf file"] = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/"+str(simulation["year"])+"_solar_generation_cf.nc"
-files["wind cf file"] = "/scratch/mtcraig_root/mtcraig1/shared_data/merraData/cfs/wecc/"+str(simulation["year"])+"_wind_generation_cf.nc"
-files["temperature file"] = "/home/ijbd/elcc/efor/temperatureDataset"+str(simulation["year"])+".nc"
+files["solar cf file"] = "/home/ijbd/resource/cfs/"+str(simulation["year"])+"_solar_generation_cf.nc" # this is for wecc
+files["wind cf file"] = "/home/ijbd/resource/cfs/"+str(simulation["year"])+"_wind_generation_cf.nc" # this is for wecc
+files["temperature file"] = "/home/ijbd/elcc-revisions/efor/temperatureDataset"+str(simulation["year"])+".nc" # this is for wecc
 
 # handle output directory and print location
 root_directory = files["root directory"]
@@ -179,7 +179,7 @@ if files["saved systems folder"][-1] != '/': files["saved systems folder"] += '/
 
 # TEPPC regions
 
-TEPPC_regions = pd.read_csv('../demand/_regions.csv').fillna('nan')
+TEPPC_regions = pd.read_csv('/home/ijbd/elcc-revisions/demand/_regions.csv').fillna('nan')
 
 regions = np.append([region for region in simulation["region"] if not region in(TEPPC_regions.columns)],
                     [TEPPC_regions[region].values.flatten().astype(str) for region in simulation["region"] if region in TEPPC_regions.columns]).flatten()
