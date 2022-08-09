@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - working-directory: testing
-      - run: python -m unittest -v 
+        run: python -m unittest -v 
       
