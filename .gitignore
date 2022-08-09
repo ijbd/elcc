@@ -1,7 +1,5 @@
 .vscode
-src/__pycache__/
-src/all_base_cases.py
-src/all_sensitivities.py
-src/load_systems
-src/extract_base_cases.py
-src/extract_sensitivities.py
+env
+data
+**__pycache__**
+**tmp**
