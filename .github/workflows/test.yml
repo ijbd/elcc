@@ -1,0 +1,9 @@
+name: Run Tests
+on: push
+jobs:
+  test-all:
+    runs-on: ubuntu-latest
+    steps:
+      - working-directory: testing
+      - run: python -m unittest -v 
+      
